@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.0.9] - 2026-03-12
+
+### 优化
+
+- `pm-framework-evolve` Skill 深度优化 — SKILL.md 重写（知识检索优先设计）+ 5 个 references 文档全面更新
+- 框架知识库准确统计：21 Tools（分 7 类）、6 Resources、10 Skills、3+1 Rules
+- 新增 Artifacts 沉淀管道、Manifest 智能合并机制文档
+- 发布工作流新增 Step 0：发布前强制更新框架知识库
+
 ## [3.0.8] - 2026-03-12
 
 ### 新增
