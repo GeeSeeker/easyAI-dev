@@ -20,18 +20,17 @@ easyAI-dev/
 │   ├── tasks/        ← 任务管理（含 archive/）
 │   ├── workspace/    ← 开发者记忆（journal）
 │   └── config/       ← 框架配置
-├── packages/
-│   └── mcp-server/   ← easyAI MCP Server（TypeScript）
 └── .docs/            ← 项目文档
     ├── design/       ← 架构设计文档
-    └── requirements/ ← 需求文档
+    ├── requirements/ ← 需求文档
+    ├── guides/       ← 使用指南
+    ├── notes/        ← 临时文档
+    └── archive/      ← 文档归档
 ```
 
 ## 关键文档位置
 
-- **架构设计**：`.docs/design/easyAI-底层架构设计.md`
-- **开发清单**：`.docs/design/easyAI-框架模块化开发清单.md`
-- **特性说明**：`.docs/design/easyAI-特性说明.md`
+- **架构设计**：`.docs/design/` 目录下的设计文档（如有）
 - **框架配置**：`.trellis/config/config.yaml`
 
 ## 角色系统
