@@ -4,7 +4,7 @@
 
 ## 前置条件
 
-- Antigravity IDE 已安装
+- Antigravity IDE 已安装（https://antigravity.google/）
 - Node.js >= 18 已安装
 - Git 已安装
 
