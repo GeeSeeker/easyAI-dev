@@ -30,38 +30,61 @@ easyAI 的 MCP Server 已打包在 npm 包中，无需本地编译。
 
 ### 步骤
 
-1. **生成 MCP 配置 JSON**：
+1. **定位 MCP 配置文件**：
 
-```json
-{
-  "easyai-mcp-server": {
-    "command": "npx",
-    "args": ["-y", "@geeseeker/easyai-dev", "serve"]
-  }
-}
-```
+   Antigravity IDE 的 MCP 配置文件路径为：
 
-2. **引导用户操作**：
+   ```
+   ~/.gemini/antigravity/mcp_config.json
+   ```
 
-告知用户：
+   > 如果 AI 无法确认该路径是否正确（例如 IDE 版本更新导致路径变化），应先访问 Antigravity 官方文档确认：https://antigravity.google/docs/mcp
 
-```
-请将以下 MCP 配置添加到 Antigravity IDE 的 MCP 设置中：
+2. **读取现有配置**：
 
-{
-  "easyai-mcp-server": {
-    "command": "npx",
-    "args": ["-y", "@geeseeker/easyai-dev", "serve"]
-  }
-}
+   读取 `~/.gemini/antigravity/mcp_config.json` 文件。如果不存在，创建一个空的配置骨架：
 
-添加完成后，请重启 Antigravity IDE，然后告诉我已重启。
-```
+   ```json
+   {
+     "mcpServers": {}
+   }
+   ```
 
-3. **等待用户确认重启** — 这是一个**必须的断点**，MCP 配置修改后需要重启 IDE 才能生效。
+3. **注入 easyAI MCP Server 配置**：
 
-4. **验证 MCP 连接**：用户确认重启后，尝试调用任意 easyai MCP 工具（如 `project_status`）验证连接。
-   - 如果调用失败，协助用户排查 MCP 配置。
+   向用户展示将要添加的配置内容，**请求用户确认**后再写入：
+
+   ```
+   我将在 Antigravity MCP 配置文件中添加 easyAI MCP Server：
+
+   配置文件：~/.gemini/antigravity/mcp_config.json
+
+   新增条目：
+   "easyai-mcp-server": {
+     "command": "npx",
+     "args": ["-y", "@geeseeker/easyai-dev", "serve"]
+   }
+
+   是否确认添加？
+   ```
+
+4. **用户确认后，写入配置**：
+
+   将 `easyai-mcp-server` 条目添加到 `mcpServers` 对象中（保留已有的其他 MCP Server 配置不变）。
+
+5. **请求用户重启 IDE**：
+
+   ```
+   ✅ MCP 配置已写入。
+
+   请重启 Antigravity IDE 以使配置生效。
+   重启完成后，请告诉我已重启。
+   ```
+
+   > 这是一个**必须的断点**，MCP 配置修改后需要重启 IDE 才能生效。
+
+6. **验证 MCP 连接**：用户确认重启后，尝试调用任意 easyai MCP 工具（如 `project_status`）验证连接。
+   - 如果调用失败，检查配置文件内容是否正确，协助用户排查。
    - 如果没有 easyai MCP 工具可用，说明配置尚未生效，需要再次检查配置和重启。
 
 ---
@@ -75,6 +98,7 @@ npx @geeseeker/easyai-dev init .
 ```
 
 此命令会：
+
 - 复制 `.agents/`（规则 + 工作流 + Skills）
 - 复制 `.trellis/`（配置 + 规范骨架）
 - 创建 `.docs/`（空文档子文件夹）
@@ -126,6 +150,17 @@ node --version  # 需要 >= 18
 npx @geeseeker/easyai-dev serve
 # 正常情况下会输出 "easyAI MCP Server v0.1.0 started" 到 stderr
 ```
+
+### MCP 配置文件路径不确定
+
+如果默认路径 `~/.gemini/antigravity/mcp_config.json` 不正确，可尝试：
+
+```bash
+# 搜索可能的配置文件
+find ~/.gemini -name "mcp_config*" -o -name "*mcp*.json" 2>/dev/null
+```
+
+如仍无法找到，访问 Antigravity 官方文档获取最新路径信息：https://antigravity.google/docs/mcp
 
 ### 框架完整性检查失败
 

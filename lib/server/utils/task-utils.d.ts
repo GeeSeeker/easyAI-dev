@@ -33,10 +33,18 @@ interface ParsedTask {
 }
 /**
  * 获取项目根目录
- * 优先级：EASYAI_PROJECT_ROOT 环境变量 → 向上查找 .trellis 目录
+ * 检测优先级：
+ *   1. EASYAI_PROJECT_ROOT 环境变量（显式指定）
+ *   2. process.cwd() 向上遍历查找 .trellis（IDE 工作目录在项目内时有效）
+ *   3. __dirname 向上遍历查找 .trellis（MCP Server 安装在项目 node_modules 内时有效）
  * @returns 项目根目录的绝对路径
  */
 declare function getProjectRoot(): string;
+/**
+ * 重置项目根目录缓存
+ * 仅供测试和极端场景使用
+ */
+declare function resetProjectRootCache(): void;
 /**
  * 获取任务目录绝对路径
  * @returns 任务目录的绝对路径
@@ -100,5 +108,5 @@ declare function listTaskDirs(): string[];
  */
 declare function ensureDir(dirPath: string): void;
 export type { TaskStatus, TaskMetadata, ParsedTask };
-export { TRELLIS_ROOT, TASKS_ROOT, ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, };
+export { TRELLIS_ROOT, TASKS_ROOT, ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, };
 //# sourceMappingURL=task-utils.d.ts.map

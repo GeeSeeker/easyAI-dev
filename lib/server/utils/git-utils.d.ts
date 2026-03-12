@@ -29,5 +29,5 @@ declare function getRecentCommits(count?: number): GitCommit[];
  */
 declare function isGitRepo(): boolean;
 export type { GitCommit };
-export { getGitBranch, getGitStatus, getRecentCommits, isGitRepo, };
+export { getGitBranch, getGitStatus, getRecentCommits, isGitRepo };
 //# sourceMappingURL=git-utils.d.ts.map
