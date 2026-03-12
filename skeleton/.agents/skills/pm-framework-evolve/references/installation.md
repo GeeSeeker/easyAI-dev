@@ -4,29 +4,36 @@
 
 ## 安装方式
 
-### 方式 1：npx 脚手架（推荐）
+### 方式 1：让 AI 帮你安装（推荐）
+
+复制以下文字到 Antigravity 对话框：
+
+```
+请帮我安装 easyAI 框架。
+安装指南：https://raw.githubusercontent.com/GeeSeeker/easyAI-dev/main/README_AI.md
+请读取这份指南，按步骤自动完成配置。
+```
+
+### 方式 2：命令行安装
 
 ```bash
 # 新项目
-npx @geeseeker/easyai-dev init
+npx @geeseeker/easyai-dev init my-project
 
 # 已有项目（不覆盖 README.md，合并 .gitignore）
-npx @geeseeker/easyai-dev init
+cd your-project
+npx @geeseeker/easyai-dev init .
 ```
 
-### 方式 2：MCP 全局安装
-
-配置 AI IDE 的 MCP Server 后，AI 可通过 `framework_init` tool 自动安装：
+然后在 Antigravity IDE 的 MCP 设置中添加：
 
 ```json
 {
-  "mcpServers": {
-    "easyai-dev": {
-      "command": "npx",
-      "args": ["-y", "@geeseeker/easyai-dev", "serve"],
-      "env": {
-        "EASYAI_PROJECT_ROOT": "/path/to/project"
-      }
+  "easyai-mcp-server": {
+    "command": "npx",
+    "args": ["-y", "@geeseeker/easyai-dev", "serve"],
+    "env": {
+      "EASYAI_PROJECT_ROOT": "/path/to/your/project"
     }
   }
 }
@@ -41,12 +48,13 @@ project/
 │   ├── workflows/     # PM + Worker 入口
 │   └── skills/        # 10 个能力模块
 ├── .trellis/          # 数据持久层
-│   ├── config/        # config.yaml
+│   ├── config/        # config.yaml + context-budget.md
 │   ├── spec/          # 项目规范
 │   ├── tasks/         # 任务目录
 │   └── workspace/     # journal
 ├── .docs/             # 用户文档空间（5 个子文件夹）
-└── .easyai-version    # 版本标记文件
+├── .easyai-version    # 版本标记文件
+└── .easyai-manifest.json  # 框架文件清单（用于智能升级）
 ```
 
 ## 版本管理
@@ -54,7 +62,8 @@ project/
 - **版本标记**：`.easyai-version` 文件记录当前安装版本
 - **检查更新**：`npx @geeseeker/easyai-dev check` 或 MCP `framework_check` tool
 - **执行更新**：`npx @geeseeker/easyai-dev update` 或 MCP `framework_update` tool
-- **备份机制**：更新前自动备份被修改的文件
+- **智能合并**：Manifest 驱动 — 只更新框架文件，保护用户自定义内容（自定义 Skills/Rules/Workflows 不被覆盖）
+- **冲突处理**：用户修改过的框架文件生成 `.new` 冲突文件，由用户手动合并
 
 ## npm 包信息
 

@@ -11,17 +11,16 @@
 
 ## 查看迭代历史
 
-1. **Git log**：`git log --oneline -20`
+1. **CHANGELOG.md**：发布目录中的版本更新记录
 2. **GitHub Releases**：仓库 Releases 页面
-3. **框架内部 changelog**：`.agents/skills/pm-framework-evolve/changelog/`
+3. **Git log**：`git log --oneline -20`
 
-## 提交修改建议
+## 贡献方式
 
 1. **Issue**：在 GitHub 仓库提交 Issue 描述问题或建议
 2. **Pull Request**：Fork 后提交 PR
-3. **框架内部迭代**：通过 `pm-framework-evolve` Skill 进行安全迭代
 
 ## 开发者信息
 
 - **作者**：GeeSeeker
-- **许可证**：参见仓库 LICENSE 文件
+- **许可证**：MIT

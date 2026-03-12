@@ -1,6 +1,6 @@
 {
-  "version": "3.0.7",
-  "generatedAt": "2026-03-12T14:10:02.125Z",
+  "version": "3.0.8",
+  "generatedAt": "2026-03-12T14:27:05.309Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -21,25 +21,25 @@
       "hash": "56091ee907d737a6d9301198909b3ad6d4b6c51b77c1836226e247bef68516f5"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "9e5564d7a5de0902f802acd3ccb30e2bdbf152d38539cd7f7d0e391424b1ce4f"
+      "hash": "4c8253069ba2b7303060b8c2adc28487ed7c433b54ed48e55a4c90cfa65c52c6"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
     },
     ".agents/skills/pm-framework-evolve/references/architecture.md": {
-      "hash": "a6963837139ebeebc791d10736110683233ac6a6ef4465ad30ac8d2ca4bf4670"
+      "hash": "d70dbc52236cf36a57b5837663d5b9e3833c6a15405c7b1e378d24a67a28f755"
     },
     ".agents/skills/pm-framework-evolve/references/directory-map.md": {
-      "hash": "941e49ac6de554ff1c3d0c0e33d1dc576a8b9720506acc1263df6c787434f0cc"
+      "hash": "e774508317279821ef20cf6e4116ba9f3bfc07123db94337e609f07b95732d31"
     },
     ".agents/skills/pm-framework-evolve/references/features.md": {
-      "hash": "7a0b6a9c5e789efffd3479ed679c950e2ffda57878995fa04c5606c8dac30dd2"
+      "hash": "c965cd4a08c9c05f30f2cb294c879ce75481cb7a8183cd1f13b45938a1d1a798"
     },
     ".agents/skills/pm-framework-evolve/references/github-info.md": {
-      "hash": "762304a2279fb07dde46e8d0e63ae0fe534064274088ae70b95327577d881994"
+      "hash": "b2e367ecbaa2c7064ad448bbadb1ed0dc0d70a5be0409205974cba6518e585ba"
     },
     ".agents/skills/pm-framework-evolve/references/installation.md": {
-      "hash": "c2e66dc8710988f54e08b2b518bf5e83b7eb82107a525af6e57e56d17e101181"
+      "hash": "c5d52b2ee2ba7167dd4be5cc7ed8ca61e4a32249e4568fa779f2f139c78ca8f1"
     },
     ".agents/skills/pm-framework-evolve/resources/changelog-entry-template.md": {
       "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
