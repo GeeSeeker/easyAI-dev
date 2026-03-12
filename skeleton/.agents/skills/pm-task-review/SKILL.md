@@ -1,9 +1,9 @@
 ---
 name: pm-task-review
-description: PM 任务验收 — 双阶段验收流程（Stage 1 Spec 合规 → Stage 2 代码质量）。PM 审查执行者完成的任务时激活。
+description: PM 任务验收 — 三阶段验收流程（Stage 1 Spec 合规 → Stage 2 代码质量 → Stage 3 Artifacts 沉淀）。PM 审查执行者完成的任务时激活。
 ---
 
-# PM 任务验收（双阶段）
+# PM 任务验收（三阶段）
 
 ## 适用场景
 
@@ -11,7 +11,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 ## 验收原则
 
-- **双阶段不可颠倒**：必须先 Spec 合规，再代码质量
+- **三阶段不可颠倒**：必须先 Spec 合规，再代码质量，最后 Artifacts 沉淀
 - **Stage 1 不过不进 Stage 2**：节省审查时间，避免在不合规产出上花费精力
 - **公正客观**：基于证据而非印象
 
@@ -81,8 +81,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 ### Stage 2 判定
 
-- **全部通过** → 验收通过
-  - 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })`
+- **全部通过** → 进入 Stage 3（Artifacts 沉淀）
 - **存在问题** → 打回并附带具体改进建议
   - 问题分级：Critical（必须修复）/ Important（建议修复）/ Minor（可后续优化）
   - 调用 `task_transition({ task_id, new_status: "rejected", role: "pm" })`
@@ -99,6 +98,44 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 1. 理解审查者的技术关切
 2. 如审查者正确 → 接受建议并修改
 3. 如坚持原方案 → 提供完整技术论证（非"我觉得没问题"）
+
+## Stage 3：Artifacts 沉淀
+
+> 本质：PM 作为"策展人"，将 Worker 会话产生的面向用户的 Artifacts 沉淀到 `.docs/`（持久文档空间）。
+
+### 执行步骤
+
+1. **扫描 Worker Artifacts**
+   - 检查 Worker 会话产生的 Artifacts（特别是 `walkthrough.md`）
+   - 识别面向用户的内容（排除 `task.md` 等过程性文件）
+
+2. **判断沉淀价值**
+   - 内容是否对用户有持续参考价值？
+   - 沉淀目标判断：
+
+   | Artifacts 类型 | 沉淀目标 | 判断依据 |
+   |----------------|----------|----------|
+   | `walkthrough.md` | `.docs/notes/`（临时参考）或 `.docs/guides/`（永久指南） | 是否有长期复用价值 |
+   | `other`（分析报告等） | `.docs/notes/` 或 `.docs/design/` | 内容属于设计还是参考 |
+   | `task.md` | 不沉淀 | `.trellis/tasks/` 已持久化 |
+   | `implementation_plan.md` | 不沉淀 | `pm-brainstorm` Step 6 已负责 |
+
+3. **向用户确认**
+   - 列出候选沉淀内容，说明建议的目标路径
+   - **用户确认后**才执行沉淀（不自动沉淀）
+
+4. **执行沉淀**
+   - 提炼内容（去除过程性细节，保留用户关心的结论和指导）
+   - 写入目标路径
+   - 向用户说明沉淀了什么、沉淀到了哪里
+
+5. **标记任务完成**
+   - 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })`
+
+### Stage 3 判定
+
+- **有内容沉淀** → 确认沉淀完成后标记 `completed`
+- **无需沉淀** → 直接标记 `completed`
 
 ## 验收结果输出
 
@@ -119,6 +156,10 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 {审查发现}
 
+### Stage 3: Artifacts 沉淀 — {已沉淀/无需沉淀}
+
+{沉淀内容及目标路径，或无需沉淀的原因}
+
 ### 最终判定：{通过 / 打回}
 
 {如果打回，列出具体修改要求}
@@ -129,10 +170,11 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 ```markdown
 ### 下一步行动
 
-1. [ ] 如果通过 → 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })` 标记完成
-2. [ ] 如果通过 → 确认是否需要归档（`task_transition({ task_id, new_status: "archived", role: "pm" })`）
-3. [ ] 如果打回 → 在 task.md 追加打回原因和修复建议
-4. [ ] 如果打回 → 通知用户开新会话执行 `/worker {task_id}` 继续修复
+1. [ ] 如果通过 → 确认 Artifacts 是否需要沉淀到 `.docs/`
+2. [ ] 如果通过 → 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })` 标记完成
+3. [ ] 如果通过 → 确认是否需要归档（`task_transition({ task_id, new_status: "archived", role: "pm" })`）
+4. [ ] 如果打回 → 在 task.md 追加打回原因和修复建议
+5. [ ] 如果打回 → 通知用户开新会话执行 `/worker {task_id}` 继续修复
 
 ### 状态快照
 
@@ -140,5 +182,6 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 - 当前阶段：REVIEW
 - Stage 1: {PASS/FAIL}
 - Stage 2: {PASS/FAIL/未进入}
+- Stage 3: {已沉淀/无需沉淀/未进入}
 - 最终判定：{通过/打回/审查中}
 ```

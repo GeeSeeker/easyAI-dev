@@ -20,18 +20,20 @@ easyAI-dev/
 │   ├── tasks/        ← 任务管理（含 archive/）
 │   ├── workspace/    ← 开发者记忆（journal）
 │   └── config/       ← 框架配置
-└── .docs/            ← 项目文档
-    ├── design/       ← 架构设计文档
-    ├── requirements/ ← 需求文档
-    ├── guides/       ← 使用指南
-    ├── notes/        ← 临时文档
-    └── archive/      ← 文档归档
+└── .docs/            ← 用户文档空间
+    ├── requirements/ ← 需求文档（用户 → AI）
+    ├── design/       ← 设计文档（AI ↔ 用户）
+    ├── guides/       ← 使用指南（AI → 用户）
+    ├── notes/        ← 临时文档（用户 ↔ AI）
+    └── archive/      ← 归档（各文件夹中作废/不再适配的历史文档）
 ```
 
-## 关键文档位置
+## 知识获取
 
-- **架构设计**：`.docs/design/` 目录下的设计文档（如有）
+- **框架知识**：激活 `pm-framework-evolve` Skill → 读取 `references/` 目录
+- **项目规范**：`.trellis/spec/` 目录（通过 `spec://` 资源访问）
 - **框架配置**：`.trellis/config/config.yaml`
+- **用户文档**：`.docs/` 目录（requirements → design → guides 信息流）
 
 ## 角色系统
 

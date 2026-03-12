@@ -65,6 +65,8 @@ PM 接收到用户新需求时，**必须**先激活本 Skill 完成需求澄清
 
 ### Step 6：持久化设计（HARD-GATE #2）
 
+> **Artifacts 沉淀**：这一步的本质是将 Artifacts 中的 `implementation_plan` 提炼并持久化到 `.docs/design/`，使设计成果从会话热记忆沉淀为项目持久文档。
+
 设计确认后，**必须**先持久化为设计文档，再创建任务：
 
 1. 将确认的设计写入 `.docs/design/{feature-name}.md`

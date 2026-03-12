@@ -49,7 +49,30 @@ task_append_log({
 })
 ```
 
-### 4. 输出恢复指引
+### 4. Artifacts 文档沉淀检查
+
+> 本质：在会话收尾时充当"最后一道提醒"，确保面向用户的有价值内容不会随会话消散。
+
+1. **扫描本会话 Artifacts**
+   - 检查本会话创建的所有 Artifacts
+   - 识别面向用户的内容（排除 `task.md` 等过程性文件）
+
+2. **列出候选沉淀内容**
+   - 向用户展示候选文档列表，说明每项的建议目标路径：
+
+   | Artifacts 类型 | 建议沉淀目标 |
+   |----------------|-------------|
+   | `walkthrough.md` | `.docs/notes/` 或 `.docs/guides/` |
+   | `other`（分析报告等） | `.docs/notes/` 或 `.docs/design/` |
+   | `implementation_plan.md` | 通常已由 `pm-brainstorm` Step 6 处理，跳过 |
+   | `task.md` | 不沉淀（`.trellis/tasks/` 已持久化） |
+
+3. **用户确认后执行**
+   - 用户确认需要沉淀 → 提炼内容并写入目标路径
+   - 用户确认无需沉淀 → 跳过
+   - 告知用户沉淀结果
+
+### 5. 输出恢复指引
 
 向用户输出收尾报告和 PATEOAS 导航：
 
@@ -60,6 +83,7 @@ task_append_log({
 
 - ✅ Journal 日志已写入
 - ✅ 任务记录已更新
+- {✅ 文档已沉淀到 `.docs/` / ⚠️ 无需沉淀}
 
 ### PATEOAS 导航
 
@@ -73,7 +97,7 @@ task_append_log({
 
 - 当前角色：{PM / Worker}
 - 当前阶段：SESSION_CLOSE
-- 已沉淀：Journal ✅ | 任务记录 ✅
+- 已沉淀：Journal ✅ | 任务记录 ✅ | .docs/ {✅/⚠️ 无需沉淀}
 - 遗留事项：{有/无} — {具体内容}
 ```
 

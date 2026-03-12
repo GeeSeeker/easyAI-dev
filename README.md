@@ -28,7 +28,7 @@ easyAI 是一个为 [Antigravity IDE](https://antigravity.google/) 打造的 **A
 | 🧠 **记忆系统** | journal 日志 + Artifacts 沉淀，跨会话不丢失上下文    |
 | 🛡️ **反幻觉**   | 第三方 API 必须查文档，禁止凭记忆编码                |
 | ✅ **TDD 铁律** | 所有新功能必须先写测试，Worker 无法跳过              |
-| 🔧 **MCP 集成** | 19 个工具 + 5 个数据源，通过 MCP 协议与 IDE 深度集成 |
+| 🔧 **MCP 集成** | 21 个工具 + 6 个数据源，通过 MCP 协议与 IDE 深度集成 |
 
 ---
 
@@ -124,7 +124,7 @@ npx @geeseeker/easyai-dev serve          # 启动 MCP Server
 
 ## 📄 许可证
 
-[MIT](LICENSE)
+[MIT](LICENSE) | [更新日志](CHANGELOG.md)
 
 ---
 
