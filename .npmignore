@@ -1,0 +1,6 @@
+# npm ignore file — 控制 npm publish 包含的文件
+# 使用 .npmignore 后 npm 不再使用 .gitignore 做排除
+# package.json 中的 "files" 字段仍然是主控
+
+node_modules/
+.git/
