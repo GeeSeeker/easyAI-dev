@@ -14,7 +14,7 @@ export declare function registerFrameworkInit(server: McpServer): void;
  */
 export declare function registerFrameworkCheck(server: McpServer): void;
 /**
- * 注册 framework_update 工具
+ * 注册 framework_update 工具（Manifest 驱动智能合并）
  */
 export declare function registerFrameworkUpdate(server: McpServer): void;
 //# sourceMappingURL=framework-tools.d.ts.map

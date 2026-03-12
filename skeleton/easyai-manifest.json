@@ -1,0 +1,96 @@
+{
+  "version": "3.0.7",
+  "generatedAt": "2026-03-12T13:24:32.935Z",
+  "files": {
+    ".agents/rules/anti-hallucination.md": {
+      "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
+    },
+    ".agents/rules/coding-standards.md": {
+      "hash": "b3e3d04a1a80ac78fabf5d6566e02f51f8c68e07d32e9a4fa376e38ae9ba0384"
+    },
+    ".agents/rules/project-identity.md": {
+      "hash": "42f56e40168cd2528b72a7d99e862be806e1af0a89e609b51fdad42cb8c06758"
+    },
+    ".agents/skills/common-session-close/SKILL.md": {
+      "hash": "491132b12d8a1e327afdb16d9667031ad703abd9d184d8b26b3d160318d58517"
+    },
+    ".agents/skills/common-spec-update/SKILL.md": {
+      "hash": "cca0e3176a235d5a2b33f419e80b4e35409e377b915de14a8cd35283eb980630"
+    },
+    ".agents/skills/pm-brainstorm/SKILL.md": {
+      "hash": "56091ee907d737a6d9301198909b3ad6d4b6c51b77c1836226e247bef68516f5"
+    },
+    ".agents/skills/pm-framework-evolve/SKILL.md": {
+      "hash": "9e5564d7a5de0902f802acd3ccb30e2bdbf152d38539cd7f7d0e391424b1ce4f"
+    },
+    ".agents/skills/pm-framework-evolve/changelog/index.md": {
+      "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
+    },
+    ".agents/skills/pm-framework-evolve/references/architecture.md": {
+      "hash": "a6963837139ebeebc791d10736110683233ac6a6ef4465ad30ac8d2ca4bf4670"
+    },
+    ".agents/skills/pm-framework-evolve/references/directory-map.md": {
+      "hash": "941e49ac6de554ff1c3d0c0e33d1dc576a8b9720506acc1263df6c787434f0cc"
+    },
+    ".agents/skills/pm-framework-evolve/references/features.md": {
+      "hash": "7a0b6a9c5e789efffd3479ed679c950e2ffda57878995fa04c5606c8dac30dd2"
+    },
+    ".agents/skills/pm-framework-evolve/references/github-info.md": {
+      "hash": "762304a2279fb07dde46e8d0e63ae0fe534064274088ae70b95327577d881994"
+    },
+    ".agents/skills/pm-framework-evolve/references/installation.md": {
+      "hash": "c2e66dc8710988f54e08b2b518bf5e83b7eb82107a525af6e57e56d17e101181"
+    },
+    ".agents/skills/pm-framework-evolve/resources/changelog-entry-template.md": {
+      "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
+    },
+    ".agents/skills/pm-session-start/SKILL.md": {
+      "hash": "8497c872219a21f02bf1bd815411e0340d5d50c5db0c7ad6d6c2368352899d03"
+    },
+    ".agents/skills/pm-task-planning/SKILL.md": {
+      "hash": "290aa40262e6b30b771a3cb6707f7855b49b97c209330cb97b1cae24aed37dba"
+    },
+    ".agents/skills/pm-task-review/SKILL.md": {
+      "hash": "5c0de10bded4b1ccdccb7bdaecf873dea84482674844a1a3eca9a0811c7fc041"
+    },
+    ".agents/skills/worker-check/SKILL.md": {
+      "hash": "1ad45ef6673289037f3add509d27c9941ebe94a446657436805ac8f845996fb7"
+    },
+    ".agents/skills/worker-debug/SKILL.md": {
+      "hash": "4efb05b10547d298d908b8ec718f845f141c805a41340b32437d54dda06d4012"
+    },
+    ".agents/skills/worker-implement/SKILL.md": {
+      "hash": "3f4674b0d927aa3fabe83810f8388979fa6d6aade84172a5df547edad7c7410b"
+    },
+    ".agents/workflows/pm.md": {
+      "hash": "978b8b60dff2bbc4fa2fb81e768231ba642fe46db31ee2cfafcee62234acfd84"
+    },
+    ".agents/workflows/worker.md": {
+      "hash": "c18c0fb93ac5cad49be05efd1d13ee3d16576645ec6c124683113d31103e206d"
+    },
+    ".docs/README.md": {
+      "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
+    },
+    ".trellis/config/config.yaml": {
+      "hash": "5b761b8d8ed05a47ac62b371953d08cfc220cba2cd784cae4f3858bb90e441cf"
+    },
+    ".trellis/spec/guides/external-cli-guide.md": {
+      "hash": "ee6e10f83813243ba7bcccf38a6caa977863298bee96642642713b7066cd72ba"
+    },
+    ".trellis/spec/guides/task-workflow.md": {
+      "hash": "f58667994ebb3543b0b7aa737eeab7b270b0e9657515fecdc7f3d0ceb1809200"
+    },
+    ".trellis/spec/guides/testing.md": {
+      "hash": "31133d58f05ba6ab63f55beb6398f936b532af9d8def4443b8da025897fd4c53"
+    },
+    ".trellis/spec/spec-schema.json": {
+      "hash": "3706e5dbc8ba583b886717fab22b238e2f70e05a64988b469576edfe024116cd"
+    },
+    "README.md": {
+      "hash": "c64596569893c3131c830696aa690294f5fa31a8d6a445cc4ccd52a52d20e3a2"
+    },
+    "gitignore.template": {
+      "hash": "52ffb895237131c18433d45473b55d34110f283c8395a667567386eca72be8ea"
+    }
+  }
+}
