@@ -2,6 +2,21 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.0.4] - 2026-03-12
+
+### 新增
+
+- `pm-framework-evolve` Skill（PM 专属框架自迭代能力，升级自 `common-framework-evolve`）
+- `publish.md` 发布工作流（含 AI 检查清单、CHANGELOG 生成步骤）
+- `framework-dev-mode.md` 开发模式规则
+
+### 变更
+
+- MCP 统计更新：21 个 Tools + 6 个 Resources（原 19+5）
+- `FRAMEWORK_VERSION` 同步至 3.0.4
+- `project-identity.md` 更新框架地图
+- 多个 Skill 文档优化（`pm-brainstorm`、`pm-task-review`、`common-session-close`）
+
 ## [3.0.3] - 2026-03-10
 
 ### 修复
