@@ -1,0 +1,49 @@
+{
+  "name": "@geeseeker/easyai-dev",
+  "version": "3.0.0",
+  "description": "easyAI — 让用户以纯客户的视角进行软件开发",
+  "type": "module",
+  "bin": {
+    "easyai-dev": "./bin/easyai-dev.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "skeleton/",
+    "README.md",
+    "README_AI.md"
+  ],
+  "scripts": {
+    "build": "echo 'MCP Server 已预编译，无需构建'",
+    "prepack": "npm run build",
+    "test": "echo 'TODO: add tests' && exit 0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "framework",
+    "antigravity",
+    "mcp",
+    "developer-tools"
+  ],
+  "author": "GeeSeeker",
+  "license": "MIT",
+  "homepage": "https://github.com/GeeSeeker/easyAI-dev#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeeSeeker/easyAI-dev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GeeSeeker/easyAI-dev/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^3.25.67"
+  }
+}

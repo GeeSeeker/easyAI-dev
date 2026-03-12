@@ -1,0 +1,48 @@
+# easyAI 框架配置
+# M00 骨架版本 — 后续模块将逐步填充详细配置
+
+# 框架基本信息
+framework:
+  name: easyAI
+  version: "0.1.0"
+  description: "让用户以纯客户的视角进行软件开发"
+
+# MCP Server 配置
+mcp:
+  server:
+    name: easyai-mcp-server
+    transport: stdio
+
+# 任务管理配置（M01 填充）
+tasks:
+  root: .trellis/tasks
+  archive: .trellis/tasks/archive
+  statuses:
+    - pending # 待分配
+    - in_progress # 执行中
+    - under_review # 待验收
+    - completed # 已完成
+    - archived # 已归档
+    - cancelled # 已取消
+    - rejected # 打回
+
+# 记忆系统配置（M01 填充）
+journal:
+  root: .trellis/workspace
+  maxLinesPerFile: 2000
+  dateFormat: "YYYY-MM-DD"
+
+# 规范文件配置
+spec:
+  root: .trellis/spec
+  schemaFile: .trellis/spec/spec-schema.json
+  categories:
+    - frontend
+    - backend
+    - guides
+
+# 上下文预算配置（M04 详细配置在 context-budget.md）
+context:
+  budgetFile: .trellis/config/context-budget.md
+  warningThreshold: 0.6 # 60% 时开始降级
+  criticalThreshold: 0.8 # 80% 时建议新会话
