@@ -11,6 +11,7 @@ description: 会话收尾与日志沉淀 — 汇总本会话工作、写入 jour
 
 ## 触发条件
 
+- 用户明确表示「**收工**」（或等价表达，如"结束"、"下班"等）
 - 用户明确表示本次会话结束
 - 上下文预算接近阈值，需要新开会话
 - 任务执行完成，准备提交验收
@@ -60,12 +61,12 @@ task_append_log({
 2. **列出候选沉淀内容**
    - 向用户展示候选文档列表，说明每项的建议目标路径：
 
-   | Artifacts 类型 | 建议沉淀目标 |
-   |----------------|-------------|
-   | `walkthrough.md` | `.docs/notes/` 或 `.docs/guides/` |
-   | `other`（分析报告等） | `.docs/notes/` 或 `.docs/design/` |
+   | Artifacts 类型           | 建议沉淀目标                               |
+   | ------------------------ | ------------------------------------------ |
+   | `walkthrough.md`         | `.docs/notes/` 或 `.docs/guides/`          |
+   | `other`（分析报告等）    | `.docs/notes/` 或 `.docs/design/`          |
    | `implementation_plan.md` | 通常已由 `pm-brainstorm` Step 6 处理，跳过 |
-   | `task.md` | 不沉淀（`.trellis/tasks/` 已持久化） |
+   | `task.md`                | 不沉淀（`.trellis/tasks/` 已持久化）       |
 
 3. **用户确认后执行**
    - 用户确认需要沉淀 → 提炼内容并写入目标路径

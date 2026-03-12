@@ -1,6 +1,6 @@
 {
   "version": "3.0.7",
-  "generatedAt": "2026-03-12T13:24:32.935Z",
+  "generatedAt": "2026-03-12T14:10:02.125Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -12,7 +12,7 @@
       "hash": "42f56e40168cd2528b72a7d99e862be806e1af0a89e609b51fdad42cb8c06758"
     },
     ".agents/skills/common-session-close/SKILL.md": {
-      "hash": "491132b12d8a1e327afdb16d9667031ad703abd9d184d8b26b3d160318d58517"
+      "hash": "81703e51dc2fed75145a808018351c7799ad0a8f347524366055f633182c1977"
     },
     ".agents/skills/common-spec-update/SKILL.md": {
       "hash": "cca0e3176a235d5a2b33f419e80b4e35409e377b915de14a8cd35283eb980630"
