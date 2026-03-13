@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.0.11] - 2026-03-13
+
+### 新增
+
+- `framework_check` 新增 MCP Server 版本一致性检测 — 当运行中的 MCP 版本与已安装框架版本不匹配时发出警告和重启提示
+- `framework_update` 更新完成后新增 MCP Server 重启提示
+
 ## [3.0.10] - 2026-03-13
 
 ### 修复
