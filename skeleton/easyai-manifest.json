@@ -1,6 +1,6 @@
 {
-  "version": "3.0.11",
-  "generatedAt": "2026-03-13T06:29:20.617Z",
+  "version": "3.0.12",
+  "generatedAt": "2026-03-13T06:56:58.634Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -72,7 +72,7 @@
       "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
     },
     ".trellis/config/config.yaml": {
-      "hash": "5b761b8d8ed05a47ac62b371953d08cfc220cba2cd784cae4f3858bb90e441cf"
+      "hash": "217c00d2276eb6bdb491d6d535468ee5ccc6f34b8df7af16ff32385b25991316"
     },
     ".trellis/spec/guides/external-cli-guide.md": {
       "hash": "ee6e10f83813243ba7bcccf38a6caa977863298bee96642642713b7066cd72ba"
@@ -88,9 +88,6 @@
     },
     "README.md": {
       "hash": "c64596569893c3131c830696aa690294f5fa31a8d6a445cc4ccd52a52d20e3a2"
-    },
-    "gitignore.template": {
-      "hash": "52ffb895237131c18433d45473b55d34110f283c8395a667567386eca72be8ea"
     }
   }
 }

@@ -1,10 +1,7 @@
-# Node.js 依赖
+# Node.js
 node_modules/
 
-# MCP Server 编译输出（已合并到 npm 包中，无需本地构建）
-# packages/mcp-server/build/
-
-# Python 缓存
+# Python
 __pycache__/
 
 # 系统文件
@@ -17,14 +14,7 @@ Thumbs.db
 # easyAI 测试文件
 .test/
 
-# Trellis 运行时状态（不应版本控制）
+# easyAI 运行时状态（不应版本控制）
 .trellis/tasks/.current-task
 .trellis/workspace/**/journal-*.md
 .trellis/workspace/**/.journal_size
-
-# 框架更新备份
-.agents.bak.*
-.trellis/spec.bak.*
-
-# easyAI 版本清单（本地状态）
-# .easyai-version
