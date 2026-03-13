@@ -1,6 +1,6 @@
 {
-  "version": "3.0.10",
-  "generatedAt": "2026-03-13T06:24:50.112Z",
+  "version": "3.0.11",
+  "generatedAt": "2026-03-13T06:29:20.617Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
