@@ -14,6 +14,9 @@ Thumbs.db
 # easyAI 测试文件
 .test/
 
+# easyAI Git Worktree 隔离目录
+.worktrees/
+
 # easyAI 运行时状态（不应版本控制）
 .trellis/tasks/.current-task
 .trellis/workspace/**/journal-*.md

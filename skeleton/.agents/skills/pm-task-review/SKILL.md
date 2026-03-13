@@ -95,6 +95,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 3. **请求澄清**：要求执行者解释具体设计决策
 
 执行者收到 Push Back 后：
+
 1. 理解审查者的技术关切
 2. 如审查者正确 → 接受建议并修改
 3. 如坚持原方案 → 提供完整技术论证（非"我觉得没问题"）
@@ -113,12 +114,12 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
    - 内容是否对用户有持续参考价值？
    - 沉淀目标判断：
 
-   | Artifacts 类型 | 沉淀目标 | 判断依据 |
-   |----------------|----------|----------|
-   | `walkthrough.md` | `.docs/notes/`（临时参考）或 `.docs/guides/`（永久指南） | 是否有长期复用价值 |
-   | `other`（分析报告等） | `.docs/notes/` 或 `.docs/design/` | 内容属于设计还是参考 |
-   | `task.md` | 不沉淀 | `.trellis/tasks/` 已持久化 |
-   | `implementation_plan.md` | 不沉淀 | `pm-brainstorm` Step 6 已负责 |
+   | Artifacts 类型           | 沉淀目标                                                 | 判断依据                      |
+   | ------------------------ | -------------------------------------------------------- | ----------------------------- |
+   | `walkthrough.md`         | `.docs/notes/`（临时参考）或 `.docs/guides/`（永久指南） | 是否有长期复用价值            |
+   | `other`（分析报告等）    | `.docs/notes/` 或 `.docs/design/`                        | 内容属于设计还是参考          |
+   | `task.md`                | 不沉淀                                                   | `.trellis/tasks/` 已持久化    |
+   | `implementation_plan.md` | 不沉淀                                                   | `pm-brainstorm` Step 6 已负责 |
 
 3. **向用户确认**
    - 列出候选沉淀内容，说明建议的目标路径
@@ -134,8 +135,33 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 ### Stage 3 判定
 
-- **有内容沉淀** → 确认沉淀完成后标记 `completed`
-- **无需沉淀** → 直接标记 `completed`
+- **有内容沉淀** → 确认沉淀完成后进入 Worktree 闭环检查
+- **无需沉淀** → 直接进入 Worktree 闭环检查
+
+## Worktree 闭环（条件步骤）
+
+> 仅当任务使用了 worktree 时执行。检查方式：调用 `worktree_list()` 或查看 task 执行记录中的 `[worktree]` 标记。
+
+### 步骤 1：Worktree 状态检查
+
+- 调用 `worktree_list({ role: "pm" })` 查看任务关联 worktree 的状态
+- 若该任务无关联 worktree → **跳过本步骤，直接标记 `completed`**
+- 若 `is_dirty: true` → 提醒用户 worktree 有未提交变更，建议先处理
+
+### 步骤 2：合并
+
+- 从 task 执行记录获取 `base_branch` 作为默认 target
+- 向用户确认目标分支
+- 调用 `worktree_merge({ task_id, target_branch, role: "pm" })`
+- 若冲突 → 展示冲突文件列表（工具返回 `conflict_files`），暂停。向用户提供选项：
+  1. 手动解决冲突后重试
+  2. 打回任务让 Worker 解决
+
+### 步骤 3：清理
+
+- 合并成功后 → 调用 `worktree_cleanup({ task_id, delete_branch: true, role: "pm" })`
+- 确认清理完成
+- 标记 `task_transition({ task_id, new_status: "completed", role: "pm" })`
 
 ## 验收结果输出
 

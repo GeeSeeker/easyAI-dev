@@ -1,6 +1,6 @@
 {
-  "version": "3.1.0",
-  "generatedAt": "2026-03-13T08:53:17.025Z",
+  "version": "3.2.0",
+  "generatedAt": "2026-03-13T12:06:05.709Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -12,7 +12,7 @@
       "hash": "42f56e40168cd2528b72a7d99e862be806e1af0a89e609b51fdad42cb8c06758"
     },
     ".agents/skills/common-session-close/SKILL.md": {
-      "hash": "aaaf87cf581722037417328b00deee173e66fd4a5afca9d1c56cadeabb3ae4e1"
+      "hash": "493c4163a603d7d162bfc4d96023bad72200da31368f8cbbfaad1ebf2fd3b8af"
     },
     ".agents/skills/common-spec-update/SKILL.md": {
       "hash": "cca0e3176a235d5a2b33f419e80b4e35409e377b915de14a8cd35283eb980630"
@@ -30,10 +30,10 @@
       "hash": "d70dbc52236cf36a57b5837663d5b9e3833c6a15405c7b1e378d24a67a28f755"
     },
     ".agents/skills/pm-framework-evolve/references/directory-map.md": {
-      "hash": "e774508317279821ef20cf6e4116ba9f3bfc07123db94337e609f07b95732d31"
+      "hash": "901b72ee6a3bc8268f328123548c11ee0bc7ea7d1af5c2222af9a6b692153b68"
     },
     ".agents/skills/pm-framework-evolve/references/features.md": {
-      "hash": "b454de12842fadf9178e9f2852ee1ac318f0a4bd9a0fab38edc966a2e9c9abed"
+      "hash": "6ada30677441debfe589acb3b1ef447f9e8802815eebff48e0b0b69b14096f80"
     },
     ".agents/skills/pm-framework-evolve/references/github-info.md": {
       "hash": "b2e367ecbaa2c7064ad448bbadb1ed0dc0d70a5be0409205974cba6518e585ba"
@@ -51,10 +51,10 @@
       "hash": "290aa40262e6b30b771a3cb6707f7855b49b97c209330cb97b1cae24aed37dba"
     },
     ".agents/skills/pm-task-review/SKILL.md": {
-      "hash": "5c0de10bded4b1ccdccb7bdaecf873dea84482674844a1a3eca9a0811c7fc041"
+      "hash": "ed0ff7427c00485ba6e27b9d4c677661b1299eb46cf03daf83dbc087e6642a1f"
     },
     ".agents/skills/worker-check/SKILL.md": {
-      "hash": "ca6c5069cb389749aa13683f2b2d47a54234f2ef2b5e906d8bdc615697cc1ff1"
+      "hash": "68e9ddae7c77c7f306252165ef3bb4c12e82923e3e0ed0c67cfae38fb89c9b1b"
     },
     ".agents/skills/worker-debug/SKILL.md": {
       "hash": "4efb05b10547d298d908b8ec718f845f141c805a41340b32437d54dda06d4012"
@@ -66,7 +66,7 @@
       "hash": "7bb177b580adfc53d09332437ea4da31e81bd1d3deed99d9f221fad3c9cdd3fc"
     },
     ".agents/workflows/worker.md": {
-      "hash": "5031de6e063558a596cbb4ffbecadc5f3f4b77d575c0ec6b5dd14453c92bd1ae"
+      "hash": "e24b917510d8da9c0b85752c463a262b75c17b83551431e2ed2392ca83248c1e"
     },
     ".docs/README.md": {
       "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"

@@ -177,6 +177,13 @@ Evidence Gate 接受 `_PASS` 和 `_NA`，拒绝 `_FAIL` 和缺失标记。
 
 验证全部通过后，自动提交任务产物：
 
+> **Worktree 场景**：
+>
+> - 若任务使用了 worktree（Step 3.5 已检测），所有 Git 操作（status、add、commit）在 **worktree 目录**中执行
+> - Worker 的 commit 发生在 worktree 分支上，不影响主仓库
+> - PM 验收通过后会通过 `worktree_merge` 将变更合并回基础分支
+> - Allowlist 规则照常应用，scope 路径相对于 worktree 根目录
+
 1. 执行 `git status --porcelain` 确认有变更
 2. 变更文件清单输出（可见性）
 3. **Allowlist 范围确定**：

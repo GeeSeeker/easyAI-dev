@@ -21,6 +21,9 @@ interface TaskMetadata {
     acceptance_criteria: string;
     file_scope?: string;
     assign_strategy?: string;
+    worktree_path?: string;
+    worktree_branch?: string;
+    worktree_base_branch?: string;
     created_at: string;
     updated_at: string;
 }

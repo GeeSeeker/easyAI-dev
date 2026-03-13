@@ -6,13 +6,13 @@
 
 ### PM 专属（5 个）
 
-| Skill                 | 触发条件                         | 职责                                                |
-| --------------------- | -------------------------------- | --------------------------------------------------- |
-| `pm-session-start`    | `/pm` 触发后                     | 自动读取项目状态、恢复任务上下文、加载最新日志      |
-| `pm-brainstorm`       | PM 接收到用户新需求时            | 苏格拉底式需求发散，将用户想法转化为完整设计        |
-| `pm-task-planning`    | PM 完成需求澄清后                | 将设计文档转化为约束集格式的任务定义                |
-| `pm-task-review`      | PM 审查执行者提交的任务时        | 三阶段验收（Spec 合规 → 代码质量 → Artifacts 沉淀） |
-| `pm-framework-evolve` | 需要修改框架文件或查询框架知识时 | 框架百科 + 安全迭代 + 知识库自更新                  |
+| Skill                 | 触发条件                         | 职责                                           |
+| --------------------- | -------------------------------- | ---------------------------------------------- |
+| `pm-session-start`    | `/pm` 触发后                     | 自动读取项目状态、恢复任务上下文、加载最新日志 |
+| `pm-brainstorm`       | PM 接收到用户新需求时            | 苏格拉底式需求发散，将用户想法转化为完整设计   |
+| `pm-task-planning`    | PM 完成需求澄清后                | 将设计文档转化为约束集格式的任务定义           |
+| `pm-task-review`      | PM 审查执行者提交的任务时        | 三阶段验收 + Worktree 闭环（merge/cleanup）    |
+| `pm-framework-evolve` | 需要修改框架文件或查询框架知识时 | 框架百科 + 安全迭代 + 知识库自更新             |
 
 ### Worker 专属（3 个）
 
@@ -42,7 +42,7 @@
 
 ---
 
-## MCP Tools（21 个）
+## MCP Tools（22 个）
 
 ### 任务管理（6 个）
 
@@ -92,13 +92,14 @@
 | `framework_check`  | 检查框架完整性            |
 | `framework_update` | Manifest 驱动智能合并升级 |
 
-### Git Worktree（3 个）
+### Git Worktree（4 个）
 
-| Tool               | 功能                                        |
-| ------------------ | ------------------------------------------- |
-| `worktree_create`  | 为任务创建 Git worktree（并行任务物理隔离） |
-| `worktree_merge`   | 将 worktree 分支合并回目标分支              |
-| `worktree_cleanup` | 清理 worktree 及其分支                      |
+| Tool               | 功能                                         |
+| ------------------ | -------------------------------------------- |
+| `worktree_create`  | 为任务创建 Git worktree（并行任务物理隔离）  |
+| `worktree_merge`   | 将 worktree 分支合并回目标分支（含安全预检） |
+| `worktree_cleanup` | 清理 worktree 及其分支（含未提交检查）       |
+| `worktree_list`    | 查询所有任务关联的 worktree 状态             |
 
 ---
 

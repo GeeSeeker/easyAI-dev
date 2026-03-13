@@ -87,6 +87,13 @@ task_append_log({
 
 > 本步骤在所有文件变更操作（journal、task log、artifacts 沉淀）完成后执行，确保 commit 捕获最终状态。
 
+> **Worktree 场景备注**：
+>
+> - Session-close 的 journal / task log 写入始终在**主仓库**执行（MCP 数据层绑定主仓根目录）
+> - 如果 Worker 在 worktree 中工作，session-close 的 Git commit 仍然在主仓提交元数据
+> - 这是设计意图：元数据属于项目级别，不随任务分支走
+> - Worktree 分支上的代码变更由 `worker-check` 单独提交
+
 **流程：**
 
 1. 检测 Git 仓库状态：

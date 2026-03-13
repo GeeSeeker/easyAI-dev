@@ -5,7 +5,7 @@ type Role = "pm" | "组长" | "组员" | "worker";
 /**
  * 受限工具名称
  */
-type RestrictedTool = "task_create" | "task_transition_completed" | "task_transition_archived" | "task_cancel" | "subtask_create" | "subtask_dependency_graph" | "conflict_check" | "worktree_create" | "worktree_merge" | "worktree_cleanup";
+type RestrictedTool = "task_create" | "task_transition_completed" | "task_transition_archived" | "task_cancel" | "subtask_create" | "subtask_dependency_graph" | "conflict_check" | "worktree_create" | "worktree_merge" | "worktree_cleanup" | "worktree_list";
 /**
  * 角色权限矩阵（来自 architecture §7.1）
  *
