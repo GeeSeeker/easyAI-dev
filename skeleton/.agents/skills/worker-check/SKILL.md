@@ -1,6 +1,6 @@
 ---
 name: worker-check
-description: 执行者自检与验证标记 — 完成编码后的强制验证流程。生成 dev/verification.md，每个验证类别必须为 _PASS 或 _NA（附说明）。在 worker-implement 完成后由 Worker 激活。
+description: 执行者自检与验证标记 — 完成编码后的强制验证流程。生成 dev/verification.md，Git 自动提交任务产物。在 worker-implement 完成后由 Worker 激活。
 ---
 
 # 执行者自检 & 验证标记
@@ -173,6 +173,33 @@ Evidence Gate 接受 `_PASS` 和 `_NA`，拒绝 `_FAIL` 和缺失标记。
 
 **无论是否使用 `_NA` 标记，`verification.md` 必须始终生成。**
 
+## 步骤 4：Git 自动提交
+
+验证全部通过后，自动提交任务产物：
+
+1. 执行 `git status --porcelain` 确认有变更
+2. 变更文件清单输出（可见性）
+3. **Allowlist 范围确定**：
+   - 优先使用约束集中的 `file_scope`（若存在）
+   - 加上任务目录下所有文件（`.trellis/tasks/T{id}-*/`）
+   - 加上 `dev/verification.md`、`dev/report.md`
+   - scope 外的变更文件 → 列出并警告，不自动包含
+4. 执行 `git add -- "<file1>" "<file2>" ... && git commit -m "{type}(T{id}): {title}"`
+
+**commit type 判定（带 fallback）：**
+
+- 任务描述含「新增/添加/实现」→ `feat`
+- 任务描述含「修复/Bug/修正」→ `fix`
+- 任务描述含「重构/优化/清理」→ `refactor`
+- 任务描述含「文档/说明」→ `docs`
+- **Fallback**：关键词混合或不明确时 → `task`（如 `task(T003): 用户认证模块`）
+
+**约束：**
+
+- Worker 只 commit，不 push、不 merge
+- 无变更时跳过
+- 路径必须用双引号包裹（支持中文/空格路径）
+
 ## PATEOAS 导航
 
 验证完成后输出：
@@ -180,15 +207,17 @@ Evidence Gate 接受 `_PASS` 和 `_NA`，拒绝 `_FAIL` 和缺失标记。
 ```markdown
 ### 下一步行动
 
-1. [ ] 确认 dev/verification.md 已生成且三标记全部 _PASS 或 _NA（附说明）
-2. [ ] 调用 `task_transition({ task_id, new_status: "under_review" })` 提交验收
-3. [ ] 激活 `common-session-close` Skill 完成会话收尾
-4. [ ] 告知用户回 PM 会话验收
+1. [ ] 确认 dev/verification.md 已生成且三标记全部 \_PASS 或 \_NA（附说明）
+2. [ ] 自动执行 Git commit（若检测到变更）
+3. [ ] 调用 `task_transition({ task_id, new_status: "under_review" })` 提交验收
+4. [ ] 激活 `common-session-close` Skill 完成会话收尾
+5. [ ] 告知用户回 PM 会话验收
 
 ### 状态快照
 
 - 当前角色：Worker
 - 当前阶段：CHECK
-- 标记状态：LINT*{status} | TEST*{status} | MANUAL_{status}
+- 标记状态：LINT*{status} | TEST*{status} | MANUAL\_{status}
+- Git 提交：{已提交 hash / 无变更 / 未提交}
 - 验证文件：dev/verification.md {已生成/未生成}
 ```
