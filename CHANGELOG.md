@@ -2,6 +2,16 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.1.0] - 2026-03-13
+
+### 新增
+
+- **Git 自动化**：`common-session-close` 重写为 8 步流程，新增 Git 自动提交、`.tmp/` 清理、PM push 确认、增强恢复指引
+- `worker-check` 新增 Step 4：验证通过后自动 commit 任务产物（allowlist 安全机制 + commit type fallback）
+- 双提交模型：worker-check 提交任务代码，session-close 提交会话元数据，语义分离
+- PM Git 职责声明：PM 负责 push/merge，Worker 仅限本地 commit（Skill-level policy）
+- Commit message 规范：`{type}(T{id}): {title}`（Worker）/ `session: {摘要}`（PM）
+
 ## [3.0.12] - 2026-03-13
 
 ### 修复
