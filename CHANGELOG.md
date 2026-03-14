@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.3.1] - 2026-03-14
+
+### 清理
+
+- 移除 9 个冗余 `.gitkeep`（8 个 Skill 目录 + `spec/guides/`），仅保留空用户目录的 `.gitkeep`（18→9）
+
 ## [3.3.0] - 2026-03-14
 
 ### 新增
