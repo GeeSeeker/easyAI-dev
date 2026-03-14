@@ -2,6 +2,28 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.3.0] - 2026-03-14
+
+### 新增
+
+- **Trellis spec 集成修复** — 5 个 Skill 接入 `.trellis/spec/` 读写闭环（4 Gate 架构）
+- `worker-implement` 新增 Step 0：编码前加载项目规范 + 强制复述关键约束 + `[SPEC_GAP]` 降级策略
+- `pm-session-start` 新增 Step 3.5：启动时展示 spec 覆盖状态（4 分类含 general）
+- `pm-task-review` Stage 1 新增项目规范合规性检查 + 反溯及原则
+- `pm-brainstorm` Step 1 spec 扫描 + Step 6 spec 演进入口（`common-spec-update` 触发器）
+- `pm-task-planning` Step 1 spec 冲突检查 + Step 7 `context.jsonl` 写入 HARD-GATE
+
+### 文档
+
+- 框架知识库更新：`features.md` Trellis 数据消费列、`directory-map.md` tool 计数修正（23）
+- README tool 计数修正（22→23）
+
+## [3.2.0] - 2026-03-13
+
+### 新增
+
+- **Worktree 生命周期优化** — 新增 `worktree_list` Tool、安全增强、元数据持久化
+
 ## [3.1.0] - 2026-03-13
 
 ### 新增
