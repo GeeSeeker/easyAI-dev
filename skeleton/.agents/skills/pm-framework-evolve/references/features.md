@@ -6,28 +6,38 @@
 
 ### PM 专属（5 个）
 
-| Skill                 | 触发条件                         | 职责                                           |
-| --------------------- | -------------------------------- | ---------------------------------------------- |
-| `pm-session-start`    | `/pm` 触发后                     | 自动读取项目状态、恢复任务上下文、加载最新日志 |
-| `pm-brainstorm`       | PM 接收到用户新需求时            | 苏格拉底式需求发散，将用户想法转化为完整设计   |
-| `pm-task-planning`    | PM 完成需求澄清后                | 将设计文档转化为约束集格式的任务定义           |
-| `pm-task-review`      | PM 审查执行者提交的任务时        | 三阶段验收 + Worktree 闭环（merge/cleanup）    |
-| `pm-framework-evolve` | 需要修改框架文件或查询框架知识时 | 框架百科 + 安全迭代 + 知识库自更新             |
+| Skill                 | 触发条件                         | 职责                                           | 消费的 .trellis 数据                                                          |
+| --------------------- | -------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| `pm-session-start`    | `/pm` 触发后                     | 自动读取项目状态、恢复任务上下文、加载最新日志 | `workspace/journal`（读）、`tasks/`（读）、`spec/`（状态扫描）                |
+| `pm-brainstorm`       | PM 接收到用户新需求时            | 苏格拉底式需求发散，将用户想法转化为完整设计   | `tasks/`（写：task_create）、`spec/`（读+演进判断）                           |
+| `pm-task-planning`    | PM 完成需求澄清后                | 将设计文档转化为约束集格式的任务定义           | `tasks/`（写：task_create + context_generate + context.jsonl）、`spec/`（读） |
+| `pm-task-review`      | PM 审查执行者提交的任务时        | 三阶段验收 + Worktree 闭环（merge/cleanup）    | `tasks/`（读+写：task_transition）、`spec/`（读：合规审查）                   |
+| `pm-framework-evolve` | 需要修改框架文件或查询框架知识时 | 框架百科 + 安全迭代 + 知识库自更新             | `spec/`（修改框架规范时）                                                     |
 
 ### Worker 专属（3 个）
 
-| Skill              | 触发条件                  | 职责                                                     |
-| ------------------ | ------------------------- | -------------------------------------------------------- |
-| `worker-implement` | Worker 开始实现任务时     | TDD 铁律驱动的编码流程                                   |
-| `worker-check`     | `worker-implement` 完成后 | 强制验证流程，生成 verification.md，Git 自动提交任务产物 |
-| `worker-debug`     | 遇到 Bug、测试失败时      | 4 阶段根因分析 + 3 次失败上报 PM                         |
+| Skill              | 触发条件                  | 职责                                                     | 消费的 .trellis 数据                                |
+| ------------------ | ------------------------- | -------------------------------------------------------- | --------------------------------------------------- |
+| `worker-implement` | Worker 开始实现任务时     | TDD 铁律驱动的编码流程                                   | `tasks/`（读：任务上下文）、`spec/`（读：项目规范） |
+| `worker-check`     | `worker-implement` 完成后 | 强制验证流程，生成 verification.md，Git 自动提交任务产物 | `tasks/`（写：验证产物存入 dev/）                   |
+| `worker-debug`     | 遇到 Bug、测试失败时      | 4 阶段根因分析 + 3 次失败上报 PM                         | —                                                   |
 
 ### 通用（2 个）
 
-| Skill                  | 触发条件                                      | 职责                                                                     |
-| ---------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
-| `common-session-close` | 用户说「收工」/ 会话结束 / 上下文预算接近阈值 | 汇总工作、写入 journal、Git 自动提交、.tmp/ 清理、PM push 确认、恢复指引 |
-| `common-spec-update`   | 需要更新 `.trellis/spec/` 时                  | 安全地更新项目规范文件                                                   |
+| Skill                  | 触发条件                                      | 职责                                           | 消费的 .trellis 数据                      |
+| ---------------------- | --------------------------------------------- | ---------------------------------------------- | ----------------------------------------- |
+| `common-session-close` | 用户说「收工」/ 会话结束 / 上下文预算接近阈值 | 汇总工作、写入 journal、Git 自动提交、恢复指引 | `workspace/journal`（写：journal_append） |
+| `common-spec-update`   | 需要更新 `.trellis/spec/` 时                  | 安全地更新项目规范文件                         | `spec/`（读+写）                          |
+
+---
+
+## Workflows（3 个）
+
+| Workflow     | 触发命令       | 职责                                               | 消费的 .trellis 数据      |
+| ------------ | -------------- | -------------------------------------------------- | ------------------------- |
+| `pm.md`      | `/pm`          | PM 角色入口 — 需求沟通、任务管理、验收审批         | 通过 Skills 间接消费      |
+| `worker.md`  | `/worker T001` | Worker 角色入口 — 读取任务、按约束集执行、产出报告 | 通过 Skills 间接消费      |
+| `publish.md` | `/publish`     | 框架发布 — 构建、同步 skeleton、推送 GitHub + npm  | `spec/`（同步到发行目录） |
 
 ---
 
@@ -42,7 +52,7 @@
 
 ---
 
-## MCP Tools（22 个）
+## MCP Tools（23 个）
 
 ### 任务管理（6 个）
 
@@ -101,6 +111,12 @@
 | `worktree_cleanup` | 清理 worktree 及其分支（含未提交检查）       |
 | `worktree_list`    | 查询所有任务关联的 worktree 状态             |
 
+### 项目状态（1 个）
+
+| Tool             | 功能                                      |
+| ---------------- | ----------------------------------------- |
+| `project_status` | 获取项目当前状态概览（Git + 任务 + 日志） |
+
 ---
 
 ## MCP Resources（6 个）
@@ -138,4 +154,17 @@ graph TD
 
     SC --- PM
     SC --- W
+
+    subgraph ".trellis/ 数据流"
+        SPEC[spec/]
+        TASKS[tasks/]
+        WS[workspace/]
+    end
+
+    TP -->|task_create| TASKS
+    WI -.->|spec:// 读取| SPEC
+    WC -->|写入 dev/| TASKS
+    TR -->|task_transition| TASKS
+    SC -->|journal_append| WS
+    SS -.->|journal/latest| WS
 ```

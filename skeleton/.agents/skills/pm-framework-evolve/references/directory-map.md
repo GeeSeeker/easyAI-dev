@@ -83,6 +83,6 @@ skills/
 | 路径             | 内容                                                |
 | ---------------- | --------------------------------------------------- |
 | `src/index.ts`   | MCP Server 入口                                     |
-| `src/tools/`     | 16 个文件，注册 22 个 Tools                         |
+| `src/tools/`     | 16 个文件，注册 23 个 Tools                         |
 | `src/resources/` | 5 个文件，注册 6 个 Resources                       |
 | `src/utils/`     | 工具函数（task-utils, git-utils, journal-utils 等） |

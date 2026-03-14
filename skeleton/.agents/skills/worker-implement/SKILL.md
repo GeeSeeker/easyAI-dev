@@ -9,6 +9,20 @@ description: 执行者实现工作流 — TDD 铁律驱动的编码流程。在 
 
 Worker 角色开始执行任务中的编码工作时，必须激活本 Skill。
 
+## Step 0：加载项目规范
+
+编码前 **必须** 加载与当前任务相关的项目规范。
+
+1. 通过 `task_get()` 获取任务的 `frozen_context`（含 context.jsonl 清单）
+2. 如果有 context.jsonl：读取 `priority: "required"` 的条目（URI 格式可能是 `trellis://spec/...` 或 `spec://...`，两者等效）
+3. 如果没有 context.jsonl：扫描 `.trellis/spec/guides/` 下的通用指南
+4. **强制复述**：简述 1-2 条对当前任务影响最大的 spec 约束
+
+> ⚠️ **降级策略**：若 `spec/` 目录完全为空，记录 `[SPEC_GAP]` 标记在执行记录中，
+> 按任务约束集和通用编码规范继续执行，完成后提醒 PM 补充 spec。
+>
+> 此步骤完成后再进入 TDD 循环。
+
 ## Iron Law
 
 ```

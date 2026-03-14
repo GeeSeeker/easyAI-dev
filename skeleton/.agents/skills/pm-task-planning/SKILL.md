@@ -32,6 +32,7 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 
 - 读取已确认的设计文档（来自 `pm-brainstorm` 的 `.docs/design/{name}.md`）
 - 提取功能边界、技术约束、验收标准草案
+- 读取 `.trellis/spec/` 中与任务相关的规范文件，确保约束集不与现有规范冲突
 - 确认设计文档路径，后续 `task_create()` 将引用此路径
 
 ### Step 2：约束集生成
@@ -43,6 +44,7 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 技术选型、接口规范、安全要求等确定性决策——执行者必须遵守，无商量余地。
 
 示例：
+
 - C1: 使用 JWT，TTL=15min，刷新机制=sliding window
 - C2: API 端点遵循 RESTful 规范，路径前缀 `/api/v1/`
 - C3: 密码存储使用 bcrypt，cost=12
@@ -52,6 +54,7 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 代码风格偏好、辅助性建议——执行者有小幅调整空间，偏离时需说明理由。
 
 示例：
+
 - C4: 优先复用 `src/utils/` 中的现有函数
 - C5: 单个函数不超过 30 行
 
@@ -60,6 +63,7 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 可验证的成功判据——每条必须是 yes/no 可判定的。
 
 示例：
+
 - [ ] 登录成功返回有效 JWT token
 - [ ] 无效凭证返回 401 + 标准错误格式
 - [ ] token 过期后请求返回 401
@@ -91,6 +95,7 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 - **粒度适中**：每个任务执行者在 1-2 个会话内可完成
 
 每个任务包含：
+
 ```
 标题：简洁描述
 约束集：从 Step 2 筛选该任务相关约束
@@ -136,7 +141,13 @@ task_create(
 调用方式：context_generate(task_id: "T001", phase: "implement")
 ```
 
-审核推荐清单——添加遗漏的必要规范，移除不相关的推荐。
+审核推荐清单：
+
+1. 添加遗漏的必要规范（特别是 Step 1 中识别的相关 spec 路径）
+2. 移除不相关的推荐
+3. **将审核后的清单写入 `.trellis/tasks/{id}/context.jsonl`**（HARD-GATE）
+
+> ⚠️ 不写入 context.jsonl = Worker 拿不到 spec 清单 = 违规。
 
 创建完成后向用户汇报：
 
@@ -149,22 +160,27 @@ task_create(
 ## 约束集
 
 ### 硬约束（不可违反）
+
 - C1: [具体技术决策 + 参数]
 - C2: [接口规范 + 格式要求]
 
 ### 软约束（建议遵守）
+
 - C3: [代码风格偏好]
 - C4: [辅助性建议]
 
 ### 文件范围
-- path/to/dir/*.ext
+
+- path/to/dir/\*.ext
 - path/to/specific-file.ext
 
 ### 验收标准
+
 - [ ] [可验证的成功判据 1]
 - [ ] [可验证的成功判据 2]
 
 ### 设计文档
+
 - .docs/design/{feature-name}.md
 ```
 
@@ -186,7 +202,7 @@ task_create(
 4. [ ] 拆分为原子任务（单一职责 + 文件范围 + 验收标准）
 5. [ ] 调用 `conflict_check()` 检测文件冲突
 6. [ ] 调用 `task_create()` 创建任务
-7. [ ] 调用 `context_generate()` 配置上下文
+7. [ ] 调用 `context_generate()` 生成推荐清单，审核后写入 `context.jsonl`
 
 ### 状态快照
 
