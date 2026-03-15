@@ -1,6 +1,6 @@
 ---
 name: common-session-close
-description: 会话收尾与日志沉淀 — 汇总工作、写入日志、Git 自动提交、输出恢复指引。在会话结束前由 AI 自主激活。
+description: 会话收尾与日志沉淀 — 汇总工作、写入日志、Git 自动提交、输出恢复指引。在会话结束前由 AI 自主激活。当用户说收工，或者表达出类似语义的时候，执行本 Skill。
 ---
 
 # 会话收尾 & 日志沉淀
@@ -57,27 +57,47 @@ entry: "完成了 xxx，剩余 yyy 待处理"
 
 ````
 
-### Step 4：Artifacts 文档沉淀检查
+### Step 4：知识沉淀检查（含分类触发）
 
 > 本质：在会话收尾时充当"最后一道提醒"，确保面向用户的有价值内容不会随会话消散。
+> 参照规范：`spec://general/knowledge-categories` 定义 6 种知识分类及触发规则。
+
+#### 4a. 知识分类自检
+
+按 `spec://general/knowledge-categories` 自检清单逐项检查：
+
+1. **本会话是否做出了架构/技术选型决策？** → 触发 `ADR`：按 `spec://general/adr-template` 创建决策记录
+2. **本会话是否产出了可复用的操作流程？** → 触发 `GUIDE`：沉淀到 `.docs/guides/`
+3. **本会话是否解决了非显而易见的 Bug？** → 触发 `FIX`：沉淀到 `.docs/notes/`
+4. **本会话是否研究了外部技术并有价值摘要？** → 触发 `REF`：沉淀到 `.docs/notes/`
+5. **有无短期有效的备忘需要记录？** → 触发 `NOTE`：沉淀到 `.docs/notes/`
+
+> `SPEC` 类沉淀由 `common-spec-update` 独立处理，不在本清单中。
+
+#### 4b. Artifacts 扫描
+
+> **防重复**：若本会话中 `pm-task-review` Stage 3 已执行过沉淀，仅对 Stage 3 未覆盖的非任务性内容执行检查。
 
 1. **扫描本会话 Artifacts**
    - 检查本会话创建的所有 Artifacts
    - 识别面向用户的内容（排除 `task.md` 等过程性文件）
 
-2. **快速路径**：无候选沉淀内容 → 自动跳过，不询问用户
+2. **快速路径**：4a 无触发 + 无候选 Artifacts → 自动跳过，不询问用户
 
-3. **有候选时**列出清单，说明建议目标路径：
+3. **有候选时**列出分类标注的清单（路由按 `spec://general/knowledge-categories` 默认路径）：
 
-   | Artifacts 类型           | 建议沉淀目标                               |
-   | ------------------------ | ------------------------------------------ |
-   | `walkthrough.md`         | `.docs/notes/` 或 `.docs/guides/`          |
-   | `other`（分析报告等）    | `.docs/notes/` 或 `.docs/design/`          |
-   | `implementation_plan.md` | 通常已由 `pm-brainstorm` Step 6 处理，跳过 |
-   | `task.md`                | 不沉淀（`.trellis/tasks/` 已持久化）       |
+   | Artifacts 类型           | 分类    | 默认沉淀目标                    |
+   | ------------------------ | ------- | ------------------------------- |
+   | `walkthrough.md`         | `GUIDE` | `.docs/guides/`                 |
+   | `other`（分析报告等）    | `REF`   | `.docs/notes/`                  |
+   | 架构/技术决策            | `ADR`   | `.docs/design/decisions/`       |
+   | Bug 修复过程/根因分析    | `FIX`   | `.docs/notes/`                  |
+   | 短期备忘/待办            | `NOTE`  | `.docs/notes/`                  |
+   | `implementation_plan.md` | —       | 跳过（`pm-brainstorm` 已处理）  |
+   | `task.md`                | —       | 跳过（`.trellis/tasks/` 已持久） |
 
 4. **用户确认后执行**
-   - 用户确认需要沉淀 → 提炼内容并写入目标路径
+   - 用户确认需要沉淀 → 提炼内容并写入目标路径（ADR 使用模板）
    - 用户确认无需沉淀 → 跳过
    - 若写入失败 → 记录错误但继续收工流程
 

@@ -20,10 +20,14 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 
 ## HARD-GATE
 
-```
+> 补充检查点详见 `spec://guides/review-standards` §五
+
+```text
 1. 设计文档未持久化到 .docs/design/ 前，不得进入本流程。
 2. plan_validate() 检测到反面模式时，必须修正后才能创建任务。
 3. conflict_check() 检测到文件冲突时，必须解决后才能创建任务。
+4. context.jsonl 文件缺失时，不得向用户发出执行指引（允许显式空清单 `[]`，不允许文件不存在）。
+5. 验收标准中存在不可 yes/no 判定的模糊条件时，必须重写为可测标准。
 ```
 
 ## 流程

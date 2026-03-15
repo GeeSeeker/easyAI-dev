@@ -131,16 +131,42 @@
 
 ---
 
-## MCP Resources（6 个）
+## Capability Gate（角色权限校验）
 
-| Resource URI                           | 功能                              |
-| -------------------------------------- | --------------------------------- |
-| `trellis://status`                     | 项目状态概览（Git + 任务 + 日志） |
-| `trellis://journal/latest`             | 最新 journal 日志                 |
-| `spec://{category}/{name}`             | 项目规范文件                      |
-| `trellis://tasks/{task_id}/context`    | 任务上下文（含冻结快照）          |
-| `trellis://subtasks/{task_id}/context` | 子任务依赖上下文                  |
-| `trellis://tasks/{task_id}/frozen`     | 冻结的 spec 快照（Phase-Frozen）  |
+> 源码：`src/utils/capability-gate.ts`
+
+Capability Gate 为受限工具提供角色权限校验，防止无意越权。
+
+### 机制
+
+- **权限矩阵**：`CAPABILITY_MATRIX` 定义每个受限工具对每个角色（pm / 组长 / 组员 / worker）的允许/拒绝
+- **校验函数**：`checkCapability(role, toolName)` — 返回 null（通过）或拒绝理由字符串
+- **角色规范化**：`normalizeRole()` 支持多种写法（pm / 项目经理 / project_manager 等）
+- **Git 防注入**：`isValidGitRef()` 校验分支名合法性
+
+### 受限工具清单
+
+`task_create`、`task_transition`（completed/archived）、`task_cancel`、`subtask_create`、`subtask_dependency_graph`、`conflict_check`、`worktree_create/merge/cleanup/list`
+
+### 诚实的局限性
+
+- 角色由 AI 在 Workflow 触发时自行解析并传入，MCP Server 无法独立验证
+- 可防止「无意越权」，无法防止「故意越权」
+
+---
+
+## MCP Resources（6 个 URI）
+
+> 由 5 个源文件注册 6 个 URI。`frozen_context` 不是独立 Resource，而是 `task_get()` 返回的字段。
+
+| Resource URI                                       | 功能                              | 源文件                        |
+| -------------------------------------------------- | --------------------------------- | ----------------------------- |
+| `trellis://status`                                 | 项目状态概览（Git + 任务 + 日志） | `status-resource.ts`          |
+| `trellis://journal/latest`                         | 最新 journal 日志                 | `journal-resource.ts`         |
+| `trellis://spec/{category}/{name}`                 | 项目规范文件（完整路径）          | `spec-resource.ts`            |
+| `spec://{category}/{name}`                         | 项目规范文件（简写语法）          | `spec-resource.ts`            |
+| `trellis://tasks/{task_id}/context`                | 任务上下文                        | `task-context-resource.ts`    |
+| `trellis://tasks/{task_id}/subtasks/{sid}/context` | 子任务依赖上下文                  | `subtask-context-resource.ts` |
 
 ---
 

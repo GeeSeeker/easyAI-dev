@@ -32,7 +32,7 @@ PM 角色在以下场景**必须**激活本 Skill：
 | Workflows     | 2+1  | pm.md, worker.md（🦴骨架）+ publish.md（🔧开发专属）                                                                                                                           |
 | Rules         | 3+1  | project-identity.md, anti-hallucination.md, coding-standards.md（🦴骨架）+ framework-dev-mode.md（🔧开发专属）                                                                 |
 | MCP Tools     | 23   | 详见 `references/features.md` → "MCP Tools" 章节                                                                                                                               |
-| MCP Resources | 6    | trellis://status, trellis://journal/latest, spec://{category}/{name}, trellis://tasks/{id}/context, trellis://subtasks/{id}/context, trellis://tasks/{id}/frozen               |
+| MCP Resources | 6    | trellis://status, trellis://journal/latest, trellis://spec/{c}/{n}, spec://{c}/{n}, trellis://tasks/{id}/context, trellis://tasks/{id}/subtasks/{sid}/context                  |
 
 ### 关键路径速查
 

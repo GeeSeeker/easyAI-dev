@@ -71,6 +71,26 @@
       worker 编码前 → spec://          → 加载项目规范
 ```
 
+### config.yaml 运行时联动
+
+`.trellis/config/config.yaml` 不只是静态配置文件，MCP Server 在运行时通过 `config-loader.ts` 读取并缓存它。
+
+**运行时实际消费的配置项**：
+
+```text
+.trellis/config/config.yaml       消费方
+├── context.phaseBudget        →  context_budget() 阶段预算计算
+├── context.warningThreshold   →  context_budget() 警告阈值
+├── context.criticalThreshold  →  context_budget() 临界阈值
+├── journal.maxLinesPerFile    →  journal_append() 自动分页阈值
+├── tasks.root                 →  task-utils getTasksDir() 任务目录路径
+└── tasks.archive              →  task-utils getArchiveDir() 归档目录路径
+```
+
+> `journal.root`、`tasks.maxSubtasks` 已在 `config-loader.ts` 中定义和加载，但运行时尚未被消费（journal-utils 硬编码路径，subtask-tools 未检查数量上限）。
+
+> **降级策略**：config.yaml 解析失败时，`config-loader.ts` 返回内置默认值（`DEFAULT_CONFIG`），不抛异常。
+
 ## 用户体验链条
 
 ```text

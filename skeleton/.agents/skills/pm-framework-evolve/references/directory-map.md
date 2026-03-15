@@ -84,9 +84,22 @@ skills/
 
 > 源码位于 `packages/mcp-server/`（🔧 开发专属）。用户通过 npm 包 `@geeseeker/easyai-dev` 获得编译后的 JavaScript 版本。
 
-| 路径             | 内容                                                |
-| ---------------- | --------------------------------------------------- |
-| `src/index.ts`   | MCP Server 入口                                     |
-| `src/tools/`     | 16 个文件，注册 23 个 Tools                         |
-| `src/resources/` | 5 个文件，注册 6 个 Resources                       |
-| `src/utils/`     | 工具函数（task-utils, git-utils, journal-utils 等） |
+| 路径             | 内容                          |
+| ---------------- | ----------------------------- |
+| `src/index.ts`   | MCP Server 入口               |
+| `src/tools/`     | 16 个文件，注册 23 个 Tools   |
+| `src/resources/` | 5 个文件，注册 6 个 Resources |
+| `src/utils/`     | 8 个工具函数模块              |
+
+`src/utils/` 完整清单：
+
+| 文件                 | 职责                                        |
+| -------------------- | ------------------------------------------- |
+| `task-utils.ts`      | 任务路径定位、TASKS_ROOT/ARCHIVE_ROOT       |
+| `config-loader.ts`   | 轻量 YAML 解析，读取 config.yaml，缓存+降级 |
+| `capability-gate.ts` | 角色权限矩阵、受限工具校验、Git ref 防注入  |
+| `journal-utils.ts`   | Journal 读写、分页、多用户目录扫描          |
+| `git-utils.ts`       | Git 状态查询、commit 历史                   |
+| `status-utils.ts`    | 项目状态聚合（Git + 任务 + 日志）           |
+| `hash-utils.ts`      | SHA-256 哈希计算（Manifest 驱动升级）       |
+| `uri-utils.ts`       | URI 解析辅助函数                            |
