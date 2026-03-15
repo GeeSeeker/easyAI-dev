@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.3.4] - 2026-03-15
+
+### 修复
+
+- **Journal 用户目录读取 BUG** — `trellis://journal/latest` Resource 之前硬编码读取 `workspace/default/`，导致写入 `workspace/{user}/` 的最新日志无法被新会话读取。修复后扫描所有用户目录，合并排序返回真正最新的条目。
+
 ## [3.3.3] - 2026-03-15
 
 ### 优化

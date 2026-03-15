@@ -57,13 +57,14 @@ declare function parseJournalEntries(content: string): JournalEntry[];
  */
 declare function searchJournal(query: JournalSearchQuery, user?: string): JournalEntry[];
 /**
- * 获取最新的 N 条日志条目
- * 条目按时间倒序排列（最新的在前）
+ * 获取最新的 N 条日志条目（跨所有用户目录）
+ * 扫描 .trellis/workspace/ 下所有用户目录，合并所有 journal 条目，
+ * 按日期倒序排列（最新的在前），返回前 count 条。
+ * 修复: 不再依赖 user 参数，避免读写目录不一致导致读取旧数据。
  * @param count - 获取的条目数量，默认为 10
- * @param user - 用户名，默认为 'default'
- * @returns 最新的日志条目列表
+ * @returns 最新的日志条目列表（跨所有用户）
  */
-declare function getLatestEntries(count?: number, user?: string): JournalEntry[];
+declare function getLatestEntries(count?: number): JournalEntry[];
 export type { JournalSearchQuery };
 export { WORKSPACE_ROOT, MAX_LINES_PER_FILE, DEFAULT_USER, getJournalDir, getLatestJournalFile, appendJournalEntry, parseJournalEntries, searchJournal, getLatestEntries, };
 //# sourceMappingURL=journal-utils.d.ts.map
