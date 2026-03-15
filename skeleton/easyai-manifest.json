@@ -1,6 +1,6 @@
 {
-  "version": "3.3.4",
-  "generatedAt": "2026-03-15T06:44:29.126Z",
+  "version": "3.3.5",
+  "generatedAt": "2026-03-15T07:50:51.778Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -69,7 +69,7 @@
       "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
     },
     ".trellis/config/config.yaml": {
-      "hash": "9e64322bc52af32dbcc0551e9a41b5790a8364669c82dbf6f11de8c54eea6112"
+      "hash": "85fd3adfdcf7793ebbba9897c050948f762c2b19c5123304c28c8d3cbc8be9ef"
     },
     ".trellis/spec/guides/external-cli-guide.md": {
       "hash": "ee6e10f83813243ba7bcccf38a6caa977863298bee96642642713b7066cd72ba"

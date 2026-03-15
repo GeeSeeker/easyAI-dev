@@ -1,6 +1,7 @@
 declare const TRELLIS_ROOT = ".trellis";
-declare const TASKS_ROOT = ".trellis/tasks";
-declare const ARCHIVE_ROOT = ".trellis/tasks/archive";
+/** 默认值，运行时从 config.yaml 读取 */
+declare const DEFAULT_TASKS_ROOT = ".trellis/tasks";
+declare const DEFAULT_ARCHIVE_ROOT = ".trellis/tasks/archive";
 /**
  * 任务状态枚举
  */
@@ -111,5 +112,5 @@ declare function listTaskDirs(): string[];
  */
 declare function ensureDir(dirPath: string): void;
 export type { TaskStatus, TaskMetadata, ParsedTask };
-export { TRELLIS_ROOT, TASKS_ROOT, ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, };
+export { TRELLIS_ROOT, DEFAULT_TASKS_ROOT, DEFAULT_ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, };
 //# sourceMappingURL=task-utils.d.ts.map

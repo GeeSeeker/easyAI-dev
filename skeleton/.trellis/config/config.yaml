@@ -54,3 +54,8 @@ context:
   warningThreshold: 0.6 # 60% 时开始降级（与 MCP context-budget.ts 运行时一致）
   criticalThreshold: 0.8 # 80% 时建议新会话（与 MCP context-budget.ts 运行时一致）
   auto_downgrade: true # 超过 warning 阈值时自动降级 recommended → deferred
+  phaseBudget:
+    plan: 40000
+    implement: 60000
+    check: 30000
+    debug: 50000
