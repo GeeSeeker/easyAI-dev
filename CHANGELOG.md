@@ -2,6 +2,22 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.4.0] - 2026-03-16
+
+### 新增
+
+- **审查质量门**（`review-standards.md`）— 审核类型分类、4级风险分级、C/W/I报告格式、循环修复机制、7个硬阻断检查点
+- **知识分类规范**（`knowledge-categories.md`）— 6种知识分类+触发规则+ADR操作规程+所有权分工
+- **ADR模板**（`adr-template.md`）— 标准化架构决策记录模板
+- **人话版完成简报** — pm-task-review Stage 3 向用户输出非技术视角的任务成果总结
+
+### 增强
+
+- `pm-task-review` — Pre-Review（审核类型/风险/循环计数）+类型驱动Stage 2+知识分类Stage 3
+- `pm-task-planning` — HARD-GATE 3→5条
+- `common-session-close` — Step 4知识分类自检+ADR触发+防重复
+- 知识库 — directory-map/features/architecture与MCP Server实际对齐
+
 ## [3.3.5] - 2026-03-15
 
 ### 新增
