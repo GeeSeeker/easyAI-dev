@@ -2,6 +2,18 @@
 
 > 本文档是框架知识库的一部分，供 AI 在框架自迭代时参考。
 
+<!-- 本文件由 /publish 流程同步维护，请勿手动修改数量统计 -->
+<!-- last_synced: 2026-03-15 -->
+
+## 目录
+
+- [Skills（10 个）](#skills10-个能力模块)
+- [Workflows（3 个）](#workflows3-个)
+- [Rules（3+1 个）](#rules3-个骨架--1-个开发专属)
+- [MCP Tools（23 个）](#mcp-tools23-个)
+- [MCP Resources（6 个）](#mcp-resources6-个)
+- [关联关系](#关联关系)
+
 ## Skills（10 个能力模块）
 
 ### PM 专属（5 个）

@@ -65,7 +65,23 @@ project/
 - **智能合并**：Manifest 驱动 — 只更新框架文件，保护用户自定义内容（自定义 Skills/Rules/Workflows 不被覆盖）
 - **冲突处理**：用户修改过的框架文件生成 `.new` 冲突文件，由用户手动合并
 
-## npm 包信息
+## 仓库与发布信息
 
-- 包名：`@geeseeker/easyai-dev`
-- 仓库：https://github.com/GeeSeeker/easyAI-dev
+> **实时性内容**（最新 Issues、Release 历史、CI 状态）应由 AI 实时访问 GitHub 仓库获取，不写死在本文件中。
+
+- **npm 包名**：`@geeseeker/easyai-dev`
+- **GitHub 仓库**：https://github.com/GeeSeeker/easyAI-dev
+- **npm 页面**：https://www.npmjs.com/package/@geeseeker/easyai-dev
+- **作者**：GeeSeeker
+- **许可证**：MIT
+
+### 查看迭代历史
+
+1. **CHANGELOG.md**：发布目录中的版本更新记录
+2. **GitHub Releases**：仓库 Releases 页面
+3. **Git log**：`git log --oneline -20`
+
+### 贡献方式
+
+1. **Issue**：在 GitHub 仓库提交 Issue 描述问题或建议
+2. **Pull Request**：Fork 后提交 PR

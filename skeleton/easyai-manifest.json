@@ -1,6 +1,6 @@
 {
   "version": "3.3.1",
-  "generatedAt": "2026-03-14T11:19:39.944Z",
+  "generatedAt": "2026-03-15T01:22:24.705Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -21,7 +21,7 @@
       "hash": "571c7bc424b57482b7ecf5e8e8e8c310968864a7e0791d8dababcfdb76dd2c9e"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "4c8253069ba2b7303060b8c2adc28487ed7c433b54ed48e55a4c90cfa65c52c6"
+      "hash": "c689c6233ed1882fdb997695688d4e13ad6839d99309cdcbd43aacbe60ee0bd1"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
@@ -33,13 +33,10 @@
       "hash": "c164496332b7c0e547c7dff708cecdd878a5f2d46f0e4b425953c17b2b05d209"
     },
     ".agents/skills/pm-framework-evolve/references/features.md": {
-      "hash": "146a2be40df90d74d4ba45ee15530befaf7b864406c10a019c51bfbf7cf40f32"
-    },
-    ".agents/skills/pm-framework-evolve/references/github-info.md": {
-      "hash": "b2e367ecbaa2c7064ad448bbadb1ed0dc0d70a5be0409205974cba6518e585ba"
+      "hash": "405c3b30ffe757b492574dd8a5d41aed6dee5e328d6f792162200bcee4f0dcc1"
     },
     ".agents/skills/pm-framework-evolve/references/installation.md": {
-      "hash": "c5d52b2ee2ba7167dd4be5cc7ed8ca61e4a32249e4568fa779f2f139c78ca8f1"
+      "hash": "1392b6d7e29c32e48e24058dd78cefa3b7bc78548c41973180bb4085cfd308d4"
     },
     ".agents/skills/pm-framework-evolve/resources/changelog-entry-template.md": {
       "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
