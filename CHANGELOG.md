@@ -2,6 +2,17 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.3.5] - 2026-03-15
+
+### 新增
+
+- **config.yaml 运行时联动** — 新增 `config-loader` 模块，MCP Server 中的硬编码配置值改为从 `.trellis/config/config.yaml` 动态读取
+  - `context-budget.ts`：阈值(0.6/0.8) 和阶段预算 (phaseBudget) 可配置
+  - `journal-utils.ts`：`maxLinesPerFile` 可配置
+  - `task-utils.ts`：任务/归档路径可配置
+  - config.yaml 不存在时优雅降级到默认值
+- config.yaml 新增 `context.phaseBudget` 段（plan/implement/check/debug 各阶段 token 预算）
+
 ## [3.3.4] - 2026-03-15
 
 ### 修复
