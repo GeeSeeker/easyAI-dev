@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.3.2] - 2026-03-15
+
+### 优化
+
+- **pm-framework-evolve 深度优化** — SKILL.md 重构：新增快速参考索引（简单事实问题无需加载 references）、查询路由表（按问题类型映射文件）、双路径分流（只读查询 vs 写入迭代）
+- `github-info.md` 合并到 `installation.md`（5 references 文件 → 4 个）
+- `features.md` 新增同步日期标记 `<!-- last_synced -->` + 目录导航
+- `/publish` 工作流 Step 0 新增数量同步流程（自动统计 Tool/Skill/Resource 数量）
+
 ## [3.3.1] - 2026-03-14
 
 ### 清理
