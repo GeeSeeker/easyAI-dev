@@ -57,6 +57,10 @@ skills/
 | `config/context-budget.md` | 🦴      | 上下文预算配置                    |
 | `spec/`                    | 🦴 + 🏃 | 项目规范（骨架预设 + 运行时扩展） |
 | `spec/spec-schema.json`    | 🦴      | 规范文件 JSON Schema              |
+| `spec/frontend/`           | 🦴 + 🏃 | 前端规范                          |
+| `spec/backend/`            | 🦴 + 🏃 | 后端规范                          |
+| `spec/guides/`             | 🦴 + 🏃 | 指南类规范                        |
+| `spec/general/`            | 🦴 + 🏃 | 通用规范（命名约定、Git 流程等）  |
 | `tasks/`                   | 🏃      | 任务文件（AI 动态创建）           |
 | `tasks/archive/`           | 🏃      | 已归档任务                        |
 | `workspace/journal.md`     | 🏃      | 会话日志                          |

@@ -1,6 +1,6 @@
 {
-  "version": "3.3.1",
-  "generatedAt": "2026-03-15T01:22:24.705Z",
+  "version": "3.3.3",
+  "generatedAt": "2026-03-15T06:18:18.978Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -30,7 +30,7 @@
       "hash": "bb583330068c9bcdbed246caec4f1c706b128b9a2e90bd14fc4da61c6837acc4"
     },
     ".agents/skills/pm-framework-evolve/references/directory-map.md": {
-      "hash": "c164496332b7c0e547c7dff708cecdd878a5f2d46f0e4b425953c17b2b05d209"
+      "hash": "00bb7e5f8aa09bb8706413e47e6259c5ddc25bcb35207b4f759559b1394a7a5f"
     },
     ".agents/skills/pm-framework-evolve/references/features.md": {
       "hash": "405c3b30ffe757b492574dd8a5d41aed6dee5e328d6f792162200bcee4f0dcc1"
@@ -69,7 +69,7 @@
       "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
     },
     ".trellis/config/config.yaml": {
-      "hash": "217c00d2276eb6bdb491d6d535468ee5ccc6f34b8df7af16ff32385b25991316"
+      "hash": "9e64322bc52af32dbcc0551e9a41b5790a8364669c82dbf6f11de8c54eea6112"
     },
     ".trellis/spec/guides/external-cli-guide.md": {
       "hash": "ee6e10f83813243ba7bcccf38a6caa977863298bee96642642713b7066cd72ba"
