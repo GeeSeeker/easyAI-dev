@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.3.3] - 2026-03-15
+
+### 优化
+
+- **config.yaml 扩展** — 新增 `framework.version`、`user_level`（自适应交互）、`max_subtasks`、`auto_downgrade` 声明性字段；未实现的 MCP 功能标注 TODO
+- **spec/general/ 分类** — 新增通用规范目录（命名约定、Git 流程等），config.yaml 同步更新
+- `quick-start.md` 链接修复 — 指向正确的 `requirements/` 路径
+- `directory-map.md` 新增 spec 子目录明细（frontend/backend/guides/general）
+
 ## [3.3.2] - 2026-03-15
 
 ### 优化
