@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.7.1] - 2026-03-16
+
+### 新增
+
+- **P2 三重防线 — Rules 层长对话防护**
+  - 防线 1：`framework-dev-mode.md` 写入守卫 — 修改框架文件前必须回答「写入前三问」+ 交叉约束提醒（project-identity / common-spec-update）
+  - 防线 2：Worker Workflow Step 2.5 — 启动时显式加载所有 `always_on` Rules（YAML frontmatter 扫描，失败停机）
+  - 防线 3：`common-session-close` Step 4.5 — Rules 合规回顾（动态扫描 + `[RULE_BREACH]` 结构化 journal 日志）
+
 ## [3.7.0] - 2026-03-16
 
 ### 新增
