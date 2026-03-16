@@ -92,7 +92,7 @@ npx @geeseeker/easyai-dev init .
 ```
 your-project/
 ├── .agents/            ← AI 角色层
-│   ├── rules/          │  3 条始终生效的规则
+│   ├── rules/          │  4 条始终生效的规则
 │   ├── workflows/      │  PM + Worker 工作流
 │   └── skills/         │  10+ 个能力模块
 ├── .trellis/           ← 数据持久层

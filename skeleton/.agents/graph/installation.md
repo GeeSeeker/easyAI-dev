@@ -44,7 +44,7 @@ npx @geeseeker/easyai-dev init .
 ```text
 project/
 ├── .agents/           # AI 角色层
-│   ├── rules/         # 规则文件（3 个）
+│   ├── rules/         # 规则文件（4 个）
 │   ├── workflows/     # PM + Worker 入口
 │   └── skills/        # 10 个能力模块
 ├── .trellis/          # 数据持久层

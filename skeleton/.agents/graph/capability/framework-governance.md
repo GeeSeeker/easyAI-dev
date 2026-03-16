@@ -34,6 +34,8 @@ files:
     role: 框架开发模式（三层版本流转 + 写入守卫，仅开发工作区）
   - path: .agents/rules/coding-standards.md
     role: 编码规范（glob 触发，编辑源码时自动注入）
+  - path: .agents/rules/skill-transparency.md
+    role: Skill 使用透明性（always_on，激活声明 + PATEOAS 扩展 + 事后审计）
   - tool: framework_init
     role: 框架初始化（复制骨架到目标项目）
   - tool: framework_check
@@ -66,7 +68,7 @@ files:
 
 `.agents/rules/` 目录下的规则文件，通过 YAML frontmatter 的 `trigger` 字段控制生效时机：
 
-- **always_on** — 每个会话始终生效（如 `anti-hallucination.md`、`project-identity.md`）
+- **always_on** — 每个会话始终生效（如 `anti-hallucination.md`、`project-identity.md`、`skill-transparency.md`）
 - **glob** — 编辑匹配文件时自动注入（如 `coding-standards.md` 匹配 `*.ts,*.js,*.py`）
 
 Worker Workflow Step 2.5 和 `common-session-close` Step 4.5 分别在会话启动和收尾时执行 Rules 合规加载/回顾。

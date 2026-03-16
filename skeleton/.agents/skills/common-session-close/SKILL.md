@@ -128,6 +128,24 @@ entry: "完成了 xxx，剩余 yyy 待处理"
 
 > 此步骤为事后回顾，无法撤销已发生的操作，但能为后续会话提供审计线索和改进依据。
 
+### Step 4.6：Skill 使用审计
+
+> 事后审计 — 回顾本会话中所有 Skill 的激活情况，写入 journal 以供追溯。
+
+1. 回顾本会话输出，收集所有 `[Skill: xxx]` 激活标记
+2. 统计每个 Skill 的激活次数，整理为表格：
+
+   | Skill 名 | 激活次数 |
+   | -------- | -------- |
+   | {name}   | {count}  |
+
+3. 调用 `journal_append()` 写入审计条目：
+   ```yaml
+   tags: ["SKILL_AUDIT"]
+   content: "## [SKILL_AUDIT] 本次会话 Skill 使用记录\n\n| Skill 名 | 激活次数 |\n| -------- | -------- |\n| {name} | {count} |\n...\n\n总计激活 {n} 个 Skill，共 {total} 次。"
+   ```
+4. **无 Skill 激活** → 仍写入审计条目，content 标注「本次会话未使用任何 Skill」
+
 ### Step 5：`.tmp/` 清理
 
 1. 检测项目下 `.tmp/` 目录是否存在且非空
@@ -239,6 +257,7 @@ git rev-list --count @{upstream}..HEAD
 - [x] 恢复指引 ✅（本消息即是）
 - [x] Git 变更已处理 ✅
 - [x] Rules 合规 {✅ 无违规 / ⚠️ 有违规（见 journal `[RULE_BREACH]` 条目）}
+- [x] Skill 审计 {✅ 已记录（见 journal `[SKILL_AUDIT]` 条目） / ⚠️ 审计写入失败}
 
 ### PATEOAS 导航
 
@@ -251,6 +270,7 @@ git rev-list --count @{upstream}..HEAD
 #### 状态快照
 
 - 当前角色：{PM / Worker}
+- 当前 Skill: common-session-close
 - 当前阶段：SESSION_CLOSE
 - 已沉淀：Journal ✅ | 任务记录 ✅ | .docs/ {✅/⚠️}
 - 遗留事项：{有/无} — {具体内容}
@@ -260,7 +280,7 @@ git rev-list --count @{upstream}..HEAD
 
 ```
 收工流程 {
-  Step 1-4.5: 所有角色通用（含 4.5 Rules 合规回顾）
+  Step 1-4.6: 所有角色通用（含 4.5 Rules 合规回顾 + 4.6 Skill 使用审计）
   Step 5-6: 所有角色通用
   Step 7: if (当前角色 == PM && 有 upstream && 有未推送 commit) { 询问 push }
   Step 8: 所有角色通用（硬约束）
@@ -335,3 +355,10 @@ git rev-list --count @{upstream}..HEAD
 - **输入**: 用户说「收工」
 - **期望行为**: Step 4.5 自检发现违规 → journal 中标记 `[RULE_BREACH]` → 恢复指引中显示 `⚠️ 有违规`
 - **验证方法**: 检查 journal 是否包含 `[RULE_BREACH]` 标记，恢复指引硬约束检查中 Rules 合规是否标注违规
+
+### TC-05: Skill 使用审计
+
+- **场景**: 会话中激活了多个 Skill（如 worker-implement → worker-check → common-session-close）
+- **输入**: 用户说「收工」
+- **期望行为**: Step 4.6 回顾所有 `[Skill: xxx]` 标记 → journal 中写入 `[SKILL_AUDIT]` 条目（含 Skill 使用表格）→ 恢复指引硬约束检查中显示 `✅ Skill 审计已记录`
+- **验证方法**: 检查 journal 是否包含 `[SKILL_AUDIT]` 标记，恢复指引硬约束检查中是否包含 Skill 审计状态行
