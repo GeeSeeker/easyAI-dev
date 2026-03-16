@@ -2,6 +2,27 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.8.0] - 2026-03-17
+
+### 新增
+
+- **框架知识图谱**（`.agents/graph/`）— 五层特性树（19 个节点），涵盖基础设施 → 数据层 → 能力层 → 角色系统 → 用户体验
+- **Skill 产出契约** — 所有 10 个 Skill 新增 `produces` / `requires` frontmatter 字段
+- **Skill 触发测试用例** — 所有 10 个 Skill 新增 ≥ 2 个触发 TC
+- **Workflow 显式 Skill 编排** — PM/Worker Workflow 使用 `[必须]` 标记强制 Skill 链路
+- **pm-task-planning Step 4.6** — 规划阶段外部 CLI 审核（风险 🟡 以上项目）
+- **pm-framework-evolve 图谱驱动** — 知识加载/影响分析/自更新改为读写图谱节点
+
+### 修复
+
+- **task_transition role 参数报错** — 修复传入 `role` 参数时 `Cannot read properties of undefined` 错误
+
+### 变更
+
+- **references/ 目录移除** — `architecture.md`、`features.md`、`directory-map.md` 内容迁移至图谱节点
+- **Skill description 统一格式** — 所有 10 个 Skill 重构为 `[角色] 操作 — 触发条件。产出。` 格式
+- **publish.md Step 0** — 从 references/ 迁移为图谱驱动
+
 ## [3.7.1] - 2026-03-16
 
 ### 新增
