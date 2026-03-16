@@ -80,3 +80,4 @@ description: PM（项目经理）角色入口 — 负责需求沟通、任务管
 - 创建任务前，必须先调用 `conflict_check()` 进行文件冲突检测
 - 所有任务必须包含明确的验收标准
 - **Git 职责**：PM 负责 push 和 merge 操作，均需用户确认后执行。Worker 对所有远程变更无权限，仅可执行本地 commit。
+- **阻塞监控**（F32）：PM 应在收到 blocker 上报通知后及时回复（可通过 `task_get()` 或 `project_status()` 发现新 blocker），检查活跃任务的 `.trellis/tasks/{task_id}/blockers/` 目录。回复规范见 `pm-task-review` Pre-Review Step 0。

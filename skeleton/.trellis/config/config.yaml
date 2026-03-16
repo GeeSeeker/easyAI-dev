@@ -59,3 +59,64 @@ context:
     implement: 60000
     check: 30000
     debug: 50000
+
+# 任务路由配置（F39 + O3）
+# PM 创建任务时根据此配置推荐审查策略和执行模式
+routing:
+  # 风险等级 → 审查策略映射
+  risk_review_mapping:
+    low: "pm_self_review" # 🟢 PM 自审，跳过代码风格细节
+    medium: "single_cli_review" # 🟡 1 个外部 CLI 审查
+    high: "dual_cli_review" # 🔴 2 个外部 CLI 并行审查
+    critical: "dual_cli_plus_internal" # ⚫ 2 个外部 CLI + PM 独立验证
+
+  # 低风险变更类型白名单（F41）— 匹配时自动标记为 🟢 低风险
+  # 注意：.agents/ 和 .trellis/spec/ 下的文件始终为高风险，不受白名单影响（见 review-standards）
+  low_risk_whitelist:
+    - "docs_only" # 纯文档变更（.md 文件）
+    - "config_change" # 配置文件变更（.yaml / .json）
+    - "style_tweak" # 样式微调（CSS / 缩进 / 格式化）
+    - "wording_fix" # 措辞优化（文案 / 注释 / 日志文本）
+    - "test_addition" # 纯测试新增（不改生产代码）
+    - "task_board" # 看板维护（任务创建 / 归档）
+
+# AI 团队资源清单（F43）
+# PM 做任务路由决策时参考此配置选择审查者
+team:
+  roster:
+    - name: "Antigravity (主控 AI)"
+      type: "primary" # 主控 AI，不作为外部审查者
+      strengths:
+        - "全栈开发"
+        - "项目管理"
+        - "需求分析"
+      concurrency: 1 # 单会话
+
+    - name: "Codex CLI"
+      type: "external_cli"
+      mcp_tool: "mcp_codexmcp_codex"
+      strengths:
+        - "后端逻辑"
+        - "算法分析"
+        - "安全检查"
+        - "代码执行验证"
+      concurrency: 1 # 单实例
+
+    - name: "Claude Code"
+      type: "external_cli"
+      mcp_tool: "mcp_claude-code-mcp_claude_code"
+      strengths:
+        - "代码审查"
+        - "架构分析"
+        - "重构建议"
+        - "多文件关联分析"
+      concurrency: 1 # 单实例
+
+    - name: "Gemini CLI"
+      type: "external_cli"
+      mcp_tool: "mcp_geminimcp_gemini"
+      strengths:
+        - "前端审查"
+        - "可维护性分析"
+        - "模式一致性检查"
+      concurrency: 1 # 单实例

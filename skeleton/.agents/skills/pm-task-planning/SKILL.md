@@ -108,6 +108,73 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 设计文档：引用 .docs/design/{name}.md 路径
 ```
 
+### Step 4.5：任务路由决策（F39 + O3 + F43）
+
+为每个任务确定**执行模式**和**审查策略**。读取 `.trellis/config/config.yaml` 中的 `routing` 和 `team` 配置。
+
+#### 1. 风险评估
+
+按以下优先级判定风险等级（**高风险规则优先于白名单**）：
+
+1. **强制高风险检查**（来自 `spec://guides/review-standards`）：
+   - `.agents/` 下 Skill/Workflow 变更 → 🔴 高风险（无论是否匹配白名单）
+   - 修改公共接口 / 涉及安全逻辑 / 跨模块依赖 → 🔴 高风险
+   - 架构变更 / 数据迁移 / 破坏性变更 → ⚫ 极高风险
+2. **白名单匹配**：上一步未命中高风险，且任务 `file_scope` 中**所有文件**均属于 `routing.low_risk_whitelist` 中的变更类型 → 🟢 低风险
+   - 混合类型（白名单 + 非白名单）→ 跳过白名单，进入影响面判断
+3. **影响面判断**：以上均不适用时：
+   - 仅影响 1-2 个文件，无跨模块依赖 → 🟡 中风险
+   - 其他 → 🔴 高风险
+
+#### 2. 审查策略选择
+
+根据 `routing.risk_review_mapping` 映射（key 使用 `low/medium/high/critical` 对应 🟢/🟡/🔴/⚫）：
+
+| 风险等级 | config key | 策略                     | 说明                               |
+| -------- | ---------- | ------------------------ | ---------------------------------- |
+| 🟢 低    | `low`      | `pm_self_review`         | PM 自审，跳过代码风格细节          |
+| 🟡 中    | `medium`   | `single_cli_review`      | 1 个外部 CLI 审查                  |
+| 🔴 高    | `high`     | `dual_cli_review`        | 2 个外部 CLI 并行审查              |
+| ⚫ 极高  | `critical` | `dual_cli_plus_internal` | 2 个外部 CLI + PM 独立验证关键路径 |
+
+#### 3. 审查者匹配
+
+从 `team.roster`（`type: external_cli` 的条目）中，根据任务领域匹配 `strengths`：
+
+| 任务领域             | 首选 CLI    | 备选 CLI    | 匹配依据                            |
+| -------------------- | ----------- | ----------- | ----------------------------------- |
+| 后端逻辑 / 安全      | Codex CLI   | Claude Code | strengths: 后端逻辑, 安全检查       |
+| 架构 / 重构 / 多文件 | Claude Code | Codex CLI   | strengths: 架构分析, 多文件关联分析 |
+| 前端 / 模式一致性    | Gemini CLI  | Claude Code | strengths: 前端审查, 模式一致性检查 |
+
+- 🟡 中风险（1 CLI）→ 选首选 CLI
+- 🔴/⚫（2 CLI）→ 首选 + 备选组合（确保差异化视角）
+
+> **注**：`concurrency` 字段为保留字段，当前所有 CLI 并发配额为 1（单实例）。未来支持多实例时，PM 在此步骤检查当前占用情况，超额时降级到单 CLI 审查。
+
+#### 4. 执行模式选择
+
+根据任务复杂度决定执行模式：
+
+- **独立执行者**（默认）：任务预估 1-2 个会话可完成
+- **组长+组员**：任务预估超过 2 个会话，或包含可并行的子任务
+- ⚫ 极高风险任务 → 建议组长+组员（多人交叉验证）
+
+> PM 可根据实际情况调整推荐，路由配置为建议而非强制。
+
+#### 5. 路由结果写入
+
+将路由决策追加到 `task_create()` 的 `description` 中：
+
+```markdown
+## 路由配置
+
+- 风险等级：{low/medium/high/critical}（{🟢/🟡/🔴/⚫}）
+- 审查策略：{pm_self_review/single_cli_review/dual_cli_review/dual_cli_plus_internal}
+- 推荐审查者：{CLI 名称列表}
+- 执行模式：{独立执行者/组长+组员}
+```
+
 ### Step 5：冲突预检（HARD-GATE #3）
 
 **必须**在创建任务前调用 `conflict_check()` 检测文件范围重叠：
@@ -204,9 +271,10 @@ task_create(
 2. [ ] 生成约束集（硬约束 + 软约束 + 验收标准）
 3. [ ] 调用 `plan_validate()` 自检反面模式
 4. [ ] 拆分为原子任务（单一职责 + 文件范围 + 验收标准）
-5. [ ] 调用 `conflict_check()` 检测文件冲突
-6. [ ] 调用 `task_create()` 创建任务
-7. [ ] 调用 `context_generate()` 生成推荐清单，审核后写入 `context.jsonl`
+5. [ ] 任务路由决策（风险评估 + 审查策略 + 审查者匹配）
+6. [ ] 调用 `conflict_check()` 检测文件冲突
+7. [ ] 调用 `task_create()` 创建任务（含路由配置段）
+8. [ ] 调用 `context_generate()` 生成推荐清单，审核后写入 `context.jsonl`
 
 ### 状态快照
 
@@ -215,6 +283,7 @@ task_create(
 - 设计文档：{已读取/未读取}
 - 约束集：{未开始/生成中/已完成}
 - 反面模式自检：{未开始/通过/未通过}
+- 路由决策：{未开始/已完成}
 - 冲突检测：{未开始/通过/有冲突}
 - 任务创建：{未开始/已创建 x 个}
 ```

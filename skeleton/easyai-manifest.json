@@ -1,6 +1,6 @@
 {
-  "version": "3.4.0",
-  "generatedAt": "2026-03-15T17:55:37.784Z",
+  "version": "3.5.0",
+  "generatedAt": "2026-03-16T08:17:24.112Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -45,10 +45,10 @@
       "hash": "cc17f135ed17238920f792372b660d6e9eaaa6defb5984d0aa33657203d0cc33"
     },
     ".agents/skills/pm-task-planning/SKILL.md": {
-      "hash": "b67f4c8717803d5b94982d283265fa3ae07e4ece0ae68a176bc0df7dbe3be99c"
+      "hash": "1f9feb24aa6011a5fcee567de944d41e45c33e148f310a1b8087a824a439996b"
     },
     ".agents/skills/pm-task-review/SKILL.md": {
-      "hash": "77b050caab216b9879034534a0f89cf9ca520bb9ff34847bf0819015ae4e94f1"
+      "hash": "baedcf738d28981e21852dac5ee63f2a568433a4d2201147551c6f11de0e046a"
     },
     ".agents/skills/worker-check/SKILL.md": {
       "hash": "68e9ddae7c77c7f306252165ef3bb4c12e82923e3e0ed0c67cfae38fb89c9b1b"
@@ -60,16 +60,16 @@
       "hash": "9d66f917c6bffe79b7ff7a5284c528ab1e8acd52fbd1a057e5b4c1fa9a906bb2"
     },
     ".agents/workflows/pm.md": {
-      "hash": "7bb177b580adfc53d09332437ea4da31e81bd1d3deed99d9f221fad3c9cdd3fc"
+      "hash": "d4f92fa283fe83613ae5edd81339ee974dfdf9eaee639328dc78dcfe2b7ae674"
     },
     ".agents/workflows/worker.md": {
-      "hash": "e24b917510d8da9c0b85752c463a262b75c17b83551431e2ed2392ca83248c1e"
+      "hash": "970a1b2667b59d024c6c24db42fd6293a18e8fdab4970af282e68554abc43133"
     },
     ".docs/README.md": {
       "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
     },
     ".trellis/config/config.yaml": {
-      "hash": "6c8bc9a5cffcd64f4c93bee23de15d615af5036e09655e940e3382d9a4940555"
+      "hash": "e9c0918b04516d94874dab212abdb4d39728ede782d9200e66bbb42a73f39ef7"
     },
     ".trellis/spec/general/adr-template.md": {
       "hash": "c03b93626ce45883947967fa23a778192ba5310dd4c02c9340352835af3b2e87"
