@@ -2,6 +2,23 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.10.0] - 2026-03-17
+
+### 新增
+
+- **P4 团队执行模式** — 独立执行模式 / 团队执行模式正式命名 + Worker 自主决策
+  - 新 Skill `worker-lead`（组长编排）：PLAN 阶段（子任务拆分+并发检查+操作指引）+ INTEGRATE 阶段（技术审核+集成验证+汇总报告）
+  - Worker Workflow 新增 Step 5 模式决策：角色缺失硬阻断 + 自主升级流程（需用户确认）
+  - 三模式 Skill 编排分支：独立执行模式 / 团队·组长 / 团队·组员
+  - ABCDE 工作重要性分级：A=3/B=2/C=1 个外部 CLI 审核，角色自行判断
+  - CLI 动态选型：从 config.yaml 的 `strengths` 匹配，不写死映射
+
+### 改进
+
+- 框架知识图谱更新：`_index.md` worker-workflow 描述、`task-management.md` 新增 worker-lead 文件引用、`worker-workflow.md` 三模式 skill_chain
+- README 更新：Skill 数量 10+ → 11
+- `common-session-close` 描述优化
+
 ## [3.9.0] - 2026-03-17
 
 ### 新增
