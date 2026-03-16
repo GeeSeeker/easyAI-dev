@@ -2,6 +2,20 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.5.0] - 2026-03-16
+
+### 新增
+
+- **F32 阻塞沟通协议** — Worker 阻塞上报分 L1/L2/L3 三级，blocker 文件配对命名（`{NN}-question.md` + `{NN}-reply.md`），PM 验收前自动扫描未解决阻塞
+- **F39+O3 任务路由配置化** — `config.yaml` 新增 `routing` 段（风险→审查映射、低风险白名单），`pm-task-planning` Step 4.5 路由决策（风险评估→审查策略→CLI 匹配→执行模式）
+- **F43 AI 资源清单** — `config.yaml` 新增 `team.roster`（AI 角色、擅长领域、并发配额），CLI 匹配基于任务领域与 AI 能力
+
+### 增强
+
+- `pm-task-review` Stage 2 风险分级动作与 `config.yaml` routing 对齐
+- review-standards 优先于白名单规则（`.agents/` 和 `.trellis/spec/` 始终高风险）
+- `pm.md` 新增阻塞监控约束，交叉引用 `pm-task-review` 详细处理流程
+
 ## [3.4.0] - 2026-03-16
 
 ### 新增
