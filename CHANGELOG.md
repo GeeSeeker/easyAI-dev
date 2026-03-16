@@ -2,6 +2,24 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.7.0] - 2026-03-16
+
+### 新增
+
+- **config.yaml 用户引导配置** — 新增 `developer:` 段（name → workspace 文件夹命名）+ `external_cli` / `core_rules` / `mcp_enforced` / `features` 字段，覆盖 P1 全部 5 项引导信息收集需求
+- **PM 启动硬性校验** — `pm-session-start` Step 0：`developer.name` 非空阻断检查 + `framework.version` 与 `.easyai-version` 一致性警告 + 5 个配置字段提示
+
+### 增强
+
+- `config-loader.ts` — 新增 `DeveloperConfig` 接口 + `getDefaultUser()` 函数，从 config.yaml 动态读取 developer.name
+- `journal-utils.ts` — 移除硬编码 `DEFAULT_USER`，改用 `getDefaultUser()` 动态解析用户目录
+- `journal-append.ts` — 响应消息 user fallback 联动 `getDefaultUser()`
+- `smoke.test.ts` — 新增 4 个 developer 配置测试用例（38/38 通过）
+
+### 修复
+
+- `config.yaml` 版本号 3.4.0 → 3.6.0 修正（与 `.easyai-version` 对齐）
+
 ## [3.6.0] - 2026-03-16
 
 ### 新增
