@@ -1,7 +1,7 @@
+import { getDefaultUser } from "./config-loader.js";
 declare const WORKSPACE_ROOT = ".trellis/workspace";
 /** 默认值，运行时从 config.yaml 读取 */
 declare const DEFAULT_MAX_LINES_PER_FILE = 2000;
-declare const DEFAULT_USER = "default";
 /**
  * Journal 条目接口
  */
@@ -67,5 +67,5 @@ declare function searchJournal(query: JournalSearchQuery, user?: string): Journa
  */
 declare function getLatestEntries(count?: number): JournalEntry[];
 export type { JournalSearchQuery };
-export { WORKSPACE_ROOT, DEFAULT_MAX_LINES_PER_FILE, DEFAULT_USER, getJournalDir, getLatestJournalFile, appendJournalEntry, parseJournalEntries, searchJournal, getLatestEntries, };
+export { WORKSPACE_ROOT, DEFAULT_MAX_LINES_PER_FILE, getDefaultUser, getJournalDir, getLatestJournalFile, appendJournalEntry, parseJournalEntries, searchJournal, getLatestEntries, };
 //# sourceMappingURL=journal-utils.d.ts.map

@@ -24,12 +24,19 @@ interface TasksConfig {
     maxSubtasks: number;
 }
 /**
+ * 开发者信息配置
+ */
+interface DeveloperConfig {
+    name: string;
+}
+/**
  * 框架完整配置
  */
 export interface EasyAIConfig {
     context: ContextConfig;
     journal: JournalConfig;
     tasks: TasksConfig;
+    developer: DeveloperConfig;
 }
 /**
  * 默认配置（config.yaml 不可用时的降级值）
@@ -55,5 +62,11 @@ declare function getConfig(): EasyAIConfig;
  * 仅供测试和极端场景使用（如配置文件热更新）
  */
 declare function resetConfigCache(): void;
-export { DEFAULT_CONFIG, getConfig, resetConfigCache, parseSimpleYaml };
+/**
+ * 获取默认用户名（从 config.yaml 的 developer.name 读取）
+ * journal 系统使用此值决定 workspace 文件夹名
+ * @returns 开发者名字，未配置时返回 "default"
+ */
+declare function getDefaultUser(): string;
+export { DEFAULT_CONFIG, getConfig, resetConfigCache, parseSimpleYaml, getDefaultUser, };
 //# sourceMappingURL=config-loader.d.ts.map

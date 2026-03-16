@@ -3,12 +3,31 @@
 # 框架基本信息
 framework:
   name: easyAI
-  version: "3.4.0" # 与 .easyai-version 保持一致
+  version: "3.6.0" # 与 .easyai-version 保持一致
   description: "让用户以纯客户的视角进行软件开发"
 
 # 用户交互级别（架构 §5.4 · 核心需求 #2 自适应交互）
 # AI 根据此配置调整输出详细度和引导方式
 user_level: intermediate # novice | intermediate | expert
+
+# 开发者信息（init 后由 AI 引导填写，PM 启动时硬性校验）
+developer:
+  name: "" # 你的名字 → workspace/{name}/ 文件夹名，为空时 PM 启动会阻断并引导填写
+
+# 可调用的外部 CLI（AI 在需要时自动调用）
+# 示例: ["codex", "claude", "gemini"]
+external_cli: []
+
+# 核心规范（AI 必须强制遵守，不可跳过）
+# 示例: ["所有 API 必须有错误处理", "禁止使用 any 类型"]
+core_rules: []
+
+# 强制规定（被 MCP 自动注入，运行时硬拦截）
+# 示例: ["任务必须经 PM 审批才能开始", "Worker 禁止 push 代码"]
+mcp_enforced: []
+
+# 其他功能（AI 分析后自行补充）
+features: []
 
 # MCP Server 配置
 mcp:
