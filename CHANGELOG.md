@@ -2,6 +2,20 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.9.0] - 2026-03-17
+
+### 新增
+
+- **P3 Skill 使用透明性** — 实时声明 + 事后审计
+  - 新 Rule `skill-transparency.md`（always_on）：Skill 激活时输出 `[Skill: {name}] 已激活` 标记 + PATEOAS 状态快照扩展
+  - session-close Step 4.6 Skill 审计：收尾时统计 Skill 使用清单，写入 journal `[SKILL_AUDIT]` 条目
+  - session-close TC-05：Skill 审计触发测试用例
+
+### 改进
+
+- 框架知识图谱更新：Rules 数量 3→4，framework-governance/session-management 节点同步更新
+- README 更新：Rules 数量描述 3→4
+
 ## [3.8.1] - 2026-03-17
 
 ### 修复
