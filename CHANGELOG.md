@@ -2,6 +2,17 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.6.0] - 2026-03-16
+
+### 新增
+
+- **F44 MCP 已知问题库** — `spec/guides/known-issues.md` 运维知识库，记录 MCP/CLI 已知问题和 workaround，`common-session-close` 自动检查
+- **F45 IDE 适配指南** — `.docs/guides/ide-setup.md` 指导非原生 IDE 用户配置框架（MCP Server 安装、连接配置、FAQ）
+- **F47 用户自定义目录映射** — `.directory-map` 文件（类 .gitignore 格式），用户声明自定义目录用途，AI 据此定位文件；`pm-session-start` Step 3.6 自动读取
+- **F48 文档简化与渐进展开** — `spec/guides/doc-simplify.md` 定义简化规则、渐进展开、双向链接；`common-session-close` 长文档自动简化
+- **F56 PBT 属性级测试** — `spec/guides/testing.md` 新增 6 种属性类型（幂等性、往返性、交换律等）；`smoke.test.ts` 新增 7 项属性测试
+- **F65 Skill 行为回归测试** — `spec/guides/skill-regression.md` 文档 TDD 流程；`pm-framework-evolve` Step 1 强制检查；`pm-task-review` Stage 1 执行验证；3 个核心 Skill 添加触发测试用例
+
 ## [3.5.0] - 2026-03-16
 
 ### 新增
