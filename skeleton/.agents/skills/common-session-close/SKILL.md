@@ -1,6 +1,8 @@
 ---
 name: common-session-close
-description: 会话收尾与日志沉淀 — 汇总工作、写入日志、Git 自动提交、输出恢复指引。在会话结束前由 AI 自主激活。当用户说收工，或者表达出类似语义的时候，执行本 Skill。
+description: "[Common] 会话收尾 — 用户表示收工时自主激活。产出日志条目 + Git 提交。"
+produces: journal_entry
+requires: null
 ---
 
 # 会话收尾 & 日志沉淀

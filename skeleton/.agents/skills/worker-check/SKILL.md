@@ -1,6 +1,8 @@
 ---
 name: worker-check
-description: 执行者自检与验证标记 — 完成编码后的强制验证流程。生成 dev/verification.md，Git 自动提交任务产物。在 worker-implement 完成后由 Worker 激活。
+description: "[Worker] 自检验证 — worker-implement 完成后激活。产出验证报告（verification_report）。"
+produces: verification_report
+requires: code_with_tests
 ---
 
 # 执行者自检 & 验证标记
@@ -121,6 +123,14 @@ TEST_PASS ✅
 
 MANUAL_PASS ✅
 
+## 执行过程中发现的问题
+
+| #   | 问题描述 | 影响范围 | 处理方式                                       |
+| --- | -------- | -------- | ---------------------------------------------- |
+| 1   | {问题1}  | {影响}   | {处理方式：已修复 / 已记录待后续处理 / 无影响} |
+
+（无问题则填写「无」）
+
 ## 标记汇总
 
 - LINT_PASS ✅
@@ -172,6 +182,49 @@ LINT_NA ⚠️ — 项目未配置 lint 工具
 Evidence Gate 接受 `_PASS` 和 `_NA`，拒绝 `_FAIL` 和缺失标记。
 
 **无论是否使用 `_NA` 标记，`verification.md` 必须始终生成。**
+
+## 步骤 3.5：产出完整性检查（HARD-GATE）
+
+> OPT-003：确保产出文件齐全，Git commit 前强制校验。
+
+**必须检查以下文件均已生成，否则不得进入 Step 4 Git 提交：**
+
+| 文件                  | 检查方式       | 缺失时                    |
+| --------------------- | -------------- | ------------------------- |
+| `dev/verification.md` | 管道 `test -f` | 补生成（Step 1-3 未完成） |
+| `dev/report.md`       | 管道 `test -f` | 补生成（见 Step 3.6）     |
+
+## 步骤 3.6：生成完成报告
+
+> OPT-001：补充 Worker Workflow 要求的 `dev/report.md`。
+
+将任务执行摘要写入 `dev/report.md`：
+
+```markdown
+# 任务报告
+
+## 任务信息
+
+- 任务 ID：{task_id}
+- 完成时间：{timestamp}
+- 执行者：Worker
+
+## 变更摘要
+
+| 文件    | 变更类型       | 说明       |
+| ------- | -------------- | ---------- |
+| {file1} | 新建/修改/删除 | {变更说明} |
+
+## 约束集执行情况
+
+| 约束 | 状态  | 说明                 |
+| ---- | ----- | -------------------- |
+| C1   | ✅/❌ | {如何满足或为何偏离} |
+
+## 验证标记引用
+
+详见 `dev/verification.md`
+```
 
 ## 步骤 4：Git 自动提交
 
@@ -228,3 +281,23 @@ Evidence Gate 接受 `_PASS` 和 `_NA`，拒绝 `_FAIL` 和缺失标记。
 - Git 提交：{已提交 hash / 无变更 / 未提交}
 - 验证文件：dev/verification.md {已生成/未生成}
 ```
+
+## 触发测试用例
+
+### TC-01: 三标记全部通过
+
+- **场景**: Worker 完成编码，lint/test/manual 全部通过
+- **输入**: 执行 `worker-check` Skill
+- **期望行为**:
+  1. 步骤 1-3 依次执行，三标记均为 `_PASS`
+  2. 步骤 3.5 产出完整性检查通过（verification.md + report.md 均存在）
+  3. 步骤 3.6 生成 report.md
+  4. 步骤 4 Git 自动提交
+- **验证方法**: 检查 `dev/verification.md` 和 `dev/report.md` 均已生成，Git commit 成功
+
+### TC-02: 产出文件缺失时阻断
+
+- **场景**: Worker 跳过了 report.md 生成
+- **输入**: `dev/verification.md` 存在但 `dev/report.md` 不存在
+- **期望行为**: 步骤 3.5 产出完整性检查失败 → 阻断 Git commit → 补生成 report.md
+- **验证方法**: 检查是否触发了 HARD-GATE，要求补生成缺失文件

@@ -1,6 +1,8 @@
 ---
 name: pm-task-review
-description: PM 任务验收 — 三阶段验收流程（Stage 1 Spec 合规 → Stage 2 代码质量 → Stage 3 Artifacts 沉淀）。PM 审查执行者完成的任务时激活。
+description: "[PM] 任务验收 — Worker 提交验收时激活。产出验收报告（review_report）。"
+produces: review_report
+requires: verification_report
 ---
 
 # PM 任务验收（三阶段）
@@ -218,7 +220,8 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
    > 简报面向**用户**，避免技术术语。目的是让用户不看代码就能理解任务成果。
 
 6. **标记任务完成**
-   - 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })`
+   - 如任务未使用 worktree → 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })`
+   - 如任务使用了 worktree → 进入 Worktree 闭环（完成标记在闭环结束后执行）
 
 ### Stage 3 判定
 
@@ -301,3 +304,24 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 - Stage 3: {已沉淀/无需沉淀/未进入}
 - 最终判定：{通过/打回/审查中}
 ```
+
+## 触发测试用例
+
+### TC-01: 三阶段全通过
+
+- **场景**: Worker 提交验收，三标记全为 `_PASS`
+- **输入**: `task_get()` 返回 `under_review` 状态的任务
+- **期望行为**:
+  1. Pre-Review: 扫描 blocker、确定审核类型、风险分级
+  2. Stage 1: Spec 合规检查通过
+  3. Stage 2: 代码质量审查通过
+  4. Stage 3: Artifacts 沉淀 + 完成简报
+  5. 调用 `task_transition({ new_status: "completed" })`
+- **验证方法**: 检查验收报告是否包含三个 Stage 结果，任务状态是否转为 `completed`
+
+### TC-02: Stage 1 不通过时打回
+
+- **场景**: Worker 提交验收但 verification.md 中有 `_FAIL` 标记
+- **输入**: `dev/verification.md` 中 `TEST_FAIL ❌`
+- **期望行为**: Stage 1 检查不通过 → 不进入 Stage 2 → 打回并附带修复建议
+- **验证方法**: 检查是否跳过了 Stage 2 和 Stage 3，直接打回

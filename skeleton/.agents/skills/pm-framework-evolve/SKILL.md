@@ -1,6 +1,8 @@
 ---
 name: pm-framework-evolve
-description: PM 框架自迭代 — 框架百科查询、安全迭代、迭代记录、知识库自更新。PM 需要修改框架核心文件或查询框架知识时激活。
+description: "[PM] 框架查询/迭代 — PM 查询框架知识或修改核心文件时激活。只读路径无产出，迭代路径产出框架变更记录。"
+produces: framework_change | null
+requires: null
 ---
 
 # PM 框架自迭代
@@ -19,7 +21,8 @@ PM 角色在以下场景**必须**激活本 Skill：
 
 ## 快速参考索引
 
-> **用途**：回答简单事实问题时直接查阅此表，无需加载 references/ 文件。
+> **用途**：回答简单事实问题时直接查阅此表，无需加载图谱文件。
+> 完整的框架特性树请参见 `.agents/graph/_index.md`。
 
 ### 框架组件统计
 
@@ -31,7 +34,7 @@ PM 角色在以下场景**必须**激活本 Skill：
 | Skills        | 10   | pm-session-start, pm-brainstorm, pm-task-planning, pm-task-review, pm-framework-evolve, worker-implement, worker-check, worker-debug, common-session-close, common-spec-update |
 | Workflows     | 2+1  | pm.md, worker.md（🦴骨架）+ publish.md（🔧开发专属）                                                                                                                           |
 | Rules         | 3+1  | project-identity.md, anti-hallucination.md, coding-standards.md（🦴骨架）+ framework-dev-mode.md（🔧开发专属）                                                                 |
-| MCP Tools     | 23   | 详见 `references/features.md` → "MCP Tools" 章节                                                                                                                               |
+| MCP Tools     | 23   | 详见图谱 `foundation/mcp-transport.md` → MCP Tools 节点                                                                                                                        |
 | MCP Resources | 6    | trellis://status, trellis://journal/latest, trellis://spec/{c}/{n}, spec://{c}/{n}, trellis://tasks/{id}/context, trellis://tasks/{id}/subtasks/{sid}/context                  |
 
 ### 关键路径速查
@@ -44,22 +47,11 @@ PM 角色在以下场景**必须**激活本 Skill：
 | 任务数据目录    | `.trellis/tasks/`                                         |
 | 日志系统        | `.trellis/workspace/journal.md`                           |
 | 框架配置        | `.trellis/config/config.yaml`                             |
+| 框架知识图谱    | `.agents/graph/`（特性树 + 节点详情）                     |
+| 安装指南        | `.agents/graph/installation.md`                           |
 | MCP Server 源码 | `packages/mcp-server/src/`(🔧开发专属)                    |
 | npm 包名        | `@geeseeker/easyai-dev`                                   |
 | GitHub 仓库     | https://github.com/GeeSeeker/easyAI-dev                   |
-
----
-
-## 查询路由
-
-> **用途**：需要深入了解某个主题时，按此表定位到具体 references 文件，避免全量加载。
-
-| 问题类型                               | 读取文件           | 文件行数 |
-| -------------------------------------- | ------------------ | -------- |
-| 设计理念、四层架构、约束分层、记忆体系 | `architecture.md`  | ~155行   |
-| Skill/Tool/Resource 的详细描述和关联   | `features.md`      | ~171行   |
-| 文件位置、目录结构、骨架/运行时分类    | `directory-map.md` | ~89行    |
-| 安装方式、版本管理、仓库信息           | `installation.md`  | ~90行    |
 
 ---
 
@@ -68,23 +60,15 @@ PM 角色在以下场景**必须**激活本 Skill：
 当 AI 仅需**查询**框架知识（不修改任何文件）时：
 
 1. 先查「快速参考索引」，能直接回答则**到此结束**
-2. 索引不够 → 按「查询路由」表读取对应的 references 文件
+2. 索引不够 → 按图谱渐进式披露查询：
+   - **一屏概览** → 读 `.agents/graph/_index.md`
+   - **域内展开** → 读 `.agents/graph/{domain}/_domain.md`
+   - **节点详情** → 读具体节点文件，查看关联、文件清单、变更影响
 3. 回答用户问题，**不执行任何后续步骤**
 
 > 只读查询不需要走迭代流程（Step 0-6），不需要记录 changelog，不需要用户确认门。
 
 ---
-
-## 知识库（references/）
-
-框架的结构化知识，修改框架前**必须先查阅**：
-
-| 文件               | 内容                                                           |
-| ------------------ | -------------------------------------------------------------- |
-| `architecture.md`  | 设计理念、四层架构、约束分层、角色系统、文档沉淀管道、升级机制 |
-| `features.md`      | Skills、Workflows、Rules、MCP Tools、MCP Resources、关联关系图 |
-| `directory-map.md` | 完整目录清单，🦴骨架/🏃运行时/🔧开发专属分类                   |
-| `installation.md`  | 安装方式、版本管理、仓库信息、Manifest 智能合并                |
 
 ## 管控范围
 
@@ -93,6 +77,7 @@ PM 角色在以下场景**必须**激活本 Skill：
 - `.agents/rules/` — 规则文件
 - `.agents/workflows/` — 角色入口
 - `.agents/skills/` — 能力模块
+- `.agents/graph/` — 知识图谱
 - `.trellis/spec/` — 项目规范（也可通过 `common-spec-update` Skill 处理）
 - `.trellis/config/` — 框架配置
 
@@ -108,11 +93,16 @@ PM 角色在以下场景**必须**激活本 Skill：
 
 ### Step 0：知识加载（前置）
 
-在开始任何框架变更前：
+在开始任何框架变更前，从图谱加载相关知识：
 
-1. 读取 `references/` 理解当前框架结构和设计理念
-2. 读取 `changelog/index.md` 了解已有的迭代历史
-3. 基于知识判断本次变更的合理性
+1. 读取 `.agents/graph/_index.md` 定位涉及变更的特性域
+2. 读取相关域的 `_domain.md` 了解域内特性概览
+3. 读取将要变更的特性节点文件，重点关注：
+   - `depends_on`：变更会影响哪些底层依赖
+   - `serves`：变更会波及哪些上层消费者
+   - `files`：涉及哪些实现文件
+4. 读取 `changelog/index.md` 了解已有的迭代历史
+5. 基于图谱知识判断本次变更的合理性
 
 ### Step 1：变更清单
 
@@ -131,11 +121,17 @@ PM 角色在以下场景**必须**激活本 Skill：
 
 ### Step 2：影响范围分析
 
-评估直接影响（变更文件数、变更类型）和间接影响（关联角色、关联 Skills、约束层级），给出风险等级：
+从图谱读取变更节点的 `serves`、`depends_on`、`relates_to` 字段，系统化评估影响范围：
 
-- **低**：仅新增能力，不影响现有行为
-- **中**：修改已有文件，可能影响角色行为
-- **高**：修改 Rules 或核心 Workflow，影响所有会话
+1. **向上影响（serves）**：变更会波及哪些上层消费者？列出受影响的上层节点及具体影响点
+2. **横向影响（relates_to）**：同层哪些协作特性可能受影响？列出关联节点及协作接口
+3. **向下影响（depends_on）**：变更是否需要底层特性同步调整？列出依赖节点及潜在变更
+
+综合评估给出风险等级：
+
+- **低**：仅新增能力，serves/relates_to 均无影响
+- **中**：修改已有文件，serves 中有节点可能需同步调整
+- **高**：修改 Rules 或核心 Workflow，serves 链路覆盖多个上层节点
 
 ### Step 3：用户确认门
 
@@ -153,17 +149,17 @@ PM 角色在以下场景**必须**激活本 Skill：
 3. 更新 `changelog/index.md` 索引
 4. 通过 `journal_append()` 记录变更日志
 
-### Step 6：知识库自更新
+### Step 6：图谱更新
 
-迭代完成后，检查 `references/` 中是否有文件需要更新：
+迭代完成后，检查并更新关联的图谱节点：
 
-- 新增/删除了 Skill → 更新 `features.md`
-- 新增/删除了 Rule → 更新 `features.md`
-- 修改了目录结构 → 更新 `directory-map.md`
-- 修改了安装功能 → 更新 `installation.md`
-- 修改了架构设计 → 更新 `architecture.md`
+- **新增/删除 Skill** → 更新对应层级节点 + `_index.md` + 上下游节点的关联
+- **新增/删除 Rule** → 更新 `capability/framework-governance.md` 节点
+- **修改目录结构** → 更新受影响节点的 `files:` 字段
+- **修改 Workflow** → 更新 `role-system/` 对应节点 + `skill_chain` 字段
+- **修改 MCP Tool** → 更新 `foundation/mcp-transport.md` + 上层节点的 `tool:` 引用
 
-> **自更新边界**：只更新事实性描述，不改变知识库的结构和格式。
+> **自更新边界**：只更新事实性描述和结构化元数据，不改变图谱的分层设计和节点格式。
 
 ---
 
@@ -195,7 +191,7 @@ PM 角色在以下场景**必须**激活本 Skill：
 
 - **场景**: PM 需要查询框架某个 Skill 的职责
 - **输入**: 「pm-brainstorm 这个 Skill 是干什么的？」
-- **期望行为**: 查询快速参考索引或 references/ 后直接回答，不执行 Step 0-6
+- **期望行为**: 查询快速参考索引或图谱节点后直接回答，不执行 Step 0-6
 - **验证方法**: 检查是否跳过了变更清单、影响分析、用户确认等步骤
 
 ### TC-02: 修改 Skill 时触发回归测试检查
@@ -211,3 +207,10 @@ PM 角色在以下场景**必须**激活本 Skill：
 - **输入**: 修改配置文件
 - **期望行为**: Step 1 变更清单中不触发 F65 回归测试检查（因为不是 Skill 文件）
 - **验证方法**: 检查 Step 1 是否跳过了 Skill 回归测试提醒
+
+### TC-04: 影响分析使用图谱双向链接
+
+- **场景**: PM 需要修改任务状态机逻辑
+- **输入**: 修改涉及 `capability/task-management.md` 节点
+- **期望行为**: Step 2 影响分析从图谱读取 serves（pm-workflow, worker-workflow）、relates_to（quality-control, context-management）、depends_on（task-storage, mcp-transport），生成结构化影响报告
+- **验证方法**: 检查 Step 2 是否引用了图谱节点的三向链接字段

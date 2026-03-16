@@ -1,6 +1,8 @@
 ---
 name: worker-implement
-description: 执行者实现工作流 — TDD 铁律驱动的编码流程。在 Worker 开始实现任务时由 Workflow 激活。所有新功能、Bug 修复、行为变更必须走 TDD 流程。
+description: "[Worker] TDD 编码 — Worker 开始实现任务时激活。产出代码 + 测试。"
+produces: code_with_tests
+requires: task_with_constraints
 ---
 
 # 执行者实现工作流（TDD 驱动）
@@ -204,3 +206,24 @@ npm test path/to/test.test.ts
 1. 激活 `worker-check` Skill 执行三标记自检
 2. 生成 `dev/verification.md`
 3. 不要在完成前声明"完成"——先验证，再声明
+
+## 触发测试用例
+
+### TC-01: 标准 TDD 循环
+
+- **场景**: Worker 开始实现新功能
+- **输入**: 任务约束集要求实现用户认证 API
+- **期望行为**:
+  1. Step 0 加载项目规范
+  2. RED: 写失败测试 → 运行确认失败
+  3. GREEN: 写最小代码 → 运行确认通过
+  4. REFACTOR: 清理代码
+  5. 重复直到所有功能点完成
+- **验证方法**: 检查是否每个功能点都有对应的失败测试 → 通过代码的记录
+
+### TC-02: 先写代码后补测试被拒绝
+
+- **场景**: Worker 先写了生产代码再补写测试
+- **输入**: 生产代码已存在但无对应失败测试记录
+- **期望行为**: 触发 Iron Law 违规 → 要求删除代码，从 TDD 重新开始
+- **验证方法**: 检查是否拒绝了事后补测试的做法

@@ -28,7 +28,7 @@ declare function checkCapability(role: string | undefined, toolName: RestrictedT
 /**
  * 规范化角色名（支持多种写法）
  */
-declare function normalizeRole(role: string): Role | null;
+declare function normalizeRole(role: string | undefined | null): Role | null;
 /**
  * 校验 Git ref 名称是否合法（防注入）
  * @param ref - 分支名或标签名

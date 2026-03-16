@@ -1,6 +1,8 @@
 ---
 name: pm-session-start
-description: PM 会话启动与状态恢复 — 自动读取项目状态、恢复任务上下文、加载最新日志。在 /pm 触发后由 Workflow 激活。
+description: "[PM] 会话启动 — /pm 触发后由 Workflow 激活。产出项目状态快照。"
+produces: project_snapshot
+requires: null
 ---
 
 # PM 会话启动 & 状态恢复
