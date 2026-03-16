@@ -107,6 +107,25 @@ entry: "完成了 xxx，剩余 yyy 待处理"
    - 用户确认无需沉淀 → 跳过
    - 若写入失败 → 记录错误但继续收工流程
 
+### Step 4.5：Rules 合规回顾
+
+> 长对话防护 — 回顾 `always_on` Rules 是否在本会话中被完整遵守。
+
+1. 扫描 `.agents/rules/` 目录，读取 YAML frontmatter 筛选 `trigger: always_on` 的 Rules 文件
+2. 对每条发现的 Rule，自检本会话是否有违反其核心约束的操作：
+   - 例：`anti-hallucination.md` → 是否有未查文档就使用的第三方 API？
+   - 例：`project-identity.md` → 是否在框架体系内工作？
+   - 例：`framework-dev-mode.md`（若存在）→ 是否遵循三层版本流转？
+   - 对每条 Rule 提取出最核心的约束并逐一确认
+3. **有违规** → 调用 `journal_append()` 追加一条独立条目：
+   ```yaml
+   tags: ["RULE_BREACH", "{违规的 Rule 文件名}"]
+   content: "## [RULE_BREACH] {Rule 名}\n\n### 违规描述\n{具体操作}\n\n### 纠正措施\n{已采取或建议的纠正}"
+   ```
+4. **无违规** → 在恢复指引的硬约束检查中标记 `✅ Rules 合规`
+
+> 此步骤为事后回顾，无法撤销已发生的操作，但能为后续会话提供审计线索和改进依据。
+
 ### Step 5：`.tmp/` 清理
 
 1. 检测项目下 `.tmp/` 目录是否存在且非空
@@ -217,6 +236,7 @@ git rev-list --count @{upstream}..HEAD
 - [x] Journal 日志 ✅
 - [x] 恢复指引 ✅（本消息即是）
 - [x] Git 变更已处理 ✅
+- [x] Rules 合规 {✅ 无违规 / ⚠️ 有违规（见 journal `[RULE_BREACH]` 条目）}
 
 ### PATEOAS 导航
 
@@ -238,7 +258,8 @@ git rev-list --count @{upstream}..HEAD
 
 ```
 收工流程 {
-  Step 1-6: 所有角色通用
+  Step 1-4.5: 所有角色通用（含 4.5 Rules 合规回顾）
+  Step 5-6: 所有角色通用
   Step 7: if (当前角色 == PM && 有 upstream && 有未推送 commit) { 询问 push }
   Step 8: 所有角色通用（硬约束）
 }
@@ -305,3 +326,10 @@ git rev-list --count @{upstream}..HEAD
 - **输入**: 用户说「收工」
 - **期望行为**: Step 4 知识分类自检中触发 F44 检查项 → 建议更新 `spec://guides/known-issues`
 - **验证方法**: 检查收尾流程是否提示更新已知问题库
+
+### TC-04: Rules 合规回顾
+
+- **场景**: 长对话会话中 AI 误修改了受保护的文件
+- **输入**: 用户说「收工」
+- **期望行为**: Step 4.5 自检发现违规 → journal 中标记 `[RULE_BREACH]` → 恢复指引中显示 `⚠️ 有违规`
+- **验证方法**: 检查 journal 是否包含 `[RULE_BREACH]` 标记，恢复指引硬约束检查中 Rules 合规是否标注违规
