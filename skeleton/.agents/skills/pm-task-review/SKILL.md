@@ -88,6 +88,13 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
    - 如果 Worker 报告了 `[SPEC_GAP]`，在验收后提议通过 `common-spec-update` 补充规范
    - **反溯及原则**：如 PM 在任务执行期间更新了 spec，不得用新 spec 推翻 Worker 基于旧 spec 的实现。需重新规划任务。
 
+6. **Skill 回归测试检查**（F65）
+   - 如果任务涉及 Skill 变更（`file_scope` 包含 `.agents/skills/`）：
+     - 检查被修改的 SKILL.md 是否包含 `## 触发测试用例` 章节
+     - 检查测试用例是否覆盖了本次变更的行为
+     - 参照 `spec://guides/skill-regression` 的模板和标准
+   - **缺失测试用例 → 打回**（要求 Worker 先补充测试用例）
+
 ### Stage 1 判定
 
 - **全部通过** → 进入 Stage 2

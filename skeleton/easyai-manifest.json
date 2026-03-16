@@ -1,6 +1,6 @@
 {
-  "version": "3.5.0",
-  "generatedAt": "2026-03-16T08:17:24.112Z",
+  "version": "3.6.0",
+  "generatedAt": "2026-03-16T10:35:29.162Z",
   "files": {
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -12,7 +12,7 @@
       "hash": "42f56e40168cd2528b72a7d99e862be806e1af0a89e609b51fdad42cb8c06758"
     },
     ".agents/skills/common-session-close/SKILL.md": {
-      "hash": "46adf4b76cd4021c34fc24448c526ab70e4fb85883dbc2ee1c823c26a479ee25"
+      "hash": "56a72eba2deb2e4836a95d4912ad5ed1680d6fc1cd3749004808b2117d9c22f5"
     },
     ".agents/skills/common-spec-update/SKILL.md": {
       "hash": "cca0e3176a235d5a2b33f419e80b4e35409e377b915de14a8cd35283eb980630"
@@ -21,7 +21,7 @@
       "hash": "571c7bc424b57482b7ecf5e8e8e8c310968864a7e0791d8dababcfdb76dd2c9e"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "22521546bbefa04ccd2fce49d1d8708476ee058045bfac2af12f7de9b1659730"
+      "hash": "2f4084b0a3ecef63339ad3e96c3e390dd3ac5af036a4001c0e9b31ea47d34f98"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
@@ -30,10 +30,10 @@
       "hash": "017a2874a3937fedcdd1405d21307186145bd7bee72c91af3b638c3806f31e14"
     },
     ".agents/skills/pm-framework-evolve/references/directory-map.md": {
-      "hash": "98d610a7c232532fd0701cbf2f3d7651e33450dea008040639b8b0e2e6e50693"
+      "hash": "ecda8679c81d8a709ab4d370f41a4ff15543e179990b92e944235eb951abbe02"
     },
     ".agents/skills/pm-framework-evolve/references/features.md": {
-      "hash": "3ed7913cfcadb0c1c571b28caf57f47d04c98f990a3859e809a5a709a237c2c9"
+      "hash": "dd5eedfb3d0663af9c93ce204b12dcede6db93f58e5de9a12e918e59a3c2c112"
     },
     ".agents/skills/pm-framework-evolve/references/installation.md": {
       "hash": "1392b6d7e29c32e48e24058dd78cefa3b7bc78548c41973180bb4085cfd308d4"
@@ -42,13 +42,13 @@
       "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
-      "hash": "cc17f135ed17238920f792372b660d6e9eaaa6defb5984d0aa33657203d0cc33"
+      "hash": "6e8676e0872a4f5111cc0e11cdd3b855850b5968e0ccaa53dd3d39d614bf4c88"
     },
     ".agents/skills/pm-task-planning/SKILL.md": {
       "hash": "1f9feb24aa6011a5fcee567de944d41e45c33e148f310a1b8087a824a439996b"
     },
     ".agents/skills/pm-task-review/SKILL.md": {
-      "hash": "baedcf738d28981e21852dac5ee63f2a568433a4d2201147551c6f11de0e046a"
+      "hash": "59a366dd1773447412b6e04a777f4bd45b9a95fb3796401dd6e60abf2403d333"
     },
     ".agents/skills/worker-check/SKILL.md": {
       "hash": "68e9ddae7c77c7f306252165ef3bb4c12e82923e3e0ed0c67cfae38fb89c9b1b"
@@ -65,8 +65,14 @@
     ".agents/workflows/worker.md": {
       "hash": "970a1b2667b59d024c6c24db42fd6293a18e8fdab4970af282e68554abc43133"
     },
+    ".directory-map": {
+      "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
+    },
     ".docs/README.md": {
       "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
+    },
+    ".docs/guides/ide-setup.md": {
+      "hash": "1522ece7a329e86ff8df4d05b235c8ce19321713f9981e7bf2e945892f2578a0"
     },
     ".trellis/config/config.yaml": {
       "hash": "e9c0918b04516d94874dab212abdb4d39728ede782d9200e66bbb42a73f39ef7"
@@ -77,17 +83,26 @@
     ".trellis/spec/general/knowledge-categories.md": {
       "hash": "9029e2339294dd27a3179067008bdaf3dcd5b3999fa320051177dbe5bef5aab7"
     },
+    ".trellis/spec/guides/doc-simplify.md": {
+      "hash": "efc4c39759599d76f583ef8bb09f3384bfff5feaab7e2bdf60b9412c8bb82127"
+    },
     ".trellis/spec/guides/external-cli-guide.md": {
       "hash": "ee6e10f83813243ba7bcccf38a6caa977863298bee96642642713b7066cd72ba"
     },
+    ".trellis/spec/guides/known-issues.md": {
+      "hash": "3120b1f5225fc7238045ee6bc3a86381c0da7ff2ff7c483750cd0822209a67db"
+    },
     ".trellis/spec/guides/review-standards.md": {
       "hash": "17d812a3e47b71264e7487fea44fadadc5ef6c903f063397efffa87575df28da"
+    },
+    ".trellis/spec/guides/skill-regression.md": {
+      "hash": "d9599510d6378bc7d52d26ef5aeb56fe3957fb8eee0214e767e13aee6c0f0682"
     },
     ".trellis/spec/guides/task-workflow.md": {
       "hash": "f58667994ebb3543b0b7aa737eeab7b270b0e9657515fecdc7f3d0ceb1809200"
     },
     ".trellis/spec/guides/testing.md": {
-      "hash": "31133d58f05ba6ab63f55beb6398f936b532af9d8def4443b8da025897fd4c53"
+      "hash": "8597fb5e166b6f4c14ac3b059226d41817bf4cb9c94ec890c53dd149fa026c73"
     },
     ".trellis/spec/spec-schema.json": {
       "hash": "3706e5dbc8ba583b886717fab22b238e2f70e05a64988b469576edfe024116cd"
