@@ -41,10 +41,10 @@
 
 角色工作流编排 — PM 和 Worker 的完整工作链路。
 
-| 节点                                              | 描述                                               |
-| ------------------------------------------------- | -------------------------------------------------- |
-| [pm-workflow](role-system/pm-workflow.md)         | PM 工作流 — 会话启动、需求发散、任务规划、验收审批 |
-| [worker-workflow](role-system/worker-workflow.md) | Worker 工作流 — 任务读取、TDD 编码、自检提交       |
+| 节点                                              | 描述                                                            |
+| ------------------------------------------------- | --------------------------------------------------------------- |
+| [pm-workflow](role-system/pm-workflow.md)         | PM 工作流 — 会话启动、需求发散、任务规划、验收审批              |
+| [worker-workflow](role-system/worker-workflow.md) | Worker 工作流 — 独立/团队执行模式、TDD 编码、组长编排、自检提交 |
 
 ## Layer 4 · 用户体验层（user-experience/）
 

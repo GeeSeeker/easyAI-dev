@@ -94,7 +94,7 @@ your-project/
 ├── .agents/            ← AI 角色层
 │   ├── rules/          │  4 条始终生效的规则
 │   ├── workflows/      │  PM + Worker 工作流
-│   └── skills/         │  10+ 个能力模块
+│   └── skills/         │  11 个能力模块
 ├── .trellis/           ← 数据持久层
 │   ├── config/         │  框架配置
 │   ├── spec/           │  项目规范

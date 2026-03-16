@@ -1,6 +1,6 @@
 ---
 name: common-session-close
-description: "[Common] 会话收尾 — 用户表示收工时自主激活。产出日志条目 + Git 提交。"
+description: "[Common] 会话收尾 — 用户发出“收工”指令时自主激活。产出日志条目 + Git 提交。"
 produces: journal_entry
 requires: null
 ---

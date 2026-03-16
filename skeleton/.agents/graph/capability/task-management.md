@@ -26,8 +26,10 @@ files:
     role: 任务创建与约束集生成（7 步流程：需求聚焦 → 约束集 → 反面模式自检 → 任务拆分 → 路由 → 冲突检测 → 上下文配置）
   - path: .agents/skills/pm-task-review/SKILL.md
     role: 三阶段验收流程（Stage 1 Spec 合规 → Stage 2 代码质量 → Stage 3 Artifacts 沉淀）
+  - path: .agents/skills/worker-lead/SKILL.md
+    role: 组长编排（团队执行模式：PLAN 子任务拆分 + INTEGRATE 审核整合，含 ABCDE 工作重要性分级和 CLI 动态选型）
   - path: .agents/workflows/worker.md
-    role: Worker 启动流程中的任务读取、worktree 环境切换、阻塞上报协议
+    role: Worker 启动流程中的任务读取、模式决策、worktree 环境切换、阻塞上报协议
   - tool: task_create
     role: 任务创建（生成 ID、创建目录和 task.md）
   - tool: task_get
@@ -77,7 +79,7 @@ files:
 
 ### 子任务 DAG（subtask-dag）
 
-支持子任务间的依赖声明和自动环检测。通过 `subtask_create()` 声明依赖关系，`subtask_dependency_graph()` 查询依赖图并检测循环。用于组长+组员执行模式下的任务拆分。
+支持子任务间的依赖声明和自动环检测。通过 `subtask_create()` 声明依赖关系，`subtask_dependency_graph()` 查询依赖图并检测循环。用于团队执行模式下组长拆分子任务给组员。嵌套限制：组员不能再分配子任务（单层结构）。
 
 ### 阻塞上报协议（blocker-protocol）
 
