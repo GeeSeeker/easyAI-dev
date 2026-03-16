@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.10.1] - 2026-03-17
+
+### 修复
+
+- **task_transition 深入修复** — 增强错误诊断（保留完整 stack trace）+ `parseFrontmatter` 全部 `.startsWith()` 调用前增加 `typeof` 防御 + `normalizeRole` 异常类型诊断日志
+- 新增 9 个深度防御测试（异常 role 类型 4 个 + 异常 YAML 输入 5 个）
+
 ## [3.10.0] - 2026-03-17
 
 ### 新增
