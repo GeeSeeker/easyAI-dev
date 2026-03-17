@@ -2,6 +2,18 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.13.0] - 2026-03-17
+
+### 新增
+
+- **AI 合规性增强 Phase 1** — Skill 评估守卫 + Workflow 命名规范
+  - 新增 `skill-eval-guard.md` Always On Rule：开发/规划/框架/验收类请求前，强制执行 `/common-skill-eval` Workflow
+  - 新增 `common-skill-eval.md` Workflow：四步评估流程（评估卡 → 拉取 Level 2 → ABCDE 分级 → 执行），含 12 个 Skill 速查清单
+  - Workflow 命名规范：`actor-pm.md` / `actor-worker.md`（角色入口）、`common-*`（通用流程）
+  - 强化 `framework-edit-guard.md`：覆盖设计阶段必须查图谱 + 新增"图谱必须同步更新"约束
+  - 更新 `project-identity.md`：图谱系统声明为"框架架构的单一事实来源"
+  - ABCDE 工作重要性分级从 `worker-lead` 专属提升为全角色通用（写入 Workflow）
+
 ## [3.12.0] - 2026-03-17
 
 ### 新增
