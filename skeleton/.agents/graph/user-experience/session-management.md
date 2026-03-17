@@ -14,7 +14,7 @@ files:
   - path: .agents/skills/pm-session-start/SKILL.md
     role: PM 会话启动与状态恢复（项目状态 + 活跃任务 + 最新日志）
   - path: .agents/skills/pm-session-close/SKILL.md
-    role: PM 会话收尾与日志沉淀（汇总 + 知识沉淀 + journal + Skill 审计 + Git 提交 + Push 确认 + 恢复指引）
+    role: PM 会话收尾与日志沉淀（汇总 + 知识沉淀 + 关联文档状态同步 + journal + Skill 审计 + Git 提交 + Push 确认 + 恢复指引）
   - path: .agents/skills/worker-session-close/SKILL.md
     role: Worker 会话收尾（journal + Skill 审计 + Git 提交 + 恢复指引，正常完成时由 worker-check 自动衔接）
   - path: .agents/workflows/actor-worker.md

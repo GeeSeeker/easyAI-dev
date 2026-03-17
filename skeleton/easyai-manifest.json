@@ -1,6 +1,6 @@
 {
-  "version": "3.19.0",
-  "generatedAt": "2026-03-17T23:33:35.753Z",
+  "version": "3.19.1",
+  "generatedAt": "2026-03-17T23:59:21.709Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -84,7 +84,7 @@
       "hash": "3d795bc2340243f74ba5b31aba285b1e70c77e07b968a7a21318c39372ae24e9"
     },
     ".agents/graph/user-experience/session-management.md": {
-      "hash": "5cab1a8410f93161c79b6d833f467a2163801eea64166e8383ec4a5d3399da9d"
+      "hash": "ae31ff9c5891eb2783d79ca6d18842d7dd1f962aa63bdaa4aa5dfb74c995b2b7"
     },
     ".agents/rules/always_on/cli-direct-call-guard.md": {
       "hash": "76f1915a1adcf517c3e0195993d83be0afa4fa215df8d0f383f7498a66a4de4b"
@@ -168,7 +168,7 @@
       "hash": "85a71619cc7857021e4d40d52942bd31424ca18c8fd45039153723ccf970be80"
     },
     ".agents/skills/pm-session-close/SKILL.md": {
-      "hash": "2772ac31c579c1cba95ded0488dd9508dc8badb9b44ce0fd95c59c1f89bcc69c"
+      "hash": "d42b6e500a96b2c7a718da4d85fb2afd9f9774115a734f3d0df124666e593443"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
       "hash": "f9a6de4068777d09a538dd2265c848a56d4cca79528461f268da47a9fc52cc32"
@@ -213,7 +213,7 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".trellis/config/config.yaml": {
-      "hash": "4acc4121a0b5d249b945ed3f705283e369ae056e9fa098cb8257cbec0cc77252",
+      "hash": "bf9fd8f3fcdc30cbf3f749f1581f378ad7685a2adb51a0975ce6dcb11e1b3b97",
       "merge_mode": "append"
     },
     ".trellis/spec/general/adr-template.md": {
