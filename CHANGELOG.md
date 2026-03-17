@@ -2,6 +2,27 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.18.0] - 2026-03-18
+
+### 新增
+
+- **图谱接入工作层（T018）** — 图谱从「参考层」升级为「工作层」，接入日常 Workflow 和 Skill
+  - `common-skill-eval` Step 1：框架请求时读取 `_index.md` + `skill_chain` 辅助域→Skill 映射
+  - `pm-task-planning` Step 7：框架任务自动将图谱节点写入 `context.jsonl`
+  - `actor-worker`：启动时关注 context 中的图谱条目
+  - `pm-session-start`：状态快照增加「框架能力概览」
+- **三层图谱自维护机制** — 编辑时、收工时、发布时三层防护
+  - `framework-edit-guard` 增加约束 1b：修改后检查图谱引用一致性
+  - `worker-session-close`：git diff 交叉比对图谱 files，不一致仅报警
+  - `publish.md` 新增 Step 0.5：发布前图谱一致性校验
+- **ABCDE ↔ 🟢🟡🔴⚫ 映射统一** — `common-skill-eval` Step 3 新增映射定义（A→⚫/B→🔴/C→🟡/D→🟢/E→无需审查）
+- **pm-brainstorm Step 3.5** — A/B 级设计方案须经 CLI 审核后再呈现用户
+- **图谱 `upgrade` 标注约定** — 节点 `files` 可选 `upgrade` 字段（replace/append/preserve），`config-management` 示范 `upgrade: append`
+
+### 变更
+
+- 5 个文档同步更新（ai-compliance-enforcement / framework-knowledge-graph / graph README / project-identity / knowledge-categories）
+
 ## [3.17.5] - 2026-03-18
 
 ### 修复
