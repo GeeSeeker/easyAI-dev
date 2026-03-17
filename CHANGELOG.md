@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.16.1] - 2026-03-17
+
+### 修复
+
+- **MCP Server Phase 2 合规性提示未生效** — `compliance-hints.ts` 等 5 个文件之前只存在于 `playground/packages/`（不参与编译），现已同步到 `packages/mcp-server/`
+- **清理 `playground/packages/`** — MCP 源码不应存在于 playground，已删除
+
 ## [3.16.0] - 2026-03-17
 
 ### 新增
