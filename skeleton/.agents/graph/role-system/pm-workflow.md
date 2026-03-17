@@ -31,7 +31,7 @@ skill_chain:
   common_skills:
     - pm-session-close
 files:
-  - path: .agents/workflows/pm.md
+  - path: .agents/workflows/actor-pm.md
     role: PM 角色入口（身份锚定、启动流程、可用操作菜单）
   - path: .agents/skills/pm-session-start/SKILL.md
     role: 会话启动与状态恢复（项目状态 + 活跃任务 + 最新日志）

@@ -37,7 +37,7 @@ skill_chain:
   common_skills:
     - worker-session-close
 files:
-  - path: .agents/workflows/worker.md
+  - path: .agents/workflows/actor-worker.md
     role: Worker 角色入口（身份锚定、参数解析、模式决策、角色阻断、启动流程、阻塞上报协议、完成流程）
   - path: .agents/skills/worker-lead/SKILL.md
     role: 组长编排（团队执行模式：PLAN 子任务拆分 + INTEGRATE 审核整合，含 ABCDE 工作重要性分级）

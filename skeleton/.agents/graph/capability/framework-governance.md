@@ -37,7 +37,11 @@ files:
   - path: .agents/rules/skill-transparency.md
     role: Skill 使用透明性（always_on，激活声明 + PATEOAS 扩展 + 事后审计）
   - path: .agents/rules/framework-edit-guard.md
-    role: 框架编辑守卫（always_on，修改框架文件前强制加载图谱 + 修改 Skill 前强制读 skill-creator）
+    role: 框架编辑守卫（always_on，修改/设计框架前强制查图谱 + 图谱同步更新 + 修改 Skill 前读 skill-creator）
+  - path: .agents/rules/skill-eval-guard.md
+    role: Skill 评估守卫（always_on，开发/规划/框架/验收类请求前强制执行 /common-skill-eval Workflow）
+  - path: .agents/workflows/common-skill-eval.md
+    role: Skill 评估工作流（评估卡 → 拉取 Level 2 → ABCDE 分级 → 执行）
   - tool: framework_init
     role: 框架初始化（复制骨架到目标项目）
   - tool: framework_check
