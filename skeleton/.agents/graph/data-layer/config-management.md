@@ -7,6 +7,7 @@ serves:
   - capability/task-management
   - capability/context-management
   - capability/framework-governance
+  - capability/external-cli-dispatch
   - role-system/pm-workflow
   - capability/knowledge-management
 depends_on:
@@ -59,11 +60,11 @@ files:
 
 ### routing 段（routing-section）
 
-任务路由：risk_review_mapping（风险→审查策略映射）、low_risk_whitelist（低风险变更白名单）。
+任务路由：grade_review_mapping（ABCDE → CLI 审核数量映射）、auto_downgrade_whitelist（D/E 级自动识别白名单）。
 
 ### team 段（team-section）
 
-AI 团队资源清单：roster 列出主控 AI 和外部 CLI，各含 type、mcp_tool、strengths、concurrency。PM 路由任务时参考此配置。
+AI 团队资源清单：roster 列出主控 AI 和外部 CLI，各含 type、cli_command、strengths、concurrency。PM 路由任务时参考此配置。外部 CLI 通过 `common-cli-dispatch` Skill 调用（不再使用 MCP Tool 直接调用）。
 
 ## 变更影响
 

@@ -119,25 +119,26 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 按以下优先级判定风险等级（**高风险规则优先于白名单**）：
 
 1. **强制高风险检查**（来自 `spec://guides/review-standards`）：
-   - `.agents/` 下 Skill/Workflow 变更 → 🔴 高风险（无论是否匹配白名单）
-   - 修改公共接口 / 涉及安全逻辑 / 跨模块依赖 → 🔴 高风险
-   - 架构变更 / 数据迁移 / 破坏性变更 → ⚫ 极高风险
-2. **白名单匹配**：上一步未命中高风险，且任务 `file_scope` 中**所有文件**均属于 `routing.low_risk_whitelist` 中的变更类型 → 🟢 低风险
+   - `.agents/` 下 Skill/Workflow 变更 → 🔴 B 级（无论是否匹配白名单）
+   - 修改公共接口 / 涉及安全逻辑 / 跨模块依赖 → 🔴 B 级
+   - 架构变更 / 数据迁移 / 破坏性变更 → ⚫ A 级
+2. **白名单匹配**：上一步未命中高风险，且任务 `file_scope` 中**所有文件**均属于 `routing.auto_downgrade_whitelist` 中的变更类型 → 🟢 D/E 级
    - 混合类型（白名单 + 非白名单）→ 跳过白名单，进入影响面判断
 3. **影响面判断**：以上均不适用时：
-   - 仅影响 1-2 个文件，无跨模块依赖 → 🟡 中风险
-   - 其他 → 🔴 高风险
+   - 仅影响 1-2 个文件，无跨模块依赖 → 🟡 C 级
+   - 其他 → 🔴 B 级
 
 #### 2. 审查策略选择
 
-根据 `routing.risk_review_mapping` 映射（key 使用 `low/medium/high/critical` 对应 🟢/🟡/🔴/⚫）：
+根据 `routing.grade_review_mapping` 映射（ABCDE → CLI 审核数量）：
 
-| 风险等级 | config key | 策略                     | 说明                               |
-| -------- | ---------- | ------------------------ | ---------------------------------- |
-| 🟢 低    | `low`      | `pm_self_review`         | PM 自审，跳过代码风格细节          |
-| 🟡 中    | `medium`   | `single_cli_review`      | 1 个外部 CLI 审查                  |
-| 🔴 高    | `high`     | `dual_cli_review`        | 2 个外部 CLI 并行审查              |
-| ⚫ 极高  | `critical` | `dual_cli_plus_internal` | 2 个外部 CLI + PM 独立验证关键路径 |
+| ABCDE 等级 | CLI 数量 | 说明                                        |
+| ---------- | -------- | ------------------------------------------- |
+| E          | 0        | 无需审查                                    |
+| D 🟢       | 0        | PM 自审，跳过代码风格细节                   |
+| C 🟡       | 1        | 1 个外部 CLI 审查                           |
+| B 🔴       | 2        | 2 个外部 CLI 并行审查                       |
+| A ⚫       | 3        | 3 个外部 CLI 并行审查 + PM 独立验证关键路径 |
 
 #### 3. 审查者匹配
 
@@ -167,12 +168,13 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 ### Step 4.6：规划产出外部 CLI 审核
 
 > 风险等级 🟡 以上的任务，实施计划必须经外部 CLI 审核后再呈现用户。
+> **调用方式**：通过 `common-cli-dispatch` Skill 的标准流程调用（禁止直接 `run_command` 调 CLI）。
 
 1. **检查风险等级**：Step 4.5 判定为 🟡 中、🔴 高或 ⚫ 极高时触发本步骤；🟢 低风险跳过
 2. **准备审核材料**：将约束集 + 验收标准 + 文件范围整理为结构化摘要
-3. **调用外部 CLI 审核**：
-   - 🟡 中风险 → 调用 1 个 CLI（首选匹配）
-   - 🔴 高 / ⚫ 极高 → 调用 2 个 CLI 并行审核
+3. **激活 `common-cli-dispatch` Skill 调用外部 CLI**：
+   - ABCDE 等级映射：🟡 C 级 → `--backend codex`（1 个 CLI），🔴 B 级 → `--backend codex,claude`（2 个 CLI），⚫ A 级 → `--backend codex,claude,gemini`（3 个 CLI）
+   - cli-runner.js 自动管控子进程（超时、降级、并行）
 4. **审核关注点**：
    - 约束集是否有遗漏或冲突
    - 验收标准是否可测量、无歧义
@@ -190,8 +192,8 @@ PM 完成 `pm-brainstorm`（需求澄清 + 设计确认）后，**必须**激活
 ```markdown
 ## 路由配置
 
-- 风险等级：{low/medium/high/critical}（{🟢/🟡/🔴/⚫}）
-- 审查策略：{pm_self_review/single_cli_review/dual_cli_review/dual_cli_plus_internal}
+- ABCDE 等级：{A/B/C/D/E}（{⚫/🔴/🟡/🟢/—}）
+- CLI 审核数量：{0/1/2/3}
 - 推荐审查者：{CLI 名称列表}
 - 执行模式：{独立执行者/组长+组员}
 ```

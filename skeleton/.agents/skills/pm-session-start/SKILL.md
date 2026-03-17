@@ -31,7 +31,7 @@ requires: null
      > config.yaml 中版本号 ({config_version}) 与 .easyai-version ({file_version}) 不一致，建议更新。
 
 3. **其他配置字段提示**（非阻断）
-   - `external_cli` 为空 → 提示可填写，但不阻断
+   - `team.roster` 中无 `type: external_cli` 条目 → 提示可添加外部 CLI 配置，但不阻断
    - `core_rules` 为空 → 提示可填写，但不阻断
    - `mcp_enforced` 为空 → 提示可填写，但不阻断
    - `features` 为空 → 提示可填写，但不阻断

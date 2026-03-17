@@ -59,7 +59,7 @@ PM 接收到用户新需求时，**必须**先激活本 Skill 完成需求澄清
 
 对推荐方案自评 ABCDE 工作重要性等级（参照 `common-skill-eval.md` Step 3 的定义）：
 
-- **A/B 级方案**：必须经外部 CLI 审核后再呈现用户（参照 `pm-task-planning` Step 4.6 的审核流程）
+- **A/B 级方案**：必须经外部 CLI 审核后再呈现用户（通过 `common-cli-dispatch` Skill 调用，参照 `pm-task-planning` Step 4.6 的审核流程）
 - **C 级及以下**：可直接呈现用户
 
 > 自评结果附在方案呈现中，供用户参考。

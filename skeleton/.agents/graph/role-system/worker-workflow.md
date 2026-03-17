@@ -12,6 +12,7 @@ depends_on:
   - capability/quality-control
   - capability/context-management
   - capability/knowledge-management
+  - capability/external-cli-dispatch
   - data-layer/journal-system
   - data-layer/spec-system
   - foundation/git-integration
@@ -37,6 +38,7 @@ skill_chain:
       - worker-check
   conditional_branches:
     - worker-debug
+    - common-cli-dispatch # Worker 需要外部 CLI 审查时激活
   common_skills:
     - worker-session-close
 files:

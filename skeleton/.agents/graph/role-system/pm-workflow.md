@@ -13,6 +13,7 @@ depends_on:
   - capability/context-management
   - capability/knowledge-management
   - capability/framework-governance
+  - capability/external-cli-dispatch
   - data-layer/config-management
   - data-layer/journal-system
   - foundation/git-integration
@@ -29,6 +30,7 @@ skill_chain:
     - worker-debug # PM 收到 L3 blocker 后可能需要介入调试分析
     - common-spec-update
     - pm-milestone-archive
+    - common-cli-dispatch # PM 需要外部 CLI 审查时激活
   common_skills:
     - pm-session-close
 files:
@@ -47,6 +49,8 @@ files:
     role: 框架自迭代（知识检索 + 影响分析 + 安全修改 + 知识库自更新）
   - path: .agents/skills/common-spec-update/SKILL.md
     role: 规范动态演进（变更前快照 + 影响分析 + 用户确认门）
+  - path: .agents/skills/common-cli-dispatch/SKILL.md
+    role: 外部 CLI 统一调度（ABCDE 闸门 + cli-runner.js 调度引擎）
   - path: .agents/skills/pm-milestone-archive/SKILL.md
     role: 进度归档（废弃文档清理、冷藏区转移、全局环境清理与阶段总结）
   - path: .agents/skills/pm-session-close/SKILL.md
