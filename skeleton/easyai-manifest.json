@@ -1,6 +1,6 @@
 {
-  "version": "3.11.0",
-  "generatedAt": "2026-03-17T00:18:00.066Z",
+  "version": "3.12.0",
+  "generatedAt": "2026-03-17T00:54:44.028Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "d772bac88e4ca3054ae81bac0da8d02e6fd9c3a6e2d7b01b7f40bdf9797e47e0"
@@ -15,7 +15,7 @@
       "hash": "af1bfc485b1a4524e52c5fe7c2c1de225fc397f5e1b069e5f9d375937671098c"
     },
     ".agents/graph/capability/framework-governance.md": {
-      "hash": "6d7a7119b89a8651241583f4ca63c824a4df71ce1b41587a901685253dfdb975"
+      "hash": "35b981b13bf573a7f1367ef07ef4dad0332c5ecb3c0920243cf023a5c33fc719"
     },
     ".agents/graph/capability/knowledge-management.md": {
       "hash": "45b060e8bc881205e94702140543aeb837f27eea5b77b02a0ed3b596aa2715ee"
@@ -89,6 +89,9 @@
     ".agents/rules/coding-standards.md": {
       "hash": "b3e3d04a1a80ac78fabf5d6566e02f51f8c68e07d32e9a4fa376e38ae9ba0384"
     },
+    ".agents/rules/framework-edit-guard.md": {
+      "hash": "79cb7397d0bbae0fe9bbd7e463f52011638df78634b7fe43ed0d1e90f9cfec83"
+    },
     ".agents/rules/project-identity.md": {
       "hash": "42f56e40168cd2528b72a7d99e862be806e1af0a89e609b51fdad42cb8c06758"
     },
@@ -102,7 +105,7 @@
       "hash": "46f927ddb38612e60a6c02b452a11d59cfa9693463f59e3920a216215b1cbe3d"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "b300e634d19801a7372716789e29f882f9da79b75d5a381d7af1524105eb900c"
+      "hash": "2b0c21318d8d2d2a35530b7c1f167f94b47a7606b2d9825173cabe331b0f2ae2"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
