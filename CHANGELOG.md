@@ -2,6 +2,14 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.17.1] - 2026-03-18
+
+### 修复
+
+- **`framework_check` 报告所有目录不存在** — `framework-tools.ts` 和 `lib/init.js` 中 `REQUIRED_DIRS` 仍引用已废弃的 `.docs/requirements` 和 `.docs/guides`，更新为 `.docs/notes` / `.docs/refs` / `.docs/design`
+- **`FRAMEWORK_VERSION` 常量未同步** — `framework-tools.ts` 和 `lib/init.js` 中版本停留在 3.16.1，更新为 3.17.1
+- **`REQUIRED_FILES` 引用旧 Workflow 文件名** — `pm.md` / `worker.md` 已在 v3.13.0 重命名为 `actor-pm.md` / `actor-worker.md`
+
 ## [3.17.0] - 2026-03-18
 
 ### 新增
