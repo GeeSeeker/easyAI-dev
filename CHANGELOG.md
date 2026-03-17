@@ -2,6 +2,26 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.18.2] - 2026-03-18
+
+### 修复
+
+- **文档交叉引用全量修复（T016）** — 20+ 个文件中约 35 处过期斜杠命令引用修正
+  - `/worker` → `/actor-worker`、`/pm` → `/actor-pm`、`pm.md` → `actor-pm.md` 等
+  - 覆盖 Workflows、Skills、Rules、图谱节点、用户指南
+
+### 改进
+
+- **升级保护可扩展化（T015）** — `generate-manifest.js` 从硬编码改为 `MERGE_MODE_MAP` 查表机制
+- **图谱 `upgrade` 标注推广** — 4 个代表性节点（manifest-mechanism、framework-governance、pm-workflow、spec-system）显式标注 `upgrade: replace`
+
+## [3.18.1] - 2026-03-18
+
+### 修复
+
+- **FRAMEWORK_VERSION 全端同步** — `framework-tools.ts` 和 `init.js` 常量从 3.17.4 同步到 3.18.1
+- **config.yaml 升级保护** — `generate-manifest.js` 新增 `merge_mode: append`；`framework-tools.ts` / `init.js` 新增 `appendMissingSections()` 函数（YAML 顶层段落智能追加）
+
 ## [3.18.0] - 2026-03-18
 
 ### 新增
