@@ -1,7 +1,7 @@
 # 知识分类规范
 
 > **版本**：1.1.0
-> **适用场景**：会话收尾（`common-session-close`）和任务验收（`pm-task-review`）时触发知识沉淀
+> **适用场景**：会话收尾（`pm-session-close` / `worker-session-close`）和任务验收（`pm-task-review`）时触发知识沉淀
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## 知识沉淀触发规则（F06）
 
-`common-session-close` 在 Step 4（知识沉淀检查）时，按以下清单逐项检查：
+`pm-session-close` / `worker-session-close` 在知识沉淀检查步骤中，按以下清单逐项检查：
 
 ### 自检清单
 
@@ -56,13 +56,13 @@
 
 ## 所有权分工
 
-| 场景                     | 主要负责 Skill                             | 说明                                             |
-| ------------------------ | ------------------------------------------ | ------------------------------------------------ |
-| Worker 提交的任务产物    | `pm-task-review` Stage 3                   | PM 验收时扫描 Worker Artifacts                   |
-| 非任务会话或 PM 自身会话 | `common-session-close` Step 4              | 收工时兜底检查                                   |
-| PM 验收后的收工          | `common-session-close` Step 4 跳过已沉淀项 | 避免重复提示：若 Stage 3 已处理，Step 4 自动跳过 |
+| 场景                     | 主要负责 Skill                              | 说明                                      |
+| ------------------------ | ------------------------------------------- | ----------------------------------------- |
+| Worker 提交的任务产物    | `pm-task-review` Stage 3                    | PM 验收时扫描 Worker Artifacts            |
+| 非任务会话或 PM 自身会话 | `pm-session-close` 知识沉淀步骤             | 收工时兜底检查                            |
+| PM 验收后的收工          | `pm-session-close` 知识沉淀步骤跳过已沉淀项 | 避免重复提示：若 Stage 3 已处理，自动跳过 |
 
-> **防重复规则**：`common-session-close` 在执行 Step 4 时，检查本会话中 `pm-task-review` Stage 3 是否已处理过沉淀。
+> **防重复规则**：`pm-session-close` 在执行知识沉淀步骤时，检查本会话中 `pm-task-review` Stage 3 是否已处理过沉淀。
 >
 > - Stage 3 已沉淀的内容 → Step 4 跳过这些项
 > - Stage 3 审查后**用户拒绝沉淀**的内容 → Step 4 也跳过（尊重用户已做出的决定，不重复提示）

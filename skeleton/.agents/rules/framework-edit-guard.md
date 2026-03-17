@@ -24,6 +24,12 @@ description: Framework edit guard — mandatory graph consultation and knowledge
 
 > 已通过 Skill 流程（如 `pm-framework-evolve` Step 0）完成加载的，不需要重复执行。
 
+## 约束 1b：修改后检查图谱引用
+
+修改 `.agents/`、`.trellis/spec/`、`.trellis/config/`、`packages/` 下的文件**完成后**，检查被修改文件是否被任何图谱节点的 `files` 字段引用。如被引用，提醒需同步更新该节点（如文件路径变更、职责变更等）。
+
+> 此约束与约束 3（图谱必须同步更新）互补：约束 1 是修改**前**查图谱了解全貌，约束 1b 是修改**后**检查图谱是否需要同步。
+
 ## 约束 2：修改 Skill 前必须读 skill-creator
 
 修改 `.agents/skills/` 下任何 SKILL.md 前，**必须**先读取 `skill-creator` Skill 的 SKILL.md。

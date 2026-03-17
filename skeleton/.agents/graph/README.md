@@ -36,12 +36,26 @@ Layer 0 · 基础设施层    MCP 传输、配置加载、文件系统、Git 集
 | 找某个功能的实现文件         | 读该节点的 `files:` 字段           |
 | 分析依赖链                   | 从目标节点沿 `depends_on` 向下追溯 |
 
+### 何时查图谱
+
+图谱已接入日常 Workflow，以下场景会自动或半自动触发图谱查询：
+
+| 触发场景                | 触发方式                   | 说明                                     |
+| ----------------------- | -------------------------- | ---------------------------------------- |
+| 开发类请求评估          | `common-skill-eval` 1a     | 框架请求时读 `_index.md` 辅助 Skill 评估 |
+| 修改框架文件前          | `framework-edit-guard`     | 必须先查图谱了解影响范围                 |
+| 修改框架文件后          | `framework-edit-guard` 1b  | 检查图谱 `files` 引用是否需要同步        |
+| Worker 读取任务上下文时 | `actor-worker` Step 4      | 图谱条目在 context.jsonl 中时自动加载    |
+| Worker 收工时           | `worker-session-close` 3.5 | git diff 与图谱交叉比对报警              |
+| 发布前                  | `publish.md` Step 0.5      | 图谱一致性校验                           |
+
 ## 如何维护
 
 ### 更新时机
 
 1. **框架迭代完成后**（`pm-framework-evolve` Step 6）— 每次修改框架文件后检查并更新关联节点
 2. **用户自主魔改后** — 添加/删除 Skills、Rules 后手动更新对应节点
+3. **Worker 收工报警时** — `worker-session-close` Step 3.5 报告图谱过期后更新
 
 ### 更新范围
 
@@ -68,7 +82,18 @@ children: # 子特性列表
 files: # 实现文件清单
   - path: .agents/...
     role: 说明
+    upgrade: replace # 可选，升级策略
   - tool: tool_name # MCP 工具用名称描述
     role: 说明
 ---
 ```
+
+#### `upgrade` 字段（可选）
+
+`files` 条目中的可选字段，为 MCP 升级保护功能提供元数据约定：
+
+| 值         | 含义                                                 |
+| ---------- | ---------------------------------------------------- |
+| `replace`  | 升级时整体替换（默认行为，不指定时等价于 replace）   |
+| `append`   | 升级时追加新内容、保留用户已有内容（如 config.yaml） |
+| `preserve` | 升级时完全保留用户版本，不覆盖（用户自定义文件）     |

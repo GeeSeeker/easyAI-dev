@@ -31,7 +31,7 @@ easyAI-dev/
 
 ## 知识获取
 
-- **框架知识图谱**：`.agents/graph/` — **框架架构的单一事实来源**。修改或设计框架功能前**必须**先查阅（详见 `framework-edit-guard` Rule）
+- **框架知识图谱**：`.agents/graph/` — **框架架构的单一事实来源**。已接入日常 Workflow（`common-skill-eval` / `framework-edit-guard` / `worker-session-close` / `publish`），修改或设计框架功能前**必须**先查阅（详见 `framework-edit-guard` Rule）
 - **框架参考知识**：激活 `pm-framework-evolve` Skill → 读取 `references/` 目录
 - **项目规范**：`.trellis/spec/` 目录（通过 `spec://` 资源访问）
 - **框架配置**：`.trellis/config/config.yaml`

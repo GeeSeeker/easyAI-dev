@@ -85,6 +85,7 @@ requires: null
   - {task_id}: {title} [{status}]
   - ...
 - **项目规范**: backend({n}) / frontend({n}) / guides({n}) / general({n}) — {有 SPEC_GAP 则标注}
+- **框架能力概览**: {层数}层 × {节点数}特性，详见 `.agents/graph/_index.md`
 
 ## 上次会话摘要
 

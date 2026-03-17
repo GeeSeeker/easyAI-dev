@@ -28,6 +28,7 @@ children:
 files:
   - path: .trellis/config/config.yaml
     role: 框架配置文件（完整结构定义）
+    upgrade: append
 ---
 
 # 配置数据管理
