@@ -65,10 +65,10 @@ files:
 
 知识内容的分类路由体系（由 `spec://general/knowledge-categories` 定义）：
 
-- **DESIGN** → `.docs/design/`（设计文档）
-- **GUIDE** → `.docs/guides/`（使用指南）
+- **DESIGN** → `.docs/design/features/`（特性架构蓝图）
+- **PLANNING** → `.docs/design/planning/`（规划与里程碑总结）
 - **NOTE** → `.docs/notes/`（临时备忘）
-- **REQ** → `.docs/requirements/`（需求文档）
+- **REF** → `.docs/refs/`（外部参考资料）
 
 ## 变更影响
 

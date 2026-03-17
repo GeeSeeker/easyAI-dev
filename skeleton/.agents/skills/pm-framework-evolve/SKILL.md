@@ -29,13 +29,13 @@ PM 角色在以下场景**必须**激活本 Skill：
 <!-- 本节由 /publish 流程自动同步，请勿手动修改 -->
 <!-- last_synced: 2026-03-16 -->
 
-| 组件          | 数量 | 列表                                                                                                                                                                                                          |
-| ------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Skills        | 12   | pm-session-start, pm-brainstorm, pm-task-planning, pm-task-review, pm-framework-evolve, pm-session-close, worker-implement, worker-lead, worker-check, worker-debug, worker-session-close, common-spec-update |
-| Workflows     | 2+1  | pm.md, worker.md（🦴骨架）+ publish.md（🔧开发专属）                                                                                                                                                          |
-| Rules         | 5+1  | project-identity.md, anti-hallucination.md, coding-standards.md, skill-transparency.md, framework-edit-guard.md（🦴骨架）+ framework-dev-mode.md（🔧开发专属）                                                |
-| MCP Tools     | 23   | 详见图谱 `foundation/mcp-transport.md` → MCP Tools 节点                                                                                                                                                       |
-| MCP Resources | 6    | trellis://status, trellis://journal/latest, trellis://spec/{c}/{n}, spec://{c}/{n}, trellis://tasks/{id}/context, trellis://tasks/{id}/subtasks/{sid}/context                                                 |
+| 组件          | 数量 | 列表                                                                                                                                                                                                                                |
+| ------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Skills        | 13   | pm-session-start, pm-brainstorm, pm-task-planning, pm-task-review, pm-framework-evolve, pm-milestone-archive, pm-session-close, worker-implement, worker-lead, worker-check, worker-debug, worker-session-close, common-spec-update |
+| Workflows     | 2+1  | pm.md, worker.md（🦴骨架）+ publish.md（🔧开发专属）                                                                                                                                                                                |
+| Rules         | 5+1  | project-identity.md, anti-hallucination.md, coding-standards.md, skill-transparency.md, framework-edit-guard.md（🦴骨架）+ framework-dev-mode.md（🔧开发专属）                                                                      |
+| MCP Tools     | 23   | 详见图谱 `foundation/mcp-transport.md` → MCP Tools 节点                                                                                                                                                                             |
+| MCP Resources | 6    | trellis://status, trellis://journal/latest, trellis://spec/{c}/{n}, spec://{c}/{n}, trellis://tasks/{id}/context, trellis://tasks/{id}/subtasks/{sid}/context                                                                       |
 
 ### 关键路径速查
 

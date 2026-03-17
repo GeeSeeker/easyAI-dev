@@ -94,17 +94,16 @@ your-project/
 ├── .agents/            ← AI 角色层
 │   ├── rules/          │  4 条始终生效的规则
 │   ├── workflows/      │  PM + Worker 工作流
-│   └── skills/         │  11 个能力模块
+│   └── skills/         │  13 个能力模块
 ├── .trellis/           ← 数据持久层
 │   ├── config/         │  框架配置
 │   ├── spec/           │  项目规范
 │   ├── tasks/          │  任务管理
 │   └── workspace/      │  开发者记忆（journal）
-├── .docs/              ← 用户文档空间
-│   ├── requirements/   │  需求文档
-│   ├── design/         │  设计方案
-│   ├── guides/         │  使用指南
-│   ├── notes/          │  临时笔记
+├── .docs/              ← 意图与蓝图空间
+│   ├── notes/          │  草稿场区（user-/pm- 前缀）
+│   ├── refs/           │  外部参考资料库
+│   ├── design/         │  架构与规划中心（planning/ + features/）
 │   └── archive/        │  文档归档
 └── ...                 ← 你的项目代码
 ```

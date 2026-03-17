@@ -11,16 +11,14 @@ relates_to:
   - user-experience/requirement-delivery
   - user-experience/session-management
 files:
-  - path: .docs/requirements/
-    role: 用户需求文档存放目录（用户 → AI）
+  - path: .docs/refs/
+    role: 外部参考资料存放目录
   - path: .docs/design/
-    role: 设计文档存放目录（AI ↔ 用户协作）
-  - path: .docs/guides/
-    role: 使用指南存放目录（AI → 用户）
+    role: 架构与规划中心（planning/ + features/）
   - path: .docs/notes/
-    role: 临时文档存放目录（用户 ↔ AI）
+    role: 草稿场区（user-/pm- 前缀）
   - path: .docs/archive/
-    role: 归档目录（作废或不再适配的历史文档）
+    role: 就地养老式归档目录
   - path: .agents/skills/pm-brainstorm/SKILL.md
     role: 设计文档产出（brainstorm → .docs/design/）
   - path: .agents/skills/worker-check/SKILL.md
@@ -39,21 +37,21 @@ files:
 
 框架在以下环节自动产出文档：
 
-1. **需求阶段**：PM brainstorm 产出设计文档 → `.docs/design/`
+1. **需求阶段**：PM brainstorm 产出设计文档 → `.docs/design/features/`
 2. **执行阶段**：Worker 产出验证报告 → 任务目录 `dev/`
 3. **收尾阶段**：session-close 汇总工作记录 → journal
-4. **用户主动**：用户可随时将需求文档放入 `.docs/requirements/`
+4. **用户主动**：用户可随时将参考资料放入 `.docs/refs/`
 
 ### 文档流向
 
 ```text
-用户需求 → .docs/requirements/
+参考资料 → .docs/refs/
                 ↓
-PM brainstorm → .docs/design/
+PM brainstorm → .docs/design/features/
                 ↓
 Worker 实现 → 任务目录 dev/（report.md + verification.md）
                 ↓
-PM 验收后 → 归档或更新 .docs/guides/
+PM 验收后 → 完工打 [DONE] 标记 / 废弃移入 archive/
 ```
 
 ### 文档归档
@@ -62,13 +60,13 @@ PM 验收后 → 归档或更新 .docs/guides/
 
 ## `.docs/` 目录结构
 
-| 子目录         | 信息流向  | 用途                             |
-| -------------- | --------- | -------------------------------- |
-| `requirements` | 用户 → AI | 用户原始需求文档                 |
-| `design`       | AI ↔ 用户 | PM 与用户协作的设计文档          |
-| `guides`       | AI → 用户 | 面向用户的使用指南和操作手册     |
-| `notes`        | 用户 ↔ AI | 临时文档（调研笔记、讨论记录等） |
-| `archive`      | —         | 各目录中作废/不再适配的历史文档  |
+| 子目录             | 用途                                    |
+| ------------------ | --------------------------------------- |
+| `notes/`           | 草稿场区（user-/pm- 前缀）              |
+| `refs/`            | 外部参考资料库                          |
+| `design/planning/` | 长线规划、Roadmap、里程碑总结           |
+| `design/features/` | 特性架构蓝图                            |
+| `archive/`         | 就地养老式归档（各目录内配套 archive/） |
 
 ## 变更影响
 

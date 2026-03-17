@@ -1,6 +1,6 @@
 {
-  "version": "3.16.1",
-  "generatedAt": "2026-03-17T14:06:19.392Z",
+  "version": "3.17.0",
+  "generatedAt": "2026-03-17T16:31:27.299Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "d772bac88e4ca3054ae81bac0da8d02e6fd9c3a6e2d7b01b7f40bdf9797e47e0"
@@ -18,7 +18,7 @@
       "hash": "25101f2aa0ea6a39f9fa4de0c88f79c28584ceec92319f616088e29fa4acf012"
     },
     ".agents/graph/capability/knowledge-management.md": {
-      "hash": "45b060e8bc881205e94702140543aeb837f27eea5b77b02a0ed3b596aa2715ee"
+      "hash": "dfce7b641d9be3cad1e75f3f3d9ceec0577c829759ebcf90d1fc11400ec6ab24"
     },
     ".agents/graph/capability/quality-control.md": {
       "hash": "0ecc500056fdaafa0dac705a0111483343b2fc1f51158a0a60e08c1ec7cae117"
@@ -48,7 +48,7 @@
       "hash": "b60d83c9ed8334070e475249803deae076a6e1c0e6f6dfc8a931f1616cb1e2b0"
     },
     ".agents/graph/foundation/file-persistence.md": {
-      "hash": "6ea11559d4de630a2dd530e205acb6a16552ef7bc66d96c4593371593f0130fd"
+      "hash": "242443d16bc3d7910912437da70959e3298783bd666d96d28ae10f47456a5271"
     },
     ".agents/graph/foundation/git-integration.md": {
       "hash": "2f8dccd299b70345689cda37c4e6e71ab47882d56eb27889d59db3a6cbdd928a"
@@ -66,7 +66,7 @@
       "hash": "e1e7fb5db0f01246efa2a4ccfc2e86bfbced203bd5083dd58e0679bea25b2226"
     },
     ".agents/graph/role-system/pm-workflow.md": {
-      "hash": "73908da7b9e460e3b4e22c4aef330188a234d6286793f02ddb21eec1656be175"
+      "hash": "9f822fb9210a5d1081a61181e770b6c1d5ca4acea488128f7288045d83b57a41"
     },
     ".agents/graph/role-system/worker-workflow.md": {
       "hash": "8aa524687c5fee342ee821f83d42fa9cc7b60457558dad3fab11db3e616cddb7"
@@ -75,10 +75,10 @@
       "hash": "1d29d1a4498485f1df37398deea5f1b649bb402c8074a4acd3437bf489e8bc04"
     },
     ".agents/graph/user-experience/artifact-pipeline.md": {
-      "hash": "485585bfde55a2c8ac65d201b64833594730274fe30647c313004427d6095fe8"
+      "hash": "97094ab4cb93c4aab96c06c9a0bf280280886d44048aea51a86159bdc1876cef"
     },
     ".agents/graph/user-experience/requirement-delivery.md": {
-      "hash": "191d2e58533830462292f96896a6d7ffc55799acd8d342328c5b3dadcf3b8d0b"
+      "hash": "2940554efea2b70501079c91f5e821221b60390fc8f2b39a314feca39da56b9f"
     },
     ".agents/graph/user-experience/session-management.md": {
       "hash": "6c0e69d24483a843bfc7ba85770910a701c633fcfe42bc8865ef4547a5124b1e"
@@ -93,7 +93,7 @@
       "hash": "42d0b700e29df668ef38e20f3d89ef4c7dd831b4948804cc17591c0dd5522127"
     },
     ".agents/rules/project-identity.md": {
-      "hash": "042a9d24fb679a756b7ffb17f539cfb87bea629d69d3c40119f9da41bf51490b"
+      "hash": "0ed61c8b61ea75b7f2bf6066e1506c0ca56cdd15531df12694cd544dc8ab3de7"
     },
     ".agents/rules/skill-eval-guard.md": {
       "hash": "d3aa0b5aaeb34549d9b30dc97b9994e35b511994137d8bdaec985e2948db7f78"
@@ -108,7 +108,7 @@
       "hash": "8109e1039064194967677f1e677bba2e86f458bdfcffc7e68f2b244941eeb270"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "2af552193cc3e5b735fac7b8042af4027030a39662ebcdf9702bfa761fa4b7dd"
+      "hash": "2aaddf36d8030cce63e9c9e67755dc58b0eaca718247078f64628a56cfcdd6d9"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
@@ -116,8 +116,11 @@
     ".agents/skills/pm-framework-evolve/resources/changelog-entry-template.md": {
       "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
     },
+    ".agents/skills/pm-milestone-archive/SKILL.md": {
+      "hash": "c69e71eb1be2b69cfc3838e0dea967e700644d630d5f87ab0b1872dfd9a44448"
+    },
     ".agents/skills/pm-session-close/SKILL.md": {
-      "hash": "823f17174b10eb04e52dd7bfad33d6806af8c8d195ba70677103d09a890eb493"
+      "hash": "1713a5e28d5597601af9b36bea336264901cb10b7a6e68b62d43d4ccbe923a02"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
       "hash": "a77913f99512e584ea04861d17f5fbf6f01c425066bb32ac5f5147e92f9871fa"
@@ -126,7 +129,7 @@
       "hash": "092c6d4415b83d3d0624c67e7eed51f489d656d789d1574808fee115fc07c94e"
     },
     ".agents/skills/pm-task-review/SKILL.md": {
-      "hash": "524e8cb25fae74fc30d6b70538b88b125f17795ea34fac57cc6e8632ab34c0a3"
+      "hash": "edda2e779c7f45f9cd6d57bf0eeff75dbb6994b5c77e24acfb03fba553b8afe2"
     },
     ".agents/skills/worker-check/SKILL.md": {
       "hash": "bcf75fa721b536902389011223238a2ac796a270ec5f342074d64b44d9e33e4d"
@@ -144,13 +147,13 @@
       "hash": "dbeef2d6ca7aa567cc413228f4f137b47679ce1eae24155d31930e355eafb530"
     },
     ".agents/workflows/actor-pm.md": {
-      "hash": "fc350262de32d6ab63039f6e8c8bd644f0ecfd48183fbd9210436fe03bdd99ef"
+      "hash": "5c64e5e05a663f8ab5e8edffc88689309637d1afd07a2ee5e3a384b79fbf1442"
     },
     ".agents/workflows/actor-worker.md": {
       "hash": "0a7b6c478a46c68f9c460d1a12582439718662a172fe0fb450bf4d6714db8c2b"
     },
     ".agents/workflows/common-skill-eval.md": {
-      "hash": "f793a79b5ed1f7aedc97aa9c6123d544b02be75ec51677f6d416aa75b46b5868"
+      "hash": "5775d9922026b0b749ec12a5b667cc1cfb9498e883df2d8682de701bca6e7909"
     },
     ".agents/workflows/worker-quick-fix.md": {
       "hash": "ce607552ed39ab759cc55c6635cb441dbe3cde529156adc802c2281a7f04209e"
@@ -159,13 +162,10 @@
       "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
     },
     ".docs/README.md": {
-      "hash": "bb979346956d6d753d44519a533e634429c73d9e72895920b5861e29a3808ddb"
-    },
-    ".docs/guides/ide-setup.md": {
-      "hash": "1522ece7a329e86ff8df4d05b235c8ce19321713f9981e7bf2e945892f2578a0"
+      "hash": "d7cf9fc43d96e4c431e822d3204f60d80eac2ae4eeb2bd1adde3df4f0656c82d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "ae040a1e4524eca9e53dc17ea6378cac79a081563bbd5f0204e2064948c650d6"
+      "hash": "af1158e7dd280736e1d01c88f022be34eb3b0e42d575a4dcca15c9c111dca782"
     },
     ".trellis/spec/general/adr-template.md": {
       "hash": "c03b93626ce45883947967fa23a778192ba5310dd4c02c9340352835af3b2e87"

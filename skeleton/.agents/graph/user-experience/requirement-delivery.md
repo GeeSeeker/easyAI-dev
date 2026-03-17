@@ -21,10 +21,10 @@ files:
     role: 需求 → 约束集任务的转化
   - path: .agents/skills/pm-task-review/SKILL.md
     role: 成果验收（三阶段审查）
-  - path: .docs/requirements/
-    role: 用户需求文档存放目录
+  - path: .docs/refs/
+    role: 外部参考资料存放目录
   - path: .docs/design/
-    role: AI 与用户协作的设计文档存放目录
+    role: AI 与用户协作的设计文档存放目录（planning/ + features/）
 ---
 
 # 需求交付闭环

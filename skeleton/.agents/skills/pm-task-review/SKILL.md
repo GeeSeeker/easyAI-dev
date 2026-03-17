@@ -181,7 +181,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
    | Artifacts 类型           | 知识分类 | 默认沉淀目标                     |
    | ------------------------ | -------- | -------------------------------- |
-   | `walkthrough.md`         | `GUIDE`  | `.docs/guides/`                  |
+   | `walkthrough.md`         | `GUIDE`  | `.docs/design/features/`         |
    | `other`（分析报告等）    | `REF`    | `.docs/notes/`                   |
    | 含架构/技术决策          | `ADR`    | `.docs/design/decisions/`        |
    | Bug 修复过程/根因分析    | `FIX`    | `.docs/notes/`                   |

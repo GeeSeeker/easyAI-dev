@@ -28,6 +28,7 @@ skill_chain:
   conditional_branches:
     - worker-debug # PM 收到 L3 blocker 后可能需要介入调试分析
     - common-spec-update
+    - pm-milestone-archive
   common_skills:
     - pm-session-close
 files:
@@ -45,6 +46,8 @@ files:
     role: 框架自迭代（知识检索 + 影响分析 + 安全修改 + 知识库自更新）
   - path: .agents/skills/common-spec-update/SKILL.md
     role: 规范动态演进（变更前快照 + 影响分析 + 用户确认门）
+  - path: .agents/skills/pm-milestone-archive/SKILL.md
+    role: 进度归档（废弃文档清理、冷藏区转移、全局环境清理与阶段总结）
   - path: .agents/skills/pm-session-close/SKILL.md
     role: PM 会话收尾（汇总 + 知识沉淀 + journal + Git 提交 + Push 确认 + 恢复指引）
   - tool: project_status
@@ -81,6 +84,7 @@ PM 工作流的标准路径为线性 Skill 链，每个 Skill 的产出是下游
 
 - **worker-debug**：PM 收到 Worker 的 L3 blocker 后，可能需要介入分析根因
 - **common-spec-update**：新建或修改 `.trellis/spec/` 下规范文件时激活（运行时数据变更不触发）
+- **pm-milestone-archive**：用户主动要求「进度归档」或大阶段结束时激活。执行废弃隔离、冷区转移与阶段总结报告。
 
 ### 通用 Skill（common_skills）
 

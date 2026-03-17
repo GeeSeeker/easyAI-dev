@@ -64,13 +64,13 @@ task_append_log({
 按 `spec://general/knowledge-categories` 自检清单逐项检查：
 
 1. **本会话是否做出了架构/技术选型决策？** → 触发 `ADR`：按 `spec://general/adr-template` 创建决策记录
-2. **本会话是否产出了可复用的操作流程？** → 触发 `GUIDE`：沉淀到 `.docs/guides/`
+2. **本会话是否产出了可复用的操作流程？** → 触发 `GUIDE`：沉淀到 `.docs/design/features/`
 3. **本会话是否解决了非显而易见的 Bug？** → 触发 `FIX`：沉淀到 `.docs/notes/`
 4. **本会话是否研究了外部技术并有价值摘要？** → 触发 `REF`：沉淀到 `.docs/notes/`
 5. **有无短期有效的备忘需要记录？** → 触发 `NOTE`：沉淀到 `.docs/notes/`
 6. **本会话是否遇到 MCP/CLI 已知问题？** → 更新 `spec://guides/known-issues`（参照 F44 已知问题库条目模板）
 7. **本会话是否产出了超过 100 行的长文档？** → 主动执行文档简化流程（参照 `spec://guides/doc-simplify`）：
-   - 按 `doc-simplify` 规范创建简化版文件到 `.docs/guides/{原文件名}-简化版.md`
+   - 按 `doc-simplify` 规范创建简化版文件到 `.docs/design/features/{原文件名}-简化版.md`
    - 在源文档顶部添加 `<!-- simplified: 路径 -->` 双向链接
    - 在简化版顶部添加 `<!-- source: 路径 -->` 双向链接
    - 向用户确认是否保留简化版（用户可拒绝）
@@ -91,7 +91,7 @@ task_append_log({
 
    | Artifacts 类型           | 分类    | 默认沉淀目标                     |
    | ------------------------ | ------- | -------------------------------- |
-   | `walkthrough.md`         | `GUIDE` | `.docs/guides/`                  |
+   | `walkthrough.md`         | `GUIDE` | `.docs/design/features/`         |
    | `other`（分析报告等）    | `REF`   | `.docs/notes/`                   |
    | 架构/技术决策            | `ADR`   | `.docs/design/decisions/`        |
    | Bug 修复过程/根因分析    | `FIX`   | `.docs/notes/`                   |

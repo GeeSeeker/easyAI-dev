@@ -24,7 +24,7 @@ files:
   - path: .agents/
     role: AI 角色层根目录（rules/ workflows/ skills/）
   - path: .docs/
-    role: 用户文档空间根目录（requirements/ design/ guides/ notes/ archive/）
+    role: 意图与蓝图空间根目录（notes/ refs/ design/ archive/）
   - path: .directory-map
     role: 用户自定义目录映射（用途声明）
 ---
@@ -54,13 +54,13 @@ AI 角色层的根目录，包含三个子目录：
 
 ### .docs/ 目录体系（docs-directory）
 
-用户文档空间，信息流向清晰：
+意图与蓝图空间，面向人与大局：
 
-- `requirements/` — 用户 → AI（需求文档）
-- `design/` — AI ↔ 用户（设计文档）
-- `guides/` — AI → 用户（使用指南）
-- `notes/` — 双向临时文档
-- `archive/` — 历史文档归档
+- `notes/` — 草稿场区（user-/pm- 前缀，双向临时文档）
+- `refs/` — 外部参考资料库
+- `design/planning/` — 长线规划、Roadmap、里程碑总结
+- `design/features/` — 特性架构蓝图
+- `archive/` — 就地养老式归档
 
 ### 目录映射（directory-map）
 
