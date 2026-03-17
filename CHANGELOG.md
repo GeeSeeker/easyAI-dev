@@ -2,6 +2,28 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.17.0] - 2026-03-18
+
+### 新增
+
+- **`.docs/` 目录结构重构** — 从旧结构（requirements/design/guides/notes/archive）迁移为意图流驱动的新结构（notes/refs/design/archive）
+  - `notes/`：纯草稿场区（user-/pm- 前缀），禁止长期堆积
+  - `refs/`：外部参考资料库（替代原 requirements/）
+  - `design/planning/`：长线项目规划、Roadmap、里程碑总结
+  - `design/features/`：特性架构蓝图
+  - 废弃 `requirements/` 和 `guides/` 目录
+- **`pm-milestone-archive` 新 Skill** — 里程碑进度归档（触发：用户主动要求「进度归档」）
+  - 5 步归档流程：docs 去水 → archive 冷藏区转移 → tmp 彻底清空 → trellis 任务清理 → 里程碑总结报告
+  - PM 工作流新增「场景 F：里程碑归档与大扫除」
+  - `common-skill-eval` 速查清单同步更新
+
+### 变更
+
+- 10+ 个框架文件旧引用全量清理（project-identity / 5 个图谱节点 / pm-session-close / pm-task-review / common-skill-eval / README）
+- 知识分类路由更新：`GUIDE → design/features/`、`REQ → refs/`、新增 `PLANNING` 类别
+- Skills 数量 12 → 13（新增 pm-milestone-archive）
+- 发行版 README.md 项目结构树同步更新
+
 ## [3.16.1] - 2026-03-17
 
 ### 修复
