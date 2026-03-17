@@ -2,6 +2,16 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.15.0] - 2026-03-17
+
+### 新增
+
+- **Phase 3A Skill Description 深度适配** — 12 个 Skill 标准化触发/排除条件
+  - 所有 Skill description 更新为标准格式：`[角色] 动作 — 触发：…排除：…产出：…`
+  - `common-skill-eval.md` 速查清单新增「排除条件」列
+  - `worker-implement` vs `worker-debug` 触发边界明确化（从零编码 vs 已有代码出 Bug）
+  - 评估卡测试：10/10 场景 100% 激活准确率
+
 ## [3.14.0] - 2026-03-17
 
 ### 新增
