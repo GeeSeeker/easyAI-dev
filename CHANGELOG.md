@@ -2,6 +2,19 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.12.0] - 2026-03-17
+
+### 新增
+
+- **P6 框架编辑守卫** — 新 Rule `framework-edit-guard.md`（always_on）
+  - 约束 1：修改框架文件前必须查图谱（覆盖 `.agents/` + `.trellis/spec/` + `.trellis/config/` 全部 6 个路径）
+  - 约束 2：修改 Skill 前必须读 `skill-creator`（目录结构规范 + YAML frontmatter 格式 + 渐进式披露原则）
+  - 解决长对话中 AI 注意力衰减导致的流程合规问题
+
+### 修复
+
+- Rules 计数修正 3+1 → 5+1（补充 `skill-transparency.md` + `framework-edit-guard.md`）
+
 ## [3.11.0] - 2026-03-17
 
 ### 新增
