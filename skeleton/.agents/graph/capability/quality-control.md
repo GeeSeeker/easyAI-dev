@@ -20,6 +20,7 @@ children:
   - systematic-debugging
   - evidence-gate-enforcement
   - review-standards
+  - compliance-hints
 files:
   - path: .agents/skills/worker-implement/SKILL.md
     role: TDD 铁律驱动的编码流程（Red-Green-Refactor 循环、原子步骤、豁免场景）
@@ -39,6 +40,8 @@ files:
     role: 规划反面模式检测（多方案未选择、推迟决策等）
   - tool: spec_validate
     role: 规范文件格式校验（必须字段、SemVer、枚举合法性）
+  - path: packages/mcp-server/src/utils/compliance-hints.ts
+    role: 合规性提示生成器（missing_verification / unresolved_blockers / stale_task 三场景检测）
 ---
 
 # 质量控制
@@ -81,6 +84,16 @@ MCP 层的硬性校验机制。`task_transition` 在转移到 `under_review` 时
 ### 审查标准（review-standards）
 
 PM 验收时的代码质量标准，包括边界情况处理、错误信息质量、可维护性（是否能让他人理解）。审查深度根据风险等级分档：低风险简化检查，高风险双 CLI 并行审查，极高风险附加 PM 独立验证。
+
+### 合规性提示（compliance-hints）
+
+MCP Tool 返回值中附加的间接约束信息。`task_get`、`task_transition`、`task_list`、`project_status` 在返回结果时自动检测三种场景：
+
+1. **missing_verification** — in_progress 状态且无 dev/verification.md
+2. **unresolved_blockers** — blockers/ 目录下有未回复的问题文件
+3. **stale_task** — in_progress 状态且 updated_at 超过 24 小时
+
+属于"间接约束强化"（设计文档 Phase 2），AI 在调用 MCP 工具时持续收到合规性反馈。
 
 ## 变更影响
 

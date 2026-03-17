@@ -33,7 +33,7 @@ files:
   - tool: task_create
     role: 任务创建（生成 ID、创建目录和 task.md）
   - tool: task_get
-    role: 任务详情读取（含 frozen_context 冻结快照）
+    role: 任务详情读取（含 frozen_context 冻结快照 + compliance_hints 合规性提示）
   - tool: task_list
     role: 任务列表查询（支持按 status 过滤）
   - tool: task_transition
