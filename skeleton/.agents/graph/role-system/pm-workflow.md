@@ -80,11 +80,11 @@ PM 工作流的标准路径为线性 Skill 链，每个 Skill 的产出是下游
 非必经但在特定情境下激活的 Skill：
 
 - **worker-debug**：PM 收到 Worker 的 L3 blocker 后，可能需要介入分析根因
-- **common-spec-update**：当需求变更涉及项目规范调整时激活
+- **common-spec-update**：新建或修改 `.trellis/spec/` 下规范文件时激活（运行时数据变更不触发）
 
 ### 通用 Skill（common_skills）
 
-- **pm-session-close**：会话结束时激活，汇总工作、知识沉淀、写入 journal、Git 提交、Push 确认
+- **pm-session-close**：用户说「收工」或会话即将结束时激活（Worker 角色用 worker-session-close）。执行知识沉淀、journal、Git 提交、Push 确认
 
 ## 角色特征
 

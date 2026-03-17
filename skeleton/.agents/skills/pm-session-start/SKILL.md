@@ -1,6 +1,6 @@
 ---
 name: pm-session-start
-description: "[PM] 会话启动 — /pm 触发后由 Workflow 激活。产出项目状态快照。"
+description: "[PM] 会话启动 — 触发：/pm 命令启动新会话。排除：会话已启动或 Worker 角色。产出：项目状态快照。"
 produces: project_snapshot
 requires: null
 ---

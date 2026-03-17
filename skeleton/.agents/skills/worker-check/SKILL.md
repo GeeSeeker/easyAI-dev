@@ -1,6 +1,6 @@
 ---
 name: worker-check
-description: "[Worker] 自检验证 — worker-implement 完成后激活。产出验证报告（verification_report）。"
+description: "[Worker] 自检验证 — 触发：worker-implement 编码完成，提交验收前。排除：编码尚未完成时不激活。产出：验证报告（三标记）。"
 produces: verification_report
 requires: code_with_tests
 ---

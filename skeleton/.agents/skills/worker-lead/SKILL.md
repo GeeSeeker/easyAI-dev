@@ -1,6 +1,6 @@
 ---
 name: worker-lead
-description: "[Worker] 组长编排 — 团队执行模式下激活。拆分子任务、协调组员、审核产出、整合交付。"
+description: "[Worker] 组长编排 — 触发：Worker 以组长角色执行团队任务。排除：独立执行模式或组员角色不激活。产出：子任务分配 + 整合交付报告。"
 produces: integrated_deliverable
 requires: task_with_constraints
 ---

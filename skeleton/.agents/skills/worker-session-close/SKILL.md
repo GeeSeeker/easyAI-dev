@@ -1,6 +1,6 @@
 ---
 name: worker-session-close
-description: "[Worker] 会话收尾 — worker-check 完成后自动衔接执行，或 Worker 中途暂停时手动触发。产出日志条目 + Git 提交元数据。"
+description: "[Worker] 会话收尾 — 触发：worker-check 完成后自动衔接，或中途暂停时手动触发。排除：PM 用 pm-session-close。产出：日志 + Git 提交。"
 produces: journal_entry
 requires: null
 ---

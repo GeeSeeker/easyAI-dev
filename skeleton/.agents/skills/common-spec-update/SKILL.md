@@ -1,6 +1,6 @@
 ---
 name: common-spec-update
-description: "[Common] 规范演进 — 需要更新 .trellis/spec/ 时激活。产出规范文件变更。"
+description: "[Common] 规范演进 — 触发：新建或修改 .trellis/spec/ 下的规范文件。排除：运行时数据变更（tasks/workspace）。产出：规范文件变更。"
 produces: spec_change
 requires: null
 ---

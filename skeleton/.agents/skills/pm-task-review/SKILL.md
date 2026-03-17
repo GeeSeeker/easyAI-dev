@@ -1,6 +1,6 @@
 ---
 name: pm-task-review
-description: "[PM] 任务验收 — Worker 提交验收时激活。产出验收报告（review_report）。"
+description: "[PM] 任务验收 — 触发：任务状态为 under_review。排除：任务未提交验收或仍在执行中。产出：验收报告。"
 produces: review_report
 requires: verification_report
 ---

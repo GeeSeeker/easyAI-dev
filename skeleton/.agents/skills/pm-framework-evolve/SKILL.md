@@ -1,6 +1,6 @@
 ---
 name: pm-framework-evolve
-description: "[PM] 框架查询/迭代 — PM 查询框架知识或修改核心文件时激活。只读路径无产出，迭代路径产出框架变更记录。"
+description: "[PM] 框架查询/迭代 — 触发：查询框架架构或修改 .agents/.trellis/spec/config/ 文件。排除：Worker 角色。产出：只读无产出，迭代产出变更记录。"
 produces: framework_change | null
 requires: null
 ---

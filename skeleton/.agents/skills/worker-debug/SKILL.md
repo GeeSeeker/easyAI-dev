@@ -1,6 +1,6 @@
 ---
 name: worker-debug
-description: "[Worker] 系统性调试 — Bug、测试失败或意外行为时激活。产出根因分析 + 修复方案。"
+description: "[Worker] 系统性调试 — 触发：已有代码出现 Bug、测试失败或意外行为。排除：新功能从零编码（用 worker-implement）。产出：根因分析 + 修复方案。"
 produces: debug_analysis
 requires: null
 ---

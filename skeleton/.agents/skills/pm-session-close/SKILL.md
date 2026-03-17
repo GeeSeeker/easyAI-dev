@@ -1,6 +1,6 @@
 ---
 name: pm-session-close
-description: "[PM] 会话收尾 — PM 说"收工"时激活。执行知识沉淀、日志写入、Skill 审计、Git 提交、Push 确认、恢复指引。仅 PM 角色使用。"
+description: "[PM] 会话收尾 — 触发：用户说「收工」或会话即将结束。排除：Worker 角色（用 worker-session-close）。产出：journal 日志 + Git 提交 + 恢复指引。"
 produces: journal_entry
 requires: null
 ---

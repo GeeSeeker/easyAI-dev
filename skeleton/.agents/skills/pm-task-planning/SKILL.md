@@ -1,6 +1,6 @@
 ---
 name: pm-task-planning
-description: "[PM] 任务规划 — 设计文档确认后激活。产出约束集任务（task_create）。"
+description: "[PM] 任务规划 — 触发：设计文档已确认，需创建执行任务。排除：设计未持久化到 .docs/design/。产出：约束集任务（task_create）。"
 produces: task_with_constraints
 requires: design_document
 ---

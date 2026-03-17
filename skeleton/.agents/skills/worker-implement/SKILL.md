@@ -1,6 +1,6 @@
 ---
 name: worker-implement
-description: "[Worker] TDD 编码 — Worker 开始实现任务时激活。产出代码 + 测试。"
+description: "[Worker] TDD 编码 — 触发：Worker 接到任务开始从零编码。排除：修复已有代码的 Bug（用 worker-debug）。产出：代码 + 测试。"
 produces: code_with_tests
 requires: task_with_constraints
 ---

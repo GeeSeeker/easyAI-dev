@@ -1,6 +1,6 @@
 ---
 name: pm-brainstorm
-description: "[PM] 需求发散 — 用户提出新需求时激活。产出设计文档（.docs/design/）。"
+description: "[PM] 需求发散 — 触发：用户提出新功能需求或变更请求。排除：已有设计文档且用户未要求修改。产出：.docs/design/ 设计文档。"
 produces: design_document
 requires: null
 ---
