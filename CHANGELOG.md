@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.17.5] - 2026-03-18
+
+### 修复
+
+- **图谱数据清洗（T017）** — 全量审计修正 19 个业务节点
+  - 5 处过期路径修正（`worker.md` → `actor-worker.md`、`pm.md` → `actor-pm.md`）
+  - 7 处双向一致性补全（缺失的 `relates_to` 反向引用）
+  - v3.12→v3.17 新增文件已录入图谱（compliance-hints / worker-quick-fix / pm-milestone-archive / worker-session-close / worker-lead）
+
 ## [3.17.1] - 2026-03-18
 
 ### 修复
