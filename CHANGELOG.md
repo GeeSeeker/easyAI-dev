@@ -2,6 +2,22 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.14.0] - 2026-03-17
+
+### 新增
+
+- **AI 合规性增强 Phase 2** — MCP 合规性提示系统
+  - 新增 `compliance-hints.ts`：自动检测三种场景（missing_verification / unresolved_blockers / stale_task）
+  - `task_get()` 返回值新增 `compliance_hints` 字段
+  - `task_transition()` 转移到 `in_progress` / `under_review` 时附加合规性提示
+  - `task_list()` 活跃任务附加 `hint_count` 摘要
+  - `project_status()` 附加 `compliance_hint_total` 汇总
+  - 图谱节点更新：`quality-control.md` 新增 compliance-hints 子特性
+
+### 修复
+
+- **hash-utils resolveUriToPath 崩溃** — `context.jsonl` 使用 `path` 字段时 `entry.uri` 为 undefined，导致 `startsWith()` 崩溃。修复：`uri` 改为可选、新增 null guard、增加 `path` 字段回退解析
+
 ## [3.13.0] - 2026-03-17
 
 ### 新增
