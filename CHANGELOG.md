@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.19.1] - 2026-03-18
+
+### 新增
+
+- **pm-session-close Step 4.5 关联文档状态同步** — 收工时自动检测已完成任务关联的设计文档，建议打 `[DONE]`/`[OBSOLETE]` 标记（需用户确认），遵循 pm-milestone-archive 标记规范
+
 ## [3.19.0] - 2026-03-18
 
 ### 新增
