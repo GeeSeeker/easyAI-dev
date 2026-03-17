@@ -2,6 +2,30 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.19.0] - 2026-03-18
+
+### 新增
+
+- **外部 CLI 统一调度体系（common-cli-dispatch）** — 新增 Skill + 调度引擎
+  - `cli-runner.js`：Node.js 调度引擎，支持多 backend 并行（codex/claude/gemini）、降级策略、超时控制（SIGTERM→5s→SIGKILL）
+  - 3 个 Backend 适配器（codex.js / claude.js / gemini.js）：统一 capability interface
+  - lib 工具链：JSON 流解析（parser.js）、噪音过滤（filter.js）、报告生成（reporter.js）
+  - SKILL.md：ABCDE 分级闸门（A=3/B=2/C=1/D-E=0 CLI）+ 标准调用流程
+  - templates/review.md：统一审查 Prompt 模板
+  - 34 项测试全通过，零 npm 依赖
+- **cli-direct-call-guard Rule** — 禁止 AI 直接 run_command 调用 codex/claude/gemini，必须通过 cli-runner.js
+- **external-cli-dispatch 图谱节点** — 能力层新增，含 serves/depends_on 关系
+
+### 变更
+
+- **ABCDE 分级体系全量统一** — config.yaml `risk_review_mapping(low/medium/high/critical)` → `grade_review_mapping(A/B/C/D/E)`
+  - `low_risk_whitelist` → `auto_downgrade_whitelist`（含 D/E 级自动降级规则）
+  - 清理所有残留旧分级引用（`pm_self_review`/`single_cli_review`/`dual_cli_review`）
+- **config.yaml team.roster** — `mcp_tool` 字段替换为 `cli_command`，移除 `external_cli` 顶级字段
+- **pm-brainstorm / pm-task-planning / common-skill-eval** — CLI 调用方式从 MCP Tool 改为 cli-runner.js
+- **external-cli-guide.md** — 调用模板从 MCP 改为 cli-runner.js
+- Skills 数量 13 → 14（新增 common-cli-dispatch）
+
 ## [3.18.2] - 2026-03-18
 
 ### 修复
