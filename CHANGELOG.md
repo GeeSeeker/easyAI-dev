@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.16.0] - 2026-03-17
+
+### 新增
+
+- **Phase 3B worker-quick-fix 轻量修复 Workflow**
+  - 新增 `worker-quick-fix.md` 轻量工作流（跳过 TDD 流程）
+  - `actor-worker.md` 新增 quick-fix 模式分支拦截
+  - `worker-workflow.md` 图谱节点同步更新
+
 ## [3.15.0] - 2026-03-17
 
 ### 新增
