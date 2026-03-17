@@ -2,7 +2,8 @@
  * context.jsonl 中每条记录的结构
  */
 interface ContextEntry {
-    uri: string;
+    uri?: string;
+    path?: string;
     phase?: string;
     priority?: string;
     reason?: string;
@@ -49,7 +50,7 @@ declare function computeContentHash(filePath: string): string;
  * @param uri - 资源 URI
  * @returns 文件绝对路径，无法解析时返回 null
  */
-declare function resolveUriToPath(uri: string): string | null;
+declare function resolveUriToPath(uri: string | undefined): string | null;
 /**
  * 解析 context.jsonl 文件
  * 每行一条 JSON 记录，跳过空行和解析失败的行
@@ -73,6 +74,6 @@ declare function generateSnapshot(taskDir: string, phase: string): SnapshotResul
  * @returns stale 检测结果
  */
 declare function checkStale(snapshotPath: string): StaleCheckResult;
-export type { ContextEntry, SnapshotResult, StaleCheckResult, StaleEntry, };
+export type { ContextEntry, SnapshotResult, StaleCheckResult, StaleEntry };
 export { computeContentHash, resolveUriToPath, parseContextJsonl, generateSnapshot, checkStale, };
 //# sourceMappingURL=hash-utils.d.ts.map

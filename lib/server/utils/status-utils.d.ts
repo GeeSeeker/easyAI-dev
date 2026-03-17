@@ -18,6 +18,7 @@ interface TaskSummary {
     id: string;
     title: string;
     status: string;
+    hint_count?: number;
 }
 /**
  * 任务统计接口
@@ -27,6 +28,7 @@ interface TaskStats {
     active: number;
     by_status: Record<string, number>;
     active_tasks: TaskSummary[];
+    compliance_hint_total: number;
 }
 /**
  * 日志摘要接口
