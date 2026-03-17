@@ -2,6 +2,23 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.11.0] - 2026-03-17
+
+### 新增
+
+- **P5 收工 Skill 体系重构** — 拆分 `common-session-close` 为角色专属 Skill
+  - `pm-session-close`：PM 专属收工（含知识沉淀、`.tmp/` 清理、Push 确认、恢复指引）
+  - `worker-session-close`：Worker 专属收工（含角色分支 独立/组长/组员 + 双触发 自动/手动）
+  - Worker 正常完成任务时由 `worker-check` 自动衔接，无需手动说"收工"
+  - Worker 中途暂停时仍可手动触发
+
+### 变更
+
+- **删除 `common-session-close`** — 所有引用更新为角色专属 Skill
+- Skills 数量 10 → 12（+`pm-session-close`, +`worker-session-close`, +`worker-lead`）
+- 6 个图谱节点同步更新（session-management、pm-workflow、worker-workflow、artifact-pipeline、framework-governance、knowledge-management）
+- `skill-transparency.md` 示例更新
+
 ## [3.10.1] - 2026-03-17
 
 ### 修复
