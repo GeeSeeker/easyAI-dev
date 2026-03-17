@@ -13,6 +13,7 @@ depends_on: []
 relates_to:
   - foundation/config-system
   - foundation/git-integration
+  - foundation/manifest-mechanism
 children:
   - trellis-directory
   - agents-directory

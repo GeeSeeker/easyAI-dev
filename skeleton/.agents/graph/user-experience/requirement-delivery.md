@@ -11,9 +11,9 @@ relates_to:
   - user-experience/session-management
   - user-experience/artifact-pipeline
 files:
-  - path: .agents/workflows/pm.md
+  - path: .agents/workflows/actor-pm.md
     role: PM 入口（接收用户需求、展示可用操作菜单）
-  - path: .agents/workflows/worker.md
+  - path: .agents/workflows/actor-worker.md
     role: Worker 入口（执行约束集任务、产出代码和验证报告）
   - path: .agents/skills/pm-brainstorm/SKILL.md
     role: 需求发散阶段（苏格拉底式引导用户完善需求）

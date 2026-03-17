@@ -13,6 +13,7 @@ depends_on:
   - foundation/mcp-transport
 relates_to:
   - data-layer/task-storage
+  - data-layer/config-management
 children:
   - journal-format
   - auto-pagination

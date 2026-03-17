@@ -14,6 +14,7 @@ depends_on:
 relates_to:
   - data-layer/spec-system
   - data-layer/journal-system
+  - data-layer/config-management
 children:
   - task-directory
   - task-md-format

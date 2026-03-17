@@ -15,6 +15,7 @@ depends_on:
 relates_to:
   - capability/task-management
   - capability/knowledge-management
+  - capability/quality-control
 children:
   - context-budget
   - context-generation
@@ -23,7 +24,7 @@ children:
 files:
   - path: .agents/skills/pm-task-planning/SKILL.md
     role: Step 7 上下文配置（调用 context_generate 生成推荐清单 + PM 审核）
-  - path: .agents/workflows/worker.md
+  - path: .agents/workflows/actor-worker.md
     role: Worker 启动 Step 4 上下文加载（优先使用 frozen_context，回退到 context.jsonl）
   - tool: context_budget
     role: Token 预算估算（超 60% 建议降级、超 80% 建议新开会话）

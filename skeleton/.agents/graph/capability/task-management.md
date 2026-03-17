@@ -28,7 +28,7 @@ files:
     role: 三阶段验收流程（Stage 1 Spec 合规 → Stage 2 代码质量 → Stage 3 Artifacts 沉淀）
   - path: .agents/skills/worker-lead/SKILL.md
     role: 组长编排（团队执行模式：PLAN 子任务拆分 + INTEGRATE 审核整合，含 ABCDE 工作重要性分级和 CLI 动态选型）
-  - path: .agents/workflows/worker.md
+  - path: .agents/workflows/actor-worker.md
     role: Worker 启动流程中的任务读取、模式决策、worktree 环境切换、阻塞上报协议
   - tool: task_create
     role: 任务创建（生成 ID、创建目录和 task.md）

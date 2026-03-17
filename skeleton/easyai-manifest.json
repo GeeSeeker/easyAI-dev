@@ -1,6 +1,6 @@
 {
-  "version": "3.17.4",
-  "generatedAt": "2026-03-17T17:40:47.738Z",
+  "version": "3.17.5",
+  "generatedAt": "2026-03-17T19:50:21.556Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "d772bac88e4ca3054ae81bac0da8d02e6fd9c3a6e2d7b01b7f40bdf9797e47e0"
@@ -12,7 +12,7 @@
       "hash": "a62534f4019691d32d4cb4cef3af7b32fd7f1b99cfdfc70d8a49a95bf91a8277"
     },
     ".agents/graph/capability/context-management.md": {
-      "hash": "af1bfc485b1a4524e52c5fe7c2c1de225fc397f5e1b069e5f9d375937671098c"
+      "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
     },
     ".agents/graph/capability/framework-governance.md": {
       "hash": "25101f2aa0ea6a39f9fa4de0c88f79c28584ceec92319f616088e29fa4acf012"
@@ -21,10 +21,10 @@
       "hash": "dfce7b641d9be3cad1e75f3f3d9ceec0577c829759ebcf90d1fc11400ec6ab24"
     },
     ".agents/graph/capability/quality-control.md": {
-      "hash": "0ecc500056fdaafa0dac705a0111483343b2fc1f51158a0a60e08c1ec7cae117"
+      "hash": "68f22aec975038335a79356ecd71f9f9580b5f2e931ccc09d3abf5babe148a3e"
     },
     ".agents/graph/capability/task-management.md": {
-      "hash": "fc5131ebb71fbd374821e24fec067a38261d51a3b2a0a340d5cce0e6fe773274"
+      "hash": "e233484c20d150a02f57d6220681b69282ee358a00891a6cdda86baf46307891"
     },
     ".agents/graph/data-layer/_domain.md": {
       "hash": "072000b0a313c1153c5de98051d28421f428aad3bfe630161d1ec64ab9e99e00"
@@ -33,13 +33,13 @@
       "hash": "a0c9d492a2d99358e370094cb692d73959b84bf0a69a5cb558734897826b15d2"
     },
     ".agents/graph/data-layer/journal-system.md": {
-      "hash": "5de3e467cd73d9d37b16e22722d853d35d3ffa4f8d2468fdaf176c6830fb46c0"
+      "hash": "9feafd9c16e0f3ad31d436fd8592e4635ae8f3f572bf3fb3faca2924196bdaf3"
     },
     ".agents/graph/data-layer/spec-system.md": {
-      "hash": "a62e6d783e9dd445bafcd743e8b3b5f6026a9d515a4d4edbd456b609bec87932"
+      "hash": "efb6fdf216650b63055fdaef84f1f66bf9bc8cd24cee47f66651104d152e2d53"
     },
     ".agents/graph/data-layer/task-storage.md": {
-      "hash": "140247a5bc0c284ddd61ed80689b0d19e854866ffb873a1a099d24e442b49019"
+      "hash": "0126385d0ec37fb85a7f61d1c7b156f4d24351f07a68bd809e5ee30458a558b4"
     },
     ".agents/graph/foundation/_domain.md": {
       "hash": "988f98360fe5b2ec936bc5b5eedcd34dc3e0c098164941e6adece39ec789de41"
@@ -48,7 +48,7 @@
       "hash": "b60d83c9ed8334070e475249803deae076a6e1c0e6f6dfc8a931f1616cb1e2b0"
     },
     ".agents/graph/foundation/file-persistence.md": {
-      "hash": "242443d16bc3d7910912437da70959e3298783bd666d96d28ae10f47456a5271"
+      "hash": "521319c566246dbaf7be7088a509fba4b00e4050cb7720c7e30da8860ca68998"
     },
     ".agents/graph/foundation/git-integration.md": {
       "hash": "2f8dccd299b70345689cda37c4e6e71ab47882d56eb27889d59db3a6cbdd928a"
@@ -78,10 +78,10 @@
       "hash": "97094ab4cb93c4aab96c06c9a0bf280280886d44048aea51a86159bdc1876cef"
     },
     ".agents/graph/user-experience/requirement-delivery.md": {
-      "hash": "2940554efea2b70501079c91f5e821221b60390fc8f2b39a314feca39da56b9f"
+      "hash": "6222f0fb5d69b5a3c6cd864f984ac01b207b8b0acd46ef7c6acae89271d437ae"
     },
     ".agents/graph/user-experience/session-management.md": {
-      "hash": "6c0e69d24483a843bfc7ba85770910a701c633fcfe42bc8865ef4547a5124b1e"
+      "hash": "281dc1121eb3ee455b21e5e14e7ee70a05ce31690ccf247ccab70dfd0d33c9dc"
     },
     ".agents/rules/anti-hallucination.md": {
       "hash": "0d18aafe1cdacf5db0e71eb06c559ab01df9deebb99804ad514930cc7d59c749"
@@ -165,7 +165,7 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".trellis/config/config.yaml": {
-      "hash": "4c13aa5284bbf9d9606ffda0efe695e28ae5d9f95adc13ebe87ac5fefd1f7762"
+      "hash": "c5ad9df3004d36e7651f9e5e482b365bc6db2b5fe4997f666325cf155d77e4a6"
     },
     ".trellis/spec/general/adr-template.md": {
       "hash": "c03b93626ce45883947967fa23a778192ba5310dd4c02c9340352835af3b2e87"

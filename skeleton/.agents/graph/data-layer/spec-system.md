@@ -14,6 +14,7 @@ depends_on:
   - foundation/mcp-transport
 relates_to:
   - data-layer/config-management
+  - data-layer/task-storage
 children:
   - category-directories
   - schema-validation

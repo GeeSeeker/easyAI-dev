@@ -14,6 +14,7 @@ depends_on:
 relates_to:
   - capability/task-management
   - capability/context-management
+  - capability/framework-governance
 children:
   - tdd-workflow
   - three-marker-check
