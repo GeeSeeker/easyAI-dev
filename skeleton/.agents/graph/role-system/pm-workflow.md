@@ -29,7 +29,7 @@ skill_chain:
     - worker-debug # PM 收到 L3 blocker 后可能需要介入调试分析
     - common-spec-update
   common_skills:
-    - common-session-close
+    - pm-session-close
 files:
   - path: .agents/workflows/pm.md
     role: PM 角色入口（身份锚定、启动流程、可用操作菜单）
@@ -45,8 +45,8 @@ files:
     role: 框架自迭代（知识检索 + 影响分析 + 安全修改 + 知识库自更新）
   - path: .agents/skills/common-spec-update/SKILL.md
     role: 规范动态演进（变更前快照 + 影响分析 + 用户确认门）
-  - path: .agents/skills/common-session-close/SKILL.md
-    role: 会话收尾与日志沉淀（汇总 + journal + Git 提交 + 恢复指引）
+  - path: .agents/skills/pm-session-close/SKILL.md
+    role: PM 会话收尾（汇总 + 知识沉淀 + journal + Git 提交 + Push 确认 + 恢复指引）
   - tool: project_status
     role: 获取项目当前状态概览（Git 分支、活跃任务、最新日志）
   - tool: task_create
@@ -84,7 +84,7 @@ PM 工作流的标准路径为线性 Skill 链，每个 Skill 的产出是下游
 
 ### 通用 Skill（common_skills）
 
-- **common-session-close**：会话结束时激活，汇总工作、写入 journal、Git 提交
+- **pm-session-close**：会话结束时激活，汇总工作、知识沉淀、写入 journal、Git 提交、Push 确认
 
 ## 角色特征
 

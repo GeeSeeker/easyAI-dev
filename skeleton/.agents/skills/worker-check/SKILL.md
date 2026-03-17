@@ -270,7 +270,7 @@ Evidence Gate 接受 `_PASS` 和 `_NA`，拒绝 `_FAIL` 和缺失标记。
 1. [ ] 确认 dev/verification.md 已生成且三标记全部 \_PASS 或 \_NA（附说明）
 2. [ ] 自动执行 Git commit（若检测到变更）
 3. [ ] 调用 `task_transition({ task_id, new_status: "under_review" })` 提交验收
-4. [ ] 激活 `common-session-close` Skill 完成会话收尾
+4. [ ] 自动衔接 `worker-session-close` Skill 完成会话收尾
 5. [ ] 告知用户回 PM 会话验收
 
 ### 状态快照

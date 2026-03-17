@@ -126,7 +126,7 @@ description: PM（项目经理）角色入口 — 负责需求沟通、任务管
 
 以下 Skill 在所有场景中按需激活：
 
-- **[必须]** `common-session-close` — 会话结束时激活，汇总工作、写入 journal、Git 提交、输出恢复指引
+- **[必须]** `pm-session-close` — 会话结束时激活，汇总工作、知识沉淀、写入 journal、Git 提交、Push 确认、输出恢复指引
 
 ---
 

@@ -1,22 +1,21 @@
 ---
-name: common-session-close
-description: "[Common] 会话收尾 — 用户发出“收工”指令时自主激活。产出日志条目 + Git 提交。"
+name: pm-session-close
+description: "[PM] 会话收尾 — PM 说"收工"时激活。执行知识沉淀、日志写入、Skill 审计、Git 提交、Push 确认、恢复指引。仅 PM 角色使用。"
 produces: journal_entry
 requires: null
 ---
 
-# 会话收尾 & 日志沉淀
+# PM 会话收尾
 
 ## 适用场景
 
-任何角色（PM / Worker）在会话结束前，必须执行本 Skill 完成收尾动作。
+**仅 PM 角色**在会话结束前执行本 Skill。Worker 角色使用 `worker-session-close`。
 
 ## 触发条件
 
 - 用户明确表示「**收工**」（或等价表达，如"结束"、"下班"等）
 - 用户明确表示本次会话结束
 - 上下文预算接近阈值，需要新开会话
-- 任务执行完成，准备提交验收
 
 ## 执行步骤
 
@@ -44,20 +43,16 @@ journal_append({
 > **注意**：Journal 仅记录回顾性内容（做了什么、为什么这样做）。
 > 如有明确的未完成工作，应通过任务系统（`task_create` / `task_append_log`）追踪，而非写在 journal 中。
 
-```
-
 ### Step 3：更新任务执行记录
 
 如果本会话涉及具体任务，调用 MCP Tool `task_append_log()`：
 
 ```
-
 task_append_log({
-task_id: "T001",
-entry: "完成了 xxx，剩余 yyy 待处理"
+  task_id: "T001",
+  entry: "完成了 xxx，剩余 yyy 待处理"
 })
-
-````
+```
 
 ### Step 4：知识沉淀检查（含分类触发）
 
@@ -94,14 +89,14 @@ entry: "完成了 xxx，剩余 yyy 待处理"
 
 3. **有候选时**列出分类标注的清单（路由按 `spec://general/knowledge-categories` 默认路径）：
 
-   | Artifacts 类型           | 分类    | 默认沉淀目标                    |
-   | ------------------------ | ------- | ------------------------------- |
-   | `walkthrough.md`         | `GUIDE` | `.docs/guides/`                 |
-   | `other`（分析报告等）    | `REF`   | `.docs/notes/`                  |
-   | 架构/技术决策            | `ADR`   | `.docs/design/decisions/`       |
-   | Bug 修复过程/根因分析    | `FIX`   | `.docs/notes/`                  |
-   | 短期备忘/待办            | `NOTE`  | `.docs/notes/`                  |
-   | `implementation_plan.md` | —       | 跳过（`pm-brainstorm` 已处理）  |
+   | Artifacts 类型           | 分类    | 默认沉淀目标                     |
+   | ------------------------ | ------- | -------------------------------- |
+   | `walkthrough.md`         | `GUIDE` | `.docs/guides/`                  |
+   | `other`（分析报告等）    | `REF`   | `.docs/notes/`                   |
+   | 架构/技术决策            | `ADR`   | `.docs/design/decisions/`        |
+   | Bug 修复过程/根因分析    | `FIX`   | `.docs/notes/`                   |
+   | 短期备忘/待办            | `NOTE`  | `.docs/notes/`                   |
+   | `implementation_plan.md` | —       | 跳过（`pm-brainstorm` 已处理）   |
    | `task.md`                | —       | 跳过（`.trellis/tasks/` 已持久） |
 
 4. **用户确认后执行**
@@ -159,13 +154,6 @@ entry: "完成了 xxx，剩余 yyy 待处理"
 
 > 本步骤在所有文件变更操作（journal、task log、artifacts 沉淀）完成后执行，确保 commit 捕获最终状态。
 
-> **Worktree 场景备注**：
->
-> - Session-close 的 journal / task log 写入始终在**主仓库**执行（MCP 数据层绑定主仓根目录）
-> - 如果 Worker 在 worktree 中工作，session-close 的 Git commit 仍然在主仓提交元数据
-> - 这是设计意图：元数据属于项目级别，不随任务分支走
-> - Worktree 分支上的代码变更由 `worker-check` 单独提交
-
 **流程：**
 
 1. 检测 Git 仓库状态：
@@ -193,20 +181,16 @@ entry: "完成了 xxx，剩余 yyy 待处理"
 ```bash
 git add -- "<file1>" "<file2>" ...
 git commit -m "{message}"
-````
+```
 
 **Commit message 规则：**
 
-| 场景                      | 格式                        | 示例                                     |
-| ------------------------- | --------------------------- | ---------------------------------------- |
-| PM 收工                   | `session: {摘要}`           | `session: 需求澄清 + T001/T002 任务拆分` |
-| PM 收工（涉及特定任务）   | `session(T{id}...): {摘要}` | `session(T001, T002): 验收 + 需求澄清`   |
-| Worker 收工（未完成任务） | `wip(T{id}): {进度}`        | `wip(T003): 完成 2/5 功能点`             |
-| session-close 元数据提交  | `session: {摘要}`           | `session: journal + task log 更新`       |
+| 场景                    | 格式                        | 示例                                     |
+| ----------------------- | --------------------------- | ---------------------------------------- |
+| PM 收工                 | `session: {摘要}`           | `session: 需求澄清 + T001/T002 任务拆分` |
+| PM 收工（涉及特定任务） | `session(T{id}...): {摘要}` | `session(T001, T002): 验收 + 需求澄清`   |
 
-### Step 7：PM 专属 — Push 确认
-
-> 仅 PM 角色执行此步骤。Worker 跳过。
+### Step 7：Push 确认
 
 1. 检测当前分支是否有 upstream：
 
@@ -243,7 +227,7 @@ git rev-list --count @{upstream}..HEAD
 - ✅ 任务记录已更新
 - {✅ 文档已沉淀到 `.docs/` / ⚠️ 无需沉淀}
 - {✅ `.tmp/` 已清理 / ⚠️ `.tmp/` 有残留 / ⚠️ 无临时文件}
-- {✅ 已推送到远程 / ⚠️ 未推送（{n} 个本地提交） / — 非 PM 角色}
+- {✅ 已推送到远程 / ⚠️ 未推送（{n} 个本地提交）}
 
 ### Git 状态快照
 
@@ -269,36 +253,12 @@ git rev-list --count @{upstream}..HEAD
 
 #### 状态快照
 
-- 当前角色：{PM / Worker}
-- 当前 Skill: common-session-close
+- 当前角色：PM
+- 当前 Skill: pm-session-close
 - 当前阶段：SESSION_CLOSE
 - 已沉淀：Journal ✅ | 任务记录 ✅ | .docs/ {✅/⚠️}
 - 遗留事项：{有/无} — {具体内容}
 ```
-
-## 角色分支逻辑
-
-```
-收工流程 {
-  Step 1-4.6: 所有角色通用（含 4.5 Rules 合规回顾 + 4.6 Skill 使用审计）
-  Step 5-6: 所有角色通用
-  Step 7: if (当前角色 == PM && 有 upstream && 有未推送 commit) { 询问 push }
-  Step 8: 所有角色通用（硬约束）
-}
-```
-
-## 双提交模型
-
-> `worker-check` 和 `common-session-close` 各自的 commit 职责不同，是刻意的两次提交。
-
-| 提交点                 | 提交者   | 包含内容                                    | Commit Message                            |
-| ---------------------- | -------- | ------------------------------------------- | ----------------------------------------- |
-| `worker-check` 完成后  | Worker   | 任务产物代码 + 测试 + `dev/verification.md` | `{type}(T{id}): {title}`                  |
-| `common-session-close` | 任意角色 | Journal + task log + `.docs/` 沉淀 + 元数据 | `session: {摘要}` 或 `wip(T{id}): {进度}` |
-
-- **Worker 场景**：两个独立 commit（任务产物 + 会话元数据）
-- **PM 场景**：一个 commit（session-close 统一提交）
-- **空提交处理**：无变更时静默跳过
 
 ## Git 异常处理
 
@@ -323,42 +283,28 @@ git rev-list --count @{upstream}..HEAD
 
 ## 触发测试用例
 
-### TC-01: 正常收工流程
+### TC-01: 正常 PM 收工流程
 
 - **场景**: PM 完成工作后
 - **输入**: 用户说「收工」
 - **期望行为**:
   1. 汇总会话工作（Step 1）
   2. 写入 journal（Step 2）
-  3. 执行知识沉淀检查（Step 4，含 F44 已知问题检查和 F48 长文档检查）
-  4. Git 提交（Step 6）
+  3. 执行知识沉淀检查（Step 4）
+  4. Git 提交（Step 6）+ Push 确认（Step 7）
   5. 输出恢复指引（Step 8）
 - **验证方法**: 检查 journal 是否写入、Git 是否提交、恢复指引是否包含硬约束检查项
 
-### TC-02: 无变更时的收工
+### TC-02: 无变更时的 PM 收工
 
 - **场景**: 会话中只进行了查询，未修改任何文件
 - **输入**: 用户说「收工」
 - **期望行为**: 跳过 Git 提交，仍然写入 journal 和输出恢复指引
 - **验证方法**: 检查提交步骤显示"工作区已干净"
 
-### TC-03: MCP/CLI 问题触发已知问题库更新
+### TC-03: Skill 使用审计
 
-- **场景**: 会话中遇到了 Gemini CLI 429 限流
+- **场景**: 会话中激活了多个 Skill（如 pm-session-start → pm-brainstorm → pm-session-close）
 - **输入**: 用户说「收工」
-- **期望行为**: Step 4 知识分类自检中触发 F44 检查项 → 建议更新 `spec://guides/known-issues`
-- **验证方法**: 检查收尾流程是否提示更新已知问题库
-
-### TC-04: Rules 合规回顾
-
-- **场景**: 长对话会话中 AI 误修改了受保护的文件
-- **输入**: 用户说「收工」
-- **期望行为**: Step 4.5 自检发现违规 → journal 中标记 `[RULE_BREACH]` → 恢复指引中显示 `⚠️ 有违规`
-- **验证方法**: 检查 journal 是否包含 `[RULE_BREACH]` 标记，恢复指引硬约束检查中 Rules 合规是否标注违规
-
-### TC-05: Skill 使用审计
-
-- **场景**: 会话中激活了多个 Skill（如 worker-implement → worker-check → common-session-close）
-- **输入**: 用户说「收工」
-- **期望行为**: Step 4.6 回顾所有 `[Skill: xxx]` 标记 → journal 中写入 `[SKILL_AUDIT]` 条目（含 Skill 使用表格）→ 恢复指引硬约束检查中显示 `✅ Skill 审计已记录`
-- **验证方法**: 检查 journal 是否包含 `[SKILL_AUDIT]` 标记，恢复指引硬约束检查中是否包含 Skill 审计状态行
+- **期望行为**: Step 4.6 写入 `[SKILL_AUDIT]` 条目 → 恢复指引显示 `✅ Skill 审计已记录`
+- **验证方法**: 检查 journal 是否包含 `[SKILL_AUDIT]` 标记

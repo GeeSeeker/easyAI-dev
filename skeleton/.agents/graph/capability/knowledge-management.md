@@ -25,8 +25,8 @@ files:
     role: 框架知识图谱（五层特性树 + 双向链接 + 渐进式披露）
   - path: .agents/skills/pm-framework-evolve/SKILL.md
     role: PM 框架自迭代（知识查询 + 安全迭代 + 知识库自更新）
-  - path: .agents/skills/common-session-close/SKILL.md
-    role: 会话收尾中的知识沉淀检查（Step 4 分类触发 + Step 4b Artifacts 沉淀）
+  - path: .agents/skills/pm-session-close/SKILL.md
+    role: PM 会话收尾中的知识沉淀检查（Step 4 分类触发 + Step 4b Artifacts 沉淀）
   - path: .agents/skills/common-spec-update/SKILL.md
     role: 规范动态演进（变更前快照 → 影响分析 → 用户确认门 → journal 记录）
   - path: .agents/skills/pm-task-review/SKILL.md
@@ -51,7 +51,7 @@ files:
 
 ### 日志生命周期（journal-lifecycle）
 
-工作记忆的写入与检索。通过 `journal_append()` 写入带标签的日志条目，`journal_search()` 按多条件组合搜索。日志超过最大行数时自动创建新文件。`common-session-close` Skill 在每次会话结束时自动触发日志写入。
+工作记忆的写入与检索。通过 `journal_append()` 写入带标签的日志条目，`journal_search()` 按多条件组合搜索。日志超过最大行数时自动创建新文件。`pm-session-close` Skill 在每次会话结束时自动触发日志写入。
 
 ### 规范演进（spec-evolution）
 

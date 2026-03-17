@@ -24,7 +24,7 @@ description: Skill usage transparency — real-time activation declarations and 
 
 ```
 **[Skill: worker-implement] 已激活** — 执行者实现工作流
-**[Skill: common-session-close] 已激活** — 会话收尾与日志沉淀
+**[Skill: pm-session-close] 已激活** — PM 会话收尾
 ```
 
 ### 退出声明（推荐）

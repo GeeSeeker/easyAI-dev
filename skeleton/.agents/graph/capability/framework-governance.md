@@ -71,7 +71,7 @@ files:
 - **always_on** — 每个会话始终生效（如 `anti-hallucination.md`、`project-identity.md`、`skill-transparency.md`）
 - **glob** — 编辑匹配文件时自动注入（如 `coding-standards.md` 匹配 `*.ts,*.js,*.py`）
 
-Worker Workflow Step 2.5 和 `common-session-close` Step 4.5 分别在会话启动和收尾时执行 Rules 合规加载/回顾。
+Worker Workflow Step 2.5 和 `pm-session-close` Step 4.5 分别在会话启动和收尾时执行 Rules 合规加载/回顾。
 
 ### Manifest 驱动升级（manifest-upgrade）
 

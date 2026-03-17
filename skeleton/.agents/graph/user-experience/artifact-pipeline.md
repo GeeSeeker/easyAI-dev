@@ -25,8 +25,8 @@ files:
     role: 设计文档产出（brainstorm → .docs/design/）
   - path: .agents/skills/worker-check/SKILL.md
     role: 验证报告产出（dev/verification.md）
-  - path: .agents/skills/common-session-close/SKILL.md
-    role: 会话工作汇总沉淀
+  - path: .agents/skills/pm-session-close/SKILL.md
+    role: PM 会话工作汇总沉淀
 ---
 
 # 文档沉淀管道
