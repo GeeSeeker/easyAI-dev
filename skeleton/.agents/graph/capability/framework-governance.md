@@ -28,8 +28,10 @@ files:
     role: 规范守护（.trellis/spec/ 的写操作必须经过本 Skill）
   - path: .agents/rules/project-identity.md
     role: 项目身份定义 + 五级约束分层体系
+    upgrade: replace
   - path: .agents/rules/anti-hallucination.md
     role: 反幻觉硬约束（第三方库查文档、禁止模糊措辞、RPI 阶段隔离）
+    upgrade: replace
   - path: .agents/rules/framework-dev-mode.md
     role: 框架开发模式（三层版本流转 + 写入守卫，仅开发工作区）
   - path: .agents/rules/coding-standards.md

@@ -1,6 +1,6 @@
 ---
 name: pm-session-start
-description: "[PM] 会话启动 — 触发：/pm 命令启动新会话。排除：会话已启动或 Worker 角色。产出：项目状态快照。"
+description: "[PM] 会话启动 — 触发：/actor-pm 命令启动新会话。排除：会话已启动或 Worker 角色。产出：项目状态快照。"
 produces: project_snapshot
 requires: null
 ---
@@ -9,7 +9,7 @@ requires: null
 
 ## 适用场景
 
-当 PM 角色通过 `/pm` Workflow 启动时，自动执行本 Skill 完成状态恢复。
+当 PM 角色通过 `/actor-pm` Workflow 启动时，自动执行本 Skill 完成状态恢复。
 
 ## 执行步骤
 
@@ -123,8 +123,8 @@ requires: null
 
 ### TC-01: 标准 PM 会话启动
 
-- **场景**: 用户在新会话中首次调用 `/pm`
-- **输入**: `/pm`
+- **场景**: 用户在新会话中首次调用 `/actor-pm`
+- **输入**: `/actor-pm`
 - **期望行为**:
   1. 调用 `project_status()` 获取状态
   2. 读取 `trellis://status` 和 `trellis://journal/latest`
@@ -136,13 +136,13 @@ requires: null
 ### TC-02: MCP 不可用时的降级
 
 - **场景**: MCP Server 未启动或连接断开
-- **输入**: `/pm`
+- **输入**: `/actor-pm`
 - **期望行为**: 降级为手动 git 命令 + 文件系统读取，仍完成状态恢复
 - **验证方法**: 检查是否输出了降级提示且状态快照仍然生成
 
 ### TC-03: .directory-map 为空的提示
 
 - **场景**: 项目根目录存在 `.directory-map` 但为空（仅注释）
-- **输入**: `/pm`
+- **输入**: `/actor-pm`
 - **期望行为**: 在 PATEOAS 导航中提示用户配置 `.directory-map`
 - **验证方法**: 检查 PATEOAS 导航是否包含 `.directory-map` 配置建议

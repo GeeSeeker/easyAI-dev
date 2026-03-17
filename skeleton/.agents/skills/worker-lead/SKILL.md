@@ -72,8 +72,8 @@ Worker 以组长角色执行任务时，必须激活本 Skill。本 Skill 包含
 
 **启动命令**（按顺序）：
 
-1. 新开会话 → `/worker {task_id} 组员A`
-2. 新开会话 → `/worker {task_id} 组员B`
+1. 新开会话 → `/actor-worker {task_id} 组员A`
+2. 新开会话 → `/actor-worker {task_id} 组员B`
    ...
 
 **执行顺序**：{并行/有依赖则说明先后}

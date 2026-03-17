@@ -24,6 +24,7 @@ files:
     role: 规范体系根目录
   - path: .trellis/spec/spec-schema.json
     role: 规范文件 JSON Schema（校验 frontmatter）
+    upgrade: replace
   - path: .trellis/spec/frontend/
     role: 前端规范目录
   - path: .trellis/spec/backend/

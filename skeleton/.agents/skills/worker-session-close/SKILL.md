@@ -125,7 +125,7 @@ git commit -m "{message}"
 if (自动触发 — 正常完成) {
   if (独立执行者 || 组长) {
     → task_transition({ task_id, new_status: "under_review" })
-    → 告知用户：「任务已提交验收，请回 PM 会话执行 /pm 进行验收」
+    → 告知用户：「任务已提交验收，请回 PM 会话执行 /actor-pm 进行验收」
   }
   if (组员) {
     → 不执行 task_transition（组员无权提交主任务验收）
@@ -137,7 +137,7 @@ if (自动触发 — 正常完成) {
   // 手动触发 — 中途暂停
   → 不执行 task_transition（任务未完成）
   → task_append_log() 记录进度
-  → 告知用户：「进度已保存，下次通过 /worker {task_id} 继续」
+  → 告知用户：「进度已保存，下次通过 /actor-worker {task_id} 继续」
 }
 ```
 
@@ -164,8 +164,8 @@ if (自动触发 — 正常完成) {
 
 #### 下一步行动
 
-1. [ ] 回 PM 会话执行 `/pm` 进行验收
-2. [ ] 或新开会话 `/worker {task_id}` 继续未完成的工作
+1. [ ] 回 PM 会话执行 `/actor-pm` 进行验收
+2. [ ] 或新开会话 `/actor-worker {task_id}` 继续未完成的工作
 
 #### 状态快照
 
@@ -222,5 +222,5 @@ if (自动触发 — 正常完成) {
   1. Step 1-5 正常执行，journal tags 含 `wip`
   2. Step 5 commit message 使用 `wip(T{id})` 格式
   3. Step 6 中途暂停分支：不执行 task_transition，记录进度
-  4. 恢复指引显示「下次通过 /worker {task_id} 继续」
+  4. 恢复指引显示「下次通过 /actor-worker {task_id} 继续」
 - **验证方法**: 检查 journal tags 含 wip，commit message 格式正确

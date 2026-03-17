@@ -293,7 +293,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 2. [ ] 如果通过 → 调用 `task_transition({ task_id, new_status: "completed", role: "pm" })` 标记完成
 3. [ ] 如果通过 → 确认是否需要归档（`task_transition({ task_id, new_status: "archived", role: "pm" })`）
 4. [ ] 如果打回 → 在 task.md 追加打回原因和修复建议
-5. [ ] 如果打回 → 通知用户开新会话执行 `/worker {task_id}` 继续修复
+5. [ ] 如果打回 → 通知用户开新会话执行 `/actor-worker {task_id}` 继续修复
 
 ### 状态快照
 

@@ -16,8 +16,10 @@ children:
 files:
   - path: .easyai-manifest.json
     role: 骨架文件 SHA-256 哈希清单（升级时比对）
+    upgrade: replace
   - path: .easyai-version
     role: 当前框架版本号
+    upgrade: replace
   - tool: framework_init
     role: 初始化框架到项目（生成 manifest）
   - tool: framework_check

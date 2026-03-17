@@ -39,19 +39,19 @@ PM 角色在以下场景**必须**激活本 Skill：
 
 ### 关键路径速查
 
-| 需要了解…       | 答案                                                      |
-| --------------- | --------------------------------------------------------- |
-| PM 角色入口     | `/pm` → `.agents/workflows/pm.md`                         |
-| Worker 角色入口 | `/worker T001` → `.agents/workflows/worker.md`            |
-| 项目规范目录    | `.trellis/spec/`（backend / frontend / guides / general） |
-| 任务数据目录    | `.trellis/tasks/`                                         |
-| 日志系统        | `.trellis/workspace/journal.md`                           |
-| 框架配置        | `.trellis/config/config.yaml`                             |
-| 框架知识图谱    | `.agents/graph/`（特性树 + 节点详情）                     |
-| 安装指南        | `.agents/graph/installation.md`                           |
-| MCP Server 源码 | `packages/mcp-server/src/`(🔧开发专属)                    |
-| npm 包名        | `@geeseeker/easyai-dev`                                   |
-| GitHub 仓库     | https://github.com/GeeSeeker/easyAI-dev                   |
+| 需要了解…       | 答案                                                       |
+| --------------- | ---------------------------------------------------------- |
+| PM 角色入口     | `/actor-pm` → `.agents/workflows/actor-pm.md`              |
+| Worker 角色入口 | `/actor-worker T001` → `.agents/workflows/actor-worker.md` |
+| 项目规范目录    | `.trellis/spec/`（backend / frontend / guides / general）  |
+| 任务数据目录    | `.trellis/tasks/`                                          |
+| 日志系统        | `.trellis/workspace/journal.md`                            |
+| 框架配置        | `.trellis/config/config.yaml`                              |
+| 框架知识图谱    | `.agents/graph/`（特性树 + 节点详情）                      |
+| 安装指南        | `.agents/graph/installation.md`                            |
+| MCP Server 源码 | `packages/mcp-server/src/`(🔧开发专属)                     |
+| npm 包名        | `@geeseeker/easyai-dev`                                    |
+| GitHub 仓库     | https://github.com/GeeSeeker/easyAI-dev                    |
 
 ---
 

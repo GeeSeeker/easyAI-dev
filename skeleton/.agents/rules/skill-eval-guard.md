@@ -21,4 +21,4 @@ description: Skill evaluation guard — forces AI to evaluate which Skills are n
 - 简单的问答对话（如"这个函数是做什么的？"）
 - 纯文档编辑（如更新记事本、写注释）
 - 用户明确说"跳过评估"
-- 已通过斜杠命令（`/pm`、`/worker`）触发了角色 Workflow（角色 Workflow 内部已包含 Skill 激活逻辑）
+- 已通过斜杠命令（`/actor-pm`、`/actor-worker`）触发了角色 Workflow（角色 Workflow 内部已包含 Skill 激活逻辑）

@@ -36,6 +36,7 @@ files:
     role: PM 角色入口（身份锚定、启动流程、可用操作菜单）
   - path: .agents/skills/pm-session-start/SKILL.md
     role: 会话启动与状态恢复（项目状态 + 活跃任务 + 最新日志）
+    upgrade: replace
   - path: .agents/skills/pm-brainstorm/SKILL.md
     role: 苏格拉底式需求发散（引导用户从想法到完整设计）
   - path: .agents/skills/pm-task-planning/SKILL.md

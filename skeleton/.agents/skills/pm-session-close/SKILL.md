@@ -247,8 +247,8 @@ git rev-list --count @{upstream}..HEAD
 
 #### 下一步行动
 
-1. [ ] 新开会话，执行 `/pm` 恢复 PM 上下文
-2. [ ] 或执行 `/worker {task_id}` 继续具体任务
+1. [ ] 新开会话，执行 `/actor-pm` 恢复 PM 上下文
+2. [ ] 或执行 `/actor-worker {task_id}` 继续具体任务
 3. [ ] 新会话将读取 `trellis://journal/latest` Resource 自动恢复状态
 
 #### 状态快照

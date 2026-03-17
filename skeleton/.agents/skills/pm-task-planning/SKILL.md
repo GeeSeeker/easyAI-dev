@@ -238,6 +238,7 @@ task_create(
 1. 添加遗漏的必要规范（特别是 Step 1 中识别的相关 spec 路径）
 2. 移除不相关的推荐
 3. **框架任务时，将相关图谱节点路径写入 context.jsonl**：
+
    ```json
    {
      "uri": ".agents/graph/xxx.md",
@@ -249,6 +250,7 @@ task_create(
    - 框架任务 → 必须写入图谱节点
    - 业务任务涉及框架结构修改 → 建议写入
    - 纯业务逻辑任务 → 不需要
+
 4. **将审核后的清单写入 `.trellis/tasks/{id}/context.jsonl`**（HARD-GATE）
 
 > ⚠️ 不写入 context.jsonl = Worker 拿不到 spec 清单 = 违规。
@@ -256,7 +258,7 @@ task_create(
 创建完成后向用户汇报：
 
 - 任务 ID 和标题
-- 执行指引（如"请开新会话执行 `/worker T001`"）
+- 执行指引（如"请开新会话执行 `/actor-worker T001`"）
 
 ## 约束集输出模板
 
