@@ -54,6 +54,63 @@ const {
   console.log("✅ parseArgs 默认值通过");
 }
 
+// --- 测试：parseArgs 解析新增参数 ---
+{
+  const config = parseArgs([
+    "node",
+    "cli-runner.js",
+    "--backend",
+    "codex",
+    "--prompt-file",
+    "/tmp/test.md",
+    "--session-id",
+    "sess-123",
+    "--context-mode",
+    "analyze",
+  ]);
+  console.assert(config.sessionId === "sess-123", "sessionId 应解析正确");
+  console.assert(config.contextMode === "analyze", "contextMode 应为 analyze");
+  console.log("✅ parseArgs 解析新增参数通过");
+}
+
+// --- 测试：parseArgs 验证错误的 context-mode ---
+{
+  const origExit = process.exit;
+  const origError = console.error;
+  let exitCode = 0;
+  let errorMsg = "";
+
+  // 仅替换一次，避免影响后续调用
+  process.exit = (code) => {
+    exitCode = code;
+  };
+  console.error = (msg) => {
+    errorMsg = msg;
+  };
+
+  parseArgs([
+    "node",
+    "cli-runner.js",
+    "--backend",
+    "codex",
+    "--prompt-file",
+    "/tmp/test.md",
+    "--context-mode",
+    "invalid_mode",
+  ]);
+
+  console.assert(exitCode === 1, "非法 context-mode 应该退出代码 1");
+  console.assert(
+    errorMsg.includes("context-mode") ||
+      errorMsg.includes("analyze|review|execute"),
+    "错误信息应包含 context-mode",
+  );
+
+  process.exit = origExit;
+  console.error = origError;
+  console.log("✅ parseArgs 异常 context-mode 校验通过");
+}
+
 // --- 测试：BACKEND_REGISTRY 包含三个 backend ---
 {
   console.assert("codex" in BACKEND_REGISTRY, "应包含 codex");

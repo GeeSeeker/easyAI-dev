@@ -22,6 +22,7 @@
 const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const { parseArgs: utilParseArgs } = require("util");
 
 const { createNoiseFilter, DEFAULT_NOISE_PATTERNS } = require("./lib/filter");
 const { formatSingleResult, formatMultiResult } = require("./lib/reporter");
@@ -42,47 +43,54 @@ const BACKEND_REGISTRY = {
  */
 function parseArgs(argv) {
   const args = argv.slice(2);
-  const config = {
-    backends: [],
-    mode: "review",
-    promptFile: null,
-    workdir: process.cwd(),
-    timeout: 600,
-    outputDir: null,
-    taskId: null,
+  const options = {
+    backend: { type: "string" },
+    mode: { type: "string", default: "review" },
+    "prompt-file": { type: "string" },
+    workdir: { type: "string", default: process.cwd() },
+    timeout: { type: "string", default: "600" },
+    "output-dir": { type: "string" },
+    "task-id": { type: "string" },
+    "session-id": { type: "string" },
+    "context-mode": { type: "string" },
+    help: { type: "boolean" },
   };
 
-  for (let i = 0; i < args.length; i++) {
-    switch (args[i]) {
-      case "--backend":
-        config.backends = args[++i].split(",").map((s) => s.trim());
-        break;
-      case "--mode":
-        config.mode = args[++i];
-        break;
-      case "--prompt-file":
-        config.promptFile = args[++i];
-        break;
-      case "--workdir":
-        config.workdir = args[++i];
-        break;
-      case "--timeout":
-        config.timeout = parseInt(args[++i], 10);
-        break;
-      case "--output-dir":
-        config.outputDir = args[++i];
-        break;
-      case "--task-id":
-        config.taskId = args[++i];
-        break;
-      case "--help":
-        printUsage();
-        process.exit(0);
-        break;
-      default:
-        console.error(`未知参数: ${args[i]}`);
-        process.exit(1);
-    }
+  let parsed;
+  try {
+    parsed = utilParseArgs({ args, options, allowPositionals: false });
+  } catch (err) {
+    console.error(`参数解析错误: ${err.message}`);
+    process.exit(1);
+  }
+
+  const { values } = parsed;
+
+  if (values.help) {
+    printUsage();
+    process.exit(0);
+  }
+
+  const config = {
+    backends: values.backend
+      ? values.backend.split(",").map((s) => s.trim())
+      : [],
+    mode: values.mode,
+    promptFile: values["prompt-file"] || null,
+    workdir: values.workdir,
+    timeout: parseInt(values.timeout, 10),
+    outputDir: values["output-dir"] || null,
+    taskId: values["task-id"] || null,
+    sessionId: values["session-id"] || null,
+    contextMode: values["context-mode"] || null,
+  };
+
+  if (
+    config.contextMode &&
+    !["analyze", "review", "execute"].includes(config.contextMode)
+  ) {
+    console.error(`错误: --context-mode 必须是 analyze, review, execute 之一`);
+    process.exit(1);
   }
 
   return config;
@@ -95,13 +103,15 @@ function printUsage() {
   console.log(`用法: node cli-runner.js [选项]
 
 选项:
-  --backend <name,...>    后端名称，逗号分隔（codex,claude,gemini）
+  --backend <name,...>   后端名称，逗号分隔（codex,claude,gemini）
   --mode <mode>          运行模式（review）[默认: review]
   --prompt-file <path>   Prompt 文件路径
   --workdir <path>       工作目录 [默认: 当前目录]
   --timeout <seconds>    超时秒数 [默认: 600]
   --output-dir <path>    结果输出目录
   --task-id <id>         任务 ID
+  --session-id <id>      会话 ID，支持连续对话恢复存储
+  --context-mode <mode>  上下文模式（analyze, review, execute）
   --help                 显示帮助`);
 }
 

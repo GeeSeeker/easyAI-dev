@@ -80,7 +80,7 @@ declare function slugify(text: string): string;
  * @param title - 任务标题
  * @returns 任务 ID（如 T001-login-api）
  */
-declare function generateTaskId(title: string): string;
+declare function generateTaskId(title: string, role: "pm" | "worker"): string;
 /**
  * 解析 task.md 文件内容
  * @param content - task.md 文件内容
@@ -111,6 +111,18 @@ declare function listTaskDirs(): string[];
  * @param dirPath - 目录路径
  */
 declare function ensureDir(dirPath: string): void;
+/**
+ * 提取任务约束集中 ABCDE 等级判定所需的 CLI 记录数。
+ * 根据路由配置中的 "- CLI 审核数量：X" 提取。如果未声明则返回 0。
+ * @param body 任务正文
+ */
+declare function getRequiredCliCount(body: string): number;
+/**
+ * 获取任务目录中实际的 CLI 记录数。
+ * 检查任务的 cli/ 目录下的子目录数量。
+ * @param taskPath 任务目录绝对路径
+ */
+declare function getActualCliRecordCount(taskPath: string): number;
 export type { TaskStatus, TaskMetadata, ParsedTask };
-export { TRELLIS_ROOT, DEFAULT_TASKS_ROOT, DEFAULT_ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, };
+export { TRELLIS_ROOT, DEFAULT_TASKS_ROOT, DEFAULT_ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, getRequiredCliCount, getActualCliRecordCount, };
 //# sourceMappingURL=task-utils.d.ts.map

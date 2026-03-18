@@ -13,7 +13,7 @@ PM 或 Worker 需要调用外部 CLI（Codex / Claude Code / Gemini CLI）进行
 
 ## HARD-GATE
 
-```
+```text
 外部 CLI 的唯一合法调用路径是本 Skill 的 cli-runner.js 脚本。
 直接 run_command 调用 codex / claude / gemini = 违反 Rule 硬约束。
 ```
@@ -65,14 +65,16 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 
 **参数说明**：
 
-| 参数            | 说明                                           |
-| --------------- | ---------------------------------------------- |
-| `--backend`     | 逗号分隔的 backend 列表（codex/claude/gemini） |
-| `--mode`        | 调用模式（review）                             |
-| `--prompt-file` | Prompt 文件路径                                |
-| `--workdir`     | CLI 工作目录                                   |
-| `--timeout`     | 超时秒数（默认 600）                           |
-| `--output-dir`  | 结果输出目录                                   |
+| 参数             | 说明                                           |
+| ---------------- | ---------------------------------------------- |
+| `--backend`      | 逗号分隔的 backend 列表（codex/claude/gemini） |
+| `--mode`         | 调用模式（review）                             |
+| `--prompt-file`  | Prompt 文件路径                                |
+| `--workdir`      | CLI 工作目录                                   |
+| `--timeout`      | 超时秒数（默认 600）                           |
+| `--output-dir`   | 结果输出目录                                   |
+| `--session-id`   | 会话 ID，支持连续对话恢复存储                  |
+| `--context-mode` | 上下文模式（analyze, review, execute）         |
 
 ### Step 4：读取并处理结果
 
@@ -82,10 +84,17 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 4. 检查 `degraded_from` 字段，如有降级需记录
 5. 综合多个 backend 结果，去重合并
 
-### Step 5：整合到工作流
+### Step 5：裁决 + 整合
 
-- **PM 审查场景**：将综合结果附加到任务审查结论中
-- **Worker 审查场景**：将结果作为自检的补充证据
+原则："谁调用，谁裁判"。PM 和 Worker 都需通过 `common-cli-dispatch` 统一执行裁决逻辑。
+
+- **5.1 读取结果**：读取 CLI 结果 JSON。
+- **5.2 交叉验证**：将逐条 finding 与项目 `spec/` 或约束集进行交叉验证。
+- **5.3 法官裁决**：对每条建议进行明确标记：
+  - 采纳：`[ACCEPTED]`
+  - 拒绝：`[REJECTED_CLI_ADVICE: 理由]`（必须提供具体拒绝理由）
+- **5.4 生成裁决报告**：将结论汇拢为裁决报告写入 `tasks/Txxx/cli/{backend}/verdict.md`（或相应的任务归档路经）。
+- **5.5 整合到工作流**：将 `[ACCEPTED]` 的 findings 整合到当前工作流，并兼容旧有将综合结果作为审查或自检补充证据的流程。
 
 ## 降级策略
 

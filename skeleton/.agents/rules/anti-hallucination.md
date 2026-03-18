@@ -19,9 +19,9 @@ description: Anti-hallucination constraints for all sessions
 5. **实现阶段禁止做架构决策**：Implementation 阶段严格按约束集执行，遇架构歧义必须上报 PM，不得自行裁决。
 6. **反面模式自检**：输出方案时自检是否包含「多方案未选择」「推迟决策」「信息堆砌无结论」等反面模式。可调用 `plan_validate()` 自动检测。
 
-## 代码主权（来源：GuDa-spec）
+## 代码主权（来源：GuDa-spec + easyAI 迭代）
 
-7. **外部 CLI 产出仅供参考**：Codex / Claude Code / Gemini CLI 的输出严禁直接合入代码库，必须经主控 AI 重构为符合项目规范的生产代码后才能使用。
+7. **主控 AI 对 CLI 产出负验证责任**：外部 CLI（Codex / Claude Code / Gemini CLI）可直接写入项目文件，但主控 AI（Antigravity）必须对写入结果执行验证（lint / test / manual check）。验证通过方可认定为有效产出；验证失败须回滚或修正。CLI 的审查建议须经法官裁决（[ACCEPTED] / [REJECTED_CLI_ADVICE]）后方可采纳。
 
 ## 检索优先级
 
@@ -39,4 +39,4 @@ description: Anti-hallucination constraints for all sessions
 - [ ] 是否存在"凭印象"编写的代码？
 - [ ] 是否有未经验证的技术假设？
 - [ ] 方案中是否存在未决定事项或推迟决策？
-- [ ] 外部模型产出是否经过重构和规范对齐？
+- [ ] 外部模型产出是否经过验证（lint/test）并通过法官裁决？
