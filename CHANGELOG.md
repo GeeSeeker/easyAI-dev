@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.2.2] - 2026-03-19
+
+### 文档
+
+- **增强 MCP 安装引导** — `README_AI.md` 新增 S5 章节：增强 MCP 选装（Context7 文档检索 + ContextWeaver 代码语义搜索 + Exa 互联网搜索），安装后自动写入 `GEMINI.md` 检索优先级规则；S4 更新过渡引导
+- **README.md** — 方式一描述中提及增强 MCP 生态
+
 ## [4.2.1] - 2026-03-19
 
 ### 修复
