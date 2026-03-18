@@ -2,6 +2,16 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.19.3] - 2026-03-18
+
+### 文档
+
+- **README.md 全面重构** — 新增设计哲学（框架即人体比喻）、适合谁区块、完整需求交付流程示例、教程入口链接
+- **新增 3 份教程文档** — `docs/getting-started.md`（快速上手）、`docs/core-concepts.md`（核心概念）、`docs/workflow-guide.md`（工作流实战指南）
+- **命令统一修正** — README.md / README_AI.md / skeleton/README.md 中 `/pm` → `/actor-pm`
+- **MCP 数据修正** — 23 个 MCP 工具 + 6 个数据源（源码级核实）
+- **安装指南补全** — 命令行安装路径增加 `EASYAI_PROJECT_ROOT` 环境变量说明
+
 ## [3.19.2] - 2026-03-18
 
 ### 修复
