@@ -1,6 +1,6 @@
 {
-  "version": "4.3.3",
-  "generatedAt": "2026-03-18T23:28:10.422Z",
+  "version": "4.3.4",
+  "generatedAt": "2026-03-18T23:31:37.536Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -204,7 +204,7 @@
       "hash": "188a27adb3925405e1a4a69af968161d14f63a324e9a29908938c76c9b948964"
     },
     ".agents/skills/pm-session-close/SKILL.md": {
-      "hash": "0c4b44efed11fc77206e2b18e1a93fb2d6ac1fdc215235bc598a30036e27b028"
+      "hash": "6f16daaebb4deb39e2b3d91750e2919c4e68936414763f83aa6771d9440b2e72"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
       "hash": "496ad7018e626c019bcad600710ef8f2f5c5ebe585808b43fb3197a0fb5c5995"
@@ -228,7 +228,7 @@
       "hash": "e3a6c1b4851c2352da7bd88abccc2b93bd304ba09097711d887acc9477c078d5"
     },
     ".agents/skills/worker-session-close/SKILL.md": {
-      "hash": "c4b3fae9d9098a001f56b29f4d611bba2512e11e36bab21691682a256b7ffb4c"
+      "hash": "ee040e760c1f4d3cddf21a0d42c8b7e9119efc72dd9802d84a6f4639d947c230"
     },
     ".agents/workflows/actor-pm.md": {
       "hash": "3a5a29ac2729571b324e9a112d411168c8c622e73e44161bf2153112f93c93cd"
@@ -255,7 +255,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "8ca439dd908b0ced16b98e9e7b1ebfb38af25a930737fc472eb107c2668875a4",
+      "hash": "a54621f44d37f70df5569b38486b1e2d6546e6031e34c812c86ab711aadb9481",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {

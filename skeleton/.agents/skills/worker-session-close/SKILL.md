@@ -94,6 +94,16 @@ journal_append({
 3. 调用 `journal_append()` 写入 `[SKILL_AUDIT]` 审计条目
 4. **无 Skill 激活** → 仍写入审计条目，标注「本次会话未使用任何 Skill」
 
+### Step 4.5：`.gitkeep` 清理
+
+> 框架初始化时用 `.gitkeep` 保持空目录进入 Git。当目录已有实际内容后，`.gitkeep` 不再必要。
+
+1. 扫描 `.trellis/` 和 `.docs/` 目录下的所有 `.gitkeep` 文件
+2. 对每个找到的 `.gitkeep`，检查**同级目录**是否包含除 `.gitkeep` 以外的其他文件或子目录
+3. **有其他内容** → 删除该 `.gitkeep`（已不需要）
+4. **仅 `.gitkeep`** → 保留（维持目录结构）
+5. 静默执行，删除结果在 Step 5 Git 提交中自然体现
+
 ### Step 5：Git 提交元数据
 
 > 提交 journal + task log 等元数据。任务产物代码已由 `worker-check` Step 4 提交。
