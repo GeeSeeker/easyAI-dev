@@ -183,10 +183,16 @@ PM 在工作中发现的问题、后续线索会记在这里。
 任务有生命周期：pending → in_progress → under_review → completed → archived
 
 现在我来创建项目的第一个真实任务：
-"根据 core_rules 创建项目编码规范 spec 文件"
+"创建项目 README.md"
+
+Worker 编码时会自动参考 .trellis/spec/ 下的规范文件。
+目前规范目录是空的，你可以随时往里面添加编码规范（比如前端规范、API 规范等），
+AI 在编码和审查时会自动遵守这些规范。
 ```
 
-**执行**：调用 `task_create`，创建一个 D 级任务，描述是根据用户在 Step 3 填的 `core_rules` 生成 `.trellis/spec/` 下的规范文件。如果 `core_rules` 为空，则创建一个通用的编码规范任务。
+**执行**：调用 `task_create`，创建一个 E 级任务（文档类），描述是基于用户在前几步中提供的项目信息，生成一份结构清晰的项目 README.md（包含项目名称、简介、技术栈、安装方式等）。
+
+> 如果项目是全新的（无代码），README 以骨架形式创建（标题 + 占位区块），Worker 标注 `[TDD-EXEMPT]`。
 
 ### Step 9: Worker 执行演示
 

@@ -1,6 +1,6 @@
 {
-  "version": "4.3.4",
-  "generatedAt": "2026-03-18T23:31:37.536Z",
+  "version": "4.3.5",
+  "generatedAt": "2026-03-18T23:40:16.555Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -201,13 +201,13 @@
       "hash": "cc974f8030dc5f002f034842a9f3fe08dd028fc4a1cb2aefcd6399ad9e6027b0"
     },
     ".agents/skills/pm-onboarding/SKILL.md": {
-      "hash": "188a27adb3925405e1a4a69af968161d14f63a324e9a29908938c76c9b948964"
+      "hash": "7bae4c47d45ee5f4faaaa6861ad5ba11318595ac5027bdcec89846c60eccb444"
     },
     ".agents/skills/pm-session-close/SKILL.md": {
       "hash": "6f16daaebb4deb39e2b3d91750e2919c4e68936414763f83aa6771d9440b2e72"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
-      "hash": "496ad7018e626c019bcad600710ef8f2f5c5ebe585808b43fb3197a0fb5c5995"
+      "hash": "fce5642e595e3342c3422682b14cd077260015c0830fbe057c2ff9a41d2ae9eb"
     },
     ".agents/skills/pm-task-planning/SKILL.md": {
       "hash": "a0228fb3e032388e5794aa7a4b43e1fd0832c9dcf9ec0350c339a8a011487ad4"
@@ -228,7 +228,7 @@
       "hash": "e3a6c1b4851c2352da7bd88abccc2b93bd304ba09097711d887acc9477c078d5"
     },
     ".agents/skills/worker-session-close/SKILL.md": {
-      "hash": "ee040e760c1f4d3cddf21a0d42c8b7e9119efc72dd9802d84a6f4639d947c230"
+      "hash": "c4b3fae9d9098a001f56b29f4d611bba2512e11e36bab21691682a256b7ffb4c"
     },
     ".agents/workflows/actor-pm.md": {
       "hash": "3a5a29ac2729571b324e9a112d411168c8c622e73e44161bf2153112f93c93cd"
@@ -255,7 +255,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "a54621f44d37f70df5569b38486b1e2d6546e6031e34c812c86ab711aadb9481",
+      "hash": "26face4fb629ae0c7ac121f6382ef2b0d5b8fc3d5433a577ef2c6be327d7d882",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {
