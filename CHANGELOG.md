@@ -2,6 +2,15 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.2.4] - 2026-03-19
+
+### 修复
+
+- **`framework_check` 路径不匹配** — `REQUIRED_FILES` 从 `rules/xxx.md` 修正为 `rules/always_on/xxx.md` 和 `rules/glob/xxx.md`，修复所有新安装项目 `framework_check` 必定报 3 个 missing files 的问题
+- **`FRAMEWORK_VERSION` 硬编码过时** — `init.js` 和 `framework-tools` 中版本号从 4.2.2 同步到 4.2.4
+- **图谱文件引用补全** — pm-workflow 补充 `pm-braindump-assimilate` + `common-semantic-map` + `common-github-cli`；worker-workflow 补充 `common-github-cli`；session-management 补充 `common-semantic-map`
+- **文档数字同步** — README.md + core-concepts.md 中节点数 18→20、Skills 14→17、Rules 7→8
+
 ## [4.2.3] - 2026-03-19
 
 ### 修复
