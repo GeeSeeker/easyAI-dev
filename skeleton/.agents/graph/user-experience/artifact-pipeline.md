@@ -51,12 +51,25 @@ PM brainstorm → .docs/design/features/
                 ↓
 Worker 实现 → 任务目录 dev/（report.md + verification.md）
                 ↓
-PM 验收后 → 完工打 [DONE] 标记 / 废弃移入 archive/
+PM 验收后 → 完工打 [DONE] 标记 / 废弃打 [OBSOLETE] 标记移入 archive/
 ```
+
+### 文档前缀约定
+
+`.docs/` 下的文件使用以下标准化前缀标记生命周期状态：
+
+| 前缀          | 含义                    | 处理方式                  | 示例                             |
+| ------------- | ----------------------- | ------------------------- | -------------------------------- |
+| 无前缀        | 活跃/进行中             | 保留原位                  | `semantic-map.md`                |
+| `[DONE]`      | 已完成（设计已落地）    | 保留原位                  | `[DONE] semantic-map.md`         |
+| `[OBSOLETE]`  | 废弃/放弃（经评估不做） | 移至对应 `archive/` 目录  | `[OBSOLETE] ide-plugin.md`       |
+| `[MILESTONE]` | 里程碑阶段总结          | 存放在 `design/planning/` | `[MILESTONE] v4.0.0-阶段总结.md` |
+
+> 前缀约定的权威来源：`pm-milestone-archive` Skill Step 1。变更前缀定义时须同步更新该 Skill。
 
 ### 文档归档
 
-不再适用的文档移入对应目录的 `.docs/archive/`，保留历史可追溯性。
+不再适用的文档打 `[OBSOLETE]` 前缀后移入对应目录的 `archive/` 子目录，保留历史可追溯性。
 
 ## `.docs/` 目录结构
 

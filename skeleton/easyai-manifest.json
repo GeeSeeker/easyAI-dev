@@ -1,6 +1,6 @@
 {
-  "version": "4.2.2",
-  "generatedAt": "2026-03-18T20:48:46.007Z",
+  "version": "4.2.3",
+  "generatedAt": "2026-03-18T21:23:11.397Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -78,7 +78,7 @@
       "hash": "1d29d1a4498485f1df37398deea5f1b649bb402c8074a4acd3437bf489e8bc04"
     },
     ".agents/graph/user-experience/artifact-pipeline.md": {
-      "hash": "99fe7747714301f894049c882bd08fbad9c0120b2efb5cdc2a09657d5ab163b3"
+      "hash": "61903a46b9d09f9a611dcb0f2237a0a8adecd5b7f2abf17d7cc81f52af729622"
     },
     ".agents/graph/user-experience/requirement-delivery.md": {
       "hash": "3d795bc2340243f74ba5b31aba285b1e70c77e07b968a7a21318c39372ae24e9"
@@ -93,7 +93,7 @@
       "hash": "76f1915a1adcf517c3e0195993d83be0afa4fa215df8d0f383f7498a66a4de4b"
     },
     ".agents/rules/always_on/framework-edit-guard.md": {
-      "hash": "ff6cc040973ef31d37d614eb16378417042884adc675ad0e8839b247ea261c9b"
+      "hash": "33605b9ff8438ac05e790ddc890e8fc774d673e04d115c2fa8e97715e34277c8"
     },
     ".agents/rules/always_on/project-identity.md": {
       "hash": "5972769a2d8a48bf13801f2b4d84b9755162e605ce19fafe3832b8f94a96150f"
@@ -252,7 +252,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "70979b5b23b182888f2b238d978fb0f1521e5acba6cbec52a7b4e62a26450dcd",
+      "hash": "faa6e16dbe81406aa8bc9e5e22b1dc077bbe7ca4af2f336c25d3934301708232",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {

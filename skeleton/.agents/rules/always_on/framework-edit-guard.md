@@ -24,6 +24,15 @@ description: Framework edit guard — mandatory graph consultation and knowledge
 
 > 已通过 Skill 流程（如 `pm-framework-evolve` Step 0）完成加载的，不需要重复执行。
 
+## 约束 1d：`.docs/` 文件操作须查阅 artifact-pipeline
+
+在 `.docs/` 下**创建、重命名、移动或归档**文件时，必须先读取图谱节点 `user-experience/artifact-pipeline.md`，了解：
+
+- 文档前缀约定（`[DONE]` / `[OBSOLETE]` / `[MILESTONE]`）
+- 各子目录的用途和归档路径
+
+> 此约束比约束 1 更轻量：仅要求读取一个图谱节点，无需完整的三步查询流程。日常读取或编辑 `.docs/` 文件内容不触发此约束。
+
 ## 约束 1b：修改后检查图谱引用
 
 修改 `.agents/`、`.trellis/spec/`、`.trellis/config/`、`packages/` 下的文件**完成后**，检查被修改文件是否被任何图谱节点的 `files` 字段引用。如被引用，提醒需同步更新该节点（如文件路径变更、职责变更等）。
