@@ -146,17 +146,247 @@ npx @geeseeker/easyai-dev check .
 告知用户：
 
 ```
-✅ easyAI 安装完成！
+✅ easyAI 基础安装完成！
 
 已配置：
 - 1 个 MCP Server — easyai-mcp-server
 - 框架骨架 — .agents/ + .trellis/ + .docs/
 
-使用方式：
-1. 在 Antigravity IDE 中打开此项目
-2. 输入 /actor-pm 启动项目经理
-3. 和 PM 对话，描述你的需求即可！
+接下来可以选装增强 MCP（提升检索和分析能力），或直接开始使用。
 ```
+
+然后自动进入 S5（增强 MCP 选装）。
+
+---
+
+## S5：增强 MCP 选装（可选）
+
+> 增强 MCP 是**全局级插件**，安装一次即可在所有项目中使用。可在 S4 完成后引导用户选装，也可以随时在后续会话中触发。
+
+完成 S4 后，向用户展示增强 MCP 菜单：
+
+```
+🎉 easyAI 基础安装已完成！
+
+easyAI 还支持 3 个增强 MCP，可大幅提升 AI 的检索和分析能力：
+
+1. 📚 Context7 — 获取最新第三方库官方文档（免费，无需安装）
+2. 🔍 ContextWeaver — 本地代码语义搜索（免费，需注册硅基流动）
+3. 🌐 Exa — 互联网语义搜索引擎（免费，需注册 ExaFree）
+
+是否现在安装？可选择全部安装，或逐个选择。
+```
+
+用户同意后，按以下顺序逐一安装。用户跳过的项直接跳过，不再追问。
+
+### S5.1：Context7 — 第三方库文档检索
+
+**功能**：查询任意第三方库的最新官方文档和代码示例，避免 AI 使用过时 API。
+
+**安装步骤**：
+
+1. **无需本地安装**（远程 MCP 服务）
+
+2. **获取 API Key**（可选但推荐）：
+
+   访问 [Context7 官网](https://context7.com) 注册获取免费 API Key。
+   无 API Key 也可使用，但有速率限制。
+
+3. **写入 MCP 配置**：
+
+   在 `~/.gemini/antigravity/mcp_config.json` 的 `mcpServers` 中添加：
+   - **有 API Key**：
+
+     ```json
+     "context7": {
+       "type": "remote",
+       "serverURL": "https://mcp.context7.com/mcp",
+       "headers": {
+         "CONTEXT7_API_KEY": "<用户的 API Key>"
+       },
+       "enabled": true
+     }
+     ```
+
+   - **无 API Key**：
+     ```json
+     "context7": {
+       "type": "remote",
+       "serverURL": "https://mcp.context7.com/mcp",
+       "enabled": true
+     }
+     ```
+
+4. **验证**：需要重启 IDE 后验证。可记录待 S5 全部完成后统一重启验证。
+
+### S5.2：ContextWeaver — 本地代码语义搜索
+
+**功能**：在项目代码中进行语义级搜索（Embedding + Rerank），理解代码含义而非仅匹配关键词。
+
+**前置条件**：需要硅基流动（SiliconFlow）的免费 API Key，用于调用 Embedding 和 Reranker 模型。
+
+**安装步骤**：
+
+1. **引导注册硅基流动**：
+
+   ```
+   ContextWeaver 需要硅基流动的 API Key（完全免费）。
+
+   请访问以下链接注册（或登录已有账号）：
+   👉 https://cloud.siliconflow.cn/i/UuyBH9t8
+
+   注册后，在控制台的「API 密钥」页面创建一个新密钥，然后把密钥告诉我。
+   ```
+
+   > 等待用户提供 API Key 后再继续。
+
+2. **安装 ContextWeaver**：
+
+   ```bash
+   npm install -g @hsingjui/contextweaver
+   ```
+
+3. **创建配置文件** `~/.contextweaver/.env`：
+
+   ```bash
+   mkdir -p ~/.contextweaver
+   ```
+
+   写入以下内容（将 `<API_KEY>` 替换为用户提供的硅基流动 API Key）：
+
+   ```env
+   # ContextWeaver 配置
+
+   # Embedding API - 硅基流动
+   EMBEDDINGS_API_KEY=<API_KEY>
+   EMBEDDINGS_BASE_URL=https://api.siliconflow.cn/v1/embeddings
+   EMBEDDINGS_MODEL=Qwen/Qwen3-Embedding-8B
+   EMBEDDINGS_MAX_CONCURRENCY=10
+   EMBEDDINGS_DIMENSIONS=1024
+
+   # Reranker - 硅基流动
+   RERANK_API_KEY=<API_KEY>
+   RERANK_BASE_URL=https://api.siliconflow.cn/v1/rerank
+   RERANK_MODEL=Qwen/Qwen3-Reranker-8B
+   RERANK_TOP_N=20
+   ```
+
+   > Embedding 和 Reranker 使用相同的 API Key。
+
+4. **写入 MCP 配置**：
+
+   在 `~/.gemini/antigravity/mcp_config.json` 的 `mcpServers` 中添加：
+
+   ```json
+   "contextweaver": {
+     "command": "contextweaver",
+     "args": ["mcp"]
+   }
+   ```
+
+5. **验证**：记录待统一重启后验证。
+
+### S5.3：Exa — 互联网语义搜索
+
+**功能**：让 AI 具备互联网搜索能力，查找博客、社区讨论、最新动态等泛化信息。
+
+**前置条件**：需要 ExaFree 社区提供的免费 API Key 和服务地址。
+
+**安装步骤**：
+
+1. **引导获取 ExaFree API Key**：
+
+   ```
+   Exa 搜索使用 ExaFree 公益站提供的免费服务。
+
+   获取方式：
+   1. 访问 https://linux.do 社区
+   2. 搜索「ExaFree」相关帖子，按帖子说明注册获取 API Key 和 Base URL
+
+   获取到后，请把 API Key 和 Base URL 告诉我。
+   ```
+
+   > 等待用户提供 API Key 和 Base URL 后再继续。
+
+2. **下载 exa-pool-mcp 脚本**：
+
+   ```bash
+   mkdir -p ~/.exa-pool-mcp
+   curl -o ~/.exa-pool-mcp/exa_pool_mcp.py https://raw.githubusercontent.com/TullyMonster/exa-pool-mcp/main/exa_pool_mcp.py
+   ```
+
+   > 需要已安装 `uv`（Python 包管理器）。如未安装：`curl -LsSf https://astral.sh/uv/install.sh | sh`
+
+3. **写入 MCP 配置**：
+
+   在 `~/.gemini/antigravity/mcp_config.json` 的 `mcpServers` 中添加（替换 `<BASE_URL>` 和 `<API_KEY>`）：
+
+   ```json
+   "exa": {
+     "command": "uv",
+     "args": [
+       "run",
+       "--directory",
+       "<用户 home 目录>/.exa-pool-mcp",
+       "exa_pool_mcp.py"
+     ],
+     "env": {
+       "EXA_POOL_BASE_URL": "<BASE_URL>",
+       "EXA_POOL_API_KEY": "<API_KEY>"
+     }
+   }
+   ```
+
+   > `--directory` 的路径必须是绝对路径，例如 `/home/username/.exa-pool-mcp`。
+
+4. **验证**：记录待统一重启后验证。
+
+### S5.4：安装后配置
+
+完成上述增强 MCP 安装后，执行以下收尾步骤：
+
+1. **写入检索优先级规则**：
+
+   检查用户的全局规则文件 `~/.gemini/GEMINI.md`：
+   - 文件不存在 → 创建文件，写入以下内容
+   - 文件已存在但不包含「检索优先级」相关内容（关键词：`Context7`） → 追加以下内容
+   - 文件已存在且已包含 → 跳过
+
+   ```markdown
+   ## 检索优先级
+
+   - **事实校验与检索（反幻觉）**：
+     对非语言内置的第三方库，**严禁依赖底层记忆，必须以最新检索为准**。
+     - **检索优先级**：`Context7`（首选官方文档）→ `Exa`（联网语义搜索）→ `GitHub`（开源社区实践）
+     - **代码检索**：语义搜索 → `ContextWeaver`；精确关键词 → `grep_search`
+     - **联网搜索**：官方文档 → `Context7`；泛化信息 → `Exa`；通用兜底 → `search_web`
+   ```
+
+2. **请求用户重启 IDE**：
+
+   ```
+   ✅ 增强 MCP 安装完成！
+
+   已配置：
+   - 📚 Context7 — 第三方库文档检索
+   - 🔍 ContextWeaver — 本地代码语义搜索
+   - 🌐 Exa — 互联网语义搜索
+   （仅列出用户实际安装的项）
+
+   检索优先级规则已写入全局配置。
+
+   请重启 Antigravity IDE 以使所有增强 MCP 生效。
+   重启完成后，请告诉我已重启。
+   ```
+
+3. **验证增强 MCP**：
+
+   用户确认重启后，逐一验证已安装的增强 MCP：
+   - **Context7**：调用 `mcp_context7_resolve-library-id` 查询任意库（如 `react`）
+   - **ContextWeaver**：调用 `mcp_contextweaver_codebase-retrieval` 搜索当前项目
+   - **Exa**：调用 `mcp_exa_exa_search` 搜索任意关键词
+
+   全部通过则确认安装成功。任何一项失败则协助排查。
 
 ---
 

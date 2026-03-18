@@ -74,7 +74,7 @@ easyAI 是一个为 [Antigravity IDE](https://antigravity.google/) 打造的 **A
 请读取这份指南，按步骤自动完成配置。
 ```
 
-AI 会自动完成 MCP 配置 + 项目初始化。**这就是 easyAI 的哲学** — 连安装都不需要你亲自动手。
+AI 会自动完成 MCP 配置 + 项目初始化，还会引导你选装增强 MCP（Context7 文档检索 + ContextWeaver 代码语义搜索 + Exa 互联网搜索）。**这就是 easyAI 的哲学** — 连安装都不需要你亲自动手。
 
 ### 方式二：命令行安装
 
