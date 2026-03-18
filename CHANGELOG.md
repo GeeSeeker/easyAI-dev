@@ -2,9 +2,24 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
-## [3.21.0] - 2026-03-18
+## [4.0.0] - 2026-03-18
 
 ### 新增
+
+- **外部 CLI 审查拦截机制 (Evidence Gate)** — MCP 状态机进入 under_review 前，强制要求达到 ABCDE 分级对应的 CLI 独立审查数量（A=3, B=2, C=1），否则硬阻断转移
+- **外部 CLI 角色定义系统** — 新增 7 个专属角色提示词（Codex/Claude/Gemini 的 Reviewer/Architect/Implementer 等），指导外部 CLI 按照特定规范审查
+- **独立上下文模式模板 (Context Profiles)** — 新增 `analyze-mode.md`、`review-mode.md`、`execute-mode.md`，精确控制不同阶段外部 CLI 的知识投喂量
+- **CLI 执行参数深化** — `cli-runner.js` 新增 `--session-id` (连续对话恢复) 和 `--context-mode` (分析/审查/执行三种核心流)
+- **外部 CLI 法官裁决集成** — `common-cli-dispatch` Step 5 升级，提取 CLI 独立审核意见并生成 `[ACCEPTED]` 或 `[REJECTED_CLI_ADVICE]` 首末裁决报告（verdict.md）
+- **Worker 动态委派 CLI 节点** — `worker-implement` 增加是否将明确代码委派外部 CLI 的自助分析节点
+- **PM 整合 CLI 需求分析** — `pm-brainstorm` 支持在 A/B 级复杂方案规划前，使用外部 CLI 的 analyze 模式预演并出具可行性报告
+- **计划自动驾驶 (Plan Auto-Review)** — Worker 产出执行计划后自动触发 CLI review，若 `[ACCEPTED]` 则静默全自动流转代码编写，将极大削减中断
+
+### 变更
+
+- **anti-hallucination Rule 主权更新** — 允许外部 CLI 直接修改项目文件，主控 AI (Antigravity) 肩负完整测试验收的最终安全兜底责任
+
+## [3.21.0] - 2026-03-18
 
 - **集中式工具权限矩阵** — 新增 `.trellis/config/permissions.yaml`，集中声明 AI 行为边界（工具分级、路径保护、角色权限）
 - **Brain Dump 同化器** — 新增 `pm-braindump-assimilate` Skill，解析用户非结构化输入并分类路由到框架各位置
