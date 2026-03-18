@@ -59,6 +59,8 @@ files:
     role: Worker 会话收尾（journal + Skill 审计 + Git 提交 + 恢复指引，正常完成时由 worker-check 自动衔接）
   - path: .agents/rules/glob/coding-standards.md
     role: 编码规范（Worker 编写代码时自动注入）
+  - path: .agents/skills/common-github-cli/SKILL.md
+    role: GitHub CLI 集成（Worker 需要 GitHub 平台交互时激活）
   - tool: task_get
     role: 任务详情读取（含约束集、验收标准、frozen_context）
   - tool: task_append_log

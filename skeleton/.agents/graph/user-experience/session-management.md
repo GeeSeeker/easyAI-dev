@@ -26,6 +26,8 @@ files:
     role: 日志写入（会话收尾时沉淀工作记录）
   - tool: journal_search
     role: 日志搜索（会话启动时检索历史上下文）
+  - path: .agents/skills/common-semantic-map/SKILL.md
+    role: 项目语义地图（pm-session-start 检测缺失时触发生成）
 ---
 
 # 会话管理

@@ -30,8 +30,10 @@ skill_chain:
     - worker-debug # PM 收到 L3 blocker 后可能需要介入调试分析
     - common-spec-update
     - pm-milestone-archive
+    - pm-braindump-assimilate # 用户提供非结构化想法/需求文本时激活
     - common-cli-dispatch # PM 需要外部 CLI 审查时激活
     - common-github-cli # PM 需要 GitHub 平台交互时激活（搜索代码/Issue、创建 PR 等）
+    - common-semantic-map # PM 会话启动时检测是否需要生成语义地图
   common_skills:
     - pm-session-close
 files:
@@ -66,6 +68,12 @@ files:
     role: 文件范围冲突检测（创建任务前必须调用）
   - tool: plan_validate
     role: 反面模式检测（规划产出自检）
+  - path: .agents/skills/pm-braindump-assimilate/SKILL.md
+    role: Brain Dump 同化（非结构化想法 → 分类路由）
+  - path: .agents/skills/common-github-cli/SKILL.md
+    role: GitHub CLI 集成（搜索代码/Issue、创建 PR、管理 Release 等）
+  - path: .agents/skills/common-semantic-map/SKILL.md
+    role: 项目语义地图（pm-session-start 检测缺失时触发生成）
 ---
 
 # PM 工作流
