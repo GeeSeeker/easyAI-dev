@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.2.0] - 2026-03-19
+
+### 新增
+
+- **GitHub CLI 轻量集成 Skill** — 新增 `common-github-cli` Skill，用 `gh` CLI 替代重量级 GitHub MCP Server（节省约 5000 tokens 上下文），按需激活不常驻，覆盖搜索代码/Issue、创建 PR、管理 Release 等日常操作
+
 ## [4.1.0] - 2026-03-19
 
 ### 新增
