@@ -33,45 +33,48 @@ const geminiBackend = {
   buildArgs(config) {
     const args = [];
 
-    // JSON 流输出 + 自动确认
-    args.push("-o", "stream-json", "-y");
+    // JSON 输出 + 自动确认 + 非交互模式
+    args.push("-o", "json", "-y");
 
     // 传入工作目录（Gemini 用 --include-directories）
     if (config.workdir) {
       args.push("--include-directories", config.workdir);
     }
 
+    // -p 启用非交互模式（prompt 通过 stdin 传入）
+    args.push("-p");
+
     return args;
   },
 
   /**
-   * 解析 Gemini 的 stream-json 输出，合并 delta 内容
+   * 解析 Gemini 的 JSON 输出（-o json 模式，单个 JSON 对象）
    * @param {string} stdout - 原始 stdout 文本
    * @returns {object} 解析结果
    */
   parseOutput(stdout) {
-    const { parseJSONLines } = require("../lib/parser");
-    const { events, rawLines } = parseJSONLines(stdout);
-
-    const contentParts = [];
-    let sessionId = null;
-
-    for (const event of events) {
-      // 提取 session_id
-      if (event.session_id && !sessionId) {
-        sessionId = event.session_id;
-      }
-      // 合并 delta 内容
-      if (event.content) {
-        contentParts.push(event.content);
-      }
+    const trimmed = stdout.trim();
+    if (!trimmed) {
+      return { message: "", session_id: null, raw_text: null };
     }
 
-    return {
-      message: contentParts.join(""),
-      session_id: sessionId,
-      raw_text: rawLines.length > 0 ? rawLines.join("\n") : null,
-    };
+    try {
+      const data = JSON.parse(trimmed);
+      return {
+        message: data.response || "",
+        session_id: data.session_id || null,
+        raw_text: null,
+        // 保存 stats 供后续 Token 成本分析使用
+        stats: data.stats || null,
+      };
+    } catch (_err) {
+      // JSON 解析失败，降级为纯文本
+      return {
+        message: trimmed,
+        session_id: null,
+        raw_text: trimmed,
+      };
+    }
   },
 
   /**
@@ -94,6 +97,9 @@ const geminiBackend = {
     "Loading extension:",
     "YOLO mode is enabled",
     "Loaded cached credentials",
+    "[ERROR] [IDEConnectionUtils]",
+    "[ERROR] [IDEClient]",
+    "is overriding the built-in skill",
   ],
 };
 

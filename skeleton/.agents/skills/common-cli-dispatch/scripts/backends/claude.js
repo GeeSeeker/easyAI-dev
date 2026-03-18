@@ -14,11 +14,11 @@ const claudeBackend = {
 
   // 能力声明
   capabilities: {
-    supports_json: true,
-    supports_stream_json: true,
+    supports_json: false,
+    supports_stream_json: false,
     supports_resume: true,
     stdin_mode: false,
-    cwd_flag: null, // Claude 不支持 -C，通过 cmd.Dir 设置
+    cwd_flag: null, // Claude 不支持 -C，通过 spawn options.cwd 设置
     needs_post_message_delay: false,
   },
 
@@ -31,44 +31,24 @@ const claudeBackend = {
    * @returns {string[]} CLI 参数数组
    */
   buildArgs(config) {
-    const args = ["-p"];
-
-    // 禁用所有设置源（防止递归调用）
-    args.push("--setting-sources", "");
-
-    // JSON 流输出
-    args.push("--output-format", "stream-json", "--verbose");
+    // 与 MCP 参考项目（claude-code-mcp）完全一致的参数
+    const args = ["--dangerously-skip-permissions", "-p"];
 
     return args;
   },
 
   /**
-   * 解析 Claude 的 stream-json 输出，提取 result
+   * 解析 Claude 的纯文本输出
    * @param {string} stdout - 原始 stdout 文本
    * @returns {object} 解析结果
    */
   parseOutput(stdout) {
-    const { parseJSONLines } = require("../lib/parser");
-    const { events, rawLines } = parseJSONLines(stdout);
-
-    let message = "";
-    let sessionId = null;
-
-    for (const event of events) {
-      // 提取 session_id
-      if (event.session_id && !sessionId) {
-        sessionId = event.session_id;
-      }
-      // 提取最终 result
-      if (event.result) {
-        message = event.result;
-      }
-    }
+    const trimmed = stdout.trim();
 
     return {
-      message,
-      session_id: sessionId,
-      raw_text: rawLines.length > 0 ? rawLines.join("\n") : null,
+      message: trimmed,
+      session_id: null,
+      raw_text: null,
     };
   },
 

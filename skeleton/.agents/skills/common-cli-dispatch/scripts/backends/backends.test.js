@@ -46,33 +46,31 @@ for (const backend of [codex, claude, gemini]) {
   console.log("✅ Codex buildArgs 正确");
 }
 
-// --- 测试：Claude buildArgs 包含 stream-json 和 --setting-sources ---
+// --- 测试：Claude buildArgs 包含 --dangerously-skip-permissions 和 -p ---
 {
   const args = claude.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(
-    args.includes("stream-json"),
-    "Claude args 应包含 stream-json",
-  );
-  console.assert(
-    args.includes("--setting-sources"),
-    "Claude args 应包含 --setting-sources",
+    args.includes("--dangerously-skip-permissions"),
+    "Claude args 应包含 --dangerously-skip-permissions",
   );
   console.assert(args.includes("-p"), "Claude args 应包含 -p");
+  console.assert(
+    !args.includes("--output-format"),
+    "Claude args 不应包含 --output-format（使用纯文本模式）",
+  );
   console.log("✅ Claude buildArgs 正确");
 }
 
-// --- 测试：Gemini buildArgs 包含 stream-json 和 --include-directories ---
+// --- 测试：Gemini buildArgs 包含 json 和 --include-directories 和 -p ---
 {
   const args = gemini.buildArgs({ workdir: "/project", mode: "review" });
-  console.assert(
-    args.includes("stream-json"),
-    "Gemini args 应包含 stream-json",
-  );
+  console.assert(args.includes("json"), "Gemini args 应包含 json");
   console.assert(
     args.includes("--include-directories"),
     "Gemini args 应包含 --include-directories",
   );
   console.assert(args.includes("-y"), "Gemini args 应包含 -y");
+  console.assert(args.includes("-p"), "Gemini args 应包含 -p");
   console.log("✅ Gemini buildArgs 正确");
 }
 
@@ -92,34 +90,31 @@ for (const backend of [codex, claude, gemini]) {
   console.log("✅ Codex parseOutput 正确");
 }
 
-// --- 测试：Claude parseOutput 提取 result ---
+// --- 测试：Claude parseOutput 提取纯文本 ---
 {
-  const stdout = [
-    '{"type":"assistant","session_id":"s456","subtype":"init"}',
-    '{"type":"result","session_id":"s456","result":"analysis complete"}',
-  ].join("\n");
+  const stdout = "analysis complete\n";
   const result = claude.parseOutput(stdout);
   console.assert(
     result.message === "analysis complete",
     `Claude 解析不正确: "${result.message}"`,
   );
-  console.assert(result.session_id === "s456", "Claude session_id 不正确");
   console.log("✅ Claude parseOutput 正确");
 }
 
-// --- 测试：Gemini parseOutput 合并 delta 内容 ---
+// --- 测试：Gemini parseOutput 解析单 JSON 对象（-o json 模式） ---
 {
-  const stdout = [
-    '{"type":"init","session_id":"g789"}',
-    '{"type":"message","content":"part1 ","delta":true}',
-    '{"type":"message","content":"part2","delta":true}',
-  ].join("\n");
+  const stdout = JSON.stringify({
+    session_id: "g789",
+    response: "code looks good",
+    stats: { models: {} },
+  });
   const result = gemini.parseOutput(stdout);
   console.assert(
-    result.message === "part1 part2",
+    result.message === "code looks good",
     `Gemini 解析不正确: "${result.message}"`,
   );
   console.assert(result.session_id === "g789", "Gemini session_id 不正确");
+  console.assert(result.stats !== null, "Gemini stats 应非 null");
   console.log("✅ Gemini parseOutput 正确");
 }
 

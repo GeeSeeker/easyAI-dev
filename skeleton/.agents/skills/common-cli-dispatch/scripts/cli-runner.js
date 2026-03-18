@@ -223,7 +223,14 @@ function executeBackend(backendInfo, config) {
 
     const child = spawn(backend.command, cliArgs, {
       cwd: backend.capabilities.cwd_flag ? undefined : config.workdir,
-      stdio: ["pipe", "pipe", "pipe"],
+      // stdin_mode: true 的 backend（如 Codex）通过 pipe 传入 prompt
+      // stdin_mode: false 的 backend（如 Claude、Gemini）通过 CLI 参数传入
+      // 后者必须设 stdin 为 'ignore'，否则 CLI 会等待 stdin 输入导致挂起
+      stdio: [
+        backend.capabilities.stdin_mode ? "pipe" : "ignore",
+        "pipe",
+        "pipe",
+      ],
     });
 
     let stdout = "";
@@ -365,16 +372,21 @@ async function main() {
   // 保存结果文件
   saveResults(results, config.outputDir, config.taskId);
 
-  // 输出到 stdout（主控 AI 读取）
-  if (results.length === 1) {
-    process.stdout.write(formatSingleResult(results[0], config.taskId));
-  } else {
-    process.stdout.write(formatMultiResult(results, config.taskId));
-  }
-
   // 设置退出码（任一失败则非零）
   const hasFailure = results.some((r) => r.exit_code !== 0);
-  process.exit(hasFailure ? 1 : 0);
+  const exitCode = hasFailure ? 1 : 0;
+
+  // 输出到 stdout（主控 AI 读取）
+  // 注意：非 TTY 管道场景下 stdout 是异步的，
+  // 必须等 write 回调完成后再退出，否则输出会丢失
+  const output =
+    results.length === 1
+      ? formatSingleResult(results[0], config.taskId)
+      : formatMultiResult(results, config.taskId);
+
+  process.stdout.write(output, () => {
+    process.exit(exitCode);
+  });
 }
 
 // 导出供测试使用

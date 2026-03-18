@@ -3,7 +3,7 @@
 # 框架基本信息
 framework:
   name: easyAI
-  version: "3.19.3" # 与 .easyai-version 保持一致
+  version: "3.19.4" # 与 .easyai-version 保持一致
   description: "让用户以纯客户的视角进行软件开发"
 
 # 用户交互级别（架构 §5.4 · 核心需求 #2 自适应交互）
@@ -12,21 +12,33 @@ user_level: intermediate # novice | intermediate | expert
 
 # 开发者信息（init 后由 AI 引导填写，PM 启动时硬性校验）
 developer:
-  name: "" # 你的名字 → workspace/{name}/ 文件夹名，为空时 PM 启动会阻断并引导填写
+  name: "GeeSeeker" # 你的名字 → workspace/{name}/ 文件夹名，为空时 PM 启动会阻断并引导填写
 
-# 外部 CLI 调用方式已迁移至 common-cli-dispatch Skill
-# 参见 .agents/skills/common-cli-dispatch/SKILL.md
+# 可调用的外部 CLI（AI 在需要时自动调用）
+# 示例: ["Gemini CLI", "Claude Code", "Codex CLI"]
+external_cli: ["Gemini CLI", "Claude Code", "Codex CLI"]
 
 # 核心规范（AI 必须强制遵守，不可跳过）
-# 示例: ["所有 API 必须有错误处理", "禁止使用 any 类型"]
-core_rules: []
+core_rules:
+  - "禁止使用 any 类型（TypeScript）"
+  - "所有公共函数必须有 JSDoc/docstring 注释"
+  - "禁止空 catch 块，必须记录或上抛错误"
+  - "脚本零外部 npm 依赖 — 仅 Node.js 内置模块"
 
 # 强制规定（被 MCP 自动注入，运行时硬拦截）
-# 示例: ["任务必须经 PM 审批才能开始", "Worker 禁止 push 代码"]
-mcp_enforced: []
+mcp_enforced:
+  - "任务状态转移必须符合状态机规则（MCP task_transition 校验）"
+  - "提交验收必须通过 Evidence Gate（三标记全 PASS/NA）"
+  - "Worker 禁止 push 代码（仅允许本地 commit）"
+  - "创建任务前必须通过 conflict_check 文件冲突检测"
 
-# 其他功能（AI 分析后自行补充）
-features: []
+# 已启用的框架功能
+features:
+  - "ABCDE 分级审查体系（A=3 CLI / B=2 / C=1 / D-E=0）"
+  - "外部 CLI 统一调度（common-cli-dispatch + cli-runner.js）"
+  - "知识图谱驱动的框架架构管理（.agents/graph/）"
+  - "任务生命周期管理（pending → in_progress → under_review → completed）"
+  - "会话记忆系统（journal + workspace）"
 
 # MCP Server 配置
 mcp:
@@ -110,7 +122,7 @@ team:
         - "全栈开发"
         - "项目管理"
         - "需求分析"
-      concurrency: 1 # 单会话
+      concurrency: 6 # 单会话
 
     - name: "Codex CLI"
       type: "external_cli"
@@ -126,6 +138,7 @@ team:
       type: "external_cli"
       cli_command: "claude"
       strengths:
+        - "超多用量"
         - "代码审查"
         - "架构分析"
         - "重构建议"
@@ -139,4 +152,5 @@ team:
         - "前端审查"
         - "可维护性分析"
         - "模式一致性检查"
+        - "顶级多模态能力"
       concurrency: 1 # 单实例
