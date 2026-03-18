@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.2.1] - 2026-03-19
+
+### 修复
+
+- **common-github-cli Skill 补全** — 补充缺失命令：`gh issue edit`、`gh pr edit`、`gh release list`、`gh repo create/fork`；修复 temp file 路径为 `.tmp/`；添加 auth scope 提示和 `--repo` 可选说明
+
 ## [4.2.0] - 2026-03-19
 
 ### 新增
