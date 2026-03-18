@@ -1,6 +1,6 @@
 {
-  "version": "4.0.0",
-  "generatedAt": "2026-03-18T17:15:03.500Z",
+  "version": "4.2.0",
+  "generatedAt": "2026-03-18T19:20:18.744Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -69,10 +69,10 @@
       "hash": "e1e7fb5db0f01246efa2a4ccfc2e86bfbced203bd5083dd58e0679bea25b2226"
     },
     ".agents/graph/role-system/pm-workflow.md": {
-      "hash": "f1b80ef07cedbb304abae0230826ee407cbc816068c76ad48d6373e5ae25b9fc"
+      "hash": "6b60c4df7dfabb4527ac8974b5925a19a46bfe5975ccdb15cf3a997283c573c2"
     },
     ".agents/graph/role-system/worker-workflow.md": {
-      "hash": "abf8496d68046b46d79ad98bbefb15984218a8a62e625b621c9243ed8c600452"
+      "hash": "3abfe5f2d5a0494fa70bd2537a253dc44e4cbe646ce7cfcbcf8d8a3f42ca8d7a"
     },
     ".agents/graph/user-experience/_domain.md": {
       "hash": "1d29d1a4498485f1df37398deea5f1b649bb402c8074a4acd3437bf489e8bc04"
@@ -173,6 +173,9 @@
     ".agents/skills/common-cli-dispatch/templates/roles/gemini-reviewer.md": {
       "hash": "a3f06a105f8cec8a144128d33e275745fd62e39cde1d9a22a23dc0d859efae51"
     },
+    ".agents/skills/common-github-cli/SKILL.md": {
+      "hash": "8344d5284901c28f729e35a9c618a7e5d67bc18be9142615859205ea629947f8"
+    },
     ".agents/skills/common-semantic-map/SKILL.md": {
       "hash": "07de8140a770a5d2aaf24b6be689dd3a1dcd8d73b5d6ed7cc944fa7d2150b7a6"
     },
@@ -249,7 +252,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "4e6e329ee2c93c44c5431135ae6811cc08b69a446ec037fa97d6c299c50ee993",
+      "hash": "b6b17c1e74162c01afb6a0ade1b43dde2e098a5f20847087376c23b23503aff6",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {

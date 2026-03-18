@@ -31,6 +31,7 @@ skill_chain:
     - common-spec-update
     - pm-milestone-archive
     - common-cli-dispatch # PM 需要外部 CLI 审查时激活
+    - common-github-cli # PM 需要 GitHub 平台交互时激活（搜索代码/Issue、创建 PR 等）
   common_skills:
     - pm-session-close
 files:

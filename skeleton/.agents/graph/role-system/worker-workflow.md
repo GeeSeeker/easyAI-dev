@@ -39,6 +39,7 @@ skill_chain:
   conditional_branches:
     - worker-debug
     - common-cli-dispatch # Worker 需要外部 CLI 审查时激活
+    - common-github-cli # Worker 需要 GitHub 平台交互时激活
   common_skills:
     - worker-session-close
 files:
