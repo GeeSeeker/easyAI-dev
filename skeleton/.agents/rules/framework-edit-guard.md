@@ -30,6 +30,16 @@ description: Framework edit guard — mandatory graph consultation and knowledge
 
 > 此约束与约束 3（图谱必须同步更新）互补：约束 1 是修改**前**查图谱了解全貌，约束 1b 是修改**后**检查图谱是否需要同步。
 
+## 约束 1c：非任务上下文修改提醒
+
+当 AI 在**非正式任务上下文**中（即未通过 `/actor-worker {task_id}` 启动、没有活跃任务 ID 关联）修改 `.agents/`、`.trellis/spec/`、`.trellis/config/`、`packages/` 下的框架文件时：
+
+1. **提醒检查图谱**：输出 `⚠️ 当前修改未关联正式任务，请确认图谱一致性`
+2. **建议创建任务**：提示 `💡 建议为此修改创建正式任务（task_create），以便追踪变更历史和图谱同步`
+3. **不阻塞执行**：此约束为提醒性质，不强制阻断（用户确认后可继续）
+
+> 此约束的目的是防止非任务上下文的「随手改」绕过任务系统的变更追踪和图谱同步机制。
+
 ## 约束 2：修改 Skill 前必须读 skill-creator
 
 修改 `.agents/skills/` 下任何 SKILL.md 前，**必须**先读取 `skill-creator` Skill 的 SKILL.md。

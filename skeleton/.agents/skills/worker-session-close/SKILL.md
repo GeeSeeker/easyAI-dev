@@ -64,16 +64,26 @@ journal_append({
 3. **有违规** → 调用 `journal_append()` 追加 `[RULE_BREACH]` 条目
 4. **无违规** → 在恢复指引中标记 `✅ Rules 合规`
 
-### Step 3.5：图谱一致性检查（仅报警）
+### Step 3.5：图谱一致性检查（报警 + 跨会话追踪）
 
 > 检查本会话中修改的框架文件是否与图谱节点 `files` 引用一致。
 
-1. 执行 `git diff --name-only` 获取本会话变更的文件列表
+1. 执行 `git diff --name-only HEAD~1..HEAD` 获取最近一次提交变更的文件列表
+   - 使用 commit range 而非 working tree diff，确保检查的是已提交的变更
    - **无 diff 时自动跳过**此步骤
 2. 筛选匹配 `.agents/`、`.trellis/spec/`、`.trellis/config/`、`packages/` 的文件
 3. 与图谱节点（`.agents/graph/` 下所有节点文件）的 `files` 字段交叉比对
-4. 发现不一致时输出报警（**仅报警，不阻塞收工**）：
-   - 格式：`⚠️ 图谱过期：{节点名} 引用的 {文件路径} 已变更，建议更新节点`
+4. 发现不一致时：
+   - 输出报警（**仅报警，不阻塞收工**）：`⚠️ 图谱过期：{节点名} 引用的 {文件路径} 已变更，建议更新节点`
+   - 调用 `journal_append()` 写入跨会话追踪条目：
+     ```
+     journal_append({
+       date: "当天日期",
+       tags: ["graph-stale", "T{id}"],
+       content: "[GRAPH_STALE] 图谱节点 {节点名} 引用的 {文件路径} 已变更但图谱未同步更新。发现于任务 T{id} 收工检查。",
+       tasks_touched: ["T{id}"]
+     })
+     ```
 
 ### Step 4：Skill 使用审计
 

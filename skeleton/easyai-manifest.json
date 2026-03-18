@@ -1,6 +1,6 @@
 {
-  "version": "3.19.6",
-  "generatedAt": "2026-03-18T11:41:38.965Z",
+  "version": "3.20.0",
+  "generatedAt": "2026-03-18T13:13:41.430Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -96,7 +96,7 @@
       "hash": "33e1bbb457b64de7ba72817dae1414b1f6558069cbdc1f9e6456d7b01bc276ff"
     },
     ".agents/rules/framework-edit-guard.md": {
-      "hash": "61bf38dae85b9650f8183a5e48b057910fe384523e48df62e72387cd5d22fd81"
+      "hash": "ff6cc040973ef31d37d614eb16378417042884adc675ad0e8839b247ea261c9b"
     },
     ".agents/rules/project-identity.md": {
       "hash": "5972769a2d8a48bf13801f2b4d84b9755162e605ce19fafe3832b8f94a96150f"
@@ -174,7 +174,7 @@
       "hash": "0c4b44efed11fc77206e2b18e1a93fb2d6ac1fdc215235bc598a30036e27b028"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
-      "hash": "f9a6de4068777d09a538dd2265c848a56d4cca79528461f268da47a9fc52cc32"
+      "hash": "16d1809f334ad1c121046abda9af7bfe7b6dbf6486e4b60783d6c63eaa7fc255"
     },
     ".agents/skills/pm-task-planning/SKILL.md": {
       "hash": "a0228fb3e032388e5794aa7a4b43e1fd0832c9dcf9ec0350c339a8a011487ad4"
@@ -195,7 +195,7 @@
       "hash": "e3a6c1b4851c2352da7bd88abccc2b93bd304ba09097711d887acc9477c078d5"
     },
     ".agents/skills/worker-session-close/SKILL.md": {
-      "hash": "e555223a9bc70e3b2eb5f7d9d57c13b9c0f50c1695211cac16d20fd736d91190"
+      "hash": "b99b5bc23c3265df6fd09b4395cdfff968c944330ea31de2cdc4b1fb8f616887"
     },
     ".agents/workflows/actor-pm.md": {
       "hash": "ceeca737cf447b11efa23865078ec3e00ada271265f82ba703c3d6e778265a41"
@@ -204,7 +204,7 @@
       "hash": "4dfaa33f33b32911785f6f45ad88e0eed814a963f02247064b67a12d80b13553"
     },
     ".agents/workflows/common-skill-eval.md": {
-      "hash": "bb2f97bb51b2845a8bdb1ab7ebf8a8892b3916af2c03e8da05dde5a568157d2c"
+      "hash": "c1e008ddee37289caeaec919168c302a97ea3394c476871092067582e5c33a8b"
     },
     ".agents/workflows/worker-quick-fix.md": {
       "hash": "ce607552ed39ab759cc55c6635cb441dbe3cde529156adc802c2281a7f04209e"
@@ -222,7 +222,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "fbbedcf57579ab603168333e1625a4bd0a09ef2bde7b0715a3f55a2a78b6204b",
+      "hash": "e71bf9917fa086bf5495c8fb885b930c04f4823f8d9ea65e8009473330ff0329",
       "merge_mode": "append"
     },
     ".trellis/spec/general/adr-template.md": {
