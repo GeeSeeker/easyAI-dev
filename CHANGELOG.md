@@ -2,6 +2,19 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.21.0] - 2026-03-18
+
+### 新增
+
+- **集中式工具权限矩阵** — 新增 `.trellis/config/permissions.yaml`，集中声明 AI 行为边界（工具分级、路径保护、角色权限）
+- **Brain Dump 同化器** — 新增 `pm-braindump-assimilate` Skill，解析用户非结构化输入并分类路由到框架各位置
+- **Worker 标准化完成汇报** — `worker-session-close` Step 7 改为固定格式汇报（含任务 ID、变更摘要、验证结果、可复制的 PM 验收提示词）
+- **PM 记事本主动记录** — `pm-session-start` 新增 Step 3.3（PM 记事本恢复）和 Step 3.65（权限矩阵概览）；`actor-pm` 新增记事本主动记录约束
+
+### 修复
+
+- **任务编号重复** — `generateTaskId()` 改为递归扫描归档子目录（`archive/YYYY-MM/`），修复里程碑归档后新建任务编号重复的 Bug
+
 ## [3.20.0] - 2026-03-18
 
 ### 新增
