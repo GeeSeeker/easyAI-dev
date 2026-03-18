@@ -37,16 +37,23 @@ interface ParsedTask {
 }
 /**
  * 获取项目根目录
- * 检测优先级：
- *   1. EASYAI_PROJECT_ROOT 环境变量（显式指定）
- *   2. process.cwd() 向上遍历查找 .trellis（IDE 工作目录在项目内时有效）
- *   3. __dirname 向上遍历查找 .trellis（MCP Server 安装在项目 node_modules 内时有效）
+ * 检测优先级（每次调用都重新检测，无缓存）：
+ *   0. MCP roots 协议（IDE 自动传递工作区路径，最高优先级）
+ *   1. EASYAI_PROJECT_ROOT 环境变量（用户手动指定，兜底）
+ *   2. process.cwd() 向上遍历查找 .trellis
+ *   3. __dirname 向上遍历查找 .trellis
  * @returns 项目根目录的绝对路径
  */
 declare function getProjectRoot(): string;
 /**
- * 重置项目根目录缓存
- * 仅供测试和极端场景使用
+ * 设置由 MCP roots 协议提供的项目根目录
+ * 在 MCP Server 连接后由 index.ts 调用
+ * @param rootPath - IDE 工作区的绝对路径
+ */
+declare function setProjectRootFromRoots(rootPath: string): void;
+/**
+ * 重置项目根目录（清除 roots 设置）
+ * 仅供测试和 rootsListChanged 通知使用
  */
 declare function resetProjectRootCache(): void;
 /**
@@ -124,5 +131,5 @@ declare function getRequiredCliCount(body: string): number;
  */
 declare function getActualCliRecordCount(taskPath: string): number;
 export type { TaskStatus, TaskMetadata, ParsedTask };
-export { TRELLIS_ROOT, DEFAULT_TASKS_ROOT, DEFAULT_ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, getRequiredCliCount, getActualCliRecordCount, };
+export { TRELLIS_ROOT, DEFAULT_TASKS_ROOT, DEFAULT_ARCHIVE_ROOT, VALID_TRANSITIONS, getProjectRoot, setProjectRootFromRoots, resetProjectRootCache, getTasksDir, getArchiveDir, getTaskDir, generateTaskId, slugify, parseTaskMd, serializeTaskMd, isValidTransition, listTaskDirs, ensureDir, getRequiredCliCount, getActualCliRecordCount, };
 //# sourceMappingURL=task-utils.d.ts.map

@@ -3,29 +3,30 @@
 # 框架基本信息
 framework:
   name: easyAI
-  version: "4.2.4" # 与 .easyai-version 保持一致
+  version: "4.2.5" # 与 .easyai-version 保持一致
   description: "让用户以纯客户的视角进行软件开发"
 
-# 用户交互级别（架构 §5.4 · 核心需求 #2 自适应交互）
+# 用户交互级别
 # AI 根据此配置调整输出详细度和引导方式
 user_level: intermediate # novice | intermediate | expert
 
-# 开发者信息（init 后由 AI 引导填写，PM 启动时硬性校验）
+# 开发者信息（PM 首次启动时会引导你填写）
 developer:
-  name: "GeeSeeker" # 你的名字 → workspace/{name}/ 文件夹名，为空时 PM 启动会阻断并引导填写
+  name: "" # 你的名字 → workspace/{name}/ 文件夹名，为空时 PM 启动会引导填写
 
 # 可调用的外部 CLI（AI 在需要时自动调用）
+# PM 首次启动时会引导你配置，也可以之后手动添加
 # 示例: ["Gemini CLI", "Claude Code", "Codex CLI"]
-external_cli: ["Gemini CLI", "Claude Code", "Codex CLI"]
+external_cli: []
 
 # 核心规范（AI 必须强制遵守，不可跳过）
-core_rules:
-  - "禁止使用 any 类型（TypeScript）"
-  - "所有公共函数必须有 JSDoc/docstring 注释"
-  - "禁止空 catch 块，必须记录或上抛错误"
-  - "脚本零外部 npm 依赖 — 仅 Node.js 内置模块"
+# PM 首次启动时会引导你设定，也可以之后手动添加
+# 示例:
+#   - "禁止使用 any 类型（TypeScript）"
+#   - "所有 API 必须有单元测试"
+core_rules: []
 
-# 强制规定（被 MCP 自动注入，运行时硬拦截）
+# 强制规定（框架内置，由 MCP 自动注入，运行时硬拦截）
 mcp_enforced:
   - "任务状态转移必须符合状态机规则（MCP task_transition 校验）"
   - "提交验收必须通过 Evidence Gate（三标记全 PASS/NA）"
@@ -51,8 +52,6 @@ tasks:
   root: .trellis/tasks
   archive: .trellis/tasks/archive
   max_subtasks: 10 # 单任务最大子任务数
-  # TODO: auto_freeze: true      — 待 MCP task-transition.ts 实现 config 读取后启用
-  # TODO: stale_detection: true   — 待 MCP 实现 context-snapshot 哈希对比后启用
   statuses:
     - pending # 待分配
     - in_progress # 执行中
@@ -67,7 +66,6 @@ journal:
   root: .trellis/workspace
   maxLinesPerFile: 2000
   dateFormat: "YYYY-MM-DD"
-  # TODO: auto_archive_days: 30  — 待 MCP 实现自动归档逻辑后启用
 
 # 规范文件配置
 spec:
@@ -81,8 +79,8 @@ spec:
 
 # 上下文预算配置
 context:
-  warningThreshold: 0.6 # 60% 时开始降级（与 MCP context-budget.ts 运行时一致）
-  criticalThreshold: 0.8 # 80% 时建议新会话（与 MCP context-budget.ts 运行时一致）
+  warningThreshold: 0.6 # 60% 时开始降级
+  criticalThreshold: 0.8 # 80% 时建议新会话
   auto_downgrade: true # 超过 warning 阈值时自动降级 recommended → deferred
   phaseBudget:
     plan: 40000
@@ -90,9 +88,8 @@ context:
     check: 30000
     debug: 50000
 
-# 任务路由配置（F39 + O3）
+# 任务路由配置
 # PM 创建任务时根据此配置推荐审查策略和执行模式
-# ABCDE 分级体系（来源：common-skill-eval §3 + common-cli-dispatch §3.2）
 routing:
   # ABCDE 分级 → 审查策略映射
   grade_review_mapping:
@@ -102,7 +99,7 @@ routing:
     D: 0 # 🟢 低风险 / 测试 / 配置 → PM 自审
     E: 0 # — 文档 / 注释 / 格式 → 无需审查
 
-  # D/E 级自动识别白名单（F41）— 匹配时自动标记为 D 级或 E 级
+  # D/E 级自动识别白名单 — 匹配时自动标记为 D 级或 E 级
   # 注意：.agents/ 和 .trellis/spec/ 下的文件始终为 B 级以上，不受白名单影响
   auto_downgrade_whitelist:
     - "docs_only" # 纯文档变更（.md 文件）→ E 级
@@ -112,7 +109,7 @@ routing:
     - "test_addition" # 纯测试新增（不改生产代码）→ D 级
     - "task_board" # 看板维护（任务创建 / 归档）→ E 级
 
-# AI 团队资源清单（F43）
+# AI 团队资源清单
 # PM 做任务路由决策时参考此配置选择审查者
 team:
   roster:
@@ -124,33 +121,22 @@ team:
         - "需求分析"
       concurrency: 6 # 单会话
 
-    - name: "Codex CLI"
-      type: "external_cli"
-      cli_command: "codex"
-      strengths:
-        - "后端逻辑"
-        - "算法分析"
-        - "安全检查"
-        - "代码执行验证"
-      concurrency: 1 # 单实例
 
-    - name: "Claude Code"
-      type: "external_cli"
-      cli_command: "claude"
-      strengths:
-        - "超多用量"
-        - "代码审查"
-        - "架构分析"
-        - "重构建议"
-        - "多文件关联分析"
-      concurrency: 1 # 单实例
-
-    - name: "Gemini CLI"
-      type: "external_cli"
-      cli_command: "gemini"
-      strengths:
-        - "前端审查"
-        - "可维护性分析"
-        - "模式一致性检查"
-        - "顶级多模态能力"
-      concurrency: 1 # 单实例
+    # 外部 CLI 示例（PM 首次启动时会引导你配置）：
+    # - name: "Codex CLI"
+    #   type: "external_cli"
+    #   cli_command: "codex"
+    #   strengths: ["后端逻辑", "安全检查", "代码执行验证"]
+    #   concurrency: 1
+    #
+    # - name: "Claude Code"
+    #   type: "external_cli"
+    #   cli_command: "claude"
+    #   strengths: ["代码审查", "架构分析", "多文件关联分析"]
+    #   concurrency: 1
+    #
+    # - name: "Gemini CLI"
+    #   type: "external_cli"
+    #   cli_command: "gemini"
+    #   strengths: ["前端审查", "可维护性分析", "多模态能力"]
+    #   concurrency: 1
