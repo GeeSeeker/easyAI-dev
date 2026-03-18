@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.2.3] - 2026-03-19
+
+### 修复
+
+- **文档前缀约定补全** — `artifact-pipeline` 图谱节点新增完整前缀约定表（`[DONE]`/`[OBSOLETE]`/`[MILESTONE]`），修复 AI 操作 `.docs/` 时因图谱信息不完整而无法发现已有前缀规则的问题
+- **framework-edit-guard 新增约束 1d** — `.docs/` 下创建/重命名/移动/归档文件时，要求 AI 先查阅 `artifact-pipeline` 图谱节点，防止违反前缀约定
+
 ## [4.2.2] - 2026-03-19
 
 ### 文档
