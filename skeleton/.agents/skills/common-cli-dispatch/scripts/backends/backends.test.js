@@ -118,6 +118,44 @@ for (const backend of [codex, claude, gemini]) {
   console.log("✅ Gemini parseOutput 正确");
 }
 
+// --- 测试：Codex execute 模式包含 sandbox_permissions ---
+{
+  const args = codex.buildArgs({ workdir: "/project", mode: "execute" });
+  const joined = args.join(" ");
+  console.assert(
+    joined.includes("sandbox_permissions"),
+    "Codex execute 应包含 sandbox_permissions",
+  );
+  console.assert(
+    joined.includes("disk-write-access"),
+    "Codex execute 应包含 disk-write-access",
+  );
+  console.log("✅ Codex execute buildArgs 正确");
+}
+
+// --- 测试：Claude execute 模式与 review 一致 ---
+{
+  const reviewArgs = claude.buildArgs({ workdir: "/project", mode: "review" });
+  const execArgs = claude.buildArgs({ workdir: "/project", mode: "execute" });
+  console.assert(
+    JSON.stringify(reviewArgs) === JSON.stringify(execArgs),
+    "Claude execute 应与 review 参数一致",
+  );
+  console.log("✅ Claude execute buildArgs 正确（与 review 一致）");
+}
+
+// --- 测试：Gemini execute 模式包含 --sandbox false ---
+{
+  const args = gemini.buildArgs({ workdir: "/project", mode: "execute" });
+  const sandboxIdx = args.indexOf("--sandbox");
+  console.assert(sandboxIdx !== -1, "Gemini execute 应包含 --sandbox");
+  console.assert(
+    args[sandboxIdx + 1] === "false",
+    "Gemini execute --sandbox 应为 false",
+  );
+  console.log("✅ Gemini execute buildArgs 正确");
+}
+
 // --- 测试：isAvailable 返回 boolean ---
 {
   for (const backend of [codex, claude, gemini]) {

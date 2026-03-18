@@ -2,6 +2,16 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.19.5] - 2026-03-18
+
+### 新增
+
+- **CLI execute 模式** — `cli-runner.js --mode execute` 支持外部 CLI 修改文件
+  - Codex：添加 `sandbox_permissions`（disk-full-read-access + disk-write-access）
+  - Gemini：添加 `--sandbox false` 禁用沙箱
+  - Claude：无需额外参数（`--dangerously-skip-permissions` 已覆盖）
+- **execute.md Prompt 模板** — 新增执行模式专用 Prompt 模板
+
 ## [3.19.4] - 2026-03-18
 
 ### 修复

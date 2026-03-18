@@ -36,6 +36,11 @@ const geminiBackend = {
     // JSON 输出 + 自动确认 + 非交互模式
     args.push("-o", "json", "-y");
 
+    // execute 模式：禁用沙箱以允许文件写入
+    if (config.mode === "execute") {
+      args.push("--sandbox", "false");
+    }
+
     // 传入工作目录（Gemini 用 --include-directories）
     if (config.workdir) {
       args.push("--include-directories", config.workdir);

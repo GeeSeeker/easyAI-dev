@@ -1,6 +1,6 @@
 {
-  "version": "3.19.4",
-  "generatedAt": "2026-03-18T01:56:15.505Z",
+  "version": "3.19.5",
+  "generatedAt": "2026-03-18T02:06:32.199Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -111,16 +111,16 @@
       "hash": "80db38e55b3e6aced5660ee62cbee06c41081ca116215d2230fb26ed1019651b"
     },
     ".agents/skills/common-cli-dispatch/scripts/backends/backends.test.js": {
-      "hash": "3b0afb5f25dbef1d02d0cd73001365178300e74ed9c0923ec49f8e22912a9e4e"
+      "hash": "2ea662de26bca50c93b5797029286432dff821f7a89f5e3f8a700a3dd5b832ce"
     },
     ".agents/skills/common-cli-dispatch/scripts/backends/claude.js": {
       "hash": "4da87bec85d558fc97a3f431bc837546eb450bd073f5fde267769c38e8e8c5d4"
     },
     ".agents/skills/common-cli-dispatch/scripts/backends/codex.js": {
-      "hash": "09fe651336bef352b6964e74b4048ce7e86dcb842d2ba4045a5cfdf5c5efdd7c"
+      "hash": "67f2da1314338d866160d8c48b0b8b63f0c73f06d0ed4614b1b099e74baf7310"
     },
     ".agents/skills/common-cli-dispatch/scripts/backends/gemini.js": {
-      "hash": "76c6dce13587a6bcfec3f922371feb288849db639732ecf0d6a816ae3529d69e"
+      "hash": "44327157bd024cf5d52001ffd05d57b405df159f5f7c640c1f6e152f77f6d863"
     },
     ".agents/skills/common-cli-dispatch/scripts/cli-runner.js": {
       "hash": "1e5911e001739d437ded252edaf407f3fe93d8f0d4fd21b32092ba903ecf2007"
@@ -145,6 +145,9 @@
     },
     ".agents/skills/common-cli-dispatch/scripts/lib/reporter.test.js": {
       "hash": "456de6c65fab2d46a3b9060c4dc85e4468d83d9195a97fe3617a4f2c17808010"
+    },
+    ".agents/skills/common-cli-dispatch/templates/execute.md": {
+      "hash": "21addde63b7af5ff5198dabcec78f48e8d9d94b9c57041edbfb9f6d3d10b3551"
     },
     ".agents/skills/common-cli-dispatch/templates/review.md": {
       "hash": "678b489a9005decfaa761f80907cce14c4762c5141714bd05b298e6ab4bda7d7"
@@ -213,7 +216,7 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".trellis/config/config.yaml": {
-      "hash": "49d9d4b560b706cb88f11b5ce50478d6112f710afb985cdb698e5a1bab43b03c",
+      "hash": "32c1806da6b00a3de6233e9b2ef2292023b3591176b53323e4c8c1bc0e7c1ffb",
       "merge_mode": "append"
     },
     ".trellis/spec/general/adr-template.md": {

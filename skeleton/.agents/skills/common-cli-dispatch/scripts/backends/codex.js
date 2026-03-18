@@ -36,6 +36,14 @@ const codexBackend = {
     // 跳过 git 仓库检查
     args.push("--skip-git-repo-check");
 
+    // execute 模式：赋予磁盘读写权限（沙箱内）
+    if (config.mode === "execute") {
+      args.push(
+        "-c",
+        'sandbox_permissions=["disk-full-read-access","disk-write-access"]',
+      );
+    }
+
     if (config.workdir) {
       args.push("-C", config.workdir);
     }
