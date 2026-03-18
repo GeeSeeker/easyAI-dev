@@ -1,0 +1,107 @@
+# 工具权限矩阵
+# AI 行为边界的集中声明。具体执行由各 Rule 和 MCP 校验保障。
+
+# 工具分级（AI 自省参考）
+tools:
+  safe: # 只读操作，可自由调用
+    - view_file
+    - view_file_outline
+    - view_code_item
+    - list_dir
+    - find_by_name
+    - grep_search
+    - read_url_content
+    - search_web
+    - mcp_context7_resolve-library-id
+    - mcp_context7_query-docs
+    - mcp_easyai-mcp-server_project_status
+    - mcp_easyai-mcp-server_task_list
+    - mcp_easyai-mcp-server_task_get
+    - mcp_easyai-mcp-server_journal_search
+    - mcp_easyai-mcp-server_spec_validate
+    - mcp_easyai-mcp-server_plan_validate
+    - mcp_easyai-mcp-server_context_budget
+    - mcp_easyai-mcp-server_conflict_check
+    - mcp_easyai-mcp-server_framework_check
+    - mcp_easyai-mcp-server_worktree_list
+    - mcp_easyai-mcp-server_subtask_dependency_graph
+
+  sensitive: # 写操作，需在约束范围内使用
+    - write_to_file
+    - replace_file_content
+    - multi_replace_file_content
+    - run_command
+    - browser_subagent
+    - generate_image
+    - mcp_easyai-mcp-server_task_create # 仅 PM 可用
+    - mcp_easyai-mcp-server_task_transition # 状态机校验
+    - mcp_easyai-mcp-server_task_append_log
+    - mcp_easyai-mcp-server_task_cancel
+    - mcp_easyai-mcp-server_journal_append
+    - mcp_easyai-mcp-server_context_generate
+    - mcp_easyai-mcp-server_subtask_create # 仅组长可用
+    - mcp_easyai-mcp-server_worktree_create
+    - mcp_easyai-mcp-server_worktree_merge # 仅 PM 可用
+    - mcp_easyai-mcp-server_worktree_cleanup
+    - mcp_easyai-mcp-server_framework_init
+    - mcp_easyai-mcp-server_framework_update
+
+  restricted: # 高危操作，有硬性限制
+    - delete_file # 仅限任务范围内文件，禁删框架核心
+    - send_command_input # 慎用，仅交互式命令
+
+# 路径保护（来源：framework-edit-guard + coding-standards Rule）
+protected_paths:
+  pm_only: # 仅 PM 可修改，Worker 禁止触碰
+    - .agents/rules/
+    - .agents/workflows/
+    - .agents/skills/
+    - .agents/graph/
+    - .trellis/spec/
+    - .trellis/config/
+  forbidden: # 所有角色均禁止修改
+    - .git/
+    - node_modules/
+    - .venv/
+  task_scoped: # Worker 仅可修改约束集 file_scope 内的文件
+    - src/
+    - tests/
+    - docs/
+
+# 角色权限矩阵（来源：capability-gate.ts + actor-pm/actor-worker Workflow）
+roles:
+  pm:
+    can:
+      - task_create
+      - task_cancel
+      - worktree_merge
+      - git push
+      - git merge
+      - 修改 .agents/ 和 .trellis/spec/（需用户确认）
+    cannot:
+      - 直接编写生产代码
+      - 调试 Bug
+      - 运行测试
+  worker:
+    can:
+      - git commit（仅本地）
+      - task_transition（状态机约束内）
+      - task_append_log
+      - 在 file_scope 内编写代码
+    cannot:
+      - git push
+      - git merge
+      - task_create
+      - 修改 .agents/ 或 .trellis/spec/
+      - 做架构决策（遇歧义必须上报 PM）
+  组长:
+    inherits: worker
+    additional:
+      - subtask_create
+      - subtask_dependency_graph
+      - 编排组员任务
+
+# 外部 CLI 约束（来源：cli-direct-call-guard Rule）
+external_cli:
+  rule: "禁止通过 run_command 直接调用 codex/claude/gemini"
+  legal_path: "必须通过 common-cli-dispatch Skill 的 cli-runner.js 调用"

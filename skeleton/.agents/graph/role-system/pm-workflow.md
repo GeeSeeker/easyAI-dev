@@ -90,6 +90,7 @@ PM 工作流的标准路径为线性 Skill 链，每个 Skill 的产出是下游
 - **worker-debug**：PM 收到 Worker 的 L3 blocker 后，可能需要介入分析根因
 - **common-spec-update**：新建或修改 `.trellis/spec/` 下规范文件时激活（运行时数据变更不触发）
 - **pm-milestone-archive**：用户主动要求「进度归档」或大阶段结束时激活。执行废弃隔离、冷区转移与阶段总结报告。
+- **pm-braindump-assimilate**：用户提供非结构化想法/需求文本时激活。解析并分类路由到框架对应位置。
 
 ### 通用 Skill（common_skills）
 

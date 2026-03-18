@@ -53,6 +53,15 @@ requires: null
 
 读取 MCP Resource `trellis://journal/latest`，了解上次会话的工作内容和遗留事项。
 
+### 3.3 PM 记事本恢复
+
+读取 `.docs/notes/pm-记事本.md`，检查「待办」区是否有上次遗留的待办事项：
+
+- 有待办条目 → 在状态快照中列出，提醒 PM 关注
+- 无待办条目 → 标记「✅ PM 记事本无遗留待办」
+
+> PM 在工作过程中应主动往 `pm-记事本.md` 的「待办」区写入发现的问题和后续线索（详见 actor-pm 约束段）。
+
 ### 3.5 项目规范状态
 
 扫描 `.trellis/spec/` 目录结构，了解当前项目规范的覆盖情况：
@@ -71,6 +80,12 @@ requires: null
 
 - 文件存在且非空 → 解析目录映射，在后续操作中据此定位文件
 - 文件不存在或为空 → 在 PATEOAS 导航中提示：「`.directory-map` 尚未配置，建议声明项目中自定义目录的用途，以便 AI 更好地定位文件」
+
+### 3.65 权限矩阵概览
+
+读取 `.trellis/config/permissions.yaml`，在状态快照中展示当前角色的权限摘要（工具分级数量 + 路径保护范围）。
+
+> 如文件不存在，提示用户可通过 `framework_init` 或手动创建。
 
 ### 3.7 图谱健康检查
 
@@ -101,7 +116,9 @@ requires: null
   - {task_id}: {title} [{status}]
   - ...
 - **项目规范**: backend({n}) / frontend({n}) / guides({n}) / general({n}) — {有 SPEC_GAP 则标注}
+- **权限矩阵**: safe({n}) / sensitive({n}) / restricted({n}) — 详见 `.trellis/config/permissions.yaml`
 - **框架能力概览**: {层数}层 × {节点数}特性，详见 `.agents/graph/_index.md`
+- **PM 记事本**: {n} 条遗留待办 / 无遗留待办
 
 ## 上次会话摘要
 
