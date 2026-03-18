@@ -1,6 +1,6 @@
 {
-  "version": "4.2.0",
-  "generatedAt": "2026-03-18T19:20:18.744Z",
+  "version": "4.2.1",
+  "generatedAt": "2026-03-18T19:40:07.777Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -174,7 +174,7 @@
       "hash": "a3f06a105f8cec8a144128d33e275745fd62e39cde1d9a22a23dc0d859efae51"
     },
     ".agents/skills/common-github-cli/SKILL.md": {
-      "hash": "8344d5284901c28f729e35a9c618a7e5d67bc18be9142615859205ea629947f8"
+      "hash": "fbb76dc7d29f4abf7ee25fddb8277550b4c198ccddc62c42633f4c895e088344"
     },
     ".agents/skills/common-semantic-map/SKILL.md": {
       "hash": "07de8140a770a5d2aaf24b6be689dd3a1dcd8d73b5d6ed7cc944fa7d2150b7a6"
@@ -252,7 +252,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "b6b17c1e74162c01afb6a0ade1b43dde2e098a5f20847087376c23b23503aff6",
+      "hash": "70979b5b23b182888f2b238d978fb0f1521e5acba6cbec52a7b4e62a26450dcd",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {

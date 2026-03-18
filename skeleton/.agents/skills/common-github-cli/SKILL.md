@@ -18,6 +18,8 @@ description: "[Common] GitHub CLI 集成 — 触发：需要与 GitHub 交互（
 
 按使用频率排序，覆盖日常 90% 的 GitHub 交互需求。
 
+> **提示**：在仓库目录内运行时，`--repo` 参数可省略，`gh` 会自动识别当前仓库。
+
 ### 搜索
 
 ```bash
@@ -52,10 +54,15 @@ gh issue create --repo owner/repo \
   --body "描述内容"
 
 # 关闭 Issue
+# 关闭 Issue（--reason 可选值：completed | not planned）
 gh issue close <number> --repo owner/repo --reason completed
 
 # 添加评论
 gh issue comment <number> --repo owner/repo --body "评论内容"
+
+# 编辑 Issue（修改标题、正文、标签等）
+gh issue edit <number> --repo owner/repo --title "新标题"
+gh issue edit <number> --repo owner/repo --add-label "bug" --remove-label "question"
 ```
 
 ### Pull Request 管理
@@ -77,7 +84,7 @@ gh pr view <number> --repo owner/repo --json files --jq '.files[].path'
 gh pr checks <number> --repo owner/repo
 
 # 创建 PR（推荐用 temp file 写 body）
-cat > /tmp/pr_body.md <<'EOF'
+cat > .tmp/pr_body.md <<'EOF'
 ## 摘要
 简要描述
 
@@ -88,16 +95,20 @@ EOF
 
 gh pr create \
   --title "描述性标题" \
-  --body-file /tmp/pr_body.md \
+  --body-file .tmp/pr_body.md \
   --base main
 
-rm /tmp/pr_body.md
+rm .tmp/pr_body.md
 
 # 合并 PR
 gh pr merge <number> --repo owner/repo --squash --delete-branch
 
 # 审查 PR
 gh pr review <number> --repo owner/repo --approve --body "LGTM"
+
+# 编辑 PR（修改标题、正文、审查者等）
+gh pr edit <number> --repo owner/repo --title "新标题"
+gh pr edit <number> --repo owner/repo --add-reviewer user1
 ```
 
 ### 仓库操作
@@ -122,6 +133,37 @@ gh release view --repo owner/repo
 gh release create v1.0.0 --repo owner/repo \
   --title "v1.0.0" \
   --notes "发布说明"
+
+# 列出所有 Release
+gh release list --repo owner/repo
+
+# 创建仓库
+gh repo create my-repo --public --description "仓库描述"
+
+# Fork 仓库
+gh repo fork owner/repo --clone
+```
+
+### GitHub Actions
+
+```bash
+# 查看最近的 workflow 运行
+gh run list --repo owner/repo --limit 10
+
+# 查看 workflow 运行详情
+gh run view <run-id> --repo owner/repo
+
+# 实时监控 workflow 运行状态
+gh run watch <run-id> --repo owner/repo
+
+# 重新运行失败的 workflow
+gh run rerun <run-id> --repo owner/repo
+
+# 下载 workflow 生成的 artifacts
+gh run download <run-id> --repo owner/repo -n <artifact-name>
+
+# 取消运行中的 workflow
+gh run cancel <run-id> --repo owner/repo
 ```
 
 ### GitHub API 直接调用
@@ -162,25 +204,27 @@ gh search code "pattern" --repo owner/repo --json path --jq '.[0:5] | .[].path'
 # ❌ 禁止：复杂内容用 inline --body
 gh pr create --title "Title" --body "## Summary\n- Item 1\n`code`"
 
-# ✅ 正确：用 temp file
-cat > /tmp/pr_body.md <<'EOF'
+# ✅ 正确：用 temp file（统一使用项目内 .tmp/ 目录）
+mkdir -p .tmp
+cat > .tmp/pr_body.md <<'EOF'
 ## Summary
 - Item 1
 `code`
 EOF
-gh pr create --title "Title" --body-file /tmp/pr_body.md
-rm /tmp/pr_body.md
+gh pr create --title "Title" --body-file .tmp/pr_body.md
+rm .tmp/pr_body.md
 ```
 
 ## 错误恢复
 
-| 错误                               | 解决方案                                   |
-| ---------------------------------- | ------------------------------------------ |
-| `gh: command not found`            | `sudo apt install gh` 或 `brew install gh` |
-| `not logged into any GitHub hosts` | `gh auth login`                            |
-| `head ref not found`               | 先 `git push -u origin <branch>`           |
-| `HTTP 403 / 404`                   | 检查仓库权限和名称拼写                     |
-| `API rate limit exceeded`          | 等待重置或用 `gh auth status` 检查认证状态 |
+| 错误                               | 解决方案                                                  |
+| ---------------------------------- | --------------------------------------------------------- |
+| `gh: command not found`            | `sudo apt install gh` 或 `brew install gh`                |
+| `not logged into any GitHub hosts` | `gh auth login`                                           |
+| `head ref not found`               | 先 `git push -u origin <branch>`                          |
+| `HTTP 403 / 404`                   | 检查仓库权限和名称拼写                                    |
+| `Resource not accessible`          | `gh auth refresh -s <scope>`（如 `project`、`admin:org`） |
+| `API rate limit exceeded`          | 等待重置或用 `gh auth status` 检查认证状态                |
 
 ## PATEOAS 导航
 
