@@ -2,6 +2,21 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.20.0] - 2026-03-18
+
+### 新增
+
+- **图谱主动赋能（Graph Active Enablement）** — 从"半主动赋能"升级为"主动提示增强"
+  - **[P1] MCP compliance-hints 设计文档检测** — `task_create` 返回值新增 `compliance_hints` 字段，自动检测 `.docs/design/` 下是否有活跃设计文档，缺失时生成 `info` 提示（非阻断）
+  - **[P2] 跨会话图谱追踪** — `worker-session-close` Step 3.5 改用 commit range 检测 + 图谱不一致时写入 `[GRAPH_STALE]` journal 条目；`pm-session-start` 新增 Step 3.7 图谱健康检查
+  - **[P3] 依赖链文件级检查** — `common-skill-eval` 新增 Step 1b，检查候选 Skill 的 `requires` 前置产出（仅 `design_document` 和 `task_with_constraints` 两种可靠类型）
+  - **[P4] 非任务上下文修改提醒** — `framework-edit-guard` 新增约束 1c，在非正式任务中修改框架文件时提醒检查图谱和创建任务
+
+### 变更
+
+- compliance-hints 提示类型从 3 种扩展为 4 种（新增 `missing_design_document`）
+- `task-create.ts` 首次接入 compliance-hints 体系（此前仅 `task-transition.ts` 消费）
+
 ## [3.19.6] - 2026-03-18
 
 ### 新增
