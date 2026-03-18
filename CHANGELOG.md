@@ -2,6 +2,16 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [3.19.4] - 2026-03-18
+
+### 修复
+
+- **Gemini CLI 无输出** — 添加 `-p` 非交互模式标志 + 输出格式从 `stream-json` 改为 `json`（单 JSON 对象）+ `parseOutput` 重写适配新格式
+- **Claude CLI 认证失败** — 移除 `--setting-sources ''`（会清空 API key 配置），改用 MCP 参考项目的 `--dangerously-skip-permissions`；纯文本输出模式
+- **Claude CLI 超时挂起** — `spawn` 的 `stdio[0]` 从 `pipe` 改为 `ignore`（非 stdin 模式的 backend 不应打开 stdin pipe）
+- **多 backend 输出丢失** — `process.stdout.write()` 后未等 flush 即调用 `process.exit()`
+- **Gemini stderr 噪音** — 新增 3 条噪音过滤模式（IDE 连接错误、skill 覆盖警告）
+
 ## [3.19.3] - 2026-03-18
 
 ### 文档
