@@ -13,11 +13,39 @@ requires: null
 
 ## 执行步骤
 
-### Step 0: config.yaml 硬性校验
+### Step 0: config.yaml 硬性校验 + 新项目检测
 
 > **阻断性检查** — 校验失败时不继续后续步骤。
 
 读取 `.trellis/config/config.yaml`，校验以下字段：
+
+#### 0a. 新项目检测
+
+检查以下三个条件是否**同时**满足：
+
+1. `developer.name` 为空
+2. `.trellis/workspace/` 下无任何 `journal.md` 文件（排除 `.gitkeep`）
+3. `.trellis/tasks/` 下无任何任务子目录（排除 `.gitkeep` 和 `archive/`）
+
+**三条件全部满足** → 判定为**全新项目**，输出：
+
+```
+🎉 检测到全新项目！easyAI 提供两种初始化模式：
+
+1. 引导模式（推荐新手）— 分步引导你完成配置，每步讲解用途，
+   并带你体验一次完整的 easyAI 开发流程。
+
+2. 快速模式（熟手直达）— AI 自动完成所有初始化，输出功能速查表。
+
+选哪个？（输入 1 或 2）
+```
+
+- 用户选择 1 → 激活 `pm-onboarding` Skill（引导模式），**结束 pm-session-start**
+- 用户选择 2 → 激活 `pm-onboarding` Skill（快速模式），完成后**回到 Step 1 继续**
+
+**三条件未全部满足** → 非新项目，继续下方常规校验。
+
+#### 0b. developer.name 校验
 
 1. **`developer.name` 非空检查**
    - 非空 → ✅ 通过，继续后续步骤

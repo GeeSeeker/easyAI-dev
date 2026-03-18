@@ -1,6 +1,6 @@
 {
-  "version": "4.2.5",
-  "generatedAt": "2026-03-18T22:47:40.743Z",
+  "version": "4.3.0",
+  "generatedAt": "2026-03-18T22:56:40.764Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -200,11 +200,14 @@
     ".agents/skills/pm-milestone-archive/SKILL.md": {
       "hash": "cc974f8030dc5f002f034842a9f3fe08dd028fc4a1cb2aefcd6399ad9e6027b0"
     },
+    ".agents/skills/pm-onboarding/SKILL.md": {
+      "hash": "188a27adb3925405e1a4a69af968161d14f63a324e9a29908938c76c9b948964"
+    },
     ".agents/skills/pm-session-close/SKILL.md": {
       "hash": "0c4b44efed11fc77206e2b18e1a93fb2d6ac1fdc215235bc598a30036e27b028"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
-      "hash": "a0f2a7c38c9b91db2438d11a7d39bff421395c19dddd2949d51ccac0152f79c0"
+      "hash": "496ad7018e626c019bcad600710ef8f2f5c5ebe585808b43fb3197a0fb5c5995"
     },
     ".agents/skills/pm-task-planning/SKILL.md": {
       "hash": "a0228fb3e032388e5794aa7a4b43e1fd0832c9dcf9ec0350c339a8a011487ad4"
@@ -252,7 +255,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "db8ca26672eb80cc5d33bd4e56005619d35830d52ed9d34743d53639793a2ffc",
+      "hash": "42d7d81d579bd582a6c78ac118b3bfe6a001f81521a6b6ef801a435f3dda4031",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {
