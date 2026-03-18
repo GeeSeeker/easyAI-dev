@@ -1,6 +1,6 @@
 {
-  "version": "3.19.5",
-  "generatedAt": "2026-03-18T02:06:32.199Z",
+  "version": "3.19.6",
+  "generatedAt": "2026-03-18T11:41:38.965Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -78,7 +78,7 @@
       "hash": "1d29d1a4498485f1df37398deea5f1b649bb402c8074a4acd3437bf489e8bc04"
     },
     ".agents/graph/user-experience/artifact-pipeline.md": {
-      "hash": "97094ab4cb93c4aab96c06c9a0bf280280886d44048aea51a86159bdc1876cef"
+      "hash": "99fe7747714301f894049c882bd08fbad9c0120b2efb5cdc2a09657d5ab163b3"
     },
     ".agents/graph/user-experience/requirement-delivery.md": {
       "hash": "3d795bc2340243f74ba5b31aba285b1e70c77e07b968a7a21318c39372ae24e9"
@@ -168,10 +168,10 @@
       "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
     },
     ".agents/skills/pm-milestone-archive/SKILL.md": {
-      "hash": "85a71619cc7857021e4d40d52942bd31424ca18c8fd45039153723ccf970be80"
+      "hash": "cc974f8030dc5f002f034842a9f3fe08dd028fc4a1cb2aefcd6399ad9e6027b0"
     },
     ".agents/skills/pm-session-close/SKILL.md": {
-      "hash": "3160a992177bb84fb2adb67a569e60cf6c012f0ec0258544fa77abcb3492177f"
+      "hash": "0c4b44efed11fc77206e2b18e1a93fb2d6ac1fdc215235bc598a30036e27b028"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
       "hash": "f9a6de4068777d09a538dd2265c848a56d4cca79528461f268da47a9fc52cc32"
@@ -215,8 +215,14 @@
     ".docs/README.md": {
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
+    ".docs/notes/pm-记事本.md": {
+      "hash": "829888356f93b940b5a7565846dc20c30d850ebed1e2a38d137fce378f4b3b06"
+    },
+    ".docs/notes/user-记事本.md": {
+      "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
+    },
     ".trellis/config/config.yaml": {
-      "hash": "32c1806da6b00a3de6233e9b2ef2292023b3591176b53323e4c8c1bc0e7c1ffb",
+      "hash": "fbbedcf57579ab603168333e1625a4bd0a09ef2bde7b0715a3f55a2a78b6204b",
       "merge_mode": "append"
     },
     ".trellis/spec/general/adr-template.md": {
