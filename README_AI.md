@@ -146,7 +146,7 @@ npx @geeseeker/easyai-dev check .
 告知用户：
 
 ```
-✅ easyAI 3.0 安装完成！
+✅ easyAI 安装完成！
 
 已配置：
 - 1 个 MCP Server — easyai-mcp-server
@@ -154,7 +154,7 @@ npx @geeseeker/easyai-dev check .
 
 使用方式：
 1. 在 Antigravity IDE 中打开此项目
-2. 输入 /pm 启动项目经理
+2. 输入 /actor-pm 启动项目经理
 3. 和 PM 对话，描述你的需求即可！
 ```
 
