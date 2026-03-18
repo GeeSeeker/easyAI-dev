@@ -26,21 +26,21 @@ files:
     role: PM 框架自迭代（变更影响分析 → 用户确认门 → 安全修改 → 知识库更新）
   - path: .agents/skills/common-spec-update/SKILL.md
     role: 规范守护（.trellis/spec/ 的写操作必须经过本 Skill）
-  - path: .agents/rules/project-identity.md
+  - path: .agents/rules/always_on/project-identity.md
     role: 项目身份定义 + 五级约束分层体系
     upgrade: replace
-  - path: .agents/rules/anti-hallucination.md
+  - path: .agents/rules/always_on/anti-hallucination.md
     role: 反幻觉硬约束（第三方库查文档、禁止模糊措辞、RPI 阶段隔离）
     upgrade: replace
-  - path: .agents/rules/framework-dev-mode.md
+  - path: .agents/rules/always_on/framework-dev-mode.md
     role: 框架开发模式（三层版本流转 + 写入守卫，仅开发工作区）
-  - path: .agents/rules/coding-standards.md
+  - path: .agents/rules/glob/coding-standards.md
     role: 编码规范（glob 触发，编辑源码时自动注入）
-  - path: .agents/rules/skill-transparency.md
+  - path: .agents/rules/always_on/skill-transparency.md
     role: Skill 使用透明性（always_on，激活声明 + PATEOAS 扩展 + 事后审计）
-  - path: .agents/rules/framework-edit-guard.md
+  - path: .agents/rules/always_on/framework-edit-guard.md
     role: 框架编辑守卫（always_on，修改/设计框架前强制查图谱 + 图谱同步更新 + 修改 Skill 前读 skill-creator）
-  - path: .agents/rules/skill-eval-guard.md
+  - path: .agents/rules/always_on/skill-eval-guard.md
     role: Skill 评估守卫（always_on，开发/规划/框架/验收类请求前强制执行 /common-skill-eval Workflow）
   - path: .agents/workflows/common-skill-eval.md
     role: Skill 评估工作流（评估卡 → 拉取 Level 2 → ABCDE 分级 → 执行）

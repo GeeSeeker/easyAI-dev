@@ -56,7 +56,7 @@ files:
     role: 系统性调试（4 阶段根因分析 + 3 次失败上报 PM）
   - path: .agents/skills/worker-session-close/SKILL.md
     role: Worker 会话收尾（journal + Skill 审计 + Git 提交 + 恢复指引，正常完成时由 worker-check 自动衔接）
-  - path: .agents/rules/coding-standards.md
+  - path: .agents/rules/glob/coding-standards.md
     role: 编码规范（Worker 编写代码时自动注入）
   - tool: task_get
     role: 任务详情读取（含约束集、验收标准、frozen_context）

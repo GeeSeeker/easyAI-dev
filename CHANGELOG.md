@@ -2,9 +2,18 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
-## [4.0.0] - 2026-03-18
+## [4.1.0] - 2026-03-19
 
 ### 新增
+
+- **自动化项目代码语义地图 (Semantic Map)** — 新增 `common-semantic-map` Skill，基于骨架提取（Skeleton Heuristics）自动扫描项目并在 `.docs/` 下成成结构化及人工可读双文件导航，消除项目进入的“战争迷雾”
+- **环境初始化地图铺底防御** — `pm-session-start` 新增 Step 3.8 初底检测，在框架首次加载时主动发现并引导全景地图生成
+
+### 重构
+
+- **Rules 目录分类流派化** — 将 `.agents/rules/` 按触发模型精细化拆分为 `always_on/` 和 `glob/` 子目录，框架规范图谱层同步更新溯源依赖
+
+## [4.0.0] - 2026-03-18
 
 - **外部 CLI 审查拦截机制 (Evidence Gate)** — MCP 状态机进入 under_review 前，强制要求达到 ABCDE 分级对应的 CLI 独立审查数量（A=3, B=2, C=1），否则硬阻断转移
 - **外部 CLI 角色定义系统** — 新增 7 个专属角色提示词（Codex/Claude/Gemini 的 Reviewer/Architect/Implementer 等），指导外部 CLI 按照特定规范审查

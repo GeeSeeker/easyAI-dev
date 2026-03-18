@@ -109,10 +109,10 @@ PM 角色在以下场景**必须**激活本 Skill：
 列出所有将要修改的文件及变更类型：
 
 ```markdown
-| 文件                        | 变更类型 | 变更摘要      |
-| --------------------------- | -------- | ------------- |
-| .agents/rules/xxx.md        | 修改     | 增加 xxx 约束 |
-| .agents/skills/yyy/SKILL.md | 新建     | yyy 能力模块  |
+| 文件                           | 变更类型 | 变更摘要      |
+| ------------------------------ | -------- | ------------- |
+| .agents/rules/always_on/xxx.md | 修改     | 增加 xxx 约束 |
+| .agents/skills/yyy/SKILL.md    | 新建     | yyy 能力模块  |
 ```
 
 > **Skill 回归测试检查**（F65）：若变更目标包含 Skill（`.agents/skills/` 下的 SKILL.md），
