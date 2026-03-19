@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.13] - 2026-03-19
+
+### 修复
+
+- **MCP Server 启动失败 (ENOENT)** — 修复了生产环境打包产物（`lib/server/index.js`）在运行时与开发阶段（`packages/mcp-server/build/`）所在目录深度不同导致的 `package.json` 寻址失败崩溃 Bug，现已引入安全的双层动态回退探测机制。
+
 ## [4.3.12] - 2026-03-19
 
 ### 修复
