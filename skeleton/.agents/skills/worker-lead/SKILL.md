@@ -56,7 +56,7 @@ Worker 以组长角色执行任务时，必须激活本 Skill。本 Skill 包含
 
 ### Step 3：并发检查 + 引导用户
 
-1. 读取 `config.yaml` 中 `team.roster[type=primary].concurrency`
+1. 读取 .trellis/config/config.yaml 中 `team.roster[type=primary].concurrency`
 1. 计算所需并发 = 1 (PM 会话) + 1 (组长会话) + N (组员会话数)
 1. 若 所需并发 > 可用并发 → 提醒用户可分批启动
 1. 输出用户操作指引：

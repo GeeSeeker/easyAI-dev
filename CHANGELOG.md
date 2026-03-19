@@ -2,6 +2,23 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.10] - 2026-03-19
+
+### 修复
+
+- **框架审计与问题修复 (Phase 1/2/3)** — 闭环完成全量遍历性代码安全检查，解决 20 项审计意见，巩固代码底座
+- **图谱与文档过时引用修复** — 清理了 `.agents/graph`、`spec` 和各角色 `SKILL.md` 中残留的旧路径（如 `always_on/glob`）并统一了编号风格
+- **MCP Server 代码复用 (DRY)** — 提取 `escapeYamlString`、规范化 `slugify` 的 ASCII-only 正则、复用 `context.jsonl` 解析逻辑
+- **Git 工具安全加固** — `git-utils.ts` 中的 `execSync` 彻底替换为 `execFileSync` 消除 Shell 注入风险，增加 30 秒限时，并使用安全分隔符解析 Git 日志
+- **语义化版本比较** — `framework-tools.ts` 实现安全的版本追踪比较，彻底修复跨位版本号比对误判的 Bug
+- **更新回滚机制** — `framework_update` 增加事务级备份与回滚机制，防止异常中断破坏框架完整性
+
+### 变更
+
+- **CLI 调度测试流演进** — 从并行的 `task-transition` 审查实践中，抛弃基于纯文字正则过滤外部 CLI 的黑盒修补思路，明确演进至采用全双工通信环境的新一代对话架构蓝图
+- **CLI 调用配置化增强** — `config.yaml` 支持更为全面的 CLI 细粒度声明选项并清理无上下文 TODO 代码
+- **独立规范拆分** — 将 `project_status` 工具模块从底层 `index.ts` 中独立文件化以统一代码存放界面
+
 ## [4.3.9] - 2026-03-19
 
 ### 修复
