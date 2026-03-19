@@ -1,6 +1,6 @@
 {
-  "version": "4.3.17",
-  "generatedAt": "2026-03-19T18:07:11.063Z",
+  "version": "4.3.18",
+  "generatedAt": "2026-03-19T19:12:53.839Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -189,7 +189,7 @@
       "hash": "1329f13ef9821ad8c2b64537419ba684abb8fcc851ffed0c79f8373fc6865f17"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "75287d6eba2ab7ea5d72a8df6d3c4d92f3e0635fab2c9a59b25a98aa3a076917"
+      "hash": "909be84aac2680562dce574a92399ef02f97f149f34e633e288d2071e68c511b"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
@@ -231,16 +231,16 @@
       "hash": "c4b3fae9d9098a001f56b29f4d611bba2512e11e36bab21691682a256b7ffb4c"
     },
     ".agents/workflows/actor-pm.md": {
-      "hash": "8588572598078e17c88942785882425b6c75d082b8f8d22e5a37ee18f9c9324c"
+      "hash": "ea9c1717c60139c7318935a294feb954002565a84de406d70484e614426458c5"
     },
     ".agents/workflows/actor-worker.md": {
-      "hash": "4dfaa33f33b32911785f6f45ad88e0eed814a963f02247064b67a12d80b13553"
+      "hash": "ab8371b46ec7efc295ac24515c38b7e24c2ca731ad9885bc2855be38586c796f"
     },
     ".agents/workflows/common-skill-eval.md": {
       "hash": "06aa182908c194d91e7eb3b7df1881e16c416adc5e0d829719d71c5883f5b277"
     },
     ".agents/workflows/worker-quick-fix.md": {
-      "hash": "ce607552ed39ab759cc55c6635cb441dbe3cde529156adc802c2281a7f04209e"
+      "hash": "934bddba33c1facddb2b5c52280c668ddb3f501ef2a9aba9723389072fc2afd8"
     },
     ".directory-map": {
       "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
@@ -255,10 +255,10 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".easyai-version": {
-      "hash": "112b5cd932ee9a4b83a59bf8bce8cdca89358cae805d8425ca7a39e23429d420"
+      "hash": "1e32844757dc2ceb5ad0f127e8720f63546c8079b7989167c2860b5678302b33"
     },
     ".trellis/config/config.yaml": {
-      "hash": "f7de97e9ea130972f4cc5a55d3c6e31f5d073af55ac0fec6e62bb5888a746f99",
+      "hash": "e2213757b5f3dea23481b11a6a215f412c4694944badca4cd4ee0c9b51302f6f",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {

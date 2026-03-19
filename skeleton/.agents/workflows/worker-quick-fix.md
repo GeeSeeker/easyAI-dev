@@ -1,5 +1,5 @@
 ---
-description: [Worker] 轻量修复 Workflow — 适用于短平快的 Bug 修复和小修改
+description: Worker (执行者) — 轻量修复 Workflow — 适用于短平快的 Bug 修复和小修改
 ---
 
 # Worker 轻量修复 Workflow (quick-fix)
