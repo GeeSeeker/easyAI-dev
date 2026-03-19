@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.12] - 2026-03-19
+
+### 修复
+
+- **工作区隔离异常 (AI 幻觉防护)** — 彻底移除 MCP 日志工具（`journal_append` 和 `journal_search`）中可选的 `user` 参数暴露，改为底层自动读取基于 `config.yaml` 定义的 `developer.name`，从物理层面彻底封死大模型强行越权伪造角色目录（如 `PM` 或 `worker` 文件夹）的隐患。
+
 ## [4.3.11] - 2026-03-19
 
 ### 修复
