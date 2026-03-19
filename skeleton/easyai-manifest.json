@@ -1,6 +1,6 @@
 {
-  "version": "4.3.18",
-  "generatedAt": "2026-03-19T19:12:53.839Z",
+  "version": "4.3.19",
+  "generatedAt": "2026-03-19T19:29:36.842Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -189,7 +189,7 @@
       "hash": "1329f13ef9821ad8c2b64537419ba684abb8fcc851ffed0c79f8373fc6865f17"
     },
     ".agents/skills/pm-framework-evolve/SKILL.md": {
-      "hash": "909be84aac2680562dce574a92399ef02f97f149f34e633e288d2071e68c511b"
+      "hash": "b4702bdda59192c5801d9775a630252ce94904dc1a4b99c06201c239fcde23ca"
     },
     ".agents/skills/pm-framework-evolve/changelog/index.md": {
       "hash": "3f307c523ed8d80845cf575e4d1f53958d34d326bf548eef8a720c190f35c85d"
@@ -255,10 +255,10 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".easyai-version": {
-      "hash": "1e32844757dc2ceb5ad0f127e8720f63546c8079b7989167c2860b5678302b33"
+      "hash": "99cbeecf6e395c685e2e05e71edcb5a5f60e1d7dee46a09e1916a0f81b21db74"
     },
     ".trellis/config/config.yaml": {
-      "hash": "e2213757b5f3dea23481b11a6a215f412c4694944badca4cd4ee0c9b51302f6f",
+      "hash": "9e84bff1c5a29cca910a33341899619c70fe936d46283a710b5851c75e5271bc",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {
@@ -290,6 +290,36 @@
     },
     ".trellis/spec/guides/testing.md": {
       "hash": "8597fb5e166b6f4c14ac3b059226d41817bf4cb9c94ec890c53dd149fa026c73"
+    },
+    ".trellis/spec/spec/general/adr-template.md": {
+      "hash": "c03b93626ce45883947967fa23a778192ba5310dd4c02c9340352835af3b2e87"
+    },
+    ".trellis/spec/spec/general/knowledge-categories.md": {
+      "hash": "5b4cd125f8e2baef3623791dce596f82f96e85ea7ff5d19e55b6db6418aa8f8f"
+    },
+    ".trellis/spec/spec/guides/doc-simplify.md": {
+      "hash": "efc4c39759599d76f583ef8bb09f3384bfff5feaab7e2bdf60b9412c8bb82127"
+    },
+    ".trellis/spec/spec/guides/external-cli-guide.md": {
+      "hash": "1a4fba95571a3b4aad6ab26fa15b992390d035583a195a3236eb6d9740379e8a"
+    },
+    ".trellis/spec/spec/guides/known-issues.md": {
+      "hash": "3120b1f5225fc7238045ee6bc3a86381c0da7ff2ff7c483750cd0822209a67db"
+    },
+    ".trellis/spec/spec/guides/review-standards.md": {
+      "hash": "17d812a3e47b71264e7487fea44fadadc5ef6c903f063397efffa87575df28da"
+    },
+    ".trellis/spec/spec/guides/skill-regression.md": {
+      "hash": "d9599510d6378bc7d52d26ef5aeb56fe3957fb8eee0214e767e13aee6c0f0682"
+    },
+    ".trellis/spec/spec/guides/task-workflow.md": {
+      "hash": "f58667994ebb3543b0b7aa737eeab7b270b0e9657515fecdc7f3d0ceb1809200"
+    },
+    ".trellis/spec/spec/guides/testing.md": {
+      "hash": "8597fb5e166b6f4c14ac3b059226d41817bf4cb9c94ec890c53dd149fa026c73"
+    },
+    ".trellis/spec/spec/spec-schema.json": {
+      "hash": "3706e5dbc8ba583b886717fab22b238e2f70e05a64988b469576edfe024116cd"
     },
     ".trellis/spec/spec-schema.json": {
       "hash": "3706e5dbc8ba583b886717fab22b238e2f70e05a64988b469576edfe024116cd"

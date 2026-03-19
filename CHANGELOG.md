@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.19] - 2026-03-20
+
+### 优化
+
+- **用户视角统计修正** — 骨架分发的框架组件统计表中移除开发专属组件（`publish.md`、`framework-dev-mode.md`），仅展示用户实际拥有的 Workflows（4）和 Rules（7），避免 AI 在用户环境中引用不存在的文件。
+
 ## [4.3.18] - 2026-03-20
 
 ### 优化
