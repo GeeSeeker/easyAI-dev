@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.8] - 2026-03-19
+
+### 修复
+
+- **`framework_check/init/update` 项目根目录检测失败** — 三个框架管理工具使用 `process.cwd()` 作为默认目标目录，但 MCP Server 进程的工作目录并非项目根。改为使用 `getProjectRoot()`（含 MCP roots 协议 + `.trellis` 向上遍历逻辑），与其他所有工具保持一致
+
 ## [4.3.7] - 2026-03-19
 
 ### 修复
