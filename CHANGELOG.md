@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.18] - 2026-03-20
+
+### 优化
+
+- **知识图谱与骨架同步** — 同步三个角色 Workflow (`actor-pm.md`, `actor-worker.md`, `worker-quick-fix.md`) 的描述至最新一致状态；更新 `pm-framework-evolve` Skill 中的框架资源统计数据（Workflows 变更为 4+1），确保图谱数据与物理文件一致。
+
 ## [4.3.17] - 2026-03-20
 
 ### 修复
