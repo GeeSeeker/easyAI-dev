@@ -18,7 +18,6 @@ children:
   - trellis-directory
   - agents-directory
   - docs-directory
-  - directory-map
 files:
   - path: .trellis/
     role: 数据持久层根目录（tasks/ spec/ workspace/ config/）
@@ -26,8 +25,6 @@ files:
     role: AI 角色层根目录（rules/ workflows/ skills/）
   - path: .docs/
     role: 意图与蓝图空间根目录（notes/ refs/ design/ archive/）
-  - path: .directory-map
-    role: 用户自定义目录映射（用途声明）
 ---
 
 # 文件系统持久化
@@ -49,7 +46,7 @@ files:
 
 AI 角色层的根目录，包含三个子目录：
 
-- `rules/` — 规则注入（always_on / glob 触发）
+- `rules/` — 规则注入（扁平目录，按 YAML frontmatter 控制生效范围）
 - `workflows/` — 角色入口（PM / Worker）
 - `skills/` — 能力模块（按角色前缀分组）
 
@@ -62,10 +59,6 @@ AI 角色层的根目录，包含三个子目录：
 - `design/planning/` — 长线规划、Roadmap、里程碑总结
 - `design/features/` — 特性架构蓝图
 - `archive/` — 就地养老式归档
-
-### 目录映射（directory-map）
-
-`.directory-map` 文件允许用户声明自定义目录的用途，AI 据此定位文件。
 
 ## 变更影响
 

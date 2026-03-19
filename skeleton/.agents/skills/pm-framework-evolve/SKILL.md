@@ -27,15 +27,15 @@ PM 角色在以下场景**必须**激活本 Skill：
 ### 框架组件统计
 
 <!-- 本节由 /publish 流程自动同步，请勿手动修改 -->
-<!-- last_synced: 2026-03-16 -->
+<!-- last_synced: 2026-03-19 -->
 
-| 组件          | 数量 | 列表                                                                                                                                                                                                                                |
-| ------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Skills        | 13   | pm-session-start, pm-brainstorm, pm-task-planning, pm-task-review, pm-framework-evolve, pm-milestone-archive, pm-session-close, worker-implement, worker-lead, worker-check, worker-debug, worker-session-close, common-spec-update |
-| Workflows     | 2+1  | pm.md, worker.md（🦴骨架）+ publish.md（🔧开发专属）                                                                                                                                                                                |
-| Rules         | 5+1  | project-identity.md, anti-hallucination.md, coding-standards.md, skill-transparency.md, framework-edit-guard.md（🦴骨架）+ framework-dev-mode.md（🔧开发专属）                                                                      |
-| MCP Tools     | 23   | 详见图谱 `foundation/mcp-transport.md` → MCP Tools 节点                                                                                                                                                                             |
-| MCP Resources | 6    | trellis://status, trellis://journal/latest, trellis://spec/{c}/{n}, spec://{c}/{n}, trellis://tasks/{id}/context, trellis://tasks/{id}/subtasks/{sid}/context                                                                       |
+| 组件          | 数量 | 列表                                                                                                                                                                                                                                                                               |
+| ------------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Skills        | 18   | pm-session-start, pm-brainstorm, pm-task-planning, pm-task-review, pm-framework-evolve, pm-milestone-archive, pm-session-close, pm-braindump-assimilate, pm-onboarding, worker-implement, worker-lead, worker-check, worker-debug, worker-session-close, common-spec-update, common-cli-dispatch, common-github-cli, common-semantic-map |
+| Workflows     | 3+2  | actor-pm.md, actor-worker.md, common-skill-eval.md（🦴骨架）+ worker-quick-fix.md, publish.md（🔧开发专属）                                                                                                                                                                          |
+| Rules         | 7+1  | project-identity.md, anti-hallucination.md, coding-standards.md, skill-transparency.md, framework-edit-guard.md, skill-eval-guard.md, cli-direct-call-guard.md（🦴骨架）+ framework-dev-mode.md（🔧开发专属）                                                                         |
+| MCP Tools     | 23   | 详见图谱 `foundation/mcp-transport.md` → MCP Tools 节点                                                                                                                                                                                                                            |
+| MCP Resources | 6    | trellis://status, trellis://journal/latest, trellis://spec/{c}/{n}, spec://{c}/{n}, trellis://tasks/{id}/context, trellis://tasks/{id}/subtasks/{sid}/context                                                                                                                      |
 
 ### 关键路径速查
 
@@ -142,6 +142,8 @@ PM 角色在以下场景**必须**激活本 Skill：
 - 逐步执行文件修改，每步完成后验证完整性
 - 如涉及 MCP Server 代码，确保 `npm run build` 通过
 
+> ⚠️ **开发工作区上下文提醒**：在 `easyAI-dev/` 中迭代时，所有框架文件修改（含图谱节点）必须在 `playground/` 中执行。图谱节点与框架文件是同等公民——修改了 Skill 就必须同步修改引用该 Skill 的图谱节点。详见 `framework-dev-mode.md` Rule。
+
 ### Step 5：记录迭代
 
 1. 按 `resources/changelog-entry-template.md` 模板生成迭代记录
@@ -160,6 +162,16 @@ PM 角色在以下场景**必须**激活本 Skill：
 - **修改 MCP Tool** → 更新 `foundation/mcp-transport.md` + 上层节点的 `tool:` 引用
 
 > **自更新边界**：只更新事实性描述和结构化元数据，不改变图谱的分层设计和节点格式。
+
+#### 校验步骤（Step 6 完成后必做）
+
+图谱更新完成后，对 **本次被修改的** 图谱节点执行引用校验：
+
+1. 读取节点文件中 `files:` 字段列出的所有文件路径
+2. 逐一检查文件是否实际存在（在开发工作区中检查 `playground/` 中的路径）
+3. 汇总结果：
+   - ✅ 全部通过 → 继续
+   - ❌ 存在不一致 → 在 journal 中记录 `[graph-stale]` 标签，并修复引用或提示用户
 
 ---
 

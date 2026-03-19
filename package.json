@@ -1,6 +1,6 @@
 {
   "name": "@geeseeker/easyai-dev",
-  "version": "4.3.8",
+  "version": "4.3.9",
   "description": "easyAI — 让用户以纯客户的视角进行软件开发",
   "type": "module",
   "bin": {

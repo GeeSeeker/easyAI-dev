@@ -34,6 +34,7 @@ skill_chain:
     - common-cli-dispatch # PM 需要外部 CLI 审查时激活
     - common-github-cli # PM 需要 GitHub 平台交互时激活（搜索代码/Issue、创建 PR 等）
     - common-semantic-map # PM 会话启动时检测是否需要生成语义地图
+    - pm-onboarding # pm-session-start 检测新项目时激活
   common_skills:
     - pm-session-close
 files:
@@ -74,6 +75,8 @@ files:
     role: GitHub CLI 集成（搜索代码/Issue、创建 PR、管理 Release 等）
   - path: .agents/skills/common-semantic-map/SKILL.md
     role: 项目语义地图（pm-session-start 检测缺失时触发生成）
+  - path: .agents/skills/pm-onboarding/SKILL.md
+    role: 新项目引导（pm-session-start 检测新项目时激活，完成初始化配置）
 ---
 
 # PM 工作流
@@ -100,6 +103,7 @@ PM 工作流的标准路径为线性 Skill 链，每个 Skill 的产出是下游
 - **common-spec-update**：新建或修改 `.trellis/spec/` 下规范文件时激活（运行时数据变更不触发）
 - **pm-milestone-archive**：用户主动要求「进度归档」或大阶段结束时激活。执行废弃隔离、冷区转移与阶段总结报告。
 - **pm-braindump-assimilate**：用户提供非结构化想法/需求文本时激活。解析并分类路由到框架对应位置。
+- **pm-onboarding**：pm-session-start 检测到新项目时激活。执行初始化配置、引导开发者设置。
 
 ### 通用 Skill（common_skills）
 

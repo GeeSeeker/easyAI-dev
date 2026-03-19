@@ -41,7 +41,11 @@ files:
   - path: .agents/rules/framework-edit-guard.md
     role: 框架编辑守卫（always_on，修改/设计框架前强制查图谱 + 图谱同步更新 + 修改 Skill 前读 skill-creator）
   - path: .agents/rules/skill-eval-guard.md
-    role: Skill 评估守卫（always_on，开发/规划/框架/验收类请求前强制执行 /common-skill-eval Workflow）
+    role: Skill 评估守卫（开发/规划/框架/验收类请求前强制执行 skill-eval Workflow）
+  - path: .agents/rules/cli-direct-call-guard.md
+    role: CLI 直接调用守卫（禁止 run_command 直接调用外部 CLI）
+  - path: .trellis/config/permissions.yaml
+    role: 工具权限矩阵（角色权限 + 工具分级 + 路径保护）
   - path: .agents/workflows/common-skill-eval.md
     role: Skill 评估工作流（评估卡 → 拉取 Level 2 → ABCDE 分级 → 执行）
   - tool: framework_init
@@ -74,10 +78,7 @@ files:
 
 ### Rules 系统（rules-system）
 
-`.agents/rules/` 目录下的规则文件，通过 YAML frontmatter 的 `trigger` 字段控制生效时机：
-
-- **always_on** — 每个会话始终生效（如 `anti-hallucination.md`、`project-identity.md`、`skill-transparency.md`、`framework-edit-guard.md`）
-- **glob** — 编辑匹配文件时自动注入（如 `coding-standards.md` 匹配 `*.ts,*.js,*.py`）
+`.agents/rules/` 目录下的规则文件直接平铺，由 IDE 的 YAML frontmatter（`alwaysApply` / `globs`）控制注入时机。规则文件无需按触发方式分子目录，统一放在 `rules/` 根目录下。
 
 Worker Workflow Step 2.5 和 `pm-session-close` Step 4.5 分别在会话启动和收尾时执行 Rules 合规加载/回顾。
 
