@@ -31,9 +31,9 @@ files:
     role: 系统性调试 Break-Loop（4 阶段根因分析 + 3 次失败上报 + 5 维分析）
   - path: .agents/skills/pm-task-review/SKILL.md
     role: PM 三阶段验收（Stage 1 Spec 合规 → Stage 2 代码质量 → Stage 3 Artifacts 沉淀）
-  - path: .agents/rules/always_on/anti-hallucination.md
+  - path: .agents/rules/anti-hallucination.md
     role: 反幻觉约束（禁止模糊措辞、第三方库必须查文档、RPI 阶段隔离）
-  - path: .agents/rules/glob/coding-standards.md
+  - path: .agents/rules/coding-standards.md
     role: 编码规范（命名约定、缩进、导入顺序、类型安全）
   - tool: task_transition
     role: Evidence Gate 运行时校验（_PASS / _NA / _FAIL 标记检查）

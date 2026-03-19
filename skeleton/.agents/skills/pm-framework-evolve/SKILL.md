@@ -111,7 +111,7 @@ PM 角色在以下场景**必须**激活本 Skill：
 ```markdown
 | 文件                           | 变更类型 | 变更摘要      |
 | ------------------------------ | -------- | ------------- |
-| .agents/rules/always_on/xxx.md | 修改     | 增加 xxx 约束 |
+| .agents/rules/xxx.md | 修改     | 增加 xxx 约束 |
 | .agents/skills/yyy/SKILL.md    | 新建     | yyy 能力模块  |
 ```
 

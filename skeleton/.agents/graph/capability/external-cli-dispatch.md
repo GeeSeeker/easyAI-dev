@@ -34,7 +34,7 @@ files:
     role: 审查模式 Prompt 模板（Markdown 变量占位符）
   - path: .agents/skills/common-cli-dispatch/templates/roles/*.md
     role: 专属角色提示词模板（定义各 backend 在不同场景的身份和审点）
-  - path: .agents/rules/always_on/cli-direct-call-guard.md
+  - path: .agents/rules/cli-direct-call-guard.md
     role: CLI 直接调用守卫 Rule（禁止 run_command 直接调用 CLI）
 ---
 
