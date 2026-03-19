@@ -2,6 +2,18 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.9] - 2026-03-19
+
+### 修复
+
+- **图谱数据修正（9 项）** — 更新 rules 扁平化描述、补全 `framework-governance` files 字段（skill-eval-guard、cli-direct-call-guard、permissions.yaml）、修正 manifest 文件名、pm-workflow 补充 pm-onboarding、SKILL.md 快速参考索引数量校正
+- **移除废弃的 `.directory-map` 引用** — `file-persistence` 图谱节点清理 children/files/子特性描述
+
+### 新增
+
+- **图谱迭代机制强化** — publish.md Step 0 扩展为 5 类全覆盖扫描、pm-framework-evolve Step 4 增加 playground 上下文提醒、Step 6 增加 files 引用校验
+- **记事本日常整理约定** — actor-pm.md 新增约束：完成的待办应即时移入完成区，不仅依赖收工批量整理
+
 ## [4.3.8] - 2026-03-19
 
 ### 修复
