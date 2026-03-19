@@ -1,6 +1,6 @@
 {
-  "version": "4.3.19",
-  "generatedAt": "2026-03-19T19:29:36.842Z",
+  "version": "4.3.20",
+  "generatedAt": "2026-03-19T19:38:52.040Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -255,10 +255,10 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".easyai-version": {
-      "hash": "99cbeecf6e395c685e2e05e71edcb5a5f60e1d7dee46a09e1916a0f81b21db74"
+      "hash": "d267ad4b82093bfca40b8370a3934e41c6d75f3882bcb46588c8c74b8feb5dae"
     },
     ".trellis/config/config.yaml": {
-      "hash": "9e84bff1c5a29cca910a33341899619c70fe936d46283a710b5851c75e5271bc",
+      "hash": "3556829425691453ac6d208b1cc159cfa1ac217ef72c4be78ea905b096250e68",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {

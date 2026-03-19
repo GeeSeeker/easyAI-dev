@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.20] - 2026-03-20
+
+### 修复
+
+- **移除废弃的 `.docs/archive/` 检查** — 框架已采用「就地养老式」归档（文件用 `[DONE]`/`[OBSOLETE]` 前缀就地标记），不再需要独立的 archive 目录。从 `framework_check` 和 `init` 的检查列表中移除，消除每次 check 的误报。
+
 ## [4.3.19] - 2026-03-20
 
 ### 优化
