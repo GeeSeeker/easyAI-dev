@@ -148,6 +148,28 @@ requires: null
 
 > 此检测仅在 `pm-session-start` 中触发，日常 session-close 不自动全刷（控制 Token 成本）。
 
+#### JSON Schema 提示
+
+> ⚠️ `semantic-map.json` 的结构是**嵌套树**，不是扁平数组。统计时必须递归遍历。
+
+```json
+{
+  "version": "1.0",
+  "generated_at": "...",        // ← 读取此字段作为 {timestamp}
+  "project_root": "...",
+  "tree": [                     // ← 顶级目录数组（非 "directories"）
+    {
+      "path": "src/",
+      "type": "directory",
+      "skeleton_files": [...],  // ← 该目录的骨架文件数组
+      "children": [...]         // ← 子目录（递归同结构）
+    }
+  ]
+}
+```
+
+**统计方法**：递归遍历 `tree` → `children`，累加所有 `type: "directory"` 节点数作为 `{n}`，累加所有 `skeleton_files` 数组长度之和作为 `{m}`。
+
 ### 4. 状态快照输出
 
 向用户输出结构化的状态快照：

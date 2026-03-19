@@ -1,6 +1,6 @@
 {
-  "version": "4.3.14",
-  "generatedAt": "2026-03-19T13:16:12.910Z",
+  "version": "4.3.15",
+  "generatedAt": "2026-03-19T17:46:03.434Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -207,7 +207,7 @@
       "hash": "6f16daaebb4deb39e2b3d91750e2919c4e68936414763f83aa6771d9440b2e72"
     },
     ".agents/skills/pm-session-start/SKILL.md": {
-      "hash": "fce5642e595e3342c3422682b14cd077260015c0830fbe057c2ff9a41d2ae9eb"
+      "hash": "c04c23c751f96dbbc82be28a311c0dba9ced1cab754adf37630a39f8cf1ccade"
     },
     ".agents/skills/pm-task-planning/SKILL.md": {
       "hash": "a0228fb3e032388e5794aa7a4b43e1fd0832c9dcf9ec0350c339a8a011487ad4"
@@ -254,8 +254,11 @@
     ".docs/notes/user-记事本.md": {
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
+    ".easyai-version": {
+      "hash": "501dd4c22eb14c3b48483ba04ae47c114fb79724142472294aea70ab05bcdeb1"
+    },
     ".trellis/config/config.yaml": {
-      "hash": "9586e52a71ac58fe59a6e5c520f6a445b8d72d70fbd4de60e5a0981c8228b204",
+      "hash": "8eee9b47291e13b353e5cec62b28e9e8b7df21040f257c7d6ebb43fc87ae5712",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {
