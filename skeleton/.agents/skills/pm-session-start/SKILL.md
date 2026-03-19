@@ -64,7 +64,7 @@ requires: null
    - `mcp_enforced` 为空 → 提示可填写，但不阻断
    - `features` 为空 → 提示可填写，但不阻断
 
-### Step 1: 获取项目状态
+### 1. 获取项目状态
 
 调用 MCP Tool `project_status()`，获取：
 
@@ -73,15 +73,15 @@ requires: null
 - 所有活跃任务列表及其状态
 - 最新 3 条日志摘要
 
-### Step 2: 读取项目总览 Resource
+### 2. 读取项目总览 Resource
 
 读取 MCP Resource `trellis://status`，获取更完整的项目总览数据。
 
-### Step 3: 检索最新日志
+### 3. 检索最新日志
 
 读取 MCP Resource `trellis://journal/latest`，了解上次会话的工作内容和遗留事项。
 
-### Step 3.3: PM 记事本恢复
+### 3.3 PM 记事本恢复
 
 读取 `.docs/notes/pm-记事本.md`，检查「待办」区是否有上次遗留的待办事项：
 
@@ -90,7 +90,7 @@ requires: null
 
 > PM 在工作过程中应主动往 `pm-记事本.md` 的「待办」区写入发现的问题和后续线索（详见 actor-pm 约束段）。
 
-### Step 3.5: 项目规范状态
+### 3.5 项目规范状态
 
 扫描 `.trellis/spec/` 目录结构，了解当前项目规范的覆盖情况：
 
@@ -102,13 +102,13 @@ requires: null
 > 如有空分类，在状态快照中标记为 `[SPEC_GAP]`，
 > 在 PATEOAS 导航中建议用户补充规范（可通过 `common-spec-update` Skill 执行）。
 
-### Step 3.6: 权限矩阵概览
+### 3.65 权限矩阵概览
 
 读取 `.trellis/config/permissions.yaml`，在状态快照中展示当前角色的权限摘要（工具分级数量 + 路径保护范围）。
 
 > 如文件不存在，提示用户可通过 `framework_init` 或手动创建。
 
-### Step 3.7: 图谱健康检查
+### 3.7 图谱健康检查
 
 > 跨会话追踪 — 检测 `worker-session-close` 报告的图谱过期条目。
 
@@ -124,7 +124,7 @@ requires: null
   在 PATEOAS 导航中增加建议项：「处理图谱过期条目」
 - **无结果** → 标记 `✅ 图谱健康` 并跳过
 
-### Step 3.8: 语义地图铺底检测
+### 3.8 语义地图铺底检测
 
 > 初始铺底 — 检测项目是否已生成语义地图，缺失时引导用户确认生成。
 
@@ -148,7 +148,7 @@ requires: null
 
 > 此检测仅在 `pm-session-start` 中触发，日常 session-close 不自动全刷（控制 Token 成本）。
 
-### Step 4: 状态快照输出
+### 4. 状态快照输出
 
 向用户输出结构化的状态快照：
 

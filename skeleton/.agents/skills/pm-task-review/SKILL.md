@@ -22,7 +22,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 在进入 Stage 1 之前，**必须**完成以下准备：
 
-### Step 0: 阻塞文件扫描（F32）
+### 0. 阻塞文件扫描（F32）
 
 扫描 `.trellis/tasks/{task_id}/blockers/` 目录：
 
@@ -36,11 +36,11 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
   3. 通过 `task_append_log()` 记录 `📋 回复 blocker: blockers/{NN}-pm-reply.md`
   4. 所有 blocker 已回复后，继续验收流程
 
-### Step 1: 确定审核类型
+### 1. 确定审核类型
 
 根据任务性质选择：架构审核 / 代码审核 / 文档审核 / 混合审核（详见 `spec://guides/review-standards` §一）
 
-### Step 2: 风险分级（F39 联动）
+### 2. 风险分级（F39 联动）
 
 **优先读取** task.md 中的 `## 路由配置` 段（由 `pm-task-planning` Step 4.5 写入）：
 
@@ -49,7 +49,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 低风险任务 Stage 2 可简化为快速检查。
 
-### Step 3: 循环计数检查（HG-7）
+### 3. 循环计数检查（HG-7）
 
 读取 task.md `## 执行记录` 中当前 Stage 的打回条目数（格式：`🔴 Stage {N} 打回第 {M} 次`）。若同一 Stage 已打回 3 次 → **强制升级**：任务保持 `rejected`，PM 与用户协商（PM 直接修复 / 重新拆分 / 降低标准 / 取消），并在验收报告中附加「循环分析」（为什么反复失败？约束集不清晰还是执行能力不足？）。
 
@@ -232,13 +232,13 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
 
 > 仅当任务使用了 worktree 时执行。检查方式：调用 `worktree_list()` 或查看 task 执行记录中的 `[worktree]` 标记。
 
-### Step 1: Worktree 状态检查
+### 步骤 1：Worktree 状态检查
 
 - 调用 `worktree_list({ role: "pm" })` 查看任务关联 worktree 的状态
 - 若该任务无关联 worktree → **跳过本步骤，直接标记 `completed`**
 - 若 `is_dirty: true` → 提醒用户 worktree 有未提交变更，建议先处理
 
-### Step 2: 合并
+### 步骤 2：合并
 
 - 从 task 执行记录获取 `base_branch` 作为默认 target
 - 向用户确认目标分支
@@ -247,7 +247,7 @@ PM 审查执行者提交验收的任务时，**必须**激活本 Skill。
   1. 手动解决冲突后重试
   2. 打回任务让 Worker 解决
 
-### Step 3: 清理
+### 步骤 3：清理
 
 - 合并成功后 → 调用 `worktree_cleanup({ task_id, delete_branch: true, role: "pm" })`
 - 确认清理完成

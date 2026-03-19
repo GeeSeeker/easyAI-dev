@@ -3,7 +3,7 @@
 # 框架基本信息
 framework:
   name: easyAI
-  version: "4.3.10"
+  version: "4.3.11" # 与 .easyai-version 保持一致
   description: "让用户以纯客户的视角进行软件开发"
 
 # 用户交互级别（架构 §5.4 · 核心需求 #2 自适应交互）
@@ -51,8 +51,8 @@ tasks:
   root: .trellis/tasks
   archive: .trellis/tasks/archive
   max_subtasks: 10 # 单任务最大子任务数
-  auto_freeze: true # 已由 task-transition.ts generateSnapshot() 实现
-  stale_detection: true # 已由 context-budget.ts stale detection 实现
+  # TODO: auto_freeze: true      — 待 MCP task-transition.ts 实现 config 读取后启用
+  # TODO: stale_detection: true   — 待 MCP 实现 context-snapshot 哈希对比后启用
   statuses:
     - pending # 待分配
     - in_progress # 执行中

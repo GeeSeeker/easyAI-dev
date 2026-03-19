@@ -15,6 +15,7 @@
 | context-management   | 上下文管理（Token 预算、阶段冻结）               |
 | knowledge-management | 知识管理（框架知识库、图谱）                     |
 | framework-governance | 框架治理（约束分层、规范演进、Manifest 升级）    |
+| external-cli-dispatch| 外部 CLI 统一调度（Codex / Claude / Gemini 审查）|
 
 ## 层间关联
 

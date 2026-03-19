@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.11] - 2026-03-19
+
+### 修复
+
+- 修正了图谱中 `manifest-mechanism` 节点对 `easyai-manifest.json` 的错误称呼，已补充前导点改为 `.easyai-manifest.json`。
+
 ## [4.3.10] - 2026-03-19
 
 ### 修复
