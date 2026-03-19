@@ -1,6 +1,6 @@
 {
-  "version": "4.3.13",
-  "generatedAt": "2026-03-19T13:09:07.685Z",
+  "version": "4.3.14",
+  "generatedAt": "2026-03-19T13:16:12.910Z",
   "files": {
     ".agents/graph/README.md": {
       "hash": "94cce4d165a3215ccfe6e5816c803c197759b8ba02d21f50b5d4469c3f716841"
@@ -255,7 +255,7 @@
       "hash": "4367b723ddee41a3bb5827b4958032c8a401172a847eb9252eca92150e45a21d"
     },
     ".trellis/config/config.yaml": {
-      "hash": "f37ecf59ba043298783f406d56f64b6366a4e0d76357b1ccc596f78d3c6c865e",
+      "hash": "9586e52a71ac58fe59a6e5c520f6a445b8d72d70fbd4de60e5a0981c8228b204",
       "merge_mode": "append"
     },
     ".trellis/config/permissions.yaml": {
