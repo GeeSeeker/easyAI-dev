@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.7] - 2026-03-19
+
+### 修复
+
+- **Rules 物理结构扁平化** — 彻底清除 `always_on/` 和 `glob/` 的残留物理子文件夹，将真实的规则文件直接平铺于 `.agents/rules/`
+- **消除全量硬编码路径** — 更新 MCP Server `framework-tools.ts` 以及图谱节点（`quality-control.md`、`framework-governance.md`、`external-cli-dispatch.md`、`worker-workflow.md`）、工作流与 Skills 中残余的旧子目录硬编码引用
+
 ## [4.2.4] - 2026-03-19
 
 ### 修复
