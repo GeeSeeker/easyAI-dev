@@ -173,8 +173,8 @@ easyAI 通过 **MCP 协议**（Model Context Protocol）与 IDE 深度集成：
 
 ```text
 18 个 Skills       ← PM/Worker 的专业能力模块
- 8 条 Rules         ← 反幻觉、编码规范等硬约束
- 4 个 Workflows     ← PM / Worker / 评估 / 发布入口
+ 7 条 Rules         ← 反幻觉、编码规范等硬约束
+ 4 个 Workflows     ← PM / Worker / 评估 / 快速修复
 23 个 MCP Tools     ← 任务管理、日志、质量控制
  6 个 MCP Resources ← 状态、规范、日志数据源
 20 个 Graph Nodes   ← 5 层知识图谱（框架的神经系统）
@@ -189,7 +189,7 @@ easyAI 通过 **MCP 协议**（Model Context Protocol）与 IDE 深度集成：
 ```text
 your-project/
 ├── .agents/            ← AI 的能力
-│   ├── rules/          │  8 条行为规则（反幻觉、编码规范等）
+│   ├── rules/          │  7 条行为规则（反幻觉、编码规范等）
 │   ├── workflows/      │  4 个工作流入口
 │   ├── skills/         │  18 个能力模块
 │   └── graph/          │  20 节点知识图谱
@@ -233,14 +233,18 @@ npx @geeseeker/easyai-dev serve          # 启动 MCP Server
 
 ## 🙏 致谢
 
-easyAI 的诞生离不开以下开源项目和技术的启发：
+easyAI 的诞生深切受益于以下开源项目、生态与前沿理论的启发：
 
-| 项目                                                                                                                    | 致谢                                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [Trellis](https://github.com/montasaurus/trellis)                                                                       | easyAI 的任务管理和 Skills 系统最初从 Trellis 学习并发展而来，Trellis 的规范驱动开发理念深刻影响了 easyAI 的架构设计 |
-| [Antigravity IDE](https://antigravity.google/)                                                                          | Google DeepMind 打造的 AI 原生 IDE，提供了 MCP 支持和 Agents 基础能力                                                |
-| [Model Context Protocol](https://modelcontextprotocol.io/)                                                              | Anthropic 提出的 AI-工具通信标准，easyAI 的 23 个工具和 6 个数据源都基于 MCP 实现                                    |
-| [Context7](https://context7.com) / [ContextWeaver](https://github.com/nicobailon/contextweaver) / [Exa](https://exa.ai) | 增强 MCP 生态 — 文档检索、代码语义搜索、互联网搜索                                                                   |
+| 项目/技术 | 致谢与渊源 |
+| --- | --- |
+| [Trellis](https://github.com/montasaurus/trellis) | easyAI 的任务状态机和架构规范最初从 Trellis 学习并发展而来，其“规范驱动”理念深刻影响了本作 |
+| [PromptX](https://github.com/Deepractice/PromptX) | 深度启发了 PM / Worker 的双角色流转系统、PATEOAS 状态快照机制以及跨会话的记忆归档架构 |
+| [GuDa-spec](https://github.com/GuDaStudio/commands) | 提供了宝贵的 RPI（设计-计划-实现）阶段隔离思路，确立了 easyAI 中基于约束集防幻觉的实现底线 |
+| [ccg-workflow](https://github.com/fengshao1227/ccg-workflow) | 启发了 easyAI 独创的 ABCDE 多模型外部验证体系，引入体系外的 Codex/Gemini CLI 按级执行审查 |
+| [Superpowers](https://github.com/obra/superpowers) | 启发了 `.agents/skills/` 目录下的原子化能力插件系统与自识别工作流挂载机制 |
+| [Antigravity IDE](https://antigravity.google/) | Google DeepMind 打造的 AI 原生 IDE，提供了绝佳的 MCP 宿主支持和底层的强悍 Agent 驱动能力 |
+| [Model Context Protocol](https://modelcontextprotocol.io/) | Anthropic 提出的通信标准，easyAI 基于它低耦合实现了总计 23 个 Tools 和 6 个 Resources |
+| [Context7](https://context7.com) / [ContextWeaver](https://github.com/nicobailon/contextweaver) / [Exa](https://exa.ai) | 开箱即用的增强 MCP 矩阵 — 提供了精准的在线文档检索、深层代码语义挖掘及全网数据搜索 |
 
 ---
 
