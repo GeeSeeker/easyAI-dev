@@ -233,6 +233,9 @@ function executeBackend(backendInfo, config) {
 
     const child = spawn(backend.command, cliArgs, {
       cwd: backend.capabilities.cwd_flag ? undefined : config.workdir,
+      // Windows 上 npm 全局包（codex/gemini）是 .cmd 脚本，
+      // spawn() 无法直接执行 .cmd，需要 shell: true
+      shell: process.platform === "win32",
       // stdin_mode: true 的 backend（如 Codex）通过 pipe 传入 prompt
       // stdin_mode: false 的 backend（如 Claude、Gemini）通过 CLI 参数传入
       // 后者必须设 stdin 为 'ignore'，否则 CLI 会等待 stdin 输入导致挂起

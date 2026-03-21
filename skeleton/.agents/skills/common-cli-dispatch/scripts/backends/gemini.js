@@ -33,7 +33,7 @@ const geminiBackend = {
   buildArgs(config) {
     const args = [];
 
-    // JSON 输出 + 自动确认 + 非交互模式
+    // JSON 输出 + 自动确认
     args.push("-o", "json", "-y");
 
     // execute 模式：禁用沙箱以允许文件写入
@@ -46,8 +46,8 @@ const geminiBackend = {
       args.push("--include-directories", config.workdir);
     }
 
-    // -p 启用非交互模式（prompt 通过 stdin 传入）
-    args.push("-p");
+    // 不加 -p：cli-runner.js 会将 prompt 内容作为最后一个 positional 参数追加，
+    // Gemini CLI 不允许 -p flag 和 positional prompt 同时使用
 
     return args;
   },

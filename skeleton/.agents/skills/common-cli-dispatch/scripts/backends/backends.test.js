@@ -61,7 +61,7 @@ for (const backend of [codex, claude, gemini]) {
   console.log("✅ Claude buildArgs 正确");
 }
 
-// --- 测试：Gemini buildArgs 包含 json 和 --include-directories 和 -p ---
+// --- 测试：Gemini buildArgs 包含 json 和 --include-directories 但不包含 -p ---
 {
   const args = gemini.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(args.includes("json"), "Gemini args 应包含 json");
@@ -70,7 +70,10 @@ for (const backend of [codex, claude, gemini]) {
     "Gemini args 应包含 --include-directories",
   );
   console.assert(args.includes("-y"), "Gemini args 应包含 -y");
-  console.assert(args.includes("-p"), "Gemini args 应包含 -p");
+  console.assert(
+    !args.includes("-p"),
+    "Gemini args 不应包含 -p（prompt 作为 positional arg 由 cli-runner 追加）",
+  );
   console.log("✅ Gemini buildArgs 正确");
 }
 
