@@ -34,6 +34,51 @@ const BACKEND_REGISTRY = {
   gemini: require("./backends/gemini"),
 };
 
+// CLI --timeout 参数的默认值
+const DEFAULT_TIMEOUT = 600;
+
+/**
+ * 从 config.yaml 读取每个 CLI 的独立 timeout 配置
+ * 简易 YAML 解析（正则提取），零外部依赖
+ * @returns {object} { codex: 600, claude: 300, gemini: 300, ... }
+ */
+function loadBackendTimeouts() {
+  const timeouts = {};
+  try {
+    // 向上查找 config.yaml（从 cwd 开始）
+    const configPaths = [
+      path.join(process.cwd(), ".trellis", "config", "config.yaml"),
+      path.join(__dirname, "..", "..", "..", "..",
+        ".trellis", "config", "config.yaml"),
+    ];
+    let content = null;
+    for (const p of configPaths) {
+      if (fs.existsSync(p)) {
+        content = fs.readFileSync(p, "utf-8");
+        break;
+      }
+    }
+    if (!content) return timeouts;
+
+    // 提取 team.roster 中每个 cli_command 对应的 timeout
+    // 匹配模式：cli_command: "xxx" ... timeout: NNN
+    const rosterBlocks = content.split(/- name:/g).slice(1);
+    for (const block of rosterBlocks) {
+      const cmdMatch = block.match(/cli_command:\s*["']?(\w+)["']?/);
+      const timeoutMatch = block.match(/timeout:\s*(\d+)/);
+      if (cmdMatch && timeoutMatch) {
+        timeouts[cmdMatch[1]] = parseInt(timeoutMatch[1], 10);
+      }
+    }
+  } catch (_err) {
+    // config.yaml 读取失败不阻塞执行，回退到默认值
+  }
+  return timeouts;
+}
+
+// 启动时预加载 per-backend timeout 配置
+const BACKEND_TIMEOUTS = loadBackendTimeouts();
+
 // --- CLI 参数解析 ---
 
 /**
@@ -78,7 +123,10 @@ function parseArgs(argv) {
     mode: values.mode,
     promptFile: values["prompt-file"] || null,
     workdir: values.workdir,
-    timeout: parseInt(values.timeout, 10),
+    // --timeout 优先级最高，未指定时留 null 让 executeBackend 读 config.yaml
+    timeout: values.timeout !== "600"
+      ? parseInt(values.timeout, 10)
+      : null, // null 表示未显式指定，用 config.yaml per-backend 值
     outputDir: values["output-dir"] || null,
     taskId: values["task-id"] || null,
     sessionId: values["session-id"] || null,
@@ -260,12 +308,16 @@ function executeBackend(backendInfo, config) {
     });
 
     // 超时控制：SIGTERM → 等待 5s → SIGKILL（C9）
+    // 优先级：CLI --timeout 参数 > config.yaml per-backend timeout > 默认 600s
     let timedOut = false;
-    const timeoutMs = config.timeout * 1000;
+    const backendTimeout = config.timeout
+      || BACKEND_TIMEOUTS[backend.name]
+      || DEFAULT_TIMEOUT;
+    const timeoutMs = backendTimeout * 1000;
     const timer = setTimeout(() => {
       timedOut = true;
       console.error(
-        `超时: ${backend.name} 超过 ${config.timeout}s, 发送 SIGTERM`,
+        `超时: ${backend.name} 超过 ${backendTimeout}s, 发送 SIGTERM`,
       );
       child.kill("SIGTERM");
 

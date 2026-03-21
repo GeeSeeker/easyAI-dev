@@ -3,7 +3,7 @@
 # 框架基本信息
 framework:
   name: easyAI
-  version: "4.3.25" # 与 .easyai-version 保持一致
+  version: "4.3.26" # 与 .easyai-version 保持一致
   description: "让用户以纯客户的视角进行软件开发"
 
 # 用户交互级别（架构 §5.4 · 核心需求 #2 自适应交互）
@@ -51,8 +51,8 @@ tasks:
   root: .trellis/tasks
   archive: .trellis/tasks/archive
   max_subtasks: 10 # 单任务最大子任务数
-  # TODO: auto_freeze: true      — 待 MCP task-transition.ts 实现 config 读取后启用
-  # TODO: stale_detection: true   — 待 MCP 实现 context-snapshot 哈希对比后启用
+  auto_freeze: true # 已由 task-transition.ts generateSnapshot() 实现
+  stale_detection: true # 已由 context-budget.ts stale detection 实现
   statuses:
     - pending # 待分配
     - in_progress # 执行中
@@ -79,8 +79,12 @@ spec:
     - guides
     - general # 项目级通用规范（命名约定、Git 流程等）
 
-# 上下文预算配置
+# 上下文预算配置 [实验性]
+# ⚠️ 此功能尚未真正接入工作流。AI 无法获取自身实际 token 消耗，
+# MCP context_budget() 仅能根据 context.jsonl 文件大小做粗略估算，
+# 与 Antigravity 实际对话上下文消耗无关。暂保留配置结构供未来探索。
 context:
+  experimental: true # 标记为实验性功能
   warningThreshold: 0.6 # 60% 时开始降级（与 MCP context-budget.ts 运行时一致）
   criticalThreshold: 0.8 # 80% 时建议新会话（与 MCP context-budget.ts 运行时一致）
   auto_downgrade: true # 超过 warning 阈值时自动降级 recommended → deferred
@@ -127,6 +131,7 @@ team:
     - name: "Codex CLI"
       type: "external_cli"
       cli_command: "codex"
+      timeout: 600 # 秒，Codex 在 --full-auto 模式下较慢
       strengths:
         - "后端逻辑"
         - "算法分析"
@@ -137,6 +142,7 @@ team:
     - name: "Claude Code"
       type: "external_cli"
       cli_command: "claude"
+      timeout: 600 # 秒
       strengths:
         - "超多用量"
         - "代码审查"
@@ -148,6 +154,7 @@ team:
     - name: "Gemini CLI"
       type: "external_cli"
       cli_command: "gemini"
+      timeout: 600 # 秒
       strengths:
         - "前端审查"
         - "可维护性分析"

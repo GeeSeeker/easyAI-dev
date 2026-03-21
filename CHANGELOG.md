@@ -2,6 +2,16 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.26] - 2026-03-21
+
+### 新增
+
+- **CLI 独立超时配置** — `config.yaml` 中每个外部 CLI（Codex/Claude/Gemini）可单独配置 `timeout`（秒），`cli-runner.js` 启动时自动读取，优先级：CLI `--timeout` 参数 > config.yaml > 默认 600s
+
+### 变更
+
+- **上下文预算标记为实验性** — `config.yaml` 中 `context` 段添加 `experimental: true` 和说明注释，明确该功能尚未真正接入工作流
+
 ## [4.3.25] - 2026-03-21
 
 ### 修复
