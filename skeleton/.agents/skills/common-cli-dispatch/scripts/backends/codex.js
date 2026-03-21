@@ -36,12 +36,17 @@ const codexBackend = {
     // 跳过 git 仓库检查
     args.push("--skip-git-repo-check");
 
-    // execute 模式：赋予磁盘读写权限（沙箱内）
     if (config.mode === "execute") {
+      // execute 模式：赋予磁盘读写权限（沙箱内）
       args.push(
         "-c",
         'sandbox_permissions=["disk-full-read-access","disk-write-access"]',
       );
+    } else {
+      // review 模式：禁用沙箱
+      // Windows 上 Codex 沙箱使用 CreateProcessAsUserW，
+      // 会报 "CreateProcessAsUserW failed: 5" 权限错误导致无法读取文件
+      args.push("--full-auto");
     }
 
     if (config.workdir) {

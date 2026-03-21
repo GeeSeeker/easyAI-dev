@@ -37,12 +37,16 @@ for (const backend of [codex, claude, gemini]) {
   console.log(`✅ ${backend.name} 实现了 capability interface`);
 }
 
-// --- 测试：Codex buildArgs 包含 --json 和 stdin - ---
+// --- 测试：Codex buildArgs review 模式包含 --full-auto ---
 {
   const args = codex.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(args.includes("--json"), "Codex args 应包含 --json");
   console.assert(args.includes("-"), "Codex args 应包含 - (stdin)");
   console.assert(args.includes("-C"), "Codex args 应包含 -C");
+  console.assert(
+    args.includes("--full-auto"),
+    "Codex review args 应包含 --full-auto（禁用 Windows 沙箱）",
+  );
   console.log("✅ Codex buildArgs 正确");
 }
 
@@ -61,7 +65,7 @@ for (const backend of [codex, claude, gemini]) {
   console.log("✅ Claude buildArgs 正确");
 }
 
-// --- 测试：Gemini buildArgs 包含 json 和 --include-directories 但不包含 -p ---
+// --- 测试：Gemini buildArgs 包含 json + --include-directories + stdin_mode ---
 {
   const args = gemini.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(args.includes("json"), "Gemini args 应包含 json");
@@ -71,8 +75,8 @@ for (const backend of [codex, claude, gemini]) {
   );
   console.assert(args.includes("-y"), "Gemini args 应包含 -y");
   console.assert(
-    !args.includes("-p"),
-    "Gemini args 不应包含 -p（prompt 作为 positional arg 由 cli-runner 追加）",
+    gemini.capabilities.stdin_mode === true,
+    "Gemini stdin_mode 应为 true（通过 stdin pipe 传入 prompt）",
   );
   console.log("✅ Gemini buildArgs 正确");
 }

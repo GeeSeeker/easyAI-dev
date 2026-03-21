@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.25] - 2026-03-21
+
+### 修复
+
+- **Codex Windows 沙箱权限错误** — review 模式添加 `--full-auto` 禁用沙箱，修复 `CreateProcessAsUserW failed: 5` 导致无法读取项目文件的问题
+- **Gemini 长 Prompt 回显问题** — `stdin_mode` 改为 `true`，prompt 通过 stdin pipe 传入，修复 Windows `cmd.exe` 对长 prompt positional arg 转义截断导致 Gemini 只回显模板的问题
+
 ## [4.3.24] - 2026-03-21
 
 ### 修复

@@ -17,7 +17,9 @@ const geminiBackend = {
     supports_json: true,
     supports_stream_json: true,
     supports_resume: true,
-    stdin_mode: false,
+    // 通过 stdin pipe 传入 prompt，避免 Windows shell:true 下
+    // 长 prompt 被 cmd.exe 转义截断导致 Gemini 只回显模板
+    stdin_mode: true,
     cwd_flag: null, // Gemini 使用 --include-directories
     needs_post_message_delay: false,
   },
@@ -46,8 +48,8 @@ const geminiBackend = {
       args.push("--include-directories", config.workdir);
     }
 
-    // 不加 -p：cli-runner.js 会将 prompt 内容作为最后一个 positional 参数追加，
-    // Gemini CLI 不允许 -p flag 和 positional prompt 同时使用
+    // prompt 通过 stdin pipe 传入（stdin_mode: true）
+    // 不使用 positional arg，避免 Windows cmd.exe 转义问题
 
     return args;
   },
