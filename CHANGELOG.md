@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.24] - 2026-03-21
+
+### 修复
+
+- **Windows CLI spawn 兼容性** — `cli-runner.js` 添加 `shell: true`（仅 Windows），修复 npm 全局安装的 `.cmd` 脚本（codex/gemini）无法被 `spawn()` 执行的 `ENOENT` 错误
+- **Gemini -p 参数冲突** — `gemini.js` 移除 `-p` 标志，修复与 positional prompt 同时存在导致 `Cannot use both a positional prompt and -p flag` 的错误
+
 ## [4.3.23] - 2026-03-21
 
 ### 新增
