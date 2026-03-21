@@ -11,14 +11,16 @@ relates_to:
   - user-experience/requirement-delivery
   - user-experience/session-management
 files:
+  - path: .docs/
+    role: 项目核心常青文档（需求文档、架构设计、SRS 等）
   - path: .docs/refs/
     role: 外部参考资料存放目录
   - path: .docs/design/
-    role: 架构与规划中心（planning/ + features/）
+    role: 设计蓝图空间（planning/ + features/）
   - path: .docs/notes/
     role: 草稿场区（user-/pm- 前缀）
   - path: .docs/archive/
-    role: 就地养老式归档目录
+    role: 常青文档归档区（用户自维护为主）
   - path: .agents/skills/pm-brainstorm/SKILL.md
     role: 设计文档产出（brainstorm → .docs/design/）
   - path: .agents/skills/worker-check/SKILL.md
@@ -73,25 +75,27 @@ PM 验收后 → 完工打 [DONE] 标记 / 废弃打 [OBSOLETE] 标记移入 arc
 
 ## `.docs/` 目录结构
 
-| 子目录              | 用途                                      |
-| ------------------- | ----------------------------------------- |
-| `notes/`            | 草稿场区（user-/pm- 前缀 + 记事本四分区） |
-| `refs/`             | 外部参考资料库                            |
-| `design/`（根文件） | 项目核心常青文档（需求、架构、技术说明）  |
-| `design/planning/`  | 长线规划、Roadmap、里程碑总结             |
-| `design/features/`  | 特性架构蓝图                              |
-| `archive/`          | 就地养老式归档（各目录内配套 archive/）   |
+| 子目录              | 用途                                             |
+| ------------------- | ------------------------------------------------ |
+| `.docs/`（根文件）  | 项目核心常青文档（需求文档、架构设计、SRS 等）   |
+| `notes/`            | 草稿场区（user-/pm- 前缀 + 记事本四分区）       |
+| `refs/`             | 外部参考资料库                                   |
+| `design/`           | 设计蓝图空间（planning/ + features/）            |
+| `design/planning/`  | 长线规划、Roadmap、里程碑总结                    |
+| `design/features/`  | 特性架构蓝图                                     |
+| `archive/`          | 常青文档归档区（用户自维护为主）                 |
+| 各目录内 `archive/` | 就地养老式归档（notes/archive/ 等）              |
 
 ### 记事本约定
 
 记事本（`user-记事本.md` 和 `pm-记事本.md`）是框架初始化时创建的标准文件，采用四分区结构：
 
-| 分区            | 说明                           | AI 处理                    |
-| --------------- | ------------------------------ | -------------------------- |
-| 说明（仅 user） | 处理模式设定（跳过/询问/自动） | 缺失时自动补全，模式值不改 |
-| 长期            | 用户长期记录                   | 不主动处理                 |
-| 待办            | 活跃待办事项                   | 完成后即时移入完成区 + 收工时批量整理 |
-| 完成            | 已完成事项                     | 归档时剪切到 archive/      |
+| 分区            | 说明                           | AI 处理                                       |
+| --------------- | ------------------------------ | --------------------------------------------- |
+| 说明（仅 user） | 处理模式设定（跳过/询问/自动） | 缺失时自动补全，模式值不改                    |
+| 长期            | 用户长期记录                   | 不主动处理                                    |
+| 待办            | 活跃待办事项                   | 完成后即时移入完成区 + 收工时批量整理         |
+| 完成            | 已完成事项                     | 归档时剪切到 archive/                         |
 
 ## 变更影响
 

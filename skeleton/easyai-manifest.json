@@ -1,6 +1,6 @@
 {
-  "version": "4.3.22",
-  "generatedAt": "2026-03-20T16:50:24.998Z",
+  "version": "4.3.23",
+  "generatedAt": "2026-03-21T09:05:06.230Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -72,7 +72,7 @@
       "hash": "ada542bbc75e60ba662c3e4672bf13fd02cf6b86f4b273d0b65d58023660d44d"
     },
     ".agents\\graph\\user-experience\\artifact-pipeline.md": {
-      "hash": "920dc3ab1263229842ba32997b96e8dcc2743c6a3dbc1dbc9f87e0e302f3a359"
+      "hash": "931afecec833366d85b055a7953b062f5b1dde8f9e9aec9d8d671afb36f84c5c"
     },
     ".agents\\graph\\user-experience\\requirement-delivery.md": {
       "hash": "3d795bc2340243f74ba5b31aba285b1e70c77e07b968a7a21318c39372ae24e9"
@@ -108,16 +108,16 @@
       "hash": "2d163388c4c024140efce389d7e5a1b7d43c5d31b4cfaf90bc504763f8ad9d5c"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\backends.test.js": {
-      "hash": "2ea662de26bca50c93b5797029286432dff821f7a89f5e3f8a700a3dd5b832ce"
+      "hash": "701923a457efe2690ba0528cbf50f34166513c1d0e517ebd532e66d1adc73c05"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\claude.js": {
-      "hash": "4da87bec85d558fc97a3f431bc837546eb450bd073f5fde267769c38e8e8c5d4"
+      "hash": "1a3527c1badf835c2c623d79a11e509b28605fcc54aad08aa640bd500b7d2aca"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\codex.js": {
-      "hash": "67f2da1314338d866160d8c48b0b8b63f0c73f06d0ed4614b1b099e74baf7310"
+      "hash": "5ffe317f74cc6dbd21dd770d78001075a8030d3d72a5a54f8a2808659029ca50"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\gemini.js": {
-      "hash": "44327157bd024cf5d52001ffd05d57b405df159f5f7c640c1f6e152f77f6d863"
+      "hash": "88299eef9b87d67cc203854b7379a13ab3098f5e8b53082217550ef2af51eb1b"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.js": {
       "hash": "aeb45c67be4999e023cbefec98023e7e1ad838abcacdad6adcff2df54f7b4130"
@@ -195,16 +195,16 @@
       "hash": "801ae16c13edcf6f6efefeecb91e74ebf269e73841d2c8db4e4e5de81143fe7c"
     },
     ".agents\\skills\\pm-framework-evolve\\SKILL.md": {
-      "hash": "b4702bdda59192c5801d9775a630252ce94904dc1a4b99c06201c239fcde23ca"
+      "hash": "4281940754f990f6f0c53e239515b4be85c0c1d20fb7d7860cb1e423540196bd"
     },
     ".agents\\skills\\pm-milestone-archive\\SKILL.md": {
-      "hash": "cc974f8030dc5f002f034842a9f3fe08dd028fc4a1cb2aefcd6399ad9e6027b0"
+      "hash": "a74fa8c70772411747c47bb0d0e624dea6552fa68d0e63ea2025309b2763b44c"
     },
     ".agents\\skills\\pm-onboarding\\SKILL.md": {
-      "hash": "7bae4c47d45ee5f4faaaa6861ad5ba11318595ac5027bdcec89846c60eccb444"
+      "hash": "55364f7a5499b3da38a6d8028f732fd77bfdccb31eda58efeb9a2620794cf18d"
     },
     ".agents\\skills\\pm-session-close\\SKILL.md": {
-      "hash": "6f16daaebb4deb39e2b3d91750e2919c4e68936414763f83aa6771d9440b2e72"
+      "hash": "f36c1365cb2c35d2375e2f198dc866c8d83b2dfe59f72b3bfa3c801eee840dae"
     },
     ".agents\\skills\\pm-session-start\\SKILL.md": {
       "hash": "c04c23c751f96dbbc82be28a311c0dba9ced1cab754adf37630a39f8cf1ccade"
@@ -255,10 +255,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "36af0c45493afa68fa0a2be1ef3f6d3f9c60cc4f798f9daa61f84bb650866a36"
+      "hash": "87f03f8dd9456c28a1f4b4103278f32d53cd62a76d0133782afb04de84059287"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "073e5c7a1e49b2b5b908fc067799def0b5278500e9d29b7f8f46b0411706caed"
+      "hash": "86c4814c3a53a1e84c3d8d6cc204fe45bf47d8aeffdd8373b2cb51023a43e97c"
     },
     ".trellis\\config\\permissions.yaml": {
       "hash": "bbd8d3dfe4f63e60baa7091dc6a282b0181c78c52c97c1a96ba055349bb645ef"

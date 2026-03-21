@@ -270,6 +270,25 @@ task_append_log({
 
 > 此步骤为静默清理，不打断收工流程。
 
+### Step 5.6：语义地图结构变更检测与刷新
+
+> 确保语义地图在项目结构发生变更后自动保持最新。仅检测结构变更（新增/删除目录或文件），文件内容修改不触发刷新。
+
+1. **检测 `semantic-map.json` 是否存在**
+   - 若不存在 → 静默跳过整个步骤（铺底检测在 `pm-session-start` 中）
+
+2. **检测结构变更**
+   - 执行 `git diff --name-status`（对比工作区与 HEAD），筛选状态为 `A`（新增）或 `D`（删除）的条目
+   - 仅关注**目录或文件的新增/删除**，忽略 `M`（修改）、`R`（重命名）等状态
+   - 若筛选结果为空 → 静默跳过，不输出任何信息
+
+3. **自动刷新语义地图**
+   - 检测到结构变更时，自动触发 `common-semantic-map` Skill 刷新语义地图
+   - 无需询问用户，直接执行
+   - 刷新完成后，产出的 `semantic-map.json` 和 `semantic-map-view.md` 将随 Step 6 Git 提交一起提交
+
+> 此步骤为静默执行，仅在检测到结构变更时触发刷新。无变更时不产生任何输出，不打断收工流程。
+
 ### Step 6：Git 自动提交
 
 > 本步骤在所有文件变更操作（journal、task log、artifacts 沉淀）完成后执行，确保 commit 捕获最终状态。
@@ -292,6 +311,7 @@ task_append_log({
    - `.trellis/tasks/{当前任务目录}/task.md`（任务记录）
    - 被 Step 4 确认沉淀的 `.docs/` 文件
    - `.docs/notes/user-记事本.md` 和 `.docs/notes/pm-记事本.md`（Step 4.8 记事本整理）
+   - `semantic-map.json` 和 `semantic-map-view.md`（Step 5.6 语义地图刷新产出）
    - scope 外的变更 → 列出并询问用户是否包含
 
 5. **敏感文件过滤**（辅助防线）— 扫描允许列表内的文件：

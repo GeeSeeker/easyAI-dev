@@ -97,7 +97,9 @@ const codexBackend = {
    */
   isAvailable() {
     try {
-      const result = spawnSync("which", ["codex"], { timeout: 5000 });
+      // 跨平台检测：Windows 用 where，Linux/macOS 用 which
+      const cmd = process.platform === "win32" ? "where" : "which";
+      const result = spawnSync(cmd, ["codex"], { timeout: 5000 });
       return result.status === 0;
     } catch (_err) {
       return false;

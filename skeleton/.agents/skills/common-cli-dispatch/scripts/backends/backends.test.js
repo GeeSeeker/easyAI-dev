@@ -168,4 +168,19 @@ for (const backend of [codex, claude, gemini]) {
   }
 }
 
+// --- 测试：isAvailable 跨平台检测命令正确 ---
+{
+  const { spawnSync } = require("child_process");
+  const expectedCmd = process.platform === "win32" ? "where" : "which";
+  // 验证当前平台的检测命令可用（命令本身存在）
+  const probe = spawnSync(expectedCmd, ["node"], { timeout: 5000 });
+  console.assert(
+    probe.status === 0,
+    `跨平台检测命令 "${expectedCmd}" 应能找到 node`,
+  );
+  console.log(
+    `✅ 跨平台检测：当前平台 ${process.platform} 使用 "${expectedCmd}" 命令`,
+  );
+}
+
 console.log("\n所有 backend 测试通过 ✅");
