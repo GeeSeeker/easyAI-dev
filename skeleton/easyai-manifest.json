@@ -1,6 +1,6 @@
 {
-  "version": "4.3.26",
-  "generatedAt": "2026-03-21T15:26:17.755Z",
+  "version": "4.3.27",
+  "generatedAt": "2026-03-21T17:20:01.535Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -255,10 +255,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "d0dc840453ce1c54af6c7227c9d5237806279d3c3e3ee31c8db46e19770a4668"
+      "hash": "f046c062eef60b6166479e03fe6817803db2f45117ce64fb797605da54a6e217"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "6e2b999963031c74dbeb40af16f8e470ef69635c1ad2fbeddcb2d0bef3dfa223"
+      "hash": "3565419c69f899644393b8f1d3b20953db26da805c8302081d77d2dbd7b6b4f5"
     },
     ".trellis\\config\\permissions.yaml": {
       "hash": "bbd8d3dfe4f63e60baa7091dc6a282b0181c78c52c97c1a96ba055349bb645ef"
