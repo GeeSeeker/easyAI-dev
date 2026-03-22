@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.30] - 2026-03-22
+
+### 修复
+
+- **Claude `--setting-sources` 空参数被 Windows shell 消除** — `args.push("--setting-sources", "")` 在 Windows `shell: true` 模式下，空字符串 `""` 被 cmd.exe 吞噬导致 `argument missing` 报错。改为 `args.push("--setting-sources=")` 使用 `=` 语法合并为单个参数
+
 ## [4.3.29] - 2026-03-22
 
 ### 修复
