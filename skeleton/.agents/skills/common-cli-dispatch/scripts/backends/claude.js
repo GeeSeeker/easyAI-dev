@@ -37,7 +37,9 @@ const claudeBackend = {
     // 阻断本地配置文件的全局 prompt，防止闲聊交互
     // 参考 ccg-workflow (backend.go:95): "Prevent infinite recursion:
     // disable all setting sources"
-    args.push("--setting-sources", "");
+    // 注意：必须使用 = 语法合并为单个参数，
+    // Windows shell: true 下分离的空字符串 "" 会被 cmd.exe 消除
+    args.push("--setting-sources=");
 
     return args;
   },

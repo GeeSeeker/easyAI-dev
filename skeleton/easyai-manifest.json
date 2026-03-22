@@ -1,6 +1,6 @@
 {
-  "version": "4.3.29",
-  "generatedAt": "2026-03-22T14:54:25.424Z",
+  "version": "4.3.30",
+  "generatedAt": "2026-03-22T15:51:24.022Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -111,7 +111,7 @@
       "hash": "5c423c7f538d70bacb4bea7c2bf5eeaa5f20866713cf4300b38752e3965cb3bc"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\claude.js": {
-      "hash": "4c1c52e1ba6726fcdecd4033a73a9bd43d3d22262ed6c3d1d27ce3d707177c7a"
+      "hash": "470d3e8ec992f3f06f967ed672abf28762e3a7186d3ed2dcf2b23120cf5c3b3a"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\codex.js": {
       "hash": "60e7e7d422efa89c59d9522445955b8bfa5e2f93dd05a4bb0ed57bebe36219be"
@@ -252,10 +252,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "33ba7998ffe17b3895bae60ccacfedde52f2e0a81881844e5c84e322e5abe5ab"
+      "hash": "e14c601d31b4e8fb5e6504ec8683f610a36baa69fac2f6d23d3f86d0a769a63a"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "f261e1b1a64b508d447c592f29bf5cdc38bcbe7b1c6fbb62e71e9b53e28cc523",
+      "hash": "46de094874508a8916ec22e0f9d676ae834360f2fa0d5484496c56fdeb78c21d",
       "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {
