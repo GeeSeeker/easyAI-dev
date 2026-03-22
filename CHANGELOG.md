@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.29] - 2026-03-22
+
+### 修复
+
+- **Codex Windows 沙箱权限错误（最终修复）** — review 模式从 `--full-auto` 改为 `--dangerously-bypass-approvals-and-sandbox`（参考 ccg-workflow executor.go:777），彻底规避 `CreateProcessAsUserW failed: 5` 错误。`--full-auto` 本意关闭沙箱，实际仍启用写沙箱
+- **Claude 闲聊响应问题** — `stdin_mode` 改为 `true`，长 prompt 通过 stdin pipe 传入，修复命令行参数模式下 Claude 进入交互/闲聊模式的问题；同时追加 `--setting-sources ""` 阻断本地配置文件的全局 prompt 干扰（参考 ccg-workflow backend.go:95）
+
 ## [4.3.28] - 2026-03-22
 
 ### 新增
