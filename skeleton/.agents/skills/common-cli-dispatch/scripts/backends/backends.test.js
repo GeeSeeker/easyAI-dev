@@ -37,20 +37,20 @@ for (const backend of [codex, claude, gemini]) {
   console.log(`✅ ${backend.name} 实现了 capability interface`);
 }
 
-// --- 测试：Codex buildArgs review 模式包含 --full-auto ---
+// --- 测试：Codex buildArgs review 模式包含 --dangerously-bypass-approvals-and-sandbox ---
 {
   const args = codex.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(args.includes("--json"), "Codex args 应包含 --json");
   console.assert(args.includes("-"), "Codex args 应包含 - (stdin)");
   console.assert(args.includes("-C"), "Codex args 应包含 -C");
   console.assert(
-    args.includes("--full-auto"),
-    "Codex review args 应包含 --full-auto（禁用 Windows 沙箱）",
+    args.includes("--dangerously-bypass-approvals-and-sandbox"),
+    "Codex review args 应包含 --dangerously-bypass-approvals-and-sandbox（禁用沙箱）",
   );
   console.log("✅ Codex buildArgs 正确");
 }
 
-// --- 测试：Claude buildArgs 包含 --dangerously-skip-permissions 和 -p ---
+// --- 测试：Claude buildArgs 包含 --dangerously-skip-permissions、-p 和 --setting-sources ---
 {
   const args = claude.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(
@@ -59,8 +59,17 @@ for (const backend of [codex, claude, gemini]) {
   );
   console.assert(args.includes("-p"), "Claude args 应包含 -p");
   console.assert(
-    !args.includes("--output-format"),
-    "Claude args 不应包含 --output-format（使用纯文本模式）",
+    args.includes("--setting-sources"),
+    "Claude args 应包含 --setting-sources（阻断本地配置闲聊）",
+  );
+  const ssIdx = args.indexOf("--setting-sources");
+  console.assert(
+    args[ssIdx + 1] === "",
+    "--setting-sources 的值应为空字符串",
+  );
+  console.assert(
+    claude.capabilities.stdin_mode === true,
+    "Claude stdin_mode 应为 true（通过 stdin pipe 传入 prompt）",
   );
   console.log("✅ Claude buildArgs 正确");
 }

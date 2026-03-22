@@ -17,7 +17,7 @@ const claudeBackend = {
     supports_json: false,
     supports_stream_json: false,
     supports_resume: true,
-    stdin_mode: false,
+    stdin_mode: true,
     cwd_flag: null, // Claude 不支持 -C，通过 spawn options.cwd 设置
     needs_post_message_delay: false,
   },
@@ -31,8 +31,13 @@ const claudeBackend = {
    * @returns {string[]} CLI 参数数组
    */
   buildArgs(config) {
-    // 与 MCP 参考项目（claude-code-mcp）完全一致的参数
+    // 核心参数：跳过权限检查 + one-shot 模式
     const args = ["--dangerously-skip-permissions", "-p"];
+
+    // 阻断本地配置文件的全局 prompt，防止闲聊交互
+    // 参考 ccg-workflow (backend.go:95): "Prevent infinite recursion:
+    // disable all setting sources"
+    args.push("--setting-sources", "");
 
     return args;
   },

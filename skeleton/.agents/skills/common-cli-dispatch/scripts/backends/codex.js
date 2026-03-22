@@ -43,10 +43,11 @@ const codexBackend = {
         'sandbox_permissions=["disk-full-read-access","disk-write-access"]',
       );
     } else {
-      // review 模式：禁用沙箱
-      // Windows 上 Codex 沙箱使用 CreateProcessAsUserW，
-      // 会报 "CreateProcessAsUserW failed: 5" 权限错误导致无法读取文件
-      args.push("--full-auto");
+      // review 模式：完全禁用沙箱和审批
+      // --full-auto 实际上仍然启用写沙箱，在 Windows 上导致
+      // CreateProcessAsUserW failed: 5 权限错误。
+      // 参考 ccg-workflow (executor.go:777) 使用此参数彻底规避沙箱
+      args.push("--dangerously-bypass-approvals-and-sandbox");
     }
 
     if (config.workdir) {

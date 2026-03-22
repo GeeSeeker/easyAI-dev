@@ -1,6 +1,6 @@
 {
-  "version": "4.3.28",
-  "generatedAt": "2026-03-22T08:26:32.175Z",
+  "version": "4.3.29",
+  "generatedAt": "2026-03-22T14:54:25.424Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -108,13 +108,13 @@
       "hash": "2d163388c4c024140efce389d7e5a1b7d43c5d31b4cfaf90bc504763f8ad9d5c"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\backends.test.js": {
-      "hash": "056e995ac9a01d2f916937cab7eb49ab6f84cf7ff155c4c57c53d938db2df6d5"
+      "hash": "5c423c7f538d70bacb4bea7c2bf5eeaa5f20866713cf4300b38752e3965cb3bc"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\claude.js": {
-      "hash": "1a3527c1badf835c2c623d79a11e509b28605fcc54aad08aa640bd500b7d2aca"
+      "hash": "4c1c52e1ba6726fcdecd4033a73a9bd43d3d22262ed6c3d1d27ce3d707177c7a"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\codex.js": {
-      "hash": "1a5ddb8a8be57a7e02701fee1c2f377334816ea149de7f70ed0baf7207f394c5"
+      "hash": "60e7e7d422efa89c59d9522445955b8bfa5e2f93dd05a4bb0ed57bebe36219be"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\gemini.js": {
       "hash": "bbc8ea0e1553aec624d64a0da61457e68789ce10c1b9e1fedfaa4ae92afad469"
@@ -239,9 +239,6 @@
     ".agents\\workflows\\common-skill-eval.md": {
       "hash": "06aa182908c194d91e7eb3b7df1881e16c416adc5e0d829719d71c5883f5b277"
     },
-    ".agents\\workflows\\worker-quick-fix.md": {
-      "hash": "934bddba33c1facddb2b5c52280c668ddb3f501ef2a9aba9723389072fc2afd8"
-    },
     ".directory-map": {
       "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
     },
@@ -255,10 +252,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "130a2527a436aee2ddc170f2ddfc05ff8f4fb6eb8c74a597e14e384022483911"
+      "hash": "33ba7998ffe17b3895bae60ccacfedde52f2e0a81881844e5c84e322e5abe5ab"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "b47f7a05753780852e51a81f2811691f1104720b752b8523f46c252383191659",
+      "hash": "f261e1b1a64b508d447c592f29bf5cdc38bcbe7b1c6fbb62e71e9b53e28cc523",
       "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {
