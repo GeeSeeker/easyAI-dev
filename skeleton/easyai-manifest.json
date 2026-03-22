@@ -1,6 +1,6 @@
 {
-  "version": "4.3.27",
-  "generatedAt": "2026-03-21T17:20:01.535Z",
+  "version": "4.3.28",
+  "generatedAt": "2026-03-22T08:26:32.175Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -207,7 +207,7 @@
       "hash": "f36c1365cb2c35d2375e2f198dc866c8d83b2dfe59f72b3bfa3c801eee840dae"
     },
     ".agents\\skills\\pm-session-start\\SKILL.md": {
-      "hash": "c04c23c751f96dbbc82be28a311c0dba9ced1cab754adf37630a39f8cf1ccade"
+      "hash": "03e981fe93e6d48bafe73435f93e3f3231faf996913658b1a10b6685d6fabb88"
     },
     ".agents\\skills\\pm-task-planning\\SKILL.md": {
       "hash": "a0228fb3e032388e5794aa7a4b43e1fd0832c9dcf9ec0350c339a8a011487ad4"
@@ -255,13 +255,15 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "f046c062eef60b6166479e03fe6817803db2f45117ce64fb797605da54a6e217"
+      "hash": "130a2527a436aee2ddc170f2ddfc05ff8f4fb6eb8c74a597e14e384022483911"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "3565419c69f899644393b8f1d3b20953db26da805c8302081d77d2dbd7b6b4f5"
+      "hash": "b47f7a05753780852e51a81f2811691f1104720b752b8523f46c252383191659",
+      "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {
-      "hash": "bbd8d3dfe4f63e60baa7091dc6a282b0181c78c52c97c1a96ba055349bb645ef"
+      "hash": "bbd8d3dfe4f63e60baa7091dc6a282b0181c78c52c97c1a96ba055349bb645ef",
+      "merge_mode": "append"
     },
     ".trellis\\spec\\general\\adr-template.md": {
       "hash": "c03b93626ce45883947967fa23a778192ba5310dd4c02c9340352835af3b2e87"

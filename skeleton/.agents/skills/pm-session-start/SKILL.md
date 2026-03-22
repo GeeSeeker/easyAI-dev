@@ -64,6 +64,44 @@ requires: null
    - `mcp_enforced` 为空 → 提示可填写，但不阻断
    - `features` 为空 → 提示可填写，但不阻断
 
+#### 0c. Config 新字段引导
+
+> **非阻断** — 用户可跳过，不影响后续步骤。
+
+检查 `.trellis/config/.config-pending.json` 是否存在：
+
+- **不存在** → 跳过，继续 Step 1
+- **存在** → 执行以下引导流程：
+
+  1. 读取 pending 文件中的 `missingPaths` 和 `skeletonSnapshot`
+  2. 读取用户当前 `config.yaml`
+  3. 对每个 `missingPaths` 条目，结合项目上下文做出判断：
+     - 读取 `skeletonSnapshot` 中该字段的默认值和注释说明
+     - 根据项目实际情况（已有配置、项目类型等）判断是否适用
+     - **可自动推荐的** → 给出推荐值 + 理由
+     - **需用户确认的** → 列出选项描述，等用户决策
+  4. 汇总展示所有推荐，一次性请用户确认：
+
+     ```
+     📋 框架升级后检测到 3 个新配置项：
+
+     1. team.roster.*.timeout — CLI 超时时间（秒）
+        推荐值: 600（与你已有的 3 个 CLI 对应）
+        理由: 默认值适合大多数场景
+
+     2. context.experimental — 上下文预算实验性标记
+        推荐值: true
+        理由: 此功能尚未真正接入，标记为实验性
+
+     确认以上推荐？（Y 全部应用 / N 逐个选择 / S 跳过）
+     ```
+
+  5. 用户确认 → AI 修改 `config.yaml` → 删除 `.config-pending.json`
+  6. 用户跳过 → 删除 `.config-pending.json`，提示后续可手动添加
+
+> **注意**：AI 修改 config.yaml 时应保持原有注释和格式风格，
+> 只在对应的父节点下插入新字段。
+
 ### 1. 获取项目状态
 
 调用 MCP Tool `project_status()`，获取：

@@ -2,6 +2,17 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.28] - 2026-03-22
+
+### 新增
+
+- **AI 驱动的 Config 智能合并** — 框架升级后将 config 差异写入 `.config-pending.json`，下次 PM 会话启动时 AI 自动检测并引导用户逐个配置新字段（推荐值 + 理由），取代旧的 console.log 提示
+- **pm-session-start Step 0c** — 新增 Config 新字段引导步骤，AI 结合项目上下文智能推荐配置值
+
+### 修复
+
+- **MCP framework_update config 差异检测** — 升级前保存用户 config 快照，修复 appendMissingSections 修改后无法检测差异的问题
+
 ## [4.3.27] - 2026-03-22
 
 ### 新增
