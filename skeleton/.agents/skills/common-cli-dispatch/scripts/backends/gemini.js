@@ -30,6 +30,8 @@ const geminiBackend = {
    * @param {string} config.workdir - 工作目录
    * @param {string} config.mode - 运行模式
    * @param {string} [config.session_id] - 恢复会话 ID
+   * @param {string} [config.model] - 指定模型
+   * @param {string[]} [config.include_files] - 注入的文件/目录路径
    * @returns {string[]} CLI 参数数组
    */
   buildArgs(config) {
@@ -37,6 +39,16 @@ const geminiBackend = {
 
     // JSON 输出 + 自动确认
     args.push("-o", "json", "-y");
+
+    // 会话恢复：追加 --resume <session_id>
+    if (config.session_id) {
+      args.push("--resume", config.session_id);
+    }
+
+    // 模型选择
+    if (config.model) {
+      args.push("--model", config.model);
+    }
 
     // execute 模式：禁用沙箱以允许文件写入
     if (config.mode === "execute") {
@@ -48,10 +60,25 @@ const geminiBackend = {
       args.push("--include-directories", config.workdir);
     }
 
+    // 上下文文件注入：通过 --include-directories 传入额外目录
+    if (config.include_files && config.include_files.length > 0) {
+      for (const filePath of config.include_files) {
+        args.push("--include-directories", filePath);
+      }
+    }
+
     // prompt 通过 stdin pipe 传入（stdin_mode: true）
     // 不使用 positional arg，避免 Windows cmd.exe 转义问题
 
     return args;
+  },
+
+  /**
+   * 构建会话列表查询参数
+   * @returns {string[]} CLI 参数数组
+   */
+  listSessionsArgs() {
+    return { type: "cli", args: ["--list-sessions"] };
   },
 
   /**

@@ -1,12 +1,12 @@
 {
-  "version": "4.3.31",
-  "generatedAt": "2026-03-23T10:33:11.760Z",
+  "version": "4.4.0",
+  "generatedAt": "2026-03-23T12:50:19.936Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
     },
     ".agents\\graph\\capability\\external-cli-dispatch.md": {
-      "hash": "2e901d151698860ff28d51a6e9a66a6ae524d173ee82177daabd153049318e3e"
+      "hash": "42adfc153c11bc5d2459c9b508bf3feb4eac84bbd60e4f704d7fb42d7938eea2"
     },
     ".agents\\graph\\capability\\framework-governance.md": {
       "hash": "9edd9311e73e1a01e6d213fb9aa61d3ee06406e737f1f33c64f5a6bf918f7937"
@@ -84,7 +84,7 @@
       "hash": "1d29d1a4498485f1df37398deea5f1b649bb402c8074a4acd3437bf489e8bc04"
     },
     ".agents\\graph\\_index.md": {
-      "hash": "572e7fa11ec1c95078b8c9633cb04332414e2a3ead88c4f8744a943f98f566bf"
+      "hash": "6f4b0db0b43051bfa841c49bc5c440b3cb036016fab5a23126c2534aae2e05f1"
     },
     ".agents\\rules\\anti-hallucination.md": {
       "hash": "aa47893ca603de425cd65931fedfeb5843a494b78b957ac054e80ab053d3eecb"
@@ -108,19 +108,19 @@
       "hash": "2d163388c4c024140efce389d7e5a1b7d43c5d31b4cfaf90bc504763f8ad9d5c"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\backends.test.js": {
-      "hash": "5c423c7f538d70bacb4bea7c2bf5eeaa5f20866713cf4300b38752e3965cb3bc"
+      "hash": "37ecdb8913df4691aece12073c07bb59b905c1d575becd7d79988056cdb1e436"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\claude.js": {
-      "hash": "78bce890102208e883fe27a51d82755d6b6e71fb8d469ab146b3936472a9a034"
+      "hash": "9fb0f9aa49797c8b5771640d57a4f83c020ac310ea8fe0d03db981f7e5ec918c"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\codex.js": {
-      "hash": "60e7e7d422efa89c59d9522445955b8bfa5e2f93dd05a4bb0ed57bebe36219be"
+      "hash": "a7e0f7196ee2501c29f0bc96fe2e9e1ccd5a436a51e2ba7b46b0d51df888c8a0"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\gemini.js": {
-      "hash": "bbc8ea0e1553aec624d64a0da61457e68789ce10c1b9e1fedfaa4ae92afad469"
+      "hash": "8fd4b8cf777d8a4ade4119bc5621f718309cb47ee2ab8ef79cf013242f82d265"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.js": {
-      "hash": "10d5ea0cf4be2c553dde582e82ececa9708297b9afc73e0fe6f54f85f0b1322f"
+      "hash": "b25ab83b8c1a415ef564e04da0e64d234d12be2322cb3294e8a37649f2e7b1ba"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.test.js": {
       "hash": "f2cd1ac0d8061711f49197328759867ff356781d7de310359a258bbb6603833d"
@@ -144,7 +144,7 @@
       "hash": "456de6c65fab2d46a3b9060c4dc85e4468d83d9195a97fe3617a4f2c17808010"
     },
     ".agents\\skills\\common-cli-dispatch\\SKILL.md": {
-      "hash": "3bf3adb941b16ec82203a300fef43c048ee8c9d56ab5bc5a20f58024fc259a63"
+      "hash": "65145cc50ef818a6e8c52c5d744ce6f29a18095984c6f48c187e303394ae2be9"
     },
     ".agents\\skills\\common-cli-dispatch\\templates\\execute.md": {
       "hash": "21addde63b7af5ff5198dabcec78f48e8d9d94b9c57041edbfb9f6d3d10b3551"
@@ -239,6 +239,9 @@
     ".agents\\workflows\\common-skill-eval.md": {
       "hash": "06aa182908c194d91e7eb3b7df1881e16c416adc5e0d829719d71c5883f5b277"
     },
+    ".agents\\workflows\\worker-quick-fix.md": {
+      "hash": "934bddba33c1facddb2b5c52280c668ddb3f501ef2a9aba9723389072fc2afd8"
+    },
     ".directory-map": {
       "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
     },
@@ -252,10 +255,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "40df4efa3d7f752c41c7448b712dd0a3bcaf0d73c9f4d257437d5a8031a400a3"
+      "hash": "84fa42545c0993edf8a5559d2a0772260f85f4a7ed29ec75e6590be64ed98067"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "e02aadc10be5bb914ffc8f4ba6cf86002e6c7ca7b9d5704ab97317104503a607",
+      "hash": "d8ee42330e86ddb3a5449fa845a04e1798e593df0d2166157ee2cbd77fcc824e",
       "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {
@@ -272,7 +275,7 @@
       "hash": "efc4c39759599d76f583ef8bb09f3384bfff5feaab7e2bdf60b9412c8bb82127"
     },
     ".trellis\\spec\\guides\\external-cli-guide.md": {
-      "hash": "1a4fba95571a3b4aad6ab26fa15b992390d035583a195a3236eb6d9740379e8a"
+      "hash": "2f312249e718b32b9647553b2b6dc653e82d99a5391cbc5184d023371042e1c6"
     },
     ".trellis\\spec\\guides\\known-issues.md": {
       "hash": "3120b1f5225fc7238045ee6bc3a86381c0da7ff2ff7c483750cd0822209a67db"

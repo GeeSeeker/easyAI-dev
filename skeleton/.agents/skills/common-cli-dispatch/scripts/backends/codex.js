@@ -27,10 +27,32 @@ const codexBackend = {
    * @param {object} config - 调用配置
    * @param {string} config.workdir - 工作目录
    * @param {string} config.mode - 运行模式
-   * @param {string} [config.session_id] - 恢复会话 ID
+   * @param {string} [config.session_id] - 恢复会话 ID（thread_id）
+   * @param {string} [config.model] - 指定模型
+   * @param {string[]} [config.include_files] - 注入的文件/目录路径
    * @returns {string[]} CLI 参数数组
    */
   buildArgs(config) {
+    // resume 模式：codex exec resume <session_id> 是 exec 的子命令
+    // 官方文档：https://developers.openai.com/codex/noninteractive
+    // 语法：codex exec resume <SESSION_ID> [PROMPT]
+    // 支持 exec 的所有参数（--json, --skip-git-repo-check 等）
+    if (config.session_id) {
+      // exec resume 参数集精简：
+      // Usage: codex exec resume [OPTIONS] [SESSION_ID] [PROMPT]
+      // 不支持 -C, -m, --dangerously-bypass-approvals-and-sandbox 等 exec 专有参数
+      const args = ["exec", "resume", config.session_id, "--json"];
+
+      // --skip-git-repo-check 是 exec 共用参数
+      args.push("--skip-git-repo-check");
+
+      // resume 模式通过 stdin 传入追问内容
+      args.push("-");
+
+      return args;
+    }
+
+    // 新会话模式
     const args = ["exec", "--json"];
 
     // 跳过 git 仓库检查
@@ -50,6 +72,11 @@ const codexBackend = {
       args.push("--dangerously-bypass-approvals-and-sandbox");
     }
 
+    // 模型选择
+    if (config.model) {
+      args.push("-m", config.model);
+    }
+
     if (config.workdir) {
       args.push("-C", config.workdir);
     }
@@ -58,6 +85,19 @@ const codexBackend = {
     args.push("-");
 
     return args;
+  },
+
+  /**
+   * 构建会话列表查询参数
+   * @returns {string[]} CLI 参数数组
+   */
+  listSessionsArgs() {
+    // Codex 的 resume 子命令是交互式 TUI，读文件系统代替
+    const os = require("os");
+    const sessionsDir = require("path").join(
+      os.homedir(), ".codex", "sessions",
+    );
+    return { type: "fs", dir: sessionsDir };
   },
 
   /**

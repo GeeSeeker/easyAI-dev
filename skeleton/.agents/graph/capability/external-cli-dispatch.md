@@ -2,7 +2,7 @@
 name: external-cli-dispatch
 layer: capability
 domain: capability
-description: 外部 CLI 统一调度 — ABCDE 分级闸门、多 backend 并行、降级策略、结构化输出
+description: 外部 CLI 统一调度 — ABCDE 分级闸门、多 backend 并行、降级策略、会话恢复与追问、模型选择、文件注入
 serves:
   - role-system/pm-workflow
   - role-system/worker-workflow
@@ -48,7 +48,11 @@ files:
 - **多 Backend 并行**：cli-runner.js 对每个 backend 启动独立子进程，互不可见
 - **降级策略**：首选 backend 不可用时按 strengths + mode 动态匹配替代
 - **超时管控**：AbortController + SIGTERM (5s) → SIGKILL
-- **结构化输出**：schema_version 1.0 的 JSON 输出契约
+- **结构化输出**：schema_version 1.0 的 JSON 输出契约（含 session_id）
+- **会话恢复**：--session-id / --follow-up 多轮追问（Codex exec resume / Claude --resume / Gemini --resume）
+- **模型选择**：--model 覆盖 config.yaml default_model（Codex -m / Claude --model / Gemini --model）
+- **文件注入**：--include-files 缩窄审查范围（Claude --add-dir / Gemini --include-directories）
+- **会话列表**：--list-sessions 查询历史会话（fs 模式 / CLI flag 模式）
 - **治理约束**：cli-direct-call-guard Rule 禁止绕过 Skill 直接调用
 
 ## 调用路径

@@ -59,22 +59,26 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
   --mode review \
   --prompt-file .tmp/cli-dispatch/prompt-xxx.md \
   --workdir /path/to/project \
-  --timeout 600 \
   --output-dir .tmp/cli-dispatch/results/
 ```
 
 **参数说明**：
 
-| 参数             | 说明                                           |
-| ---------------- | ---------------------------------------------- |
-| `--backend`      | 逗号分隔的 backend 列表（codex/claude/gemini） |
-| `--mode`         | 调用模式（review）                             |
-| `--prompt-file`  | Prompt 文件路径                                |
-| `--workdir`      | CLI 工作目录                                   |
-| `--timeout`      | 超时秒数（默认 600）                           |
-| `--output-dir`   | 结果输出目录                                   |
-| `--session-id`   | 会话 ID，支持连续对话恢复存储                  |
-| `--context-mode` | 上下文模式（analyze, review, execute）         |
+| 参数 | 说明 |
+| --- | --- |
+| `--backend <name,...>` | 逗号分隔的 backend 列表（codex/claude/gemini） |
+| `--mode <mode>` | 调用模式（review / execute） |
+| `--prompt-file <path>` | Prompt 文件路径 |
+| `--workdir <path>` | CLI 工作目录 [默认: 当前目录] |
+| `--timeout <seconds>` | 超时秒数 [默认: config.yaml per-backend timeout / 600] |
+| `--output-dir <path>` | 结果输出目录 |
+| `--task-id <id>` | 任务 ID |
+| `--session-id <id>` | 恢复指定会话（从上次结果 JSON 的 `session_id` 获取） |
+| `--follow-up` | 标记为追问模式（需配合 `--session-id`） |
+| `--model <name>` | 指定模型（覆盖 config.yaml `default_model`） |
+| `--include-files <paths>` | 逗号分隔的文件/目录路径，注入审查上下文 |
+| `--list-sessions <backend>` | 列出指定 backend 的历史会话并退出 |
+| `--context-mode <mode>` | 上下文模式（analyze, review, execute） |
 
 ### Step 4：读取并处理结果
 
@@ -82,7 +86,8 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 2. 按 `schema_version: "1.0"` 解析结构化输出
 3. 提取 `review_result.findings`，按 severity 分级（Critical / Warning / Info）
 4. 检查 `degraded_from` 字段，如有降级需记录
-5. 综合多个 backend 结果，去重合并
+5. **保存 `session_id`** — 供后续追问使用
+6. 综合多个 backend 结果，去重合并
 
 ### Step 5：裁决 + 整合
 
@@ -95,6 +100,109 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
   - 拒绝：`[REJECTED_CLI_ADVICE: 理由]`（必须提供具体拒绝理由）
 - **5.4 生成裁决报告**：将结论汇拢为裁决报告写入 `tasks/Txxx/cli/{backend}/verdict.md`（或相应的任务归档路经）。
 - **5.5 整合到工作流**：将 `[ACCEPTED]` 的 findings 整合到当前工作流，并兼容旧有将综合结果作为审查或自检补充证据的流程。
+
+## 会话恢复与追问流程
+
+### 何时恢复会话
+
+当满足以下任一条件时，应使用 `--session-id` 恢复上次调用的会话：
+
+1. **首轮审查结果需要展开**：findings 含 Critical 但缺乏具体修改建议
+2. **PM 需要追问**：针对某条 finding 要求 CLI 给出更详细的分析
+3. **分阶段审查**：先审查架构 → 再审查实现细节（同一 session 保持上下文）
+
+### 追问流程
+
+```text
+① 首轮 review → 获取结果（含 session_id）
+② 判断是否需要追问
+    ├─ 否 → 进入裁决流程（Step 5）
+    └─ 是 → 准备追问 Prompt
+③ 调用 cli-runner.js --session-id <id> --follow-up --prompt-file followup.md
+④ 读取追问结果 → 合并到首轮结果
+⑤ 进入裁决流程（Step 5）
+```
+
+> 追问 Prompt 应聚焦于具体问题，而非重复首轮的完整上下文。
+
+### 各 CLI 的会话恢复机制
+
+| Backend | 恢复机制 | session_id 来源 |
+| --- | --- | --- |
+| **Codex** | `codex resume <thread_id>` | JSON 输出中的 `thread_id` |
+| **Claude** | `claude --resume <session_id> -p` | 交互结束时输出的 UUID / 会话目录名 |
+| **Gemini** | `gemini --resume <session_id>` | JSON 输出中的 `session_id` |
+
+## 上下文文件注入
+
+通过 `--include-files` 缩窄 CLI 的关注范围，避免 CLI 在大项目中迷路。
+
+### 使用场景
+
+1. **代码审查**：只传入变更的文件 → CLI 专注审查变更
+2. **架构分析**：传入核心模块目录 → CLI 分析模块间依赖
+3. **安全检查**：传入 auth / crypto 相关文件 → CLI 聚焦安全审查
+
+### 各 CLI 的文件注入机制
+
+| Backend | 注入方式 | 说明 |
+| --- | --- | --- |
+| **Codex** | stdin prompt 中拼接文件内容 | Codex exec 无专门的文件注入参数 |
+| **Claude** | `--add-dir <path>`（每个路径独立参数） | 支持目录级注入 |
+| **Gemini** | `--include-directories <path>` | 与 workdir 使用相同参数 |
+
+### 示例
+
+```bash
+node cli-runner.js \
+  --backend claude \
+  --mode review \
+  --prompt-file prompt.md \
+  --include-files src/auth,src/crypto \
+  --workdir /path/to/project
+```
+
+## 模型选择
+
+通过 `--model` 或 config.yaml `default_model` 指定 CLI 使用的模型。
+
+### 优先级
+
+```text
+CLI --model 参数 > config.yaml team.roster.default_model > CLI 默认模型
+```
+
+### config.yaml 配置示例
+
+```yaml
+team:
+  roster:
+    - name: "Claude Code"
+      type: "external_cli"
+      cli_command: "claude"
+      timeout: 600
+      default_model: "claude-sonnet-4-20250514"  # 可选
+```
+
+### 各 CLI 的模型参数
+
+| Backend | 参数 |
+| --- | --- |
+| **Codex** | `-m <model>` |
+| **Claude** | `--model <model>` |
+| **Gemini** | `--model <model>` |
+
+## 会话列表查询
+
+通过 `--list-sessions <backend>` 查询指定 CLI 的历史会话。
+
+```bash
+node cli-runner.js --list-sessions claude
+node cli-runner.js --list-sessions codex
+node cli-runner.js --list-sessions gemini
+```
+
+> Claude 和 Codex 通过文件系统读取（交互式 TUI 不适合脚本），Gemini 使用 `--list-sessions` flag。
 
 ## 降级策略
 
@@ -123,8 +231,9 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 1. [ ] 检查 ABCDE 等级，确认 CLI 数量
 2. [ ] 准备 Prompt 文档（填充 review.md 模板）
 3. [ ] 调用 cli-runner.js（run_command）
-4. [ ] 读取并处理结果
-5. [ ] 将结果整合到当前工作流
+4. [ ] 读取并处理结果（保存 session_id）
+5. [ ] 判断是否需要追问（--follow-up + --session-id）
+6. [ ] 将结果整合到当前工作流（裁决）
 
 ### 状态快照
 
@@ -132,7 +241,8 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 - 当前 Skill: common-cli-dispatch
 - ABCDE 等级：{A/B/C/D/E}
 - CLI 数量：{0/1/2/3}
-- 调用状态：{未开始/进行中/已完成/已降级}
+- 调用状态：{未开始/进行中/已完成/追问中/已降级}
+- 活跃 session_id：{无 / <id>}
 ```
 
 ## 触发测试用例
@@ -150,3 +260,17 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 - **输入**: ABCDE = D
 - **期望行为**: 在 Step 1 闸门检查时直接退出，不调用 CLI
 - **验证方法**: 检查是否未执行 run_command
+
+### TC-03: 会话恢复追问
+
+- **场景**: 首轮审查后需要 CLI 展开某条 finding
+- **输入**: `--session-id <上次结果的 session_id> --follow-up`
+- **期望行为**: CLI 恢复上次会话上下文，回答追问问题
+- **验证方法**: 检查 exit_code = 0 且回复引用上轮上下文
+
+### TC-04: 会话列表查询
+
+- **场景**: 调度前查看历史会话
+- **输入**: `--list-sessions claude`
+- **期望行为**: 返回 JSON 格式的会话列表
+- **验证方法**: 检查输出包含 `sessions` 数组

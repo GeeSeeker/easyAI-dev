@@ -1,13 +1,13 @@
 ---
 title: 外部 CLI 集成指南
-version: "2.0"
+version: "3.0"
 category: guides
 status: active
 ---
 
 # 外部 CLI 集成指南
 
-> **版本**：v2.0（common-cli-dispatch 重构版）
+> **版本**：v3.0（会话恢复 + 模型选择 + 文件注入扩展版）
 > **适用角色**：PM（调度）、Worker（执行时参考）
 > **架构依据**：`.docs/design/features/common-cli-dispatch.md` (v1.1)
 
@@ -62,22 +62,27 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
   --output-dir .tmp/cli-dispatch/results/
 ```
 
-| 参数            | 说明                                               |
-| --------------- | -------------------------------------------------- |
-| `--backend`     | 逗号分隔的 backend 列表（codex / claude / gemini） |
-| `--mode`        | 调用模式（review）                                 |
-| `--prompt-file` | Prompt 文件路径                                    |
-| `--workdir`     | CLI 工作目录                                       |
-| `--timeout`     | 超时秒数（默认 600）                               |
-| `--output-dir`  | 结果输出目录                                       |
+| 参数 | 说明 |
+| --- | --- |
+| `--backend <name,...>` | 逗号分隔的 backend 列表（codex / claude / gemini） |
+| `--mode <mode>` | 调用模式（review / execute） |
+| `--prompt-file <path>` | Prompt 文件路径 |
+| `--workdir <path>` | CLI 工作目录 [默认: 当前目录] |
+| `--timeout <seconds>` | 超时秒数 [默认: config.yaml per-backend / 600] |
+| `--output-dir <path>` | 结果输出目录 |
+| `--session-id <id>` | 恢复指定会话（从上次结果 JSON 的 `session_id` 获取） |
+| `--follow-up` | 标记为追问模式（需配合 `--session-id`） |
+| `--model <name>` | 指定模型（覆盖 config.yaml `default_model`） |
+| `--include-files <paths>` | 逗号分隔的文件/目录路径，注入审查上下文 |
+| `--list-sessions <backend>` | 列出指定 backend 的历史会话并退出 |
 
 ### 2.2 Backend 适配器特性
 
-| Backend   | CLI 命令 | 擅长领域                       | 特殊能力              |
-| --------- | -------- | ------------------------------ | --------------------- |
-| Codex CLI | `codex`  | 后端逻辑、算法分析、安全检查   | supports_json, resume |
-| Claude    | `claude` | 代码审查、架构分析、多文件关联 | 文件分析              |
-| Gemini    | `gemini` | 前端审查、可维护性、模式一致性 | sandbox               |
+| Backend | CLI 命令 | 擅长领域 | Resume | JSON | 模型参数 | 文件注入 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Codex | `codex` | 后端逻辑、算法分析、安全 | `exec resume <id>` | `--json` | `-m` | stdin 拼接 |
+| Claude | `claude` | 架构、重构、多文件分析 | `--resume <id>` | `--output-format json` | `--model` | `--add-dir` |
+| Gemini | `gemini` | 前端、可维护性、模式一致 | `--resume <id>` | `-o json` | `--model` | `--include-directories` |
 
 ### 2.3 JSON 输出契约
 
@@ -103,7 +108,8 @@ cli-runner.js 输出 `schema_version: "1.0"` 的 JSON：
     ],
     "passed_checks": ["string"],
     "summary": "string"
-  }
+  },
+  "session_id": "uuid | null"
 }
 ```
 
@@ -189,6 +195,8 @@ Stage 3：决策与修复
 ### 注意事项
 
 1. **临时文件路径**：统一使用 `.tmp/cli-dispatch/`（非系统 `/tmp/`）
-2. **超时控制**：默认 600 秒，复杂任务可适当增加
+2. **超时控制**：默认 600 秒，复杂任务可适当增加。各 CLI 可在 config.yaml `team.roster` 中独立配置
 3. **产出重构**：所有外部 CLI 产出在合入前必须经主控 AI 重构对齐项目规范（代码主权原则）
 4. **零 npm 依赖**：cli-runner.js 仅使用 Node.js 内置模块
+5. **会话管理**：首轮结果 JSON 中的 `session_id` 应当保存，供后续 `--session-id` 追问使用
+6. **模型优先级**：`--model` CLI 参数 > config.yaml `default_model` > CLI 默认模型

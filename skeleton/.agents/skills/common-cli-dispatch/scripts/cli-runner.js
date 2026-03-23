@@ -38,12 +38,12 @@ const BACKEND_REGISTRY = {
 const DEFAULT_TIMEOUT = 600;
 
 /**
- * 从 config.yaml 读取每个 CLI 的独立 timeout 配置
+ * 从 config.yaml 读取每个 CLI 的独立配置（timeout + default_model）
  * 简易 YAML 解析（正则提取），零外部依赖
- * @returns {object} { codex: 600, claude: 300, gemini: 300, ... }
+ * @returns {object} { codex: { timeout: 600, model: null }, ... }
  */
-function loadBackendTimeouts() {
-  const timeouts = {};
+function loadBackendConfig() {
+  const configs = {};
   try {
     // 向上查找 config.yaml（从 cwd 开始）
     const configPaths = [
@@ -58,26 +58,35 @@ function loadBackendTimeouts() {
         break;
       }
     }
-    if (!content) return timeouts;
+    if (!content) return configs;
 
-    // 提取 team.roster 中每个 cli_command 对应的 timeout
-    // 匹配模式：cli_command: "xxx" ... timeout: NNN
+    // 提取 team.roster 中每个 cli_command 对应的 timeout 和 default_model
     const rosterBlocks = content.split(/- name:/g).slice(1);
     for (const block of rosterBlocks) {
       const cmdMatch = block.match(/cli_command:\s*["']?(\w+)["']?/);
+      if (!cmdMatch) continue;
+      const name = cmdMatch[1];
       const timeoutMatch = block.match(/timeout:\s*(\d+)/);
-      if (cmdMatch && timeoutMatch) {
-        timeouts[cmdMatch[1]] = parseInt(timeoutMatch[1], 10);
-      }
+      const modelMatch = block.match(/default_model:\s*["']?([^"'\n]+)["']?/);
+      configs[name] = {
+        timeout: timeoutMatch ? parseInt(timeoutMatch[1], 10) : null,
+        model: modelMatch ? modelMatch[1].trim() : null,
+      };
     }
   } catch (_err) {
     // config.yaml 读取失败不阻塞执行，回退到默认值
   }
-  return timeouts;
+  return configs;
 }
 
-// 启动时预加载 per-backend timeout 配置
-const BACKEND_TIMEOUTS = loadBackendTimeouts();
+// 启动时预加载 per-backend 配置
+const BACKEND_CONFIGS = loadBackendConfig();
+// 兼容旧代码：提取 timeout 映射
+const BACKEND_TIMEOUTS = Object.fromEntries(
+  Object.entries(BACKEND_CONFIGS)
+    .filter(([, c]) => c.timeout)
+    .map(([k, c]) => [k, c.timeout]),
+);
 
 // --- CLI 参数解析 ---
 
@@ -98,6 +107,10 @@ function parseArgs(argv) {
     "task-id": { type: "string" },
     "session-id": { type: "string" },
     "context-mode": { type: "string" },
+    model: { type: "string" },
+    "include-files": { type: "string" },
+    "follow-up": { type: "boolean", default: false },
+    "list-sessions": { type: "string" },
     help: { type: "boolean" },
   };
 
@@ -131,6 +144,12 @@ function parseArgs(argv) {
     taskId: values["task-id"] || null,
     sessionId: values["session-id"] || null,
     contextMode: values["context-mode"] || null,
+    model: values.model || null,
+    includeFiles: values["include-files"]
+      ? values["include-files"].split(",").map((s) => s.trim())
+      : null,
+    followUp: values["follow-up"] || false,
+    listSessions: values["list-sessions"] || null,
   };
 
   if (
@@ -151,16 +170,20 @@ function printUsage() {
   console.log(`用法: node cli-runner.js [选项]
 
 选项:
-  --backend <name,...>   后端名称，逗号分隔（codex,claude,gemini）
-  --mode <mode>          运行模式（review）[默认: review]
-  --prompt-file <path>   Prompt 文件路径
-  --workdir <path>       工作目录 [默认: 当前目录]
-  --timeout <seconds>    超时秒数 [默认: 600]
-  --output-dir <path>    结果输出目录
-  --task-id <id>         任务 ID
-  --session-id <id>      会话 ID，支持连续对话恢复存储
-  --context-mode <mode>  上下文模式（analyze, review, execute）
-  --help                 显示帮助`);
+  --backend <name,...>      后端名称，逗号分隔（codex,claude,gemini）
+  --mode <mode>             运行模式（review）[默认: review]
+  --prompt-file <path>      Prompt 文件路径
+  --workdir <path>          工作目录 [默认: 当前目录]
+  --timeout <seconds>       超时秒数 [默认: 600]
+  --output-dir <path>       结果输出目录
+  --task-id <id>            任务 ID
+  --session-id <id>         恢复指定会话（从上次结果的 session_id 获取）
+  --follow-up               标记为追问模式（需配合 --session-id）
+  --model <name>            指定模型（覆盖 config.yaml 默认值）
+  --include-files <paths>   逗号分隔的文件/目录路径，注入审查上下文
+  --list-sessions <backend> 列出指定 backend 的历史会话并退出
+  --context-mode <mode>     上下文模式（analyze, review, execute）
+  --help                    显示帮助`);
 }
 
 /**
@@ -168,6 +191,9 @@ function printUsage() {
  * @param {object} config - 解析后的配置
  */
 function validateConfig(config) {
+  // --list-sessions 模式不需要 backend 和 prompt
+  if (config.listSessions) return;
+
   if (config.backends.length === 0) {
     console.error("错误: 必须指定至少一个 --backend");
     process.exit(1);
@@ -180,6 +206,12 @@ function validateConfig(config) {
 
   if (!fs.existsSync(config.promptFile)) {
     console.error(`错误: prompt 文件不存在: ${config.promptFile}`);
+    process.exit(1);
+  }
+
+  // --follow-up 必须配合 --session-id
+  if (config.followUp && !config.sessionId) {
+    console.error("错误: --follow-up 需要配合 --session-id 使用");
     process.exit(1);
   }
 }
@@ -263,9 +295,17 @@ function executeBackend(backendInfo, config) {
 
   return new Promise((resolve) => {
     const promptContent = fs.readFileSync(config.promptFile, "utf-8");
+
+    // 模型优先级：CLI --model > config.yaml per-backend default_model
+    const backendCfg = BACKEND_CONFIGS[backend.name] || {};
+    const effectiveModel = config.model || backendCfg.model || null;
+
     const args = backend.buildArgs({
       workdir: config.workdir,
       mode: config.mode,
+      session_id: config.sessionId,
+      model: effectiveModel,
+      include_files: config.includeFiles,
     });
 
     // 合并所有噪音模式（默认 + backend 特有）
@@ -419,9 +459,59 @@ function saveResults(results, outputDir, taskId) {
 
 // --- 主入口 ---
 
+/**
+ * 列出指定 backend 的历史会话
+ * @param {string} backendName - backend 名称
+ */
+function listSessions(backendName) {
+  const { spawnSync } = require("child_process");
+  const backend = BACKEND_REGISTRY[backendName];
+  if (!backend) {
+    console.error(`错误: 未知 backend "${backendName}"`);
+    process.exit(1);
+  }
+  if (!backend.listSessionsArgs) {
+    console.error(`错误: ${backendName} 不支持 --list-sessions`);
+    process.exit(1);
+  }
+
+  const listConfig = backend.listSessionsArgs();
+
+  // 某些 CLI 的 list-sessions 是交互式 TUI（如 Claude、Codex），
+  // 需要通过文件系统读取代替。backend 可返回 { type: "fs", dir } 表示。
+  if (listConfig.type === "fs") {
+    const sessionsDir = listConfig.dir;
+    if (!fs.existsSync(sessionsDir)) {
+      console.log(JSON.stringify({ sessions: [], note: "目录不存在" }));
+      process.exit(0);
+    }
+    const entries = fs.readdirSync(sessionsDir)
+      .filter((f) => !f.startsWith("."))
+      .slice(0, 20); // 最多显示 20 个
+    console.log(JSON.stringify({ sessions: entries }, null, 2));
+    process.exit(0);
+  }
+
+  // CLI flag 模式（如 Gemini --list-sessions）
+  const result = spawnSync(backend.command, listConfig.args, {
+    shell: process.platform === "win32",
+    timeout: 10000,
+    encoding: "utf-8",
+  });
+  process.stdout.write(result.stdout || "");
+  if (result.stderr) process.stderr.write(result.stderr);
+  process.exit(result.status || 0);
+}
+
 async function main() {
   const config = parseArgs(process.argv);
   validateConfig(config);
+
+  // --list-sessions 模式：列出会话后直接退出
+  if (config.listSessions) {
+    listSessions(config.listSessions);
+    return;
+  }
 
   // 解析 backends（含降级检查）
   const backendInfos = resolveBackends(config.backends);

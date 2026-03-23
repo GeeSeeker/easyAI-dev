@@ -50,7 +50,7 @@ for (const backend of [codex, claude, gemini]) {
   console.log("✅ Codex buildArgs 正确");
 }
 
-// --- 测试：Claude buildArgs 包含 --dangerously-skip-permissions、-p 和 --setting-sources ---
+// --- 测试：Claude buildArgs 包含 --dangerously-skip-permissions、-p、--output-format json ---
 {
   const args = claude.buildArgs({ workdir: "/project", mode: "review" });
   console.assert(
@@ -59,17 +59,21 @@ for (const backend of [codex, claude, gemini]) {
   );
   console.assert(args.includes("-p"), "Claude args 应包含 -p");
   console.assert(
-    args.includes("--setting-sources"),
-    "Claude args 应包含 --setting-sources（阻断本地配置闲聊）",
+    args.includes("--output-format"),
+    "Claude args 应包含 --output-format",
   );
-  const ssIdx = args.indexOf("--setting-sources");
+  const ofIdx = args.indexOf("--output-format");
   console.assert(
-    args[ssIdx + 1] === "",
-    "--setting-sources 的值应为空字符串",
+    args[ofIdx + 1] === "json",
+    "--output-format 的值应为 json",
   );
   console.assert(
     claude.capabilities.stdin_mode === true,
     "Claude stdin_mode 应为 true（通过 stdin pipe 传入 prompt）",
+  );
+  console.assert(
+    claude.capabilities.supports_json === true,
+    "Claude supports_json 应为 true（--output-format json）",
   );
   console.log("✅ Claude buildArgs 正确");
 }
