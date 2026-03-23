@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.4.1] - 2026-03-24
+
+### 修复
+
+- **Windows 含空格路径参数崩溃** — `cli-runner.js` 新增 `quoteArgsForShell()` 函数，在 `shell: true`（Windows 必需）场景下，对含空格或 cmd.exe 特殊字符的参数自动加双引号包裹。修复 `--include-directories`、`--add-dir`、`-C` 等路径参数被 cmd.exe 错误拆分的问题。影响所有三个 backend（Gemini/Claude/Codex），8 个新增测试覆盖
+
 ## [4.4.0] - 2026-03-23
 
 ### 新增
