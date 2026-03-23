@@ -2,6 +2,26 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.4.0] - 2026-03-23
+
+### 新增
+
+- **CLI Dispatch 会话恢复** — 通过 `--session-id` + `--follow-up` 实现多轮追问。Codex 使用 `exec resume <id>`（官方非交互式语法），Claude 使用 `--resume <id>`，Gemini 使用 `--resume <id>`。已通过三个 CLI 实际 resume 测试验证上下文保持
+- **CLI Dispatch 模型选择** — `--model` 参数覆盖 config.yaml `default_model`。各 CLI 自动映射为对应参数（Codex `-m` / Claude `--model` / Gemini `--model`）
+- **CLI Dispatch 上下文文件注入** — `--include-files` 缩窄审查范围。Claude 通过 `--add-dir`、Gemini 通过 `--include-directories` 注入
+- **CLI Dispatch 会话列表查询** — `--list-sessions <backend>` 查询历史会话（Claude/Codex 文件系统模式、Gemini CLI flag 模式）
+- **Claude JSON 结构化输出** — `--output-format json` 返回含 `session_id` 的 JSON 对象，`supports_json` 升级为 `true`。解决了 `-p` 模式无法获取 session_id 的问题
+
+### 修复
+
+- **Codex resume 语法修正** — 从错误的 `codex resume`（交互式 TUI）改为 `codex exec resume`（官方非交互式语法），移除 `exec resume` 不支持的 `-C`/`-m` 参数
+- **Claude `--setting-sources` 移除** — 完全移除该参数（已无需要），改用 `--output-format json` 实现结构化输出
+
+### 文档
+
+- **external-cli-guide.md 升级至 v3.0** — 参数表新增 5 项、Backend 特性矩阵扩展为 7 列、JSON schema 新增 session_id
+- **图谱节点更新** — `external-cli-dispatch.md` 核心能力新增 5 项
+
 ## [4.3.31] - 2026-03-23
 
 ### 修复
