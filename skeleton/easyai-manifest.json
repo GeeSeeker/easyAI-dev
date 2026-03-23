@@ -1,6 +1,6 @@
 {
-  "version": "4.4.0",
-  "generatedAt": "2026-03-23T12:50:19.936Z",
+  "version": "4.4.1",
+  "generatedAt": "2026-03-23T16:05:17.886Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -108,7 +108,7 @@
       "hash": "2d163388c4c024140efce389d7e5a1b7d43c5d31b4cfaf90bc504763f8ad9d5c"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\backends.test.js": {
-      "hash": "37ecdb8913df4691aece12073c07bb59b905c1d575becd7d79988056cdb1e436"
+      "hash": "9afaa25b492b6ed46f6439598699b064dd792cd5112e2bbdc2a4853f09fc5e13"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\claude.js": {
       "hash": "9fb0f9aa49797c8b5771640d57a4f83c020ac310ea8fe0d03db981f7e5ec918c"
@@ -120,7 +120,7 @@
       "hash": "8fd4b8cf777d8a4ade4119bc5621f718309cb47ee2ab8ef79cf013242f82d265"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.js": {
-      "hash": "b25ab83b8c1a415ef564e04da0e64d234d12be2322cb3294e8a37649f2e7b1ba"
+      "hash": "9bef241ac47ca9229e88ffe34c1bb33f915608c6e444456d3c3592d5c5d723d8"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.test.js": {
       "hash": "f2cd1ac0d8061711f49197328759867ff356781d7de310359a258bbb6603833d"
@@ -239,9 +239,6 @@
     ".agents\\workflows\\common-skill-eval.md": {
       "hash": "06aa182908c194d91e7eb3b7df1881e16c416adc5e0d829719d71c5883f5b277"
     },
-    ".agents\\workflows\\worker-quick-fix.md": {
-      "hash": "934bddba33c1facddb2b5c52280c668ddb3f501ef2a9aba9723389072fc2afd8"
-    },
     ".directory-map": {
       "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
     },
@@ -255,10 +252,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "84fa42545c0993edf8a5559d2a0772260f85f4a7ed29ec75e6590be64ed98067"
+      "hash": "c4650c1208019130cf87a65c435054f668ab023cb208faa439db2e1abd864071"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "d8ee42330e86ddb3a5449fa845a04e1798e593df0d2166157ee2cbd77fcc824e",
+      "hash": "af010702884d623198c2a6cf439042426e445b238ffae75836ca0916d701e760",
       "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {

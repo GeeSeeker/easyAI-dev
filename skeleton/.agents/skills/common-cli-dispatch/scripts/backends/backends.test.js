@@ -203,4 +203,113 @@ for (const backend of [codex, claude, gemini]) {
   );
 }
 
+// --- 测试：quoteArgsForShell 基本场景 ---
+const { quoteArgsForShell } = require("../cli-runner");
+
+// 普通路径（无空格）→ 不变
+{
+  const input = ["--flag", "C:\\Users\\dev\\project"];
+  const result = quoteArgsForShell(input);
+  console.assert(
+    result[0] === "--flag",
+    `普通 flag 不应被引号包裹: "${result[0]}"`,
+  );
+  console.assert(
+    result[1] === "C:\\Users\\dev\\project",
+    `无空格路径不应被引号包裹: "${result[1]}"`,
+  );
+  console.log("✅ quoteArgsForShell: 普通路径不变");
+}
+
+// 含空格路径 → 加双引号
+{
+  const input = ["--dir", "C:\\Program Files\\MyApp"];
+  const result = quoteArgsForShell(input);
+  console.assert(
+    result[1] === '"C:\\Program Files\\MyApp"',
+    `含空格路径应被引号包裹: "${result[1]}"`,
+  );
+  console.log("✅ quoteArgsForShell: 含空格路径加双引号");
+}
+
+// 含中文+空格路径 → 加双引号
+{
+  const input = ["C:\\用户 文档\\项目"];
+  const result = quoteArgsForShell(input);
+  console.assert(
+    result[0] === '"C:\\用户 文档\\项目"',
+    `含中文+空格路径应被引号包裹: "${result[0]}"`,
+  );
+  console.log("✅ quoteArgsForShell: 含中文+空格路径加双引号");
+}
+
+// 已有双引号的参数 → 不变
+{
+  const input = ['"C:\\Program Files\\MyApp"'];
+  const result = quoteArgsForShell(input);
+  console.assert(
+    result[0] === '"C:\\Program Files\\MyApp"',
+    `已有双引号的参数不应重复包裹: "${result[0]}"`,
+  );
+  console.log("✅ quoteArgsForShell: 已有双引号不重复包裹");
+}
+
+// 含 cmd.exe 特殊字符 → 加双引号
+{
+  const input = ["echo&dir", "foo|bar", "a<b", "c>d", "e^f", "g(h", "i)j", "k%l", "m!n"];
+  const result = quoteArgsForShell(input);
+  for (let i = 0; i < input.length; i++) {
+    console.assert(
+      result[i] === `"${input[i]}"`,
+      `含特殊字符应被引号包裹: "${result[i]}"`,
+    );
+  }
+  console.log("✅ quoteArgsForShell: 含 cmd.exe 特殊字符加双引号");
+}
+
+// 空数组 → 空数组
+{
+  const result = quoteArgsForShell([]);
+  console.assert(result.length === 0, "空数组应返回空数组");
+  console.log("✅ quoteArgsForShell: 空数组不变");
+}
+
+// --- 测试：Gemini buildArgs 含空格 include_files ---
+{
+  const args = gemini.buildArgs({
+    workdir: "/project",
+    mode: "review",
+    include_files: ["C:\\Program Files\\context", "C:\\用户 文档"],
+  });
+  // include_files 通过 --include-directories 传入
+  const includeIdx1 = args.indexOf("C:\\Program Files\\context");
+  const includeIdx2 = args.indexOf("C:\\用户 文档");
+  console.assert(includeIdx1 !== -1, "Gemini args 应包含第一个 include_files 路径");
+  console.assert(includeIdx2 !== -1, "Gemini args 应包含第二个 include_files 路径");
+  // 前一个元素应是 --include-directories
+  console.assert(
+    args[includeIdx1 - 1] === "--include-directories",
+    "include_files 路径前应有 --include-directories",
+  );
+  console.log("✅ Gemini buildArgs 含空格 include_files 正确");
+}
+
+// --- 测试：Claude buildArgs 含空格 include_files ---
+{
+  const args = claude.buildArgs({
+    workdir: "/project",
+    mode: "review",
+    include_files: ["C:\\Program Files\\context", "C:\\用户 文档"],
+  });
+  const includeIdx1 = args.indexOf("C:\\Program Files\\context");
+  const includeIdx2 = args.indexOf("C:\\用户 文档");
+  console.assert(includeIdx1 !== -1, "Claude args 应包含第一个 include_files 路径");
+  console.assert(includeIdx2 !== -1, "Claude args 应包含第二个 include_files 路径");
+  console.assert(
+    args[includeIdx1 - 1] === "--add-dir",
+    "include_files 路径前应有 --add-dir",
+  );
+  console.log("✅ Claude buildArgs 含空格 include_files 正确");
+}
+
 console.log("\n所有 backend 测试通过 ✅");

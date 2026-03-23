@@ -34,6 +34,31 @@ const BACKEND_REGISTRY = {
   gemini: require("./backends/gemini"),
 };
 
+// Windows cmd.exe 特殊字符正则（空格或 &|<>^()%! 之一）
+const SHELL_SPECIAL_RE = /[ &|<>^()%!]/;
+
+/**
+ * 为 Windows shell:true 场景转义参数
+ *
+ * 仅当参数包含空格或 cmd.exe 特殊字符时用双引号包裹，
+ * 已有双引号包裹的参数跳过。
+ * @param {string[]} args - 原始参数数组
+ * @returns {string[]} 转义后的参数数组（新数组，不修改原数组）
+ */
+function quoteArgsForShell(args) {
+  return args.map((arg) => {
+    // 已有双引号包裹的跳过
+    if (arg.startsWith('"') && arg.endsWith('"')) {
+      return arg;
+    }
+    // 含空格或 cmd.exe 特殊字符时加双引号
+    if (SHELL_SPECIAL_RE.test(arg)) {
+      return `"${arg}"`;
+    }
+    return arg;
+  });
+}
+
 // CLI --timeout 参数的默认值
 const DEFAULT_TIMEOUT = 600;
 
@@ -319,11 +344,14 @@ function executeBackend(backendInfo, config) {
       cliArgs.push(promptContent);
     }
 
-    const child = spawn(backend.command, cliArgs, {
+    // Windows 上 npm 全局包是 .cmd 脚本，spawn 需要 shell: true
+    const useShell = process.platform === "win32";
+    // 仅 Windows shell 模式下对含空格/特殊字符的参数加引号
+    const safeArgs = useShell ? quoteArgsForShell(cliArgs) : cliArgs;
+
+    const child = spawn(backend.command, safeArgs, {
       cwd: backend.capabilities.cwd_flag ? undefined : config.workdir,
-      // Windows 上 npm 全局包（codex/gemini）是 .cmd 脚本，
-      // spawn() 无法直接执行 .cmd，需要 shell: true
-      shell: process.platform === "win32",
+      shell: useShell,
       // stdin_mode: true 的 backend（如 Codex）通过 pipe 传入 prompt
       // stdin_mode: false 的 backend（如 Claude、Gemini）通过 CLI 参数传入
       // 后者必须设 stdin 为 'ignore'，否则 CLI 会等待 stdin 输入导致挂起
@@ -493,8 +521,12 @@ function listSessions(backendName) {
   }
 
   // CLI flag 模式（如 Gemini --list-sessions）
-  const result = spawnSync(backend.command, listConfig.args, {
-    shell: process.platform === "win32",
+  const useShell = process.platform === "win32";
+  const safeArgs = useShell
+    ? quoteArgsForShell(listConfig.args)
+    : listConfig.args;
+  const result = spawnSync(backend.command, safeArgs, {
+    shell: useShell,
     timeout: 10000,
     encoding: "utf-8",
   });
@@ -549,6 +581,7 @@ module.exports = {
   parseArgs,
   resolveBackends,
   executeBackend,
+  quoteArgsForShell,
   BACKEND_REGISTRY,
 };
 
