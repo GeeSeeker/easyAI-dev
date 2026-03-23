@@ -34,12 +34,10 @@ const claudeBackend = {
     // 核心参数：跳过权限检查 + one-shot 模式
     const args = ["--dangerously-skip-permissions", "-p"];
 
-    // 阻断本地配置文件的全局 prompt，防止闲聊交互
-    // 参考 ccg-workflow (backend.go:95): "Prevent infinite recursion:
-    // disable all setting sources"
-    // 注意：必须使用 = 语法合并为单个参数，
-    // Windows shell: true 下分离的空字符串 "" 会被 cmd.exe 消除
-    args.push("--setting-sources=");
+    // 注意：不添加 --setting-sources= 参数。
+    // 该参数会禁用所有配置源（user/project/local），
+    // 导致使用自定义配置（API proxy、自定义认证等）的用户无法连接。
+    // stdin_mode: true + -p 已足够保证 one-shot 执行模式。
 
     return args;
   },
