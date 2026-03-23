@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.3.31] - 2026-03-23
+
+### 修复
+
+- **Claude `--setting-sources=` 导致自定义配置被剥离** — 该参数禁用所有配置源（user/project/local），导致使用自定义 API 代理或认证配置的用户报 `Not logged in`。移除此参数，`stdin_mode: true` + `-p` 已足够保证 one-shot 执行。**已通过实际 Claude CLI 调用验证**（exit_code: 0）
+
 ## [4.3.30] - 2026-03-22
 
 ### 修复
