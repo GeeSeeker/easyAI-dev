@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.6.0] - 2026-03-24
+
+### 修复
+
+- **CLI Dispatch 路径行为归一化** — 新增 `path-utils.js` 共享路径分类器，修复 `--include-files` 传入文件路径时被 Gemini CLI `--include-directories` 和 Claude Code `--add-dir` 当作目录校验而失败的问题。文件路径自动转为父目录 + 去重 + 不存在路径跳过。三个 backend（Gemini/Claude/Codex）统一使用 `classifyPaths()`，10 个新增测试全部覆盖
+- **已知问题库更新** — 新增 KI-003：Gemini CLI `--include-directories` 不接受文件路径（已通过适配层解决）
+
 ## [4.5.0] - 2026-03-24
 
 ### 新增
