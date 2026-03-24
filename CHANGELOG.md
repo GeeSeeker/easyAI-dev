@@ -2,6 +2,23 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.5.0] - 2026-03-24
+
+### 新增
+
+- **五维审计 Skill** — 新增 `worker-five-dimension-audit` Skill，覆盖功能、安全、性能、兼容性、可维护性五维度代码审计，集成 ABCDE 闸门分级和 `[AUDIT_FINDING]` 标签，支持自动生成 `.docs/audit/` 审计报告
+
+### 优化
+
+- **CLI 角色主权明晰化** — 框架全量同步 CLI 治理三重身份（委托人+法官+监工），涵盖 `common-cli-dispatch` SKILL.md、`external-cli-guide.md`、底层架构设计 §5.2、`anti-hallucination` Rule 7、图谱节点 `external-cli-dispatch.md`
+- **三态裁决标记** — 新增 `[PARTIALLY_ACCEPTED: reason]` 裁决标记，与 `[ACCEPTED]` / `[REJECTED_CLI_ADVICE]` 构成完整裁决体系
+- **代码主权声明强化** — Rule 7 明确"外部 CLI 产出不具有自动采纳权"，裁决以约束集和 spec 为准
+- **下游 Skill 措辞同步** — `worker-lead` 四处旧措辞（"审核"/"重构为项目规范"）更新为 Review/Execute 双模式裁决/验证措辞
+
+### 修复
+
+- **Gemini CLI 路径双重前缀** — `gemini.js` `buildArgs()` 中 `--include-directories` 路径使用 `path.resolve()` + `path.relative()` 规范化，避免 workdir 二次拼接
+
 ## [4.4.1] - 2026-03-24
 
 ### 修复
