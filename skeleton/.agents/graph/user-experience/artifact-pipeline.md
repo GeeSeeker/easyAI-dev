@@ -21,6 +21,8 @@ files:
     role: 草稿场区（user-/pm- 前缀）
   - path: .docs/archive/
     role: 常青文档归档区（用户自维护为主）
+  - path: .docs/audit/
+    role: 审计报告存放目录（五维深度审计产出）
   - path: .agents/skills/pm-brainstorm/SKILL.md
     role: 设计文档产出（brainstorm → .docs/design/）
   - path: .agents/skills/worker-check/SKILL.md
@@ -84,6 +86,8 @@ PM 验收后 → 完工打 [DONE] 标记 / 废弃打 [OBSOLETE] 标记移入 arc
 | `design/planning/`  | 长线规划、Roadmap、里程碑总结                    |
 | `design/features/`  | 特性架构蓝图                                     |
 | `archive/`          | 常青文档归档区（用户自维护为主）                 |
+| `audit/`            | 审计报告空间（五维审计 Baseline + PATCH + 调用链）|
+| `audit/archive/`    | 审计报告归档区                                   |
 | 各目录内 `archive/` | 就地养老式归档（notes/archive/ 等）              |
 
 ### 记事本约定

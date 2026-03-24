@@ -2,7 +2,7 @@
 name: external-cli-dispatch
 layer: capability
 domain: capability
-description: 外部 CLI 统一调度 — ABCDE 分级闸门、多 backend 并行、降级策略、会话恢复与追问、模型选择、文件注入
+description: 外部 CLI 统一调度 — Antigravity 三重身份（委托人 + 法官 + 监工）、ABCDE 分级闸门、多 backend 并行、降级策略、会话恢复与追问、模型选择、文件注入
 serves:
   - role-system/pm-workflow
   - role-system/worker-workflow

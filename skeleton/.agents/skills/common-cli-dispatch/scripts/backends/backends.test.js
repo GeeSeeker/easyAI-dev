@@ -294,6 +294,50 @@ const { quoteArgsForShell } = require("../cli-runner");
   console.log("✅ Gemini buildArgs 含空格 include_files 正确");
 }
 
+// --- 测试：Gemini buildArgs include_files 路径去重（C3） ---
+{
+  const path = require("path");
+  // 场景：workdir 为绝对路径，include_files 是 workdir 的子路径（绝对路径）
+  // 真实场景：调用方用 --workdir /project/playground，
+  // 且 --include-files /project/playground/.agents/graph/test.md
+  const workdir = path.resolve("/project/playground");
+  const subPath = path.join(workdir, ".agents", "graph", "test.md");
+  const args = gemini.buildArgs({
+    workdir,
+    mode: "review",
+    include_files: [subPath],
+  });
+  // 预期：args 中出现相对于 workdir 的路径（无 workdir 前缀）
+  const expectedRelative = path.join(".agents", "graph", "test.md");
+  const hasDeduped = args.some((a) => a === expectedRelative);
+  console.assert(
+    hasDeduped,
+    `Gemini 路径去重失败: 应包含 "${expectedRelative}"，实际 args: ${JSON.stringify(args)}`,
+  );
+  // 确认不包含原始绝对路径（避免双重前缀）
+  const hasOriginal = args.some((a) => a === subPath);
+  console.assert(
+    !hasOriginal,
+    `Gemini 路径去重失败: 不应包含原始绝对路径 "${subPath}"`,
+  );
+  console.log("✅ Gemini buildArgs include_files 路径去重正确");
+}
+
+// --- 测试：Gemini buildArgs include_files 无重叠路径保持原样（C5） ---
+{
+  const path = require("path");
+  const args = gemini.buildArgs({
+    workdir: path.resolve("/project/playground"),
+    mode: "review",
+    include_files: [path.resolve("/other/path/context.md")],
+  });
+  console.assert(
+    args.includes(path.resolve("/other/path/context.md")),
+    "无重叠的 include_files 路径应保持原样",
+  );
+  console.log("✅ Gemini buildArgs 无重叠路径保持原样");
+}
+
 // --- 测试：Claude buildArgs 含空格 include_files ---
 {
   const args = claude.buildArgs({

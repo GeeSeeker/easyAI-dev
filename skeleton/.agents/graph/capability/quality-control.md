@@ -22,6 +22,7 @@ children:
   - evidence-gate-enforcement
   - review-standards
   - compliance-hints
+  - five-dimension-audit
 files:
   - path: .agents/skills/worker-implement/SKILL.md
     role: TDD 铁律驱动的编码流程（Red-Green-Refactor 循环、原子步骤、豁免场景）
@@ -43,6 +44,8 @@ files:
     role: 规范文件格式校验（必须字段、SemVer、枚举合法性）
   - path: packages/mcp-server/src/utils/compliance-hints.ts
     role: 合规性提示生成器（missing_verification / unresolved_blockers / stale_task 三场景检测）
+  - path: .agents/skills/worker-five-dimension-audit/SKILL.md
+    role: 五维深度审计（存量代码宏观治理，补充 TDD/三标记自检的增量防守体系）
 ---
 
 # 质量控制
@@ -95,6 +98,10 @@ MCP Tool 返回值中附加的间接约束信息。`task_get`、`task_transition
 3. **stale_task** — in_progress 状态且 updated_at 超过 24 小时
 
 属于"间接约束强化"（设计文档 Phase 2），AI 在调用 MCP 工具时持续收到合规性反馈。
+
+### 五维深度审计（five-dimension-audit）
+
+存量代码的宏观治理手段，补充 TDD/三标记自检的增量防守体系。通过五个维度（业务逻辑闭合、数据流完整性、边界与异常处理、UX 反馈完整性、平台适配）对存量代码进行全量扫描，产出结构化审计报告到 `.docs/audit/`。由 PM 创建专项审计任务（约束集含 `[AUDIT]` 标记）触发。
 
 ## 变更影响
 

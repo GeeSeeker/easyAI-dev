@@ -21,7 +21,7 @@ description: Anti-hallucination constraints for all sessions
 
 ## 代码主权（来源：GuDa-spec + easyAI 迭代）
 
-7. **主控 AI 对 CLI 产出负验证责任**：外部 CLI（Codex / Claude Code / Gemini CLI）可直接写入项目文件，但主控 AI（Antigravity）必须对写入结果执行验证（lint / test / manual check）。验证通过方可认定为有效产出；验证失败须回滚或修正。CLI 的审查建议须经法官裁决（[ACCEPTED] / [REJECTED_CLI_ADVICE]）后方可采纳。
+7. **主控 AI 对 CLI 产出负验证责任**：外部 CLI（Codex / Claude Code / Gemini CLI）可直接写入项目文件，但主控 AI（Antigravity）必须对写入结果执行验证（lint / test / manual check）。验证通过方可认定为有效产出；验证失败须回滚或修正。CLI 的审查建议须经法官裁决（[ACCEPTED] / [REJECTED_CLI_ADVICE] / [PARTIALLY_ACCEPTED]）后方可采纳。**外部 CLI 无项目上下文（约束集、spec、设计意图），其产出不具有自动采纳权。裁决以约束集和 spec 为准，Antigravity 须保持独立判断。**
 
 ## 检索优先级
 

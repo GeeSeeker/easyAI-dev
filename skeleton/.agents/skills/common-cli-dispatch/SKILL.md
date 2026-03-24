@@ -89,6 +89,37 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 5. **保存 `session_id`** — 供后续追问使用
 6. 综合多个 backend 结果，去重合并
 
+## 角色定位与主权原则
+
+### 核心定位
+
+外部 CLI = 受聘外包（Subcontractor），Antigravity = 委托人 + 法官 + 监工。
+
+| Antigravity 角色 | 适用模式 | 行为 |
+|------------------|----------|------|
+| 委托人 | 所有模式 | 决定调用目的、选择 CLI、准备 Prompt |
+| 法官 | Review 模式 | 对 CLI 审查建议逐条裁决，以项目约束为准 |
+| 监工 | Execute 模式 | 验收 CLI 写入的代码（lint/test/manual），不合格则回滚 |
+
+### 主权原则
+
+1. 外部 CLI 没有项目上下文（约束集、spec、设计意图、历史决策），其产出不具有自动采纳权
+2. Antigravity 基于项目上下文做出独立判断，仅采纳正确且合适的内容
+3. 当 CLI 建议与项目约束冲突时，Antigravity 的裁决优先
+
+### 裁决依据优先级
+
+1. 约束集（PM 制定的硬约束）
+2. 项目 spec（.trellis/spec/ 中的规范）
+3. 设计意图（.docs/design/ 中的架构决策）
+4. CLI 建议（仅当不与上述冲突时采纳）
+
+### 三种裁决结果
+
+- `[ACCEPTED]` — CLI 意见正确且符合项目上下文，采纳
+- `[REJECTED_CLI_ADVICE: 理由]` — CLI 意见与项目约束冲突或不适用，拒绝并说明理由
+- `[PARTIALLY_ACCEPTED: 理由]` — CLI 发现了真实问题，但修复方案需按项目上下文调整
+
 ### Step 5：裁决 + 整合
 
 原则："谁调用，谁裁判"。PM 和 Worker 都需通过 `common-cli-dispatch` 统一执行裁决逻辑。
@@ -98,6 +129,7 @@ node .agents/skills/common-cli-dispatch/scripts/cli-runner.js \
 - **5.3 法官裁决**：对每条建议进行明确标记：
   - 采纳：`[ACCEPTED]`
   - 拒绝：`[REJECTED_CLI_ADVICE: 理由]`（必须提供具体拒绝理由）
+  - 部分采纳：`[PARTIALLY_ACCEPTED: 理由]`（CLI 发现了真实问题，但修复方案需调整）
 - **5.4 生成裁决报告**：将结论汇拢为裁决报告写入 `tasks/Txxx/cli/{backend}/verdict.md`（或相应的任务归档路经）。
 - **5.5 整合到工作流**：将 `[ACCEPTED]` 的 findings 整合到当前工作流，并兼容旧有将综合结果作为审查或自检补充证据的流程。
 

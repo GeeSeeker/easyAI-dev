@@ -36,7 +36,7 @@
 | [context-management](capability/context-management.md)       | 上下文管理 — Token 预算、阶段冻结、context.jsonl              |
 | [knowledge-management](capability/knowledge-management.md)   | 知识管理 — 框架知识库、references/、图谱自身                  |
 | [framework-governance](capability/framework-governance.md)   | 框架治理 — 约束分层、规范演进、Manifest 升级                  |
-| [external-cli-dispatch](capability/external-cli-dispatch.md) | 外部 CLI 统一调度 — ABCDE 闸门、多 backend 并行、降级、会话恢复与追问 |
+| [external-cli-dispatch](capability/external-cli-dispatch.md) | 外部 CLI 统一调度 — 三重身份（委托人+法官+監工）、ABCDE 闸门、多 backend 并行、降级、会话恢复 |
 
 ## Layer 3 · 角色系统层（role-system/）
 

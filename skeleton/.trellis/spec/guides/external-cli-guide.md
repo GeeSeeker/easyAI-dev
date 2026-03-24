@@ -17,10 +17,16 @@ status: active
 
 ### 1.1 核心原则：代码主权
 
-外部 CLI（Codex / Claude Code / Gemini CLI）= **外包资源池**，不是项目成员。
+外部 CLI（Codex / Claude Code / Gemini CLI）= **受聘外包**，不是项目成员。
+Antigravity = **委托人 + 法官 + 监工**。
 
-- 外部 CLI 产出视为 **Prototype**，主控 AI 需重构后才能合入代码库
-- 主控 AI 重构时须确保：对齐项目编码规范、去除冗余、验证类型安全
+- **Review 模式**（法官）：CLI 产出为审查建议，Antigravity 须逐条裁决
+  （[ACCEPTED] / [REJECTED_CLI_ADVICE] / [PARTIALLY_ACCEPTED]），
+  仅采纳正确且符合项目上下文的内容
+- **Execute 模式**（监工）：CLI 可直接写入项目文件，但 Antigravity 必须
+  执行验证（lint / test / manual check），验证失败须回滚或修正
+- Antigravity 的裁决以约束集和项目 spec 为准，CLI 无项目上下文，
+  其产出不具有自动采纳权
 
 ### 1.2 调用方式
 
@@ -196,7 +202,7 @@ Stage 3：决策与修复
 
 1. **临时文件路径**：统一使用 `.tmp/cli-dispatch/`（非系统 `/tmp/`）
 2. **超时控制**：默认 600 秒，复杂任务可适当增加。各 CLI 可在 config.yaml `team.roster` 中独立配置
-3. **产出重构**：所有外部 CLI 产出在合入前必须经主控 AI 重构对齐项目规范（代码主权原则）
+3. **代码主权**：Review 模式下 CLI 建议须经裁决，Execute 模式下 CLI 写入须经验证（代码主权原则）
 4. **零 npm 依赖**：cli-runner.js 仅使用 Node.js 内置模块
 5. **会话管理**：首轮结果 JSON 中的 `session_id` 应当保存，供后续 `--session-id` 追问使用
 6. **模型优先级**：`--model` CLI 参数 > config.yaml `default_model` > CLI 默认模型
