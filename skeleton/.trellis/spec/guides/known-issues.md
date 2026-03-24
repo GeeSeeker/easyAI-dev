@@ -57,6 +57,17 @@ status: active
 - **发现日期**: 2026-03-24
 - **GitHub 参考**: [#13669](https://github.com/google-gemini/gemini-cli/issues/13669), [#9016](https://github.com/google-gemini/gemini-cli/issues/9016)
 
+---
+
+### KI-004: Gemini CLI stdin 管道死锁（无 `-p` 时进入交互模式）
+
+- **影响范围**: Gemini CLI（外部 CLI 调度 `stdin_mode: true` 模式）
+- **症状**: Gemini 通过 Node.js `child_process.spawn` 以 stdin pipe 传入 prompt 时，进程永久挂起直到 600s 超时被强杀。无任何 stdout/stderr 输出
+- **根因**: Gemini CLI 在未收到 `-p` 参数时进入交互式 TUI 模式，而 Node.js 的匿名管道（非 TTY）无法满足交互式 stdin 的期望，导致进程死锁
+- **修复方案**: 将 `gemini.js` 的 `stdin_mode` 改为 `false`，采用 Agentic 路径传递模式：通过 `--include-directories` 挂载 prompt 文件所在目录，并使用 `-p` 传入短引导语触发 headless 模式
+- **状态**: 已解决（T059 — Agentic 路径传递重构）
+- **发现日期**: 2026-03-24
+
 ## 维护规则
 
 1. **谁负责更新**：PM 在 `common-session-close` Step 4 知识分类自检时检查

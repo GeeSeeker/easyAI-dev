@@ -1,12 +1,12 @@
 {
-  "version": "4.6.0",
-  "generatedAt": "2026-03-24T11:24:04.878Z",
+  "version": "4.6.1",
+  "generatedAt": "2026-03-24T13:44:04.104Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
     },
     ".agents\\graph\\capability\\external-cli-dispatch.md": {
-      "hash": "ffa080a482fbfe188e3345b0697f9f3fe1a2af9e8b1e06cbb5f19c928bf2370a"
+      "hash": "ef3d700e3f0fc17c98384934b908c89dfcb6fd30fdfb16b5373772089c6b1e67"
     },
     ".agents\\graph\\capability\\framework-governance.md": {
       "hash": "9edd9311e73e1a01e6d213fb9aa61d3ee06406e737f1f33c64f5a6bf918f7937"
@@ -108,7 +108,7 @@
       "hash": "2d163388c4c024140efce389d7e5a1b7d43c5d31b4cfaf90bc504763f8ad9d5c"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\backends.test.js": {
-      "hash": "e12718ebdda99ee3b999a432c220b75925446baa6734f8a1d0927b6a05ca53f5"
+      "hash": "9da176578f9eeeea8a9149e74b25f9ab58688bf3e93ed47694b20b756332a133"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\claude.js": {
       "hash": "d2b9063a436ca0ae0c614af643c00dc6eb0d9e4d7603ce508cf80f27e33b438b"
@@ -117,10 +117,10 @@
       "hash": "a7e0f7196ee2501c29f0bc96fe2e9e1ccd5a436a51e2ba7b46b0d51df888c8a0"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\backends\\gemini.js": {
-      "hash": "113509b17b0b99c0255f0a9a45f86358d85b4a1863ac67c014f2ba934bfd5168"
+      "hash": "32050dad3e5142aab045c7ebac6502a2330d5148c34e41bb02c44164ebac78fd"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.js": {
-      "hash": "9bef241ac47ca9229e88ffe34c1bb33f915608c6e444456d3c3592d5c5d723d8"
+      "hash": "c2f913a0e4acd2f76991f45f665462b20368efaa63d0f8956d3f9eaf69347f03"
     },
     ".agents\\skills\\common-cli-dispatch\\scripts\\cli-runner.test.js": {
       "hash": "f2cd1ac0d8061711f49197328759867ff356781d7de310359a258bbb6603833d"
@@ -273,10 +273,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "aab86e1db7618ee7d82b374862d73b7494e0267fa201410012a775de66f5eaba"
+      "hash": "971a65dddb07821671129c169868854dec68d9f1a1b44907bbc5ac407875def7"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "a03288afc9fd2600b50cb7da1cbf5c450c8d6f34f88f02e40e91616565f89476",
+      "hash": "8f0c9bf09aba36972dd29983b5327f84d9ebcd5a2ec9bc63b5cf1dc7e5373f03",
       "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {
@@ -296,7 +296,7 @@
       "hash": "26175c1c0191ab8ad39a018aa095b385792799292c06519d8c074c61cc63f14b"
     },
     ".trellis\\spec\\guides\\known-issues.md": {
-      "hash": "dca6b565f010c914fedba9b3605817e236a86295334ddb80fae48223493a3012"
+      "hash": "819f7c62c36d8d7b8e3beb90f57b9ab55e04ccfac8f31c2db3cbf3c571256f8a"
     },
     ".trellis\\spec\\guides\\review-standards.md": {
       "hash": "17d812a3e47b71264e7487fea44fadadc5ef6c903f063397efffa87575df28da"

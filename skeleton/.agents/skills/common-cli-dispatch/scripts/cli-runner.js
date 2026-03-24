@@ -319,8 +319,6 @@ function executeBackend(backendInfo, config) {
   }
 
   return new Promise((resolve) => {
-    const promptContent = fs.readFileSync(config.promptFile, "utf-8");
-
     // 模型优先级：CLI --model > config.yaml per-backend default_model
     const backendCfg = BACKEND_CONFIGS[backend.name] || {};
     const effectiveModel = config.model || backendCfg.model || null;
@@ -331,18 +329,14 @@ function executeBackend(backendInfo, config) {
       session_id: config.sessionId,
       model: effectiveModel,
       include_files: config.includeFiles,
+      promptFile: config.promptFile,
     });
 
     // 合并所有噪音模式（默认 + backend 特有）
     const allPatterns = [...DEFAULT_NOISE_PATTERNS, ...backend.noisePatterns];
     const noiseFilter = createNoiseFilter(allPatterns);
 
-    // 为使用 stdin 的 backend 构建额外参数
     const cliArgs = [...args];
-    if (!backend.capabilities.stdin_mode) {
-      // 对于不使用 stdin 的 backend，prompt 作为最后一个参数
-      cliArgs.push(promptContent);
-    }
 
     // Windows 上 npm 全局包是 .cmd 脚本，spawn 需要 shell: true
     const useShell = process.platform === "win32";
@@ -440,8 +434,9 @@ function executeBackend(backendInfo, config) {
       });
     });
 
-    // 写入 stdin（Codex 等使用 stdin 传入 prompt）
+    // 仅 stdin_mode 的 backend（Codex、Claude）通过 pipe 传入 prompt
     if (backend.capabilities.stdin_mode) {
+      const promptContent = fs.readFileSync(config.promptFile, "utf-8");
       child.stdin.write(promptContent);
       child.stdin.end();
     }

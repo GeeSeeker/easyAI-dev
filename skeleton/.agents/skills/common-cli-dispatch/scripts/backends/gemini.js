@@ -7,6 +7,7 @@
  */
 
 const { spawnSync } = require("child_process");
+const path = require("path");
 
 const geminiBackend = {
   name: "gemini",
@@ -17,9 +18,9 @@ const geminiBackend = {
     supports_json: true,
     supports_stream_json: true,
     supports_resume: true,
-    // 通过 stdin pipe 传入 prompt，避免 Windows shell:true 下
-    // 长 prompt 被 cmd.exe 转义截断导致 Gemini 只回显模板
-    stdin_mode: true,
+    // Agentic 路径传递模式：不使用 stdin pipe，
+    // 改为挂载 prompt 文件目录 + 短引导语触发 headless 模式
+    stdin_mode: false,
     cwd_flag: null, // Gemini 使用 --include-directories
     needs_post_message_delay: false,
   },
@@ -32,6 +33,7 @@ const geminiBackend = {
    * @param {string} [config.session_id] - 恢复会话 ID
    * @param {string} [config.model] - 指定模型
    * @param {string[]} [config.include_files] - 注入的文件/目录路径
+   * @param {string} [config.promptFile] - Prompt 文件绝对路径
    * @returns {string[]} CLI 参数数组
    */
   buildArgs(config) {
@@ -70,8 +72,16 @@ const geminiBackend = {
       }
     }
 
-    // prompt 通过 stdin pipe 传入（stdin_mode: true）
-    // 不使用 positional arg，避免 Windows cmd.exe 转义问题
+    // Agentic 路径传递：挂载 prompt 文件所在目录，
+    // 并用短引导语 -p 触发 headless 模式（避免 stdin 死锁）
+    if (config.promptFile) {
+      const promptDir = path.dirname(path.resolve(config.promptFile));
+      args.push("--include-directories", promptDir);
+      args.push(
+        "-p",
+        "请严格遵守挂载目录中 prompt 文档的指令执行任务并按要求输出格式",
+      );
+    }
 
     return args;
   },

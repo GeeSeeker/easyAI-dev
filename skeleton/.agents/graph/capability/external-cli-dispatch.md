@@ -54,6 +54,7 @@ files:
 - **会话恢复**：--session-id / --follow-up 多轮追问（Codex exec resume / Claude --resume / Gemini --resume）
 - **模型选择**：--model 覆盖 config.yaml default_model（Codex -m / Claude --model / Gemini --model）
 - **文件注入**：--include-files 缩窄审查范围（通过 path-utils.js 归一化：文件→父目录 + 去重 + 跳过不存在路径）
+- **Agentic 路径传递**：Gemini 采用目录挂载 + 短引导语模式（避免 stdin 死锁），Codex/Claude 保持 stdin pipe 模式
 - **会话列表**：--list-sessions 查询历史会话（fs 模式 / CLI flag 模式）
 - **治理约束**：cli-direct-call-guard Rule 禁止绕过 Skill 直接调用
 
