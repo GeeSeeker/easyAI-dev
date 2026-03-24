@@ -52,10 +52,12 @@ const claudeBackend = {
     }
 
     // 上下文文件注入：通过 --add-dir 传入目录
-    // Claude 的 --add-dir 接受多个目录，每个需要独立的 --add-dir 参数
+    // 使用 classifyPaths 归一化：文件→父目录，去重，跳过不存在路径
     if (config.include_files && config.include_files.length > 0) {
-      for (const filePath of config.include_files) {
-        args.push("--add-dir", filePath);
+      const { classifyPaths } = require("../lib/path-utils");
+      const { dirs } = classifyPaths(config.include_files, config.workdir);
+      for (const dir of dirs) {
+        args.push("--add-dir", dir);
       }
     }
 

@@ -47,6 +47,16 @@ status: active
 
 ---
 
+### KI-003: Gemini CLI `--include-directories` 不接受文件路径
+
+- **影响范围**: Gemini CLI（`--include-directories` 参数）
+- **症状**: 传入文件路径时校验失败（将文件路径当作目录校验），导致上下文注入失败
+- **根因**: Gemini CLI 只有 `--include-directories`（无 `--include-files`），严格校验路径必须是目录
+- **Workaround**: 在 `gemini.js` 适配层使用 `classifyPaths()` 自动将文件路径转为父目录。此逻辑同步应用于 `claude.js` 的 `--add-dir` 参数
+- **状态**: 已解决（v4.6.0 — `path-utils.js` 行为归一化）
+- **发现日期**: 2026-03-24
+- **GitHub 参考**: [#13669](https://github.com/google-gemini/gemini-cli/issues/13669), [#9016](https://github.com/google-gemini/gemini-cli/issues/9016)
+
 ## 维护规则
 
 1. **谁负责更新**：PM 在 `common-session-close` Step 4 知识分类自检时检查

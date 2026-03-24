@@ -61,22 +61,12 @@ const geminiBackend = {
     }
 
     // 上下文文件注入：通过 --include-directories 传入额外目录
+    // 使用 classifyPaths 归一化：文件→父目录，去重，跳过不存在路径
     if (config.include_files && config.include_files.length > 0) {
-      const path = require("path");
-      const resolvedWorkdir = config.workdir
-        ? path.resolve(config.workdir)
-        : null;
-      for (const filePath of config.include_files) {
-        let normalizedPath = filePath;
-        // C1: 路径去重 — 若 filePath 是 workdir 的子路径，转为相对路径
-        // 避免 Gemini CLI 将 workdir + filePath 拼接成双重前缀
-        if (resolvedWorkdir) {
-          const resolvedFile = path.resolve(filePath);
-          if (resolvedFile.startsWith(resolvedWorkdir + path.sep)) {
-            normalizedPath = path.relative(resolvedWorkdir, resolvedFile);
-          }
-        }
-        args.push("--include-directories", normalizedPath);
+      const { classifyPaths } = require("../lib/path-utils");
+      const { dirs } = classifyPaths(config.include_files, config.workdir);
+      for (const dir of dirs) {
+        args.push("--include-directories", dir);
       }
     }
 

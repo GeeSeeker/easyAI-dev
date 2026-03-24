@@ -28,6 +28,8 @@ files:
     role: JSON 行解析器（逐行 JSON.parse，解析失败降级为纯文本）
   - path: .agents/skills/common-cli-dispatch/scripts/lib/filter.js
     role: stderr 噪音过滤（各 backend 特有的 noisePatterns 匹配）
+  - path: .agents/skills/common-cli-dispatch/scripts/lib/path-utils.js
+    role: 共享路径分类器（文件→父目录转换、去重、不存在路径跳过）
   - path: .agents/skills/common-cli-dispatch/scripts/lib/reporter.js
     role: 结构化输出报告（schema_version 1.0 的 JSON 输出契约）
   - path: .agents/skills/common-cli-dispatch/templates/review.md
@@ -51,7 +53,7 @@ files:
 - **结构化输出**：schema_version 1.0 的 JSON 输出契约（含 session_id）
 - **会话恢复**：--session-id / --follow-up 多轮追问（Codex exec resume / Claude --resume / Gemini --resume）
 - **模型选择**：--model 覆盖 config.yaml default_model（Codex -m / Claude --model / Gemini --model）
-- **文件注入**：--include-files 缩窄审查范围（Claude --add-dir / Gemini --include-directories）
+- **文件注入**：--include-files 缩窄审查范围（通过 path-utils.js 归一化：文件→父目录 + 去重 + 跳过不存在路径）
 - **会话列表**：--list-sessions 查询历史会话（fs 模式 / CLI flag 模式）
 - **治理约束**：cli-direct-call-guard Rule 禁止绕过 Skill 直接调用
 

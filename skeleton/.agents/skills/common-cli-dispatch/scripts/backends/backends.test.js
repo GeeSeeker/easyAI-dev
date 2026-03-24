@@ -274,86 +274,134 @@ const { quoteArgsForShell } = require("../cli-runner");
   console.log("✅ quoteArgsForShell: 空数组不变");
 }
 
-// --- 测试：Gemini buildArgs 含空格 include_files ---
+// --- 测试：path-utils classifyPaths 基本行为 ---
+const { classifyPaths } = require("../lib/path-utils");
+const path = require("path");
+const fs = require("fs");
+
+// 用真实文件做测试（当前测试文件本身就是真实存在的文件）
+const THIS_FILE = __filename;
+const THIS_DIR = __dirname;
+
+// classifyPaths: 文件路径 → 父目录
 {
-  const args = gemini.buildArgs({
-    workdir: "/project",
-    mode: "review",
-    include_files: ["C:\\Program Files\\context", "C:\\用户 文档"],
-  });
-  // include_files 通过 --include-directories 传入
-  const includeIdx1 = args.indexOf("C:\\Program Files\\context");
-  const includeIdx2 = args.indexOf("C:\\用户 文档");
-  console.assert(includeIdx1 !== -1, "Gemini args 应包含第一个 include_files 路径");
-  console.assert(includeIdx2 !== -1, "Gemini args 应包含第二个 include_files 路径");
-  // 前一个元素应是 --include-directories
+  const { dirs, skipped } = classifyPaths([THIS_FILE], null);
+  console.assert(dirs.length === 1, "文件路径应产生 1 个目录");
   console.assert(
-    args[includeIdx1 - 1] === "--include-directories",
-    "include_files 路径前应有 --include-directories",
+    path.resolve(dirs[0]) === THIS_DIR,
+    `文件路径应转为父目录: 期望 "${THIS_DIR}"，实际 "${path.resolve(dirs[0])}"`,
   );
-  console.log("✅ Gemini buildArgs 含空格 include_files 正确");
+  console.assert(skipped.length === 0, "真实文件不应被跳过");
+  console.log("✅ classifyPaths: 文件路径 → 父目录");
 }
 
-// --- 测试：Gemini buildArgs include_files 路径去重（C3） ---
+// classifyPaths: 目录路径保持不变
 {
-  const path = require("path");
-  // 场景：workdir 为绝对路径，include_files 是 workdir 的子路径（绝对路径）
-  // 真实场景：调用方用 --workdir /project/playground，
-  // 且 --include-files /project/playground/.agents/graph/test.md
-  const workdir = path.resolve("/project/playground");
-  const subPath = path.join(workdir, ".agents", "graph", "test.md");
-  const args = gemini.buildArgs({
-    workdir,
-    mode: "review",
-    include_files: [subPath],
-  });
-  // 预期：args 中出现相对于 workdir 的路径（无 workdir 前缀）
-  const expectedRelative = path.join(".agents", "graph", "test.md");
-  const hasDeduped = args.some((a) => a === expectedRelative);
+  const { dirs } = classifyPaths([THIS_DIR], null);
+  console.assert(dirs.length === 1, "目录路径应产生 1 个目录");
   console.assert(
-    hasDeduped,
-    `Gemini 路径去重失败: 应包含 "${expectedRelative}"，实际 args: ${JSON.stringify(args)}`,
+    path.resolve(dirs[0]) === path.resolve(THIS_DIR),
+    "目录路径应保持不变",
   );
-  // 确认不包含原始绝对路径（避免双重前缀）
-  const hasOriginal = args.some((a) => a === subPath);
-  console.assert(
-    !hasOriginal,
-    `Gemini 路径去重失败: 不应包含原始绝对路径 "${subPath}"`,
-  );
-  console.log("✅ Gemini buildArgs include_files 路径去重正确");
+  console.log("✅ classifyPaths: 目录路径保持不变");
 }
 
-// --- 测试：Gemini buildArgs include_files 无重叠路径保持原样（C5） ---
+// classifyPaths: 同目录下两个文件 → 去重为 1 个父目录
 {
-  const path = require("path");
-  const args = gemini.buildArgs({
-    workdir: path.resolve("/project/playground"),
-    mode: "review",
-    include_files: [path.resolve("/other/path/context.md")],
-  });
+  // 使用同目录下两个已知存在的文件
+  const file1 = path.join(THIS_DIR, "gemini.js");
+  const file2 = path.join(THIS_DIR, "claude.js");
+  const { dirs } = classifyPaths([file1, file2], null);
   console.assert(
-    args.includes(path.resolve("/other/path/context.md")),
-    "无重叠的 include_files 路径应保持原样",
+    dirs.length === 1,
+    `同目录两个文件应去重为 1 个目录，实际 ${dirs.length}`,
   );
-  console.log("✅ Gemini buildArgs 无重叠路径保持原样");
+  console.log("✅ classifyPaths: 同目录两个文件去重");
 }
 
-// --- 测试：Claude buildArgs 含空格 include_files ---
+// classifyPaths: workdir 子目录自动相对化
+{
+  const workdir = path.resolve(THIS_DIR, "..");
+  const { dirs } = classifyPaths([THIS_DIR], workdir);
+  console.assert(dirs.length === 1, "workdir 子目录应产生 1 个结果");
+  console.assert(
+    !path.isAbsolute(dirs[0]),
+    `workdir 子目录应相对化: "${dirs[0]}"`,
+  );
+  console.log("✅ classifyPaths: workdir 子路径相对化");
+}
+
+// classifyPaths: workdir 自身去重（不重复添加）
+{
+  const { dirs } = classifyPaths([THIS_DIR], THIS_DIR);
+  console.assert(
+    dirs.length === 0,
+    `workdir 自身应被去重，实际 ${dirs.length}`,
+  );
+  console.log("✅ classifyPaths: workdir 自身去重");
+}
+
+// classifyPaths: 不存在路径 → skipped
+{
+  const fake = path.join(THIS_DIR, "nonexistent-file-12345.js");
+  // 临时静默 console.error
+  const origError = console.error;
+  console.error = () => {};
+  const { dirs, skipped } = classifyPaths([fake], null);
+  console.error = origError;
+  console.assert(dirs.length === 0, "不存在路径不应产生目录");
+  console.assert(skipped.length === 1, "不存在路径应放入 skipped");
+  console.log("✅ classifyPaths: 不存在路径跳过");
+}
+
+// --- 测试：Gemini buildArgs 使用 classifyPaths（文件→父目录） ---
+{
+  const args = gemini.buildArgs({
+    workdir: path.resolve(THIS_DIR, ".."),
+    mode: "review",
+    include_files: [THIS_FILE],
+  });
+  // 应包含 --include-directories，值为 backends 目录的相对路径
+  const includeIdxs = args.reduce((acc, a, i) => {
+    if (a === "--include-directories") acc.push(i);
+    return acc;
+  }, []);
+  // 至少 2 个 --include-directories（1 个 workdir + 1 个 include_files）
+  console.assert(
+    includeIdxs.length >= 2,
+    `Gemini 应有 >=2 个 --include-directories，实际 ${includeIdxs.length}`,
+  );
+  // 最后一个 --include-directories 的值不应是文件路径
+  const lastValue = args[includeIdxs[includeIdxs.length - 1] + 1];
+  console.assert(
+    !lastValue.endsWith(".js"),
+    `Gemini 不应有 .js 文件路径传给 --include-directories: "${lastValue}"`,
+  );
+  console.log("✅ Gemini buildArgs 使用 classifyPaths（文件→父目录）");
+}
+
+// --- 测试：Claude buildArgs 使用 classifyPaths（文件→父目录） ---
 {
   const args = claude.buildArgs({
-    workdir: "/project",
+    workdir: path.resolve(THIS_DIR, ".."),
     mode: "review",
-    include_files: ["C:\\Program Files\\context", "C:\\用户 文档"],
+    include_files: [THIS_FILE],
   });
-  const includeIdx1 = args.indexOf("C:\\Program Files\\context");
-  const includeIdx2 = args.indexOf("C:\\用户 文档");
-  console.assert(includeIdx1 !== -1, "Claude args 应包含第一个 include_files 路径");
-  console.assert(includeIdx2 !== -1, "Claude args 应包含第二个 include_files 路径");
+  const addDirIdxs = args.reduce((acc, a, i) => {
+    if (a === "--add-dir") acc.push(i);
+    return acc;
+  }, []);
   console.assert(
-    args[includeIdx1 - 1] === "--add-dir",
-    "include_files 路径前应有 --add-dir",
+    addDirIdxs.length >= 1,
+    `Claude 应有 >=1 个 --add-dir，实际 ${addDirIdxs.length}`,
   );
-  console.log("✅ Claude buildArgs 含空格 include_files 正确");
+  const dirValue = args[addDirIdxs[addDirIdxs.length - 1] + 1];
+  console.assert(
+    !dirValue.endsWith(".js"),
+    `Claude 不应有 .js 文件路径传给 --add-dir: "${dirValue}"`,
+  );
+  console.log("✅ Claude buildArgs 使用 classifyPaths（文件→父目录）");
 }
 
 console.log("\n所有 backend 测试通过 ✅");
+
