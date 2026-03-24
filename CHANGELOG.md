@@ -2,6 +2,13 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.6.1] - 2026-03-24
+
+### 修复
+
+- **Gemini CLI stdin 死锁根治** — `gemini.js` 的 `stdin_mode` 从 `true` 改为 `false`，废弃通过 stdin 管道传入 prompt 的模式（该模式因 Gemini 在无 `-p` 时进入交互式 TUI 导致永久死锁）。改用 Agentic 路径传递：通过 `--include-directories` 挂载 prompt 文件所在目录 + `-p` 短引导语触发 headless 模式。`cli-runner.js` 改为按需读取 prompt 内容（仅 `stdin_mode: true` 的 Codex/Claude 才读取），Gemini 完全走文件挂载路径
+- **已知问题库更新** — 新增 KI-004：Gemini CLI stdin 管道死锁（已通过 Agentic 路径传递解决）
+
 ## [4.6.0] - 2026-03-24
 
 ### 修复
