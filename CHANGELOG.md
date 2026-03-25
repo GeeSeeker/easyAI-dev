@@ -2,6 +2,12 @@
 
 所有版本的重要变更记录。格式基于 [Keep a Changelog](https://keepachangelog.com/)。
 
+## [4.7.0] - 2026-03-25
+
+### 变更
+
+- **task_create 参数重命名** — `role` 参数重命名为 `assigned_to`，消除 AI 将"创建者角色"与"执行者角色"混淆的歧义。工具描述增强：明确说明 `assigned_to` 指定任务执行角色（非创建者），大多数编码/修复任务应指定 `worker`。`generateTaskId()` 内部参数同步更新
+
 ## [4.6.1] - 2026-03-24
 
 ### 修复
