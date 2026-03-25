@@ -82,12 +82,13 @@ declare function getTaskDir(taskId: string): string;
  */
 declare function slugify(text: string): string;
 /**
- * 生成任务 ID（格式：T{NNN}-{slug}）
+ * 生成任务 ID（格式：T{NNN}-{assignedTo}-{slug}）
  * 自动递增序号，基于现有任务目录（包括归档目录中的任务）
  * @param title - 任务标题
- * @returns 任务 ID（如 T001-login-api）
+ * @param assignedTo - 任务执行角色（pm 或 worker）
+ * @returns 任务 ID（如 T001-worker-login-api）
  */
-declare function generateTaskId(title: string, role: "pm" | "worker"): string;
+declare function generateTaskId(title: string, assignedTo: "pm" | "worker"): string;
 /**
  * 解析 task.md 文件内容
  * @param content - task.md 文件内容

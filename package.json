@@ -1,6 +1,6 @@
 {
   "name": "@geeseeker/easyai-dev",
-  "version": "4.6.1",
+  "version": "4.7.0",
   "description": "The AI-native development framework",
   "type": "module",
   "bin": {

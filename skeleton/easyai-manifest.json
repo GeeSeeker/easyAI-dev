@@ -1,6 +1,6 @@
 {
-  "version": "4.6.1",
-  "generatedAt": "2026-03-24T13:44:04.104Z",
+  "version": "4.7.0",
+  "generatedAt": "2026-03-25T07:14:47.716Z",
   "files": {
     ".agents\\graph\\capability\\context-management.md": {
       "hash": "ffcbcf1645389093698f74bf0d9ef2b435772682dcfcd4fa7f9e54d39336b231"
@@ -257,9 +257,6 @@
     ".agents\\workflows\\common-skill-eval.md": {
       "hash": "83c2583d9e6972076b37c552c84e9f3a8f7e4cea335291b7397d0a4d1940901d"
     },
-    ".agents\\workflows\\worker-quick-fix.md": {
-      "hash": "934bddba33c1facddb2b5c52280c668ddb3f501ef2a9aba9723389072fc2afd8"
-    },
     ".directory-map": {
       "hash": "5423f226fbeab2804b82595f06f4a2df14daa829298b1bf26815afbeb6517819"
     },
@@ -273,10 +270,10 @@
       "hash": "655f3b6ff691dc7dc72350b108b491608d4957be42e9c994805f17c6e60cea4e"
     },
     ".easyai-version": {
-      "hash": "971a65dddb07821671129c169868854dec68d9f1a1b44907bbc5ac407875def7"
+      "hash": "91aa98b9f9984c58ad2d48c130377aa528e97fea91927617c739b5f7129602e1"
     },
     ".trellis\\config\\config.yaml": {
-      "hash": "8f0c9bf09aba36972dd29983b5327f84d9ebcd5a2ec9bc63b5cf1dc7e5373f03",
+      "hash": "0cf5b6b668adc5b9499459611127a55290d8c3fb0036b4c7223bf3a2fdc58abc",
       "merge_mode": "append"
     },
     ".trellis\\config\\permissions.yaml": {
